@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import { Route, Switch } from 'react-router-dom'
+import About from './About/About'
+import Browse from './Browse/Brows'
+import Contribute from './Contribute/Contribute'
+import Help from './Help/Help'
+import MapContainer from './Map/MapContainer'
+import Nav from './Nav/Nav'
+import Snow from './Snow/Snow'
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+
+  render(){
+    return (
+      <div className="App">
+        <Nav />
+        <Switch>
+          <Route exact path='/' component={MapContainer} />
+          <Route path='/about' component={About} />
+          <Route path='/browse' component={Browse} />
+          <Route path='/contribute' component={Contribute} />
+          <Route path='/help' component={Help} />
+          <Route component={MapContainer} />
+        </Switch>
+        <Snow
+        // credit to https://pajasevi.github.io/CSSnowflakes/
+        />
+      </div>
+    );
+  }
+
+
 }
 
 export default App;
