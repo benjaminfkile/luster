@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route, Switch } from 'react-router-dom'
 import About from './About/About'
-import Browse from './Browse/Brows'
+import Browse from './Browse/Browse'
 import Contribute from './Contribute/Contribute'
 import Help from './Help/Help'
 import MapContainer from './Map/MapContainer'
