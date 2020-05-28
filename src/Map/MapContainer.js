@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import Map from '../Map/Map'
-import DummyStore from './DummyStore.js'
+import LightStore from '../LightStore'
 import { mapStyles } from '../Map/NightMode.js'
+import '../Map/Map.css'
 
 class MapContainer extends Component {
+
+  dbInterval
 
   constructor() {
     super();
@@ -19,19 +22,15 @@ class MapContainer extends Component {
     }
   }
 
-  componentDidMount() {
-    // this.getLights();
-      this.setState({lights: DummyStore})
+  componentDidMount(){
+     //this.intervalOne = setInterval(this.listen4DB, 1000)
+     this.setState({lights: LightStore[0]})
   }
 
-  getLights = () => {
-    let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/lights/';
-    fetch(targetUrl)
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ lights: data })
-      })
-      .catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
+  listen4DB = () => {
+    if(LightStore[0].length > 0){
+      this.setState({lights: LightStore[0]})
+    }
   }
 
   render() {
@@ -54,6 +53,7 @@ class MapContainer extends Component {
            <img src="./res/splash.png" alt='A tree'></img>
          </div> 
          } 
+
         {this.state.lights.length > 0 &&
           <div className="Map_Container">
             <Map

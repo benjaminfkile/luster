@@ -7,11 +7,10 @@ import Help from './Help/Help'
 import MapContainer from './Map/MapContainer'
 import Nav from './Nav/Nav'
 import Snow from './Snow/Snow'
-
 import './App.css';
 
-class App extends Component {
 
+class App extends Component {
 
   render(){
     return (
@@ -34,5 +33,4 @@ class App extends Component {
 
 
 }
-
 export default App;
