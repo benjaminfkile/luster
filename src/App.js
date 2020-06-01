@@ -6,7 +6,7 @@ import Contribute from './Contribute/Contribute'
 import Help from './Help/Help'
 import MapContainer from './Map/MapContainer'
 import Nav from './Nav/Nav'
-import Snow from './Snow/Snow'
+// import Snow from './Snow/Snow'
 import './App.css';
 
 
@@ -24,9 +24,9 @@ class App extends Component {
           <Route path='/help' component={Help} />
           <Route component={MapContainer} />
         </Switch>
-        <Snow
+        {/* <Snow
         // credit to https://pajasevi.github.io/CSSnowflakes/
-        />
+        /> */}
       </div>
     );
   }

@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Map from '../Map/Map'
 import LightStore from '../LightStore'
 import { mapStyles } from '../Map/NightMode.js'
+import Snow from '../Snow/Snow'
+
 import '../Map/Map.css'
 
 class MapContainer extends Component {
@@ -23,7 +25,7 @@ class MapContainer extends Component {
   }
 
   componentDidMount(){
-     //this.intervalOne = setInterval(this.listen4DB, 1000)
+    //  this.intervalOne = setInterval(this.listen4DB, 1000)
      this.setState({lights: LightStore[0]})
   }
 
@@ -94,6 +96,9 @@ class MapContainer extends Component {
               }}
             />
           </div>}
+          <Snow
+        // credit to https://pajasevi.github.io/CSSnowflakes/
+        />
       </div>
     );
   }

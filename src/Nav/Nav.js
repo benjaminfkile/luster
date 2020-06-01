@@ -16,7 +16,6 @@ class Nav extends Component {
         } else {
             this.setState({ hamburger: false })
         }
-        console.log(this.state.hamburger)
     }
 
     render() {
@@ -25,17 +24,17 @@ class Nav extends Component {
 
                 <div className="Menu">
                     {!this.state.hamburger && <div className="MenuClosed">
-                    <img src="./res/closeMenu.png" alt="*" onClick={this.toggleBurger}></img>
+                        <img src="./res/openMenu.png" alt="*" onClick={this.toggleBurger}></img>
                     </div>}
                     {this.state.hamburger && <div className="MenuOpen">
-                    <img src="./res/openMenu.png" alt="*"  onClick={this.toggleBurger}></img>
+                        <img src="./res/closeMenu.png" alt="*" onClick={this.toggleBurger}></img>
                     </div>}
                 </div>
 
 
                 {this.state.hamburger && <div className="Routes">
                     <div className="Map_Route" tabIndex="1">
-                        <li>
+                        <li onClick={this.toggleBurger}>
                             <Link to='/'>
                                 Map
                             </Link>
@@ -43,34 +42,34 @@ class Nav extends Component {
 
                     </div>
                     <div className="Browse_Route" tabIndex="2">
-                        <li>
+                        <li onClick={this.toggleBurger}>
                             <Link to='/browse'>
                                 Browse
                             </Link>
                         </li>
                     </div>
                     <div className="About_Route" tabIndex="3">
-                        <li>
+                        <li onClick={this.toggleBurger}>
                             <Link to='/about'>
                                 About
                             </Link>
                         </li>
                     </div>
                     <div className="Contribute_Route" tabIndex="4">
-                        <li>
+                        <li onClick={this.toggleBurger}>
 
                             <Link to='/contribute'>
                                 Contribute
                             </Link>
                         </li>
                     </div>
-                    <div className="Help_Route" tabIndex="5">
-                        <li>
+                    {/* <div className="Help_Route" tabIndex="5">
+                        <li onClick={this.toggleBurger}>
                             <Link to='/help'>
                                 Help
                             </Link>
                         </li>
-                    </div>
+                    </div> */}
                 </div>}
 
 

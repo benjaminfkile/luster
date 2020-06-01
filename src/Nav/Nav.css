@@ -1,34 +1,39 @@
 .Nav {
-    position: absolute;
-    left: 88vw;
+    /* position: absolute; */
+    position: fixed;
+    /* left: 88vw; */
     top: 1vh;
     z-index: 100;
 }
 
 .Menu img{
+    position: absolute;
+    left: 87vw;
     width: 10vw;
 }
 
-
-
 .Routes{
     position: absolute;
-    width: 20vw;
-    height: 25vh;
-    left: -11vw;
-    top: 7vh;
+    display: flex;
+    width: 83vw;
+    height: 50px;
+    left: 1vw;
+    top: 0vh;
     z-index: 100;
     background-color: rgb(0, 0, 0);
-    border-style: solid;
     border-radius: 5px;
+    font-size: 4.3vw;
 }
 
 .Routes li{
     text-align: center;
-    margin-top: 15px;
-}
+    margin-top: 1.7vh;
+    }
 
 .Routes a{
+    margin-left: 4vw;
     color: rgb(161, 161, 161);
     text-decoration: none;
 }
+
+
