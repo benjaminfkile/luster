@@ -25,7 +25,7 @@ class Browse extends Component {
 
     listen4DB = () => {
         if (LightStore[0].length > 0) {
-            this.randomize(LightStore[0])
+            // this.randomize(LightStore[0])
         }
     }
 
@@ -105,7 +105,7 @@ class Browse extends Component {
                         {rating}
                     </div>
                     <div className="Nav_Link">
-                        <a href={this.navLink + this.state.previewData.lng + ',' + this.state.previewData.lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" /> &nbsp;</a>
+                        <a href={this.navLink + this.state.previewData.lat + ',' + this.state.previewData.lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" /> &nbsp;</a>
                     </div>
 
                 </div>}
