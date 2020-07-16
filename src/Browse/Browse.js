@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import LightStore from '../LightStore'
+import Location from '../Location'
+
 import '../Browse/Browse.css'
 
 class Browse extends Component {
 
-    dbInterval
+    dbInterval = 0
     navLink = 'https://www.google.com/maps/search/?api=1&query='
 
     constructor() {
@@ -19,13 +21,13 @@ class Browse extends Component {
     }
 
     componentDidMount() {
-        this.randomize(LightStore[0])
-        // this.listen4DB()
+        this.dbInterval = setInterval(this.listen4DB, 100)
     }
 
     listen4DB = () => {
         if (LightStore[0].length > 0) {
-            // this.randomize(LightStore[0])
+            this.randomize(LightStore[0])
+            clearInterval(this.dbInterval)
         }
     }
 
@@ -68,7 +70,11 @@ class Browse extends Component {
         this.setState({ lights: arr })
     }
 
+
+
     render() {
+
+        console.log(Location)
 
         let lights = this.state.lights
         let rating = []
@@ -77,8 +83,6 @@ class Browse extends Component {
                 <img src="../res/star.png" alt="*" height="30" width="30" key={Math.random()}></img>
             )
         }
-
-        console.log(lights)
 
         return (
             <div className="Browse">
