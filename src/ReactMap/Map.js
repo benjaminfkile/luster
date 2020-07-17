@@ -1,57 +1,70 @@
 import React from "react";
 import { mapStyles } from '../ReactMap/NightMode'
 import Location from '../Location'
-import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  Marker
-} from "react-google-maps";
+import './Map.css'
+import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
 
 class Map extends React.Component {
+
   intveral
 
   constructor() {
     super();
     this.state = {
       userLat: 46.833,
-      userLng: -114.030
+      userLng: -114.030,
+      centerLat: 46.833,
+      centerLng: -114.030,
+      recenter: true
     }
   }
 
   componentDidMount() {
-    this.interval = setInterval(this.setLocation, 10000)
+    this.interval = setInterval(this.setLocation, 1000)
   }
 
   setLocation = () => {
-    this.setState({ userLat: Location.lat, userLng: Location.lng })
+    if (this.state.recenter) {
+      this.setCenter()
+    }
+    this.setState({ userLat: Location.lat, userLng: Location.lng, recenter: false })
+  }
+
+  setCenter = () => {
+    console.log('tick')
+    this.setState({ centerLat: Location.lat, centerLng: Location.lng, recenter: true })
   }
 
 
-
   render = () => {
-    console.log(this.state)
     return (
-      <GoogleMap
-        defaultCenter={{ lat: this.state.userLat, lng: this.state.userLng }}
-        // center={{ lat: this.state.userLat, lng: this.state.userLng }}
-        options={{
-          zoom: 15,
-          fullscreenControl: false,
-          zoomControl: true,
-          streetViewControl: false,
-          mapTypeControl: false,
-          styles: mapStyles
-        }}
-      >
-        <>
+      <div>
+        {!this.state.recenter &&
+          <GoogleMap
+            defaultZoom={16}
+            defaultCenter={{ lat: this.state.centerLat, lng: this.state.centerLng }}
+            defaultOptions={{ styles: mapStyles }}
+          >
+            <>
+              <Marker position={{ lat: this.state.userLat, lng: this.state.userLng }} />
+            </>
 
-          <Marker
-            position={{ lat: this.state.userLat, lng: this.state.userLng }}
-          />
-        </>
-        )
-      </GoogleMap>
+          </GoogleMap>}
+        {this.state.recenter &&
+          <GoogleMap
+            defaultZoom={16}
+            center={{ lat: this.state.centerLat, lng: this.state.centerLng }}
+            defaultOptions={{ styles: mapStyles }}
+      
+          >
+            <>
+              <Marker position={{ lat: this.state.userLat, lng: this.state.userLng }} />
+            </>
+
+          </GoogleMap>}
+        <button onClick={this.setCenter}>Recenter</button>
+      </div>
+
     );
   };
 }
