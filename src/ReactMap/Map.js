@@ -38,8 +38,8 @@ class Map extends React.Component {
   }
 
   setCenter = () => {
-    if(Location.lat){
-      this.setState({userLat: Location.lat, userLng: Location.lng})
+    if (Location.lat) {
+      this.setState({ userLat: Location.lat, userLng: Location.lng })
     }
   }
 
@@ -93,22 +93,22 @@ class Map extends React.Component {
       null,
       new window.google.maps.Size(40, 40))
 
-      const defaultMapOptions = {
-        styles: mapStyles,
-        fullscreenControl: false,
-        zoomControl: false,
-        mapTypeControl: false
-      };
+    const defaultMapOptions = {
+      styles: mapStyles,
+      fullscreenControl: false,
+      zoomControl: false,
+      mapTypeControl: false
+    };
 
     return (
       <div>
 
         <GoogleMap
+          id="Map"
           defaultZoom={12}
           center={{ lat: this.state.userLat, lng: this.state.userLng }}
           // defaultOptions={{ styles: mapStyles }}
           defaultOptions={defaultMapOptions}
-          gestureHandling='greedy'
         >
           <>
             {Location.lat && <Marker
@@ -136,7 +136,7 @@ const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
+    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
     mapElement={<div style={{ height: `100%` }} />}
