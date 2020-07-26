@@ -29,8 +29,11 @@ class Map extends React.Component {
   }
 
   listen4Location = () => {
+
     this.locationAttempts += 1
+
     console.log("\nlocation attempt: " + this.locationAttempts)
+    
     if (this.locationAttempts > 30 || Location.lat) {
       clearInterval(this.locationInterval)
       this.setCenter()
@@ -45,7 +48,9 @@ class Map extends React.Component {
 
 
   listen4DB = () => {
+
     console.log('\nlistening for db')
+
     if (LightStore.length > 0) {
       this.setState({ lights: LightStore })
       this.buildMarkers()
@@ -55,7 +60,9 @@ class Map extends React.Component {
   }
 
   buildMarkers() {
+
     console.log('\nbuilding markers')
+
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       let markerImg = new window.google.maps.MarkerImage(
@@ -103,7 +110,6 @@ class Map extends React.Component {
 
     return (
       <div>
-
         <GoogleMap
           defaultZoom={12}
           center={{ lat: this.state.userLat, lng: this.state.userLng }}
