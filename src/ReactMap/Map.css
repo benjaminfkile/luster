@@ -9,9 +9,8 @@
     color: white;
     border-radius: 15%;
 }
-#Map[style]{
-    width: 100vw !important;
-    height: 100vh !important;
+#Map{
+    display: none;
 }
 
 

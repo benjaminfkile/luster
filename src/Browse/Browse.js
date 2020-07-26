@@ -25,8 +25,8 @@ class Browse extends Component {
     }
 
     listen4DB = () => {
-        if (LightStore[0].length > 0) {
-            this.randomize(LightStore[0])
+        if (LightStore.length > 0) {
+            this.randomize(LightStore)
             clearInterval(this.dbInterval)
         }
     }

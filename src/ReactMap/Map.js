@@ -97,14 +97,14 @@ class Map extends React.Component {
       styles: mapStyles,
       fullscreenControl: false,
       zoomControl: false,
-      mapTypeControl: false
+      mapTypeControl: false,
+      gestureHandling: 'greedy'
     };
 
     return (
       <div>
 
         <GoogleMap
-          id="Map"
           defaultZoom={12}
           center={{ lat: this.state.userLat, lng: this.state.userLng }}
           // defaultOptions={{ styles: mapStyles }}
