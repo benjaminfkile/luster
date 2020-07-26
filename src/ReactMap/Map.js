@@ -108,6 +108,7 @@ class Map extends React.Component {
           center={{ lat: this.state.userLat, lng: this.state.userLng }}
           // defaultOptions={{ styles: mapStyles }}
           defaultOptions={defaultMapOptions}
+          gestureHandling='greedy'
         >
           <>
             {Location.lat && <Marker
