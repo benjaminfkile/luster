@@ -36,5 +36,4 @@ let LightStore =
         { "lat": "40.758", "lng": "-73.9855", "url": "https://i.ibb.co/yNQYfzh/40-7580-73-9855.jpg", "rating": "5" }
     ]
 
-
 export default LightStore

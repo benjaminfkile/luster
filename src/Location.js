@@ -1,6 +1,5 @@
 let Location = []
 
-
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setLocation)
@@ -17,7 +16,5 @@ function setLocation(position) {
 setInterval(function () {
     getLocation()
 }, 1000);
-
-
 
 export default Location
