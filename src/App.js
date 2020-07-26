@@ -15,20 +15,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <Nav /> */}
+        <Nav />
         <Switch>
-          {/* <Route exact path='/' component={MapContainer} /> */}
           <Route exact path='/' component={ReactMap} />
           <Route path='/about' component={About} />
           <Route path='/browse' component={Browse} />
           <Route path='/contribute' component={Contribute} />
           <Route path='/help' component={Help} />
-          {/* <Route component={MapContainer} /> */}
           <Route component={ReactMap} />
         </Switch>
-        {/* <Snow
-        // credit to https://pajasevi.github.io/CSSnowflakes/
-        /> */}
       </div>
     );
   }
