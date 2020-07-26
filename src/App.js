@@ -4,7 +4,7 @@ import About from './About/About'
 import Browse from './Browse/Browse'
 import Contribute from './Contribute/Contribute'
 import Help from './Help/Help'
-import MapContainer from './Map/MapContainer'
+// import MapContainer from './Map/MapContainer'
 import ReactMap from './ReactMap/Map'
 import Nav from './Nav/Nav'
 import './App.css';
