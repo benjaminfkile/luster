@@ -1,0 +1,24 @@
+.Preview{
+    position: absolute;
+    width: 95vw;
+    height: 55vh;
+    top: 10vh;
+    left: 2.5vw;
+    background-color: black;
+    border-radius: 2%;
+}
+#Preview_Img{
+    width: 95vw;
+    border-radius: 2%;
+}
+#Preview_Interface p{
+    position: absolute;
+    top: 50vh;
+    left: 88vw;
+    color: gray;
+    font-size: 30px;
+
+}
+a{
+    text-decoration: none;
+}

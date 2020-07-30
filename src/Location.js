@@ -15,6 +15,8 @@ function setLocation(position) {
 
 setInterval(function () {
     getLocation()
-}, 1000);
+}, 3000);
+
+getLocation()
 
 export default Location

@@ -1,68 +1,57 @@
 import React from "react";
-import { mapStyles } from '../ReactMap/NightMode'
-import Location from '../Location'
-import './Map.css'
-import Snow from '../Snow/Snow'
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
+import Location from '../Location'
 import LightStore from "../LightStore";
+import Preview from "../Preview/Preview"
+import Snow from '../Snow/Snow'
+import { mapStyles } from '../ReactMap/NightMode'
+import './Map.css'
 
 class Map extends React.Component {
 
-  locationInterval
-  locationAttempts = 0
-  dbInterval
+  locationTimeout = 0
 
   constructor() {
     super();
     this.state = {
-      userLat: 46.8721,
-      userLng: -113.9940,
       lights: null,
-      markers: null
+      markers: null,
+      lightDex: -1,
+      location: false
     }
   }
 
   componentDidMount() {
-    this.locationInterval = setInterval(this.listen4Location, 1000)
-    this.dbInterval = setInterval(this.listen4DB, 1000)
+    this.locationInterval = setInterval(this.updateLocation, 2000)
+    this.dbInterval = setInterval(this.listen4DB, 100)
     this.setState({ lights: LightStore })
   }
 
-  listen4Location = () => {
-
-    this.locationAttempts += 1
-
-    console.log("\nlocation attempt: " + this.locationAttempts)
-    
-    if (this.locationAttempts > 30 || Location.lat) {
-      clearInterval(this.locationInterval)
-      this.setCenter()
-    }
-  }
-
-  setCenter = () => {
-    if (Location.lat) {
-      this.setState({ userLat: Location.lat, userLng: Location.lng })
-    }
-  }
-
-
   listen4DB = () => {
-
-    console.log('\nlistening for db')
-
     if (LightStore.length > 0) {
       this.setState({ lights: LightStore })
       this.buildMarkers()
       clearInterval(this.dbInterval)
     }
+  }
 
+  updateLocation = () =>{
+    if(Location.lat){
+      this.setState({location: true})
+    }else{
+      this.setState({location: false})
+      this.locationTimeout ++
+      if(this.locationTimeout > 9){
+        clearInterval(this.locationInterval)
+      }
+    }
+  }
+
+  togglePreview = (args) => {
+    this.setState({ lightDex: args })
   }
 
   buildMarkers() {
-
-    console.log('\nbuilding markers')
-
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       let markerImg = new window.google.maps.MarkerImage(
@@ -75,18 +64,13 @@ class Map extends React.Component {
       let marker =
         <Marker
           key={i}
-          onClick={() => this.onMarkerClick(i)}
+          onClick={() => this.togglePreview(i)}
           position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
           icon={markerImg}
         />
       temp.push(marker)
     }
     this.setState({ markers: temp })
-  }
-
-  onMarkerClick = (args) => {
-    console.log(this.state.lights[args].lat)
-    console.log(this.state.lights[args].lng)
   }
 
   render = () => {
@@ -110,29 +94,37 @@ class Map extends React.Component {
 
     return (
       <div>
-        <GoogleMap
+        {this.state.location && <GoogleMap
           defaultZoom={12}
-          center={{ lat: this.state.userLat, lng: this.state.userLng }}
-          // defaultOptions={{ styles: mapStyles }}
+          defaultCenter={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={defaultMapOptions}
         >
           <>
-            {Location.lat && <Marker
-              position={{ lat: this.state.userLat, lng: this.state.userLng }}
+            <Marker
+              position={{ lat: Location.lat, lng: Location.lng }}
               icon={locationMarker}
-            />}
+            />
           </>
+        </GoogleMap>}
 
-        </GoogleMap>
-        <div className="Recenter" onClick={this.setCenter}>Recenter</div>
+        {!this.state.location && <GoogleMap
+          defaultZoom={12}
+          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
+          defaultOptions={defaultMapOptions}
+        >
+          <>
+          </>
+        </GoogleMap>}
+
         <div className="Markers">
           {this.state.markers}
         </div>
-        <Snow
-        // credit to https://pajasevi.github.io/CSSnowflakes/
+        <Preview
+          togglePreview={this.togglePreview}
+          lightDex={this.state.lightDex}
         />
+        <Snow />
       </div>
-
     );
   };
 }
