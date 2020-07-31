@@ -11,7 +11,8 @@
     "react-google-maps": "^9.4.5",
     "react-lazy-load-image-component": "^1.5.0-beta.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-visibility-sensor": "^5.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
