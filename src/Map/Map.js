@@ -16,7 +16,7 @@ class Map extends React.Component {
     this.state = {
       lights: null,
       markers: null,
-      lightDex: 10,
+      lightDex: -1,
       location: false
     }
   }
