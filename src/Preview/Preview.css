@@ -3,8 +3,10 @@
     z-index: 102;
     width: 95vw;
     height: 55vh;
-    top: 10vh;
-    left: 2.5vw;
+    top: 15vh;
+    left: 2vw;
+    border-style: solid;
+    border-color: rgb(39,39,39);
     background-color: rgb(0, 0, 0);
     border-radius: 2%;
 }
@@ -26,7 +28,7 @@ p{
     position: absolute;
     top: 49vh;
     left: 88vw;
-    color: rgb(128, 128, 128);
+    color: rgb(255, 0, 0);
     font-size: 30px;
 
 }
@@ -34,7 +36,7 @@ h1{
     position: absolute;
     top: 49vh;
     left: 1vh;
-    color: rgb(128,128,128);
+    color: rgb(255, 255, 255);
     -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
     animation: heartbeat 1.5s ease-in-out infinite both;
 }

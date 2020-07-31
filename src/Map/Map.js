@@ -4,7 +4,7 @@ import Location from '../Location'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Snow from '../Snow/Snow'
-import { mapStyles } from '../ReactMap/NightMode'
+import { mapStyles } from './NightMode'
 import './Map.css'
 
 class Map extends React.Component {
@@ -16,7 +16,7 @@ class Map extends React.Component {
     this.state = {
       lights: null,
       markers: null,
-      lightDex: -1,
+      lightDex: 10,
       location: false
     }
   }
@@ -85,6 +85,7 @@ class Map extends React.Component {
   render = () => {
 
     console.log("\nrender")
+    console.log(this.state.lightDex)
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/navi-btn.png',
@@ -98,6 +99,7 @@ class Map extends React.Component {
       fullscreenControl: false,
       zoomControl: false,
       mapTypeControl: false,
+      streetViewControl: false,
       gestureHandling: 'greedy'
     };
 
@@ -142,7 +144,7 @@ const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
+    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
     mapElement={<div style={{ height: `100%` }} />}

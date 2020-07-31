@@ -23,8 +23,6 @@ class Preview extends Component {
 
     render() {
 
-        console.log(this.state)
-
         let rating = [];
         if (this.props.lightDex !== -1) {
             for (let i = 0; i < 5; i++) {
@@ -35,7 +33,6 @@ class Preview extends Component {
                 }
             }
         }
-
 
         return (
             <div>
@@ -50,8 +47,6 @@ class Preview extends Component {
                         <br></br>
                     </section>}
                     <p onClick={this.unloadImg.bind(this)}>x</p>
-
-
                 </div>}
             </div>
         )
