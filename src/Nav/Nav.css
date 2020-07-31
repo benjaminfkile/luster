@@ -3,7 +3,7 @@
     position: fixed;
     /* left: 88vw; */
     top: 1vh;
-    z-index: 100;
+    z-index: 102;
 }
 
 .Menu img{
@@ -15,25 +15,40 @@
 .Routes{
     position: absolute;
     display: flex;
-    width: 83vw;
-    height: 50px;
-    left: 1vw;
+    width: 85vw;
+    height: 8vh;
+    left: 2vw;
     top: 0vh;
     z-index: 100;
+    border-style: solid;
+    border-color: rgb(39,39,39);
     background-color: rgb(0, 0, 0);
     border-radius: 5px;
-    font-size: 4.3vw;
 }
 
 .Routes li{
     text-align: center;
-    margin-top: 1.7vh;
+    margin-top: 2vh;
     }
 
 .Routes a{
-    margin-left: 4vw;
-    color: rgb(161, 161, 161);
+    margin-left: 1vw;
+    color: rgb(255, 255, 255);
+    font-family: 'Red Rose', cursive;
+    font-size: 5.1vw;
     text-decoration: none;
 }
+/* .Map_Route a{
+    color: rgb(256,256,256);
+}
+.Browse_Route a{
+    color: rgb(50, 37, 222);
+}
+.About_Route a{
+    color: rgb(206, 13, 13);
+}
+.Contribute_Route a{
+    color: rgb(131, 20, 185);
+} */
 
 
