@@ -22,7 +22,7 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    this.locationInterval = setInterval(this.updateLocation, 2000)
+    this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.setState({ lights: LightStore })
   }
@@ -35,16 +35,25 @@ class Map extends React.Component {
     }
   }
 
-  updateLocation = () =>{
-    if(Location.lat){
-      this.setState({location: true})
-    }else{
-      this.setState({location: false})
-      this.locationTimeout ++
-      if(this.locationTimeout > 9){
-        clearInterval(this.locationInterval)
+  listenForLocation = () => {
+    if (Location.lat) {
+      console.log('captured location')
+      this.setState({ location: true })
+      clearInterval(this.listen4LocationInterval)
+      this.updateLocationInterval = setInterval(this.updateLocation, 10000)
+    } else {
+      this.setState({ location: false })
+      this.locationTimeout++
+      if (this.locationTimeout > 19) {
+        console.log('location denied')
+        clearInterval(this.listen4LocationInterval)
       }
     }
+  }
+
+  updateLocation = () => {
+    console.log('updated location')
+    this.setState({location: true})
   }
 
   togglePreview = (args) => {
@@ -130,11 +139,10 @@ class Map extends React.Component {
 }
 
 const MapComponent = withScriptjs(withGoogleMap(Map));
-//https://maps.google.com/maps/api/js?key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM
 export default () => (
   <MapComponent
     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
+    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
     mapElement={<div style={{ height: `100%` }} />}

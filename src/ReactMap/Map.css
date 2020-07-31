@@ -1,14 +1,4 @@
-.Recenter{
-    position: absolute;
-    top: 88vh;
-    left: 1vw;
-    width: 30vw;
-    z-index: 1000;
-    text-align: center;
-    background-color: black;
-    color: white;
-    border-radius: 15%;
-}
+
 #Map{
     display: none;
 }
