@@ -1,42 +1,39 @@
-.Browse{
-    margin-top: .5vh;
-}
 
-.Img_Container img{
+.Img_Container{
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+}
+.Light_Img img{
+
     width: 98vw;
     margin-left: 1vw;
-    border-radius: 10px;
+    border-bottom: solid;
+    border-color: rgb(39, 39, 39); 
+  
 }
-.Show_Preview{
-    margin-top: 20vh;
-    top: 0vh;
-    z-index: 4;
+.Light_Img li{
+    color: white;
 }
-.Show_Preview img{
-    width: 98vw;
-    top: 20vh;
-    margin-left: 1vw;
-    border-radius: 10px;
-    z-index: 4;
 
-}
-.Light_Info{
-    width: 100vw;
-    top: 65vh;
-    z-index: 4;
-}
-.Light_Info a{
-    text-decoration: none;
-}
-a img{
-    width: 50px;
-}
-.Stars{
+.Preview_Interface{
     display: flex;
+    margin-top: -6.5vh;
+
 }
-.Star img{
+.Preview_Interface img{
+
     width: 30px;
-    margin-left: 5vw;
+    height: 30px;
+    border-bottom: none;
+}
+.Navlink {
+    margin-right: auto;
+
+}
+.Navlink img{
+    width: 35px;
+    height: 35px;
 }
 
 

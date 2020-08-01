@@ -34,6 +34,8 @@ class Preview extends Component {
             }
         }
 
+        console.log(this.props)
+
         return (
             <div>
                 {this.props.lightDex !== -1 && <div className="Preview">
