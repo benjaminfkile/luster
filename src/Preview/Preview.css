@@ -24,7 +24,7 @@
     -webkit-animation: wobble-hor-bottom 0.8s both;
     animation: wobble-hor-bottom 0.8s both;
 }
-p{
+.Preview p{
     position: absolute;
     top: 49vh;
     left: 88vw;
@@ -32,7 +32,7 @@ p{
     font-size: 30px;
 
 }
-h1{
+.Preview h1{
     position: absolute;
     top: 49vh;
     left: 1vh;
@@ -40,7 +40,7 @@ h1{
     -webkit-animation: heartbeat 1.5s ease-in-out infinite both;
     animation: heartbeat 1.5s ease-in-out infinite both;
 }
-a{
+.Preview a{
     text-decoration: none;
 }
 

@@ -4,13 +4,11 @@
     overflow-y: hidden;
     position: relative;
 }
+
 .Light_Img img{
 
     width: 98vw;
     margin-left: 1vw;
-    border-bottom: solid;
-    border-color: rgb(39, 39, 39); 
-  
 }
 .Light_Img li{
     color: white;
@@ -18,14 +16,16 @@
 
 .Preview_Interface{
     display: flex;
-    margin-top: -6.5vh;
+    margin-bottom: 1vh;
+    border-bottom: solid;
+    border-color: rgb(71, 36, 36);
+    border-radius: 15px;  
 
 }
 .Preview_Interface img{
-
     width: 30px;
     height: 30px;
-    border-bottom: none;
+    border: none;
 }
 .Navlink {
     margin-right: auto;

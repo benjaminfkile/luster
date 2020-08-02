@@ -8,18 +8,12 @@ class Browse extends Component {
     constructor() {
         super();
         this.state = {
-            showPreview: false,
+            loaded: false,
             lightDex: -1
         }
     }
 
     toggleInterface = (args) => {
-        // if (this.state.showPreview) {
-        //     this.setState({ showPreview: false, lightDex: -1 })
-        // } else {
-        //     this.setState({ showPreview: true })
-        //     this.setState({ lightDex: args })
-        // }
         this.setState({ lightDex: args })
     }
 
