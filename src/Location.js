@@ -15,7 +15,7 @@ function setLocation(position) {
 
 setInterval(function () {
     getLocation()
-}, 10000);
+}, 1000);
 
 getLocation()
 

@@ -10,6 +10,7 @@ import './Map.css'
 class Map extends React.Component {
 
   locationTimeout = 0
+  mapMounted = false;
 
   constructor() {
     super();
@@ -22,13 +23,18 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
+    this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.setState({ lights: LightStore })
   }
 
+  componentWillUnmount() {
+    this.mapMounted = false;
+  }
+
   listen4DB = () => {
-    if (LightStore.length > 0) {
+    if (LightStore.length > 0 && this.mapMounted) {
       this.setState({ lights: LightStore })
       this.buildMarkers()
       clearInterval(this.dbInterval)
@@ -36,11 +42,11 @@ class Map extends React.Component {
   }
 
   listenForLocation = () => {
-    if (Location.lat) {
-      console.log('captured location')
+    if (Location.lat && this.mapMounted) {
+      //console.log('captured location')
       this.setState({ location: true })
       clearInterval(this.listen4LocationInterval)
-      this.updateLocationInterval = setInterval(this.updateLocation, 10000)
+      this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     } else {
       this.setState({ location: false })
       this.locationTimeout++
@@ -52,8 +58,10 @@ class Map extends React.Component {
   }
 
   updateLocation = () => {
-    console.log('updated location')
-    this.setState({location: true})
+    //console.log('updated location')
+    if(this.mapMounted){
+      this.setState({location: true})
+    }
   }
 
   togglePreview = (args) => {
@@ -84,7 +92,7 @@ class Map extends React.Component {
 
   render = () => {
 
-    console.log("\nrender")
+    console.log("render")
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/navi-btn.png',
@@ -143,7 +151,7 @@ const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
+    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
     mapElement={<div style={{ height: `100%` }} />}

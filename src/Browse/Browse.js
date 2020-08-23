@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
-import Preview from '../Preview/Preview'
 
 class Browse extends Component {
 
     constructor() {
         super();
         this.state = {
-            loaded: false,
-            lightDex: -1
+            lightDex: -1,
+            nearUser: []
         }
     }
 
@@ -20,7 +19,7 @@ class Browse extends Component {
 
     render() {
 
-        console.log(this.state.lightDex)
+        // console.log(this.state.lightDex)
         let rating = [];
 
         if (this.state.lightDex !== -1) {
@@ -32,6 +31,7 @@ class Browse extends Component {
                 }
             }
         }
+
         return (
             <div className="Browse">
                 <div className="Img_Container">

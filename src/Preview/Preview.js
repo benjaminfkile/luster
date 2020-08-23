@@ -34,7 +34,7 @@ class Preview extends Component {
             }
         }
 
-        console.log(this.props)
+        // console.log(this.props)
 
         return (
             <div>
