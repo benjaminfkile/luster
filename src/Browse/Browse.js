@@ -8,14 +8,24 @@ class Browse extends Component {
         super();
         this.state = {
             lightDex: -1,
-            nearUser: []
+            db: false
+        }
+    }
+
+    componentDidMount() {
+        this.dbInterval = setInterval(this.listen4DB, 100)
+    }
+
+    listen4DB = () => {
+        if (LightStore.length > 0) {
+            clearInterval(this.dbInterval)
+            this.setState({db: true})
         }
     }
 
     toggleInterface = (args) => {
         this.setState({ lightDex: args })
     }
-
 
     render() {
 
@@ -41,6 +51,7 @@ class Browse extends Component {
                             height={300}>
                             <div className="Light_Img" onClick={() => this.toggleInterface(i)}>
                                 <img src={img.url} alt="oops" />
+                                {/* <li>|||||||</li> */}
                                 {i === this.state.lightDex &&
                                     <div className="Preview_Interface">
                                         <div className="Navlink">
