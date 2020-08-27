@@ -54,7 +54,7 @@ class Post extends Component {
                     lng: Location.lng,
                     url: args,
                     rating: 5,
-                    id: uuid.v4(),
+                    id: Math.random()/Math.random,
                 })
             }).then((response) => {
             }).then(() => {
