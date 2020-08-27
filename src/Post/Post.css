@@ -1,16 +1,64 @@
 #ChooseFile{
-    position: absolute;
-    top: 10vh;
-    left: 38vw
+    /* position: absolute;
+    top: 20vh;
+    left: 38vw */
 }
-#UploadImg{
+
+input[type="file"] {
+    display: none;
+}
+
+.Upload_Container{
+    font-family: 'Red Rose', cursive;
+
+}
+
+.custom-file-upload {
     position: absolute;
     top: 20vh;
-    width: 80vw;
-    left: 10vw;
+    left: 33vw;
+    z-index: 1000;
+    border: 2px solid rgb(39, 39, 39);
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
 }
+
+#UploadImg{
+    position: absolute;
+    top: 35vh;
+    width: 90vw;
+    left: 5vw;
+    z-index: 1000;
+    border-style: solid;
+    border-radius: 5px;
+}
+
+#progress{
+    position: absolute;
+    top: 71vh;
+    left: 65vw;
+    z-index: 1000;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+}
+
 #UploadBtn{
     position: absolute;
-    top: 85vh;
-    left: 43vw
+    top: 70vh;
+    left: 37vw;
+    z-index: 1000;
+    border: 2px solid rgb(39, 39, 39);
+    border-radius: 5px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    
 }

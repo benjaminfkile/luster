@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Location from "../Location"
+import Snow from '../Snow/Snow'
 import axios from 'axios'
 import uuid from "uuid";
 import '../Post/Post.css'
@@ -11,9 +12,10 @@ class Post extends Component {
         this.state = {
             selectedFile: null,
             response: null,
-            image: null
+            image: null,
+            progress: null,
+            initUpload: null
         }
-        this.imgSelectedHandler = this.imgSelectedHandler.bind(this);
     }
 
     imgSelectedHandler = (event) => {
@@ -32,8 +34,14 @@ class Post extends Component {
         const fd = new FormData()
         fd.append('image', this.state.selectedFile)
         console.log(fd)
-        axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + Math.random() / Math.random() + "&image=", fd)
+        axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + Math.random() / Math.random() + "&image=", fd, {
+            onUploadProgress: ProgressEvent => {
+                console.log("Progress: " + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + "%")
+                this.setState({progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100)})
+            }
+        })
             .then(res => {
+                console.log(res)
                 this.setState({ response: res })
                 this.updateRows(this.state.response.data.data.display_url)
             });
@@ -70,9 +78,14 @@ class Post extends Component {
         }
         return (
             <div className="Upload_Container">
-                <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
+                <label className="custom-file-upload">
+                    <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
+                Choose File
+                </label>
                 {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" />}
-                {this.state.image && <button id="UploadBtn" onClick={this.imgUploadHandler}>Upload</button>}
+                {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
+                {this.state.image && <p id="UploadBtn" onClick={this.imgUploadHandler}>Upload</p>}
+                <Snow/>
             </div>
         );
     }
