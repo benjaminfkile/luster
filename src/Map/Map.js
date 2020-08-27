@@ -122,10 +122,10 @@ class Map extends React.Component {
           defaultOptions={defaultMapOptions}
         >
           <>
-            <Marker
+            {/* <Marker
               position={{ lat: Location.lat, lng: Location.lng }}
               icon={locationMarker}
-            />
+            /> */}
           </>
         </GoogleMap>}
 
