@@ -39,7 +39,7 @@ class Post extends Component {
             });
     }
 
-    updateRows = (args) => {
+    updateRows = async (args) => {
         if (this.state.response) {
             console.log(this.state.response.data.data.display_url)
             // fetch('http://localhost:8004/api/lights', {
@@ -54,7 +54,7 @@ class Post extends Component {
                     lng: Location.lng,
                     url: args,
                     rating: 5,
-                    id: 789
+                    id: uuid.v4()
                 })
             }).then((response) => {
             }).then(() => {
