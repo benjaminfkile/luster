@@ -5,7 +5,7 @@ import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Snow from '../Snow/Snow'
 import { mapStyles } from './NightMode'
-import './Map.css'
+import '../Map/Map.css'
 
 class Map extends React.Component {
 
@@ -122,10 +122,11 @@ class Map extends React.Component {
           defaultOptions={defaultMapOptions}
         >
           <>
-            {/* <Marker
-              position={{ lat: Location.lat, lng: Location.lng }}
+            <Marker
+              //temp fix to keep pin away from sleigh
+              position={{ lat: Location.lat + .00001 , lng: Location.lng + .00001 }}
               icon={locationMarker}
-            /> */}
+            />
           </>
         </GoogleMap>}
 
@@ -154,7 +155,7 @@ class Map extends React.Component {
 const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
-    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
