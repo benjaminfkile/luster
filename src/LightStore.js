@@ -2,7 +2,7 @@ let LightStore = []
 
 function getLights() {
     let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/lights/';
-    // let targetUrl = 'http://localhost:8000/api/lights'
+    // let targetUrl = 'http://localhost:8004/api/lights'
 
     fetch(targetUrl)
         .then(response => response.json())

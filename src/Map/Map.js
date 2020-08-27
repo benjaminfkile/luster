@@ -66,6 +66,10 @@ class Map extends React.Component {
 
   togglePreview = (args) => {
     this.setState({ lightDex: args })
+    if(this.state.lightDex > -1){
+      console.log(LightStore[this.state.lightDex].id)
+    }
+
   }
 
   buildMarkers() {
@@ -118,10 +122,10 @@ class Map extends React.Component {
           defaultOptions={defaultMapOptions}
         >
           <>
-            <Marker
+            {/* <Marker
               position={{ lat: Location.lat, lng: Location.lng }}
               icon={locationMarker}
-            />
+            /> */}
           </>
         </GoogleMap>}
 

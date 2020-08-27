@@ -1,0 +1,16 @@
+#ChooseFile{
+    position: absolute;
+    top: 10vh;
+    left: 38vw
+}
+#UploadImg{
+    position: absolute;
+    top: 20vh;
+    width: 80vw;
+    left: 10vw;
+}
+#UploadBtn{
+    position: absolute;
+    top: 85vh;
+    left: 43vw
+}

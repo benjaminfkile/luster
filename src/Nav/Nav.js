@@ -48,10 +48,10 @@ class Nav extends Component {
                             </Link>
                         </li>
                     </div>
-                    <div className="About_Route" tabIndex="3">
+                    <div className="Post_Route" tabIndex="3">
                         <li onClick={this.toggleBurger}>
-                            <Link to='/about'>
-                                About |
+                            <Link to='/post'>
+                                Post |
                             </Link>
                         </li>
                     </div>
