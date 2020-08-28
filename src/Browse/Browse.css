@@ -17,8 +17,7 @@
 .Preview_Interface{
     display: flex;
     margin-bottom: 1vh;
-    border-bottom: solid;
-    border-color: rgb(71, 36, 36);
+    border-bottom: 2px solid rgb(60, 60, 60);
     border-radius: 15px;  
 
 }

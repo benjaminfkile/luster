@@ -53,7 +53,7 @@ class Post extends Component {
         const fd = new FormData()
         fd.append('image', this.state.selectedFile)
         console.log(fd)
-        axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + Math.random() / Math.random() + "&image=", fd, {
+        axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
             onUploadProgress: ProgressEvent => {
                 console.log("Progress: " + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + "%")
                 this.setState({ progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) })
@@ -81,7 +81,7 @@ class Post extends Component {
                     lat: Location.lat,
                     lng: Location.lng,
                     url: args,
-                    rating: 5,
+                    rating: 1,
                     id: uuid.v4()
                 })
             })
@@ -95,6 +95,7 @@ class Post extends Component {
         }
         return (
             <div className="Upload_Container">
+                {this.state.finished && <p id="success">Success!!!</p>}
                 <label className="custom-file-upload">
                     <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
                 Choose File
