@@ -14,40 +14,60 @@ class Post extends Component {
             response: null,
             image: null,
             progress: null,
-            initUpload: null
+            warning: false,
+            finished: false
         }
     }
 
     imgSelectedHandler = (event) => {
+
         this.setState({
             selectedFile: event.target.files[0]
         })
         if (event.target.files && event.target.files[0]) {
             let img = event.target.files[0];
-            this.setState({
-                image: URL.createObjectURL(img)
-            });
+            this.setState({ image: URL.createObjectURL(img), finished: false });
         }
     }
 
+    checkDimensions = () => {
+
+        let img = document.getElementById("UploadImg");
+        let width = img.naturalWidth;
+        let height = img.naturalHeight;
+
+        if (height > width) {
+            this.setState({ warning: true })
+            console.log('bad ' + width + 'x' + height)
+
+        } else {
+            this.setState({ warning: false })
+            console.log('good ' + width + 'x' + height)
+        }
+
+        console.log(this.state.warning)
+    }
+
     imgUploadHandler = () => {
+
         const fd = new FormData()
         fd.append('image', this.state.selectedFile)
         console.log(fd)
         axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + Math.random() / Math.random() + "&image=", fd, {
             onUploadProgress: ProgressEvent => {
                 console.log("Progress: " + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + "%")
-                this.setState({progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100)})
+                this.setState({ progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) })
             }
         })
             .then(res => {
                 console.log(res)
-                this.setState({ response: res })
+                this.setState({ response: res, finished: true, progress: null })
                 this.updateRows(this.state.response.data.data.display_url)
             });
     }
 
     updateRows = async (args) => {
+
         if (this.state.response) {
             console.log(this.state.response.data.data.display_url)
             // fetch('http://localhost:8004/api/lights', {
@@ -64,15 +84,12 @@ class Post extends Component {
                     rating: 5,
                     id: uuid.v4()
                 })
-            }).then((response) => {
-            }).then(() => {
-                // window.location.href = window.location.origin
-            });
+            })
         }
     }
 
     render() {
-        console.log(Location)
+
         if (this.state.response) {
             console.log(this.state.response.data.data.display_url)
         }
@@ -82,10 +99,15 @@ class Post extends Component {
                     <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
                 Choose File
                 </label>
-                {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" />}
+                {!this.state.image && <p id="arrow">^</p>}
+                {!this.state.image && <img src="./res/splash.png" id="noImg" alt='A tree'></img>}
+                {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
                 {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
-                {this.state.image && <p id="UploadBtn" onClick={this.imgUploadHandler}>Upload</p>}
-                <Snow/>
+                {this.state.image && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
+                {this.state.warning && <p id="warning">Warning!!! The photo seems to be in portrait, Luster is intended for landscape photos. You can still upload it but the photo might not pass review if it is too stretched and blurry.</p>}
+                {this.state.finished && !this.state.warning && <p id="finished">Your photo looks good so far, if for some reason it does not pass review you can use the contact form in the contact section of the page and reach out to me. </p>}
+                <Snow />
+
             </div>
         );
     }
