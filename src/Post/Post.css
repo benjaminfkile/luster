@@ -89,11 +89,11 @@ input[type="file"] {
 }
 #arrow{
     position: absolute;
-    top: 75vh;
+    top: 70vh;
 	-webkit-animation: scale-out-center 2s cubic-bezier(0.895, 0.030, 0.685, 0.220) infinite reverse ;
 	animation: scale-out-center 2s cubic-bezier(0.895, 0.030, 0.685, 0.220) infinite reverse ;
-    color: rgb(255, 255, 255);
-    font-size: 50px;
+    color:  rgb(60, 60, 60);
+    font-size: 80px;
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -o-transform: rotate(180deg);

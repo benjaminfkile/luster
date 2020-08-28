@@ -107,7 +107,7 @@ class Post extends Component {
                 {this.state.image && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
                 {this.state.warning && <p id="warning">Warning!!! The photo seems to be in portrait, Luster is intended for landscape photos. You can still upload it but the photo might not pass review if it is too stretched and blurry.</p>}
                 {this.state.finished && !this.state.warning && <p id="finished">Your photo looks good so far, if for some reason it does not pass review you can use the contact form in the contact section of the page and reach out to me. </p>}
-                <Snow />
+                {/* <Snow /> */}
 
             </div>
         );
