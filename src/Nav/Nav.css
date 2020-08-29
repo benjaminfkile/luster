@@ -15,9 +15,9 @@
 .Routes{
     position: absolute;
     display: flex;
-    width: 85vw;
+    width: 66vw;
     height: 8vh;
-    left: 2vw;
+    left: 20vw;
     top: 0vh;
     z-index: 100;
     border-style: solid;
@@ -27,14 +27,15 @@
 }
 
 .Routes li{
+    padding-top: 15px;
     text-align: center;
-    margin-top: 2vh;
     -webkit-animation: flip-in-hor-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: flip-in-hor-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     }
 
 .Routes a{
     margin-left: 1vw;
+    margin-right: 0vw;
     color: rgb(255, 255, 255);
     font-family: 'Red Rose', cursive;
     font-size: 5.1vw;

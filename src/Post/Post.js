@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Location from "../Location"
-import Snow from '../Snow/Snow'
 import axios from 'axios'
 import uuid from "uuid";
 import '../Post/Post.css'
@@ -101,7 +100,7 @@ class Post extends Component {
                 Choose File
                 </label>
                 {!this.state.image && <p id="arrow">^</p>}
-                {!this.state.image && <img src="./res/splash.png" id="noImg" alt='A tree'></img>}
+                {!this.state.image && <img src="./res/2.png" id="noImg" alt='A tree'></img>}
                 {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
                 {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
                 {this.state.image && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}

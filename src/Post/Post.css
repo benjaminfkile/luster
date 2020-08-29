@@ -12,8 +12,8 @@ input[type="file"] {
 
 .custom-file-upload {
     position: absolute;
-    top: 20vh;
-    left: 31vw;
+    top: 12vh;
+    left: 34vw;
     z-index: 1000;
     border: 2px solid rgb(60, 60, 60);
     border-radius: 5px;
@@ -44,7 +44,7 @@ input[type="file"] {
 
 #progress{
     position: absolute;
-    top: 65.5vh;
+    top: 25vh;
     width: 100vw;
     text-align: center;
     z-index: 1000;
@@ -102,13 +102,13 @@ input[type="file"] {
 }
 
 #noImg{
-    width: 90vw;
-    height: 50vh;
+    width: 80vw;
+    height: 40vh;
 }
 
 #success{
     position: absolute;
-    top: 13vh;
+    top: 25vh;
     z-index: 1000;
     color: rgb(255, 255, 255);
     font-size: 20px;

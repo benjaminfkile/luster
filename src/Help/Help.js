@@ -6,7 +6,7 @@ class Help extends Component{
     render(){
         return(
             <div className="Help">
-                Help
+                Nothing to see here yet
             </div>
         )
     }

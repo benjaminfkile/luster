@@ -43,10 +43,8 @@ class Map extends React.Component {
 
   listenForLocation = () => {
     if (Location.lat && this.mapMounted) {
-      //console.log('captured location')
       this.setState({ location: true })
       clearInterval(this.listen4LocationInterval)
-      this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     } else {
       this.setState({ location: false })
       this.locationTimeout++
@@ -57,9 +55,8 @@ class Map extends React.Component {
     }
   }
 
-  updateLocation = () => {
-    //console.log('updated location')
-    if(this.mapMounted){
+  recenter = () => {
+    if(this.mapMounted && Location.lat){
       this.setState({location: true})
     }
   }
@@ -98,13 +95,6 @@ class Map extends React.Component {
 
     console.log("render")
 
-    let locationMarker = new window.google.maps.MarkerImage(
-      './res/navi-btn.png',
-      null,
-      null,
-      null,
-      new window.google.maps.Size(40, 40))
-
     const defaultMapOptions = {
       styles: mapStyles,
       fullscreenControl: false,
@@ -118,27 +108,23 @@ class Map extends React.Component {
       <div>
         {this.state.location && <GoogleMap
           defaultZoom={12}
-          defaultCenter={{ lat: Location.lat, lng: Location.lng }}
+          center={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={defaultMapOptions}
         >
           <>
-            <Marker
-              //temp fix to keep pin away from location marker
-              position={{ lat: Location.lat + .00001 , lng: Location.lng + .00001 }}
-              icon={locationMarker}
-            />
           </>
         </GoogleMap>}
-
         {!this.state.location && <GoogleMap
           defaultZoom={12}
-          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
+          center={{ lat: 46.8721, lng: -113.9940 }}
           defaultOptions={defaultMapOptions}
         >
           <>
           </>
         </GoogleMap>}
-
+        <div className="Recenter" onClick={this.recenter}>
+          <p>Recenter</p>
+        </div>
         <div className="Markers">
           {this.state.markers}
         </div>

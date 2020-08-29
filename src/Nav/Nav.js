@@ -55,21 +55,14 @@ class Nav extends Component {
                             </Link>
                         </li>
                     </div>
-                    <div className="Contribute_Route" tabIndex="4">
+                    <div className="Help_Route" tabIndex="4">
                         <li onClick={this.toggleBurger}>
 
-                            <Link to='/contribute'>
-                                Contribute
-                            </Link>
-                        </li>
-                    </div>
-                    {/* <div className="Help_Route" tabIndex="5">
-                        <li onClick={this.toggleBurger}>
                             <Link to='/help'>
                                 Help
                             </Link>
                         </li>
-                    </div> */}
+                    </div>
                 </div>}
 
 
