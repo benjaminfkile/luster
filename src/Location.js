@@ -1,4 +1,5 @@
 let Location = []
+let wait = setInterval(awaitUserAllow, 1000)
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -13,9 +14,16 @@ function setLocation(position) {
     Location.lng = position.coords.longitude
 }
 
-setInterval(function () {
-    getLocation()
-}, 1000);
+function awaitUserAllow() {
+    console.log("Waiting for user to allow location")
+    if (Location.lat) {
+        clearInterval(wait)
+        setInterval(function () {
+            getLocation()
+        }, 10000);
+    }
+    console.log(Location)
+}
 
 getLocation()
 
