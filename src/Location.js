@@ -20,7 +20,7 @@ function awaitUserAllow() {
         clearInterval(wait)
         setInterval(function () {
             getLocation()
-        }, 10000);
+        }, 1000);
     }
     console.log(Location)
 }

@@ -28,7 +28,7 @@ class Map extends React.Component {
   componentDidMount() {
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
-    this.updateLocationInterval = setInterval(this.updateLocation, 2000)
+    this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.setState({ lights: LightStore })
   }
