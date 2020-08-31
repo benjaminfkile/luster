@@ -22,7 +22,6 @@ function awaitUserAllow() {
             getLocation()
         }, 1000);
     }
-    console.log(Location)
 }
 
 getLocation()
