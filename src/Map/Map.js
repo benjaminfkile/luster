@@ -11,6 +11,7 @@ class Map extends React.Component {
 
   locationTimeout = 0
   mapMounted = false;
+  dragSensor = 0;
 
   constructor() {
     super();
@@ -18,13 +19,15 @@ class Map extends React.Component {
       lights: null,
       markers: null,
       lightDex: -1,
-      location: false
+      location: false,
+      centered: true,
     }
   }
 
   componentDidMount() {
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
+    this.updateLocationInterval = setInterval(this.updateLocation, 5000)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.setState({ lights: LightStore })
   }
@@ -55,21 +58,30 @@ class Map extends React.Component {
     }
   }
 
-  recenter = () => {
-    if(this.mapMounted && Location.lat){
-      this.setState({location: true})
+  updateLocation = () => {
+    if (!this.state.recenter && Location.lat) {
+      this.setState({ location: true })
     }
+  }
+
+  recenter = () => {
+    this.setState({ centered: true })
+  }
+
+  dragged = () => {
+    this.setState({ centered: false })
   }
 
   togglePreview = (args) => {
     this.setState({ lightDex: args })
-    if(this.state.lightDex > -1){
+    if (this.state.lightDex > -1) {
       console.log(LightStore[this.state.lightDex].id)
     }
 
   }
 
   buildMarkers() {
+
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       let markerImg = new window.google.maps.MarkerImage(
@@ -93,7 +105,14 @@ class Map extends React.Component {
 
   render = () => {
 
-    console.log("render")
+    console.log('rerender')
+
+    let locationMarker = new window.google.maps.MarkerImage(
+      './res/navi-btn.png',
+      null,
+      null,
+      null,
+      new window.google.maps.Size(40, 40))
 
     const defaultMapOptions = {
       styles: mapStyles,
@@ -106,17 +125,38 @@ class Map extends React.Component {
 
     return (
       <div>
-        {this.state.location && <GoogleMap
+        {this.state.location && !this.state.centered && <GoogleMap
           defaultZoom={12}
-          center={{ lat: Location.lat, lng: Location.lng }}
+          defaultCenter={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={defaultMapOptions}
         >
           <>
+            <Marker
+              //temp fix to keep pin away from sleigh
+              position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
+              icon={locationMarker}
+            />
           </>
         </GoogleMap>}
+
+        {this.state.location && this.state.centered && <GoogleMap
+          defaultZoom={12}
+          center={{ lat: Location.lat, lng: Location.lng }}
+          defaultOptions={defaultMapOptions}
+          onDrag={this.dragged}
+        >
+          <>
+            <Marker
+              //temp fix to keep pin away from sleigh
+              position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
+              icon={locationMarker}
+            />
+          </>
+        </GoogleMap>}
+
         {!this.state.location && <GoogleMap
           defaultZoom={12}
-          center={{ lat: 46.8721, lng: -113.9940 }}
+          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
           defaultOptions={defaultMapOptions}
         >
           <>
