@@ -69,8 +69,8 @@ class Post extends Component {
 
         if (this.state.response) {
             console.log(this.state.response.data.data.display_url)
-            fetch('http://localhost:8000/api/lights', {
-                // fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
+            // fetch('http://localhost:8000/api/lights', {
+                fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
