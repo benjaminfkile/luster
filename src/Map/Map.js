@@ -20,14 +20,15 @@ class Map extends React.Component {
       markers: null,
       lightDex: -1,
       location: false,
-      centered: true,
+      centered: false,
+      dragged: true,
     }
   }
 
   componentDidMount() {
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
-    this.updateLocationInterval = setInterval(this.updateLocation, 5000)
+    this.updateLocationInterval = setInterval(this.updateLocation, 2000)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.setState({ lights: LightStore })
   }
@@ -66,10 +67,13 @@ class Map extends React.Component {
 
   recenter = () => {
     this.setState({ centered: true })
+    this.setState({dragged: false})
   }
 
   dragged = () => {
+    console.log('safs')
     this.setState({ centered: false })
+    this.setState({dragged: true})
   }
 
   togglePreview = (args) => {
@@ -125,8 +129,8 @@ class Map extends React.Component {
 
     return (
       <div>
-        {this.state.location && !this.state.centered && <GoogleMap
-          defaultZoom={12}
+        {this.state.location && this.state.dragged && <GoogleMap
+          defaultZoom={14}
           defaultCenter={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={defaultMapOptions}
         >
@@ -140,7 +144,7 @@ class Map extends React.Component {
         </GoogleMap>}
 
         {this.state.location && this.state.centered && <GoogleMap
-          defaultZoom={12}
+          defaultZoom={14}
           center={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={defaultMapOptions}
           onDrag={this.dragged}
