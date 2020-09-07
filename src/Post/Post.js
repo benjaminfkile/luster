@@ -60,7 +60,7 @@ class Post extends Component {
         })
             .then(res => {
                 console.log(res)
-                this.setState({ response: res, finished: true, progress: null })
+                this.setState({ response: res, finished: true, progress: null, image: null, selectedFile: null })
                 this.updateRows(this.state.response.data.data.display_url)
             });
     }
@@ -68,9 +68,7 @@ class Post extends Component {
     updateRows = async (args) => {
 
         if (this.state.response) {
-            console.log(this.state.response.data.data.display_url)
-            // fetch('http://localhost:8000/api/lights', {
-                fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
+                fetch('https://agile-wildwood-40014.herokuapp.com/lights', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -80,11 +78,13 @@ class Post extends Component {
                     lat: Location.lat,
                     lng: Location.lng,
                     url: args,
-                    rating: 1,
-                    id: uuid.v4()
+                    upvotes: 1,
+                    id: uuid.v4(),
+                    delete_url: this.state.response.data.data.delete_url,
                 })
             })
         }
+        console.log(this.state.response)
     }
 
     render() {
