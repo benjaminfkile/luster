@@ -80,7 +80,7 @@ class Post extends Component {
                     url: args,
                     upvotes: 1,
                     id: uuid.v4(),
-                    delete_url: this.state.response.data.data.delete_url,
+                    flag: 1
                 })
             })
         }
@@ -91,6 +91,7 @@ class Post extends Component {
 
         if (this.state.response) {
             console.log(this.state.response.data.data.display_url)
+            console.log(this.state.response)
         }
         return (
             <div className="Upload_Container">

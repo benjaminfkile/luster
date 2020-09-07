@@ -67,13 +67,13 @@ class Map extends React.Component {
 
   recenter = () => {
     this.setState({ centered: true })
-    this.setState({dragged: false})
+    this.setState({ dragged: false })
   }
 
   dragged = () => {
     console.log('safs')
     this.setState({ centered: false })
-    this.setState({dragged: true})
+    this.setState({ dragged: true })
   }
 
   togglePreview = (args) => {
@@ -95,21 +95,25 @@ class Map extends React.Component {
         null,
         new window.google.maps.Size(40, 40)
       )
-      let marker =
-        <Marker
-          key={i}
-          onClick={() => this.togglePreview(i)}
-          position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
-          icon={markerImg}
-        />
-      temp.push(marker)
+      if (this.state.lights[i].flag !== 1) {
+        let marker =
+          <Marker
+            key={i}
+            onClick={() => this.togglePreview(i)}
+            position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
+            icon={markerImg}
+          />
+        temp.push(marker)
+      }
     }
+
     this.setState({ markers: temp })
   }
 
   render = () => {
 
     console.log('rerender')
+    console.log(LightStore)
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/navi-btn.png',
@@ -185,7 +189,7 @@ class Map extends React.Component {
 const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
-    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
