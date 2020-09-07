@@ -68,7 +68,7 @@ class Post extends Component {
     updateRows = async (args) => {
 
         if (this.state.response) {
-                fetch('https://agile-wildwood-40014.herokuapp.com/lights', {
+                fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
