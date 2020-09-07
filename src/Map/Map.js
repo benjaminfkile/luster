@@ -84,28 +84,32 @@ class Map extends React.Component {
 
   }
 
-  buildMarkers() {
+  buildMarkers = () => {
 
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
-      let markerImg = new window.google.maps.MarkerImage(
-        './res/' + Math.floor((Math.random() * (23 - 1) + 1)) + '.png',
-        null,
-        null,
-        null,
-        new window.google.maps.Size(40, 40)
-      )
-      if (this.state.lights[i].flag !== 1) {
-        let marker =
-          <Marker
-            key={i}
-            onClick={() => this.togglePreview(i)}
-            position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
-            icon={markerImg}
-          />
-        temp.push(marker)
+      console.log(this.state.lights[i].flag)
+      if(this.state.lights[i].flag === "0"){
+        let markerImg = new window.google.maps.MarkerImage(
+          './res/' + Math.floor((Math.random() * (23 - 1) + 1)) + '.png',
+          null,
+          null,
+          null,
+          new window.google.maps.Size(40, 40)
+        )
+          let marker =
+            <Marker
+              key={i}
+              onClick={() => this.togglePreview(i)}
+              position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
+              icon={markerImg}
+            />
+          temp.push(marker)
+          }
       }
-    }
+      
+
+
 
     this.setState({ markers: temp })
   }
@@ -113,7 +117,6 @@ class Map extends React.Component {
   render = () => {
 
     console.log('rerender')
-    console.log(LightStore)
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/navi-btn.png',
@@ -190,7 +193,7 @@ const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
     googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
+    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
     mapElement={<div style={{ height: `100%` }} />}
