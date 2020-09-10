@@ -1,16 +1,18 @@
 let Location = []
-let wait = setInterval(awaitUserAllow, 1000)
+let wv = true
 
-function isWebview(){
+function isWebview() {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
-    return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1);
+    if ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
+        wv = true
+    } else {
+        wv = false
+    }
 }
 
 function getLocation() {
-    if (!isWebview() && navigator.geolocation) {
+    if (!wv && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setLocation)
-    } else {
-        alert("Geolocation is not supported by this browser.")
     }
 }
 
@@ -19,16 +21,7 @@ function setLocation(position) {
     Location.lng = position.coords.longitude
 }
 
-function awaitUserAllow() {
-    // console.log("Waiting for user to allow location")
-    if (!isWebview() && Location.lat) {
-        clearInterval(wait)
-        setInterval(function () {
-            getLocation()
-        }, 1000);
-    }
-}
-
-getLocation()
+isWebview()
+setInterval(getLocation, 1000)
 
 export default Location
