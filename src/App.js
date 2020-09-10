@@ -12,8 +12,8 @@ class App extends Component {
 
 
   componentDidMount() {
-    if (!this.isWebview()) {
-      console.log('redirect')
+    if (this.isWebview()) {
+      setTimeout(() => window.open('https://luster.vercel.app'), 1000);
     }
   }
 
