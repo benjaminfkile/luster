@@ -28,7 +28,7 @@ class Map extends React.Component {
   componentDidMount() {
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
-    this.updateLocationInterval = setInterval(this.updateLocation, 5000)
+    this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.setState({ lights: LightStore })
   }
@@ -53,7 +53,7 @@ class Map extends React.Component {
       this.setState({ location: false })
       this.locationTimeout++
       if (this.locationTimeout > 19) {
-        console.log('location denied')
+        // console.log('location denied')
         clearInterval(this.listen4LocationInterval)
       }
     }
@@ -71,7 +71,6 @@ class Map extends React.Component {
   }
 
   dragged = () => {
-    console.log('safs')
     this.setState({ centered: false })
     this.setState({ dragged: true })
   }
@@ -107,9 +106,6 @@ class Map extends React.Component {
           temp.push(marker)
           }
       }
-      
-
-
 
     this.setState({ markers: temp })
   }

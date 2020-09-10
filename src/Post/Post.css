@@ -116,6 +116,13 @@ input[type="file"] {
     font-size: 20px;
     text-align: center;
 }
+.Audit_Container{
+  position: absolute;
+  top: 0vh;
+  left: 0vw;
+  width: 50vw;
+  height: 35vh;
+}
 
 
 /* ----------------------------------------------

@@ -18,6 +18,9 @@ class Post extends Component {
         }
     }
 
+    componentDidMount() {
+    }
+
     imgSelectedHandler = (event) => {
 
         this.setState({
@@ -68,7 +71,9 @@ class Post extends Component {
     updateRows = async (args) => {
 
         if (this.state.response) {
-                fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
+            fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
+            // fetch('http://localhost:8000/api/lights', {
+
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -87,12 +92,9 @@ class Post extends Component {
         console.log(this.state.response)
     }
 
+
     render() {
 
-        if (this.state.response) {
-            console.log(this.state.response.data.data.display_url)
-            console.log(this.state.response)
-        }
         return (
             <div className="Upload_Container">
                 {this.state.finished && <p id="success">Success!!!</p>}
