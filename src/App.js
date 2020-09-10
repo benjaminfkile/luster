@@ -9,6 +9,8 @@ import './App.css';
 
 class App extends Component {
 
+
+
   componentDidMount() {
     if (!this.isWebview()) {
       console.log('redirect')
