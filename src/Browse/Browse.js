@@ -34,7 +34,7 @@ class Browse extends Component {
 
         if (this.state.lightDex !== -1) {
             for (let i = 0; i < 5; i++) {
-                if (i < LightStore[this.state.lightDex].rating) {
+                if (i < LightStore[this.state.lightDex].upvotes) {
                     rating.push(
                         <img src="./res/star.png" alt="*" key={Math.random()}></img>
                     )

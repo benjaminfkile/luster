@@ -26,7 +26,7 @@ class Preview extends Component {
         let rating = [];
         if (this.props.lightDex !== -1) {
             for (let i = 0; i < 5; i++) {
-                if (i < LightStore[this.props.lightDex].rating) {
+                if (i < LightStore[this.props.lightDex].upvotes) {
                     rating.push(
                         <img src="./res/star.png" alt="*" height="30" width="30" key={Math.random()}></img>
                     )

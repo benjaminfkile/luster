@@ -9,14 +9,6 @@ import './App.css';
 
 class App extends Component {
 
-
-
-  componentDidMount() {
-    if (this.isWebview()) {
-      setTimeout(() => window.open('https://luster.vercel.app'), 1000);
-    }
-  }
-
   isWebview = () => {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
     return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1);
