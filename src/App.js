@@ -9,18 +9,16 @@ import './App.css';
 
 class App extends Component {
 
-  isWebview = () => {
+  inApp = () => {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
     return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1);
   }
 
   render() {
 
-    console.log(this.isWebview())
-
     return (
       <div className="Wrapper">
-        {!this.isWebview() && <div className="App">
+        {!this.inApp() && <div className="App">
           <Nav />
           <Switch>
             <Route exact path='/' component={Map} />
@@ -30,13 +28,15 @@ class App extends Component {
             <Route component={Map} />
           </Switch>
         </div>}
-        {this.isWebview() && <div className="Redirect">
-        Click the button below to leave facebook
+        {this.inApp() && <div className="Redirect">
+          Click the button below to leave facebook
         <br></br>
-        <a href="https://luster.vercel.app" target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
+          <a href="https://luster.vercel.app" target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
         </div>}
       </div>
+
     );
   }
 }
+
 export default App;

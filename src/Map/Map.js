@@ -1,6 +1,7 @@
 import React from "react";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
 import Location from '../Location'
+import GeoData from '../GeoData'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Snow from '../Snow/Snow'
@@ -20,7 +21,8 @@ class Map extends React.Component {
       markers: null,
       lightDex: -1,
       location: false,
-      centered: false,
+      geoData: false,
+      centered: true,
       dragged: true,
     }
   }
@@ -30,6 +32,7 @@ class Map extends React.Component {
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
     this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 100)
+    this.geoInterval = setInterval(this.listen4GEO, 100)
     this.setState({ lights: LightStore })
   }
 
@@ -62,6 +65,13 @@ class Map extends React.Component {
   updateLocation = () => {
     if (!this.state.recenter && Location.lat) {
       this.setState({ location: true })
+    }
+  }
+
+  listen4GEO = () => {
+    if(GeoData[0]){
+      this.setState({geoData: true})
+      clearInterval(this.geoInterval)
     }
   }
 
@@ -119,7 +129,7 @@ class Map extends React.Component {
       null,
       null,
       null,
-      new window.google.maps.Size(40, 40))
+      new window.google.maps.Size(30, 30))
 
     const defaultMapOptions = {
       styles: mapStyles,
@@ -153,23 +163,25 @@ class Map extends React.Component {
           onDrag={this.dragged}
         >
           <>
-            <Marker
+            {this.state.location && <Marker
               //temp fix to keep pin away from sleigh
               position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
               icon={locationMarker}
-            />
+            />}
           </>
         </GoogleMap>}
 
-        {!this.state.location && <GoogleMap
+        {!this.state.location && this.state.geoData && <GoogleMap
           defaultZoom={12}
-          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
+          defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
           defaultOptions={defaultMapOptions}
+          onDrag={this.dragged}
+
         >
           <>
           </>
         </GoogleMap>}
-        {Location.lat && <div className="Recenter" onClick={this.recenter}>
+        {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
           <p>Recenter</p>
         </div>}
         <div className="Markers">

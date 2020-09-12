@@ -1,17 +1,17 @@
 let Location = []
-let wv = true
+let app = true
 
-function isWebview() {
+function inApp() {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
     if ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
-        wv = true
+        app = true
     } else {
-        wv = false
+        app = false
     }
 }
 
 function getLocation() {
-    if (!wv && navigator.geolocation) {
+    if (!app && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setLocation)
     }
 }
@@ -21,7 +21,7 @@ function setLocation(position) {
     Location.lng = position.coords.longitude
 }
 
-isWebview()
+inApp()
 setInterval(getLocation, 1000)
 
 export default Location
