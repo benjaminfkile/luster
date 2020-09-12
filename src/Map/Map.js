@@ -24,16 +24,25 @@ class Map extends React.Component {
       geoData: false,
       centered: true,
       dragged: true,
+      inApp: true
     }
   }
 
   componentDidMount() {
+    this.inApp()
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
     this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.geoInterval = setInterval(this.listen4GEO, 100)
     this.setState({ lights: LightStore })
+  }
+
+  inApp = () => {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    if(!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)){
+      this.setState({inApp: false})
+    }
   }
 
   componentWillUnmount() {
@@ -49,7 +58,7 @@ class Map extends React.Component {
   }
 
   listenForLocation = () => {
-    if (Location.lat && this.mapMounted) {
+    if (Location.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
       clearInterval(this.listen4LocationInterval)
     } else {
@@ -63,7 +72,7 @@ class Map extends React.Component {
   }
 
   updateLocation = () => {
-    if (!this.state.recenter && Location.lat) {
+    if (!this.state.recenter && !this.state.inApp && Location.lat) {
       this.setState({ location: true })
     }
   }

@@ -18,7 +18,7 @@ class App extends Component {
 
     return (
       <div className="Wrapper">
-        {!this.inApp() && <div className="App">
+        <div className="App">
           <Nav />
           <Switch>
             <Route exact path='/' component={Map} />
@@ -27,12 +27,7 @@ class App extends Component {
             <Route path='/help' component={Help} />
             <Route component={Map} />
           </Switch>
-        </div>}
-        {this.inApp() && <div className="Redirect">
-          Click the button below to leave facebook
-        <br></br>
-          <a href="https://luster.vercel.app" target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
-        </div>}
+        </div>
       </div>
 
     );
