@@ -41,7 +41,7 @@ class Browse extends Component {
                 }
             }
         }
-
+        
         return (
             <div className="Browse">
                 <div className="Img_Container">
@@ -49,7 +49,7 @@ class Browse extends Component {
                         <LazyLoad
                             key={i}
                             height={300}>
-                            <div className="Light_Img" onClick={() => this.toggleInterface(i)}>
+                            {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.toggleInterface(i)}>
                                 <img src={img.url} alt="oops" />
                                 {/* <li>|||||||</li> */}
                                 {i === this.state.lightDex &&
@@ -59,7 +59,7 @@ class Browse extends Component {
                                         </div>
                                         {rating}
                                     </div>}
-                            </div>
+                            </div>}
                         </LazyLoad>)}
                 </div>
             </div>
