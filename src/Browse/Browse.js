@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Preview from "../Preview/Preview"
 import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
 
@@ -19,16 +20,17 @@ class Browse extends Component {
     listen4DB = () => {
         if (LightStore.length > 0) {
             clearInterval(this.dbInterval)
-            this.setState({db: true})
+            this.setState({ db: true })
         }
     }
 
-    toggleInterface = (args) => {
+    togglePreview = (args) => {
         this.setState({ lightDex: args })
     }
 
     render() {
 
+        // console.log(this.state.lightDex)
         let rating = [];
 
         if (this.state.lightDex !== -1) {
@@ -40,27 +42,24 @@ class Browse extends Component {
                 }
             }
         }
-        
+
         return (
-            <div className="Browse">
+            <div className="Browse" id="browse">
                 <div className="Img_Container">
                     {LightStore.map((img, i) =>
                         <LazyLoad
                             key={i}
-                            height={300}>
-                            {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.toggleInterface(i)}>
+                            height={50}>
+                            {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
                                 <img src={img.url} alt="oops" />
-                                {/* <li>|||||||</li> */}
-                                {i === this.state.lightDex &&
-                                    <div className="Preview_Interface">
-                                        <div className="Navlink">
-                                            <a href={'https://www.google.com/maps/search/?api=1&query=' + LightStore[this.state.lightDex].lat + ',' + LightStore[this.state.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" width={40} /> &nbsp;</a>
-                                        </div>
-                                        {rating}
-                                    </div>}
+
                             </div>}
                         </LazyLoad>)}
                 </div>
+                <Preview
+                    togglePreview={this.togglePreview}
+                    lightDex={this.state.lightDex}
+                />
             </div>
         );
 

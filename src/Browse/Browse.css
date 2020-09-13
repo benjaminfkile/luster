@@ -1,15 +1,19 @@
-
+.Browse{
+    position: fixed;
+}
 .Img_Container{
-    overflow-x: auto;
-    overflow-y: hidden;
-    position: relative;
+
+    position: absolute;
+    overflow-y: auto;
+    top: 10vh;
+    left: 15vw;
+    height: 100vh;
     background-color: rgb(0, 0, 0);
 }
 
 .Light_Img img{
 
-    width: 98vw;
-    margin-left: 1vw;
+    width: 70vw;
     border-radius: 10px;
 }
 .Light_Img li{

@@ -40,8 +40,8 @@ class Map extends React.Component {
 
   inApp = () => {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
-    if(!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)){
-      this.setState({inApp: false})
+    if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
+      this.setState({ inApp: false })
     }
   }
 
@@ -78,8 +78,8 @@ class Map extends React.Component {
   }
 
   listen4GEO = () => {
-    if(GeoData[0] && this.mapMounted){
-      this.setState({geoData: true})
+    if (GeoData[0] && this.mapMounted) {
+      this.setState({ geoData: true })
       clearInterval(this.geoInterval)
     }
   }
@@ -96,10 +96,6 @@ class Map extends React.Component {
 
   togglePreview = (args) => {
     this.setState({ lightDex: args })
-    if (this.state.lightDex > -1) {
-      console.log(LightStore[this.state.lightDex].id)
-    }
-
   }
 
   buildMarkers = () => {
@@ -107,7 +103,7 @@ class Map extends React.Component {
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       console.log(this.state.lights[i].flag)
-      if(this.state.lights[i].flag === "0"){
+      if (this.state.lights[i].flag === "0") {
         let markerImg = new window.google.maps.MarkerImage(
           './res/' + Math.floor((Math.random() * (23 - 1) + 1)) + '.png',
           null,
@@ -115,16 +111,16 @@ class Map extends React.Component {
           null,
           new window.google.maps.Size(40, 40)
         )
-          let marker =
-            <Marker
-              key={i}
-              onClick={() => this.togglePreview(i)}
-              position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
-              icon={markerImg}
-            />
-          temp.push(marker)
-          }
+        let marker =
+          <Marker
+            key={i}
+            onClick={() => this.togglePreview(i)}
+            position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
+            icon={markerImg}
+          />
+        temp.push(marker)
       }
+    }
 
     this.setState({ markers: temp })
   }

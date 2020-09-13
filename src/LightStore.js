@@ -9,6 +9,7 @@ function getLights() {
         .then(data => {
             for (let i = 0; i < data.length; i++) {
                 LightStore.push(data[i])
+                console.log(data[i])
             }
         })
         .catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
