@@ -29,7 +29,6 @@ class Browse extends Component {
 
     render() {
 
-        // console.log(this.state.lightDex)
         let rating = [];
 
         if (this.state.lightDex !== -1) {

@@ -72,13 +72,13 @@ class Map extends React.Component {
   }
 
   updateLocation = () => {
-    if (!this.state.recenter && !this.state.inApp && Location.lat) {
+    if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
       this.setState({ location: true })
     }
   }
 
   listen4GEO = () => {
-    if(GeoData[0]){
+    if(GeoData[0] && this.mapMounted){
       this.setState({geoData: true})
       clearInterval(this.geoInterval)
     }
