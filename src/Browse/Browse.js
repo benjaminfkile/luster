@@ -39,7 +39,7 @@ class Browse extends Component {
                     rating.push(
                         <img src="./res/star.png" alt="*" key={Math.random()}></img>
                     )
-                }
+                } 
             }
         }
 
@@ -51,8 +51,7 @@ class Browse extends Component {
                             key={i}
                             height={50}>
                             {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
-                                <img src={img.url} alt="oops" />
-
+                                <img src={img.thumb} alt="oops" />
                             </div>}
                         </LazyLoad>)}
                 </div>
