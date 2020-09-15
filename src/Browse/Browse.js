@@ -9,7 +9,8 @@ class Browse extends Component {
         super();
         this.state = {
             lightDex: -1,
-            db: false
+            db: false,
+            showFeed: true
         }
     }
 
@@ -25,12 +26,17 @@ class Browse extends Component {
     }
 
     togglePreview = (args) => {
+        if (this.state.showFeed) {
+            this.setState({ showFeed: false })
+        } else {
+            this.setState({ showFeed: true })
+        }
         this.setState({ lightDex: args })
     }
 
     render() {
 
-        // console.log(this.state.lightDex)
+        console.log(this.state.showFeed)
         let rating = [];
 
         if (this.state.lightDex !== -1) {
@@ -39,22 +45,25 @@ class Browse extends Component {
                     rating.push(
                         <img src="./res/star.png" alt="*" key={Math.random()}></img>
                     )
-                } 
+                }
             }
         }
 
         return (
             <div className="Browse" id="browse">
-                <div className="Img_Container">
-                    {LightStore.map((img, i) =>
-                        <LazyLoad
-                            key={i}
-                            height={0}>
-                            {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
-                                <img src={img.url} alt="oops" />
-                            </div>}
-                        </LazyLoad>)}
+                <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
+                    <div className="Img_Container">
+                        {LightStore.map((img, i) =>
+                            <LazyLoad
+                                key={i}
+                                height={0}>
+                                {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
+                                    <img src={img.url} alt="oops" />
+                                </div>}
+                            </LazyLoad>)}
+                    </div>
                 </div>
+
                 <Preview
                     togglePreview={this.togglePreview}
                     lightDex={this.state.lightDex}
