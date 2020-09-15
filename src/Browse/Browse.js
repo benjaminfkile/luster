@@ -49,9 +49,9 @@ class Browse extends Component {
                     {LightStore.map((img, i) =>
                         <LazyLoad
                             key={i}
-                            height={50}>
+                            height={0}>
                             {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
-                                <img src={img.thumb} alt="oops" />
+                                <img src={img.url} alt="oops" />
                             </div>}
                         </LazyLoad>)}
                 </div>
