@@ -130,11 +130,11 @@ class Map extends React.Component {
     console.log('rerender')
 
     let locationMarker = new window.google.maps.MarkerImage(
-      './res/navi-btn.png',
+      './res/location-marker.png',
       null,
       null,
       null,
-      new window.google.maps.Size(30, 30))
+      new window.google.maps.Size(50, 50))
 
     const defaultMapOptions = {
       styles: mapStyles,
