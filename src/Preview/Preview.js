@@ -23,6 +23,10 @@ class Preview extends Component {
 
     render() {
 
+        if(this.props.lightDex !== -1){
+            console.log(LightStore[this.props.lightDex])
+        }
+
         let rating = [];
         if (this.props.lightDex !== -1) {
             for (let i = 0; i < 5; i++) {
