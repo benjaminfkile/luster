@@ -50,15 +50,15 @@ class Browse extends Component {
                                 height={30}>
                                 {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
                                     <img src={img.url} alt="oops" />
-                                </div>}
-                                <ul id="stats">
+                                    <ul id="stats">
                                         <li>
-                                        <img id="upvote-img" src="./res/likes.png" alt="*" key={i}></img>
+                                            <img id="upvote-img" src="./res/likes.png" alt="*" key={i}></img>
                                         </li>
                                         <li id="upvotes">
                                             {LightStore[i].upvotes}
                                         </li>
                                     </ul>
+                                </div>}
                             </LazyLoad>)}
                     </div>
                 </div>

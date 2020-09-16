@@ -24,10 +24,8 @@
     height: 90vh;
     width: 98vw;
     background-color: rgb(36, 47, 62);
-}
+    margin-bottom: 50px;
 
-.Light_Img{
-    height: 34vh;
 }
 
 .Light_Img img{
@@ -38,17 +36,16 @@
 
 #stats{
     display: flex;
-    font-size: 20px;
-    color: rgb(172, 172, 172);
-}
-#stats li{
-    margin-top: -7vh;
+    margin-top: -50px;
+    font-size: 25px;
+    color: #949494;
 }
 #upvote-img{
-    width: 25px;
+    width: 30px;
+    padding-top: 13px;
 }
 #upvotes{
-    padding-top: 13px;
+    padding-top: 10px;
 }
 
 
