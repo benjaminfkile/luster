@@ -38,9 +38,11 @@
 
 #stats{
     display: flex;
-    margin-top: -42px;
     font-size: 20px;
     color: rgb(172, 172, 172);
+}
+#stats li{
+    margin-top: -7vh;
 }
 #upvote-img{
     width: 25px;
