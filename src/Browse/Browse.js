@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Preview from "../Preview/Preview"
+import Snow from '../Snow/Snow'
 import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
 
@@ -62,11 +63,11 @@ class Browse extends Component {
                             </LazyLoad>)}
                     </div>
                 </div>
-
                 <Preview
                     togglePreview={this.togglePreview}
                     lightDex={this.state.lightDex}
                 />
+                {this.state.lightDex !== -1 && <Snow/>}
             </div>
         );
 

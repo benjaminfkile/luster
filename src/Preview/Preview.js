@@ -39,12 +39,10 @@ class Preview extends Component {
                         <p id="preview-upvotes">
                             <img src="./res/likes.png" alt='likes' key={Math.random()}></img>
                             {LightStore[this.props.lightDex].upvotes}
-
                         </p>
                         <p id="exit-btn" onClick={this.unloadImg.bind(this)}>
                             x
                         </p>
-
                     </section>}
                 </div>}
             </div>
