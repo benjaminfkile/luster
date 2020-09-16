@@ -2,7 +2,7 @@
     position: absolute;
     z-index: 102;
     width: 95vw;
-    height: 55vh;
+    height: 48vh;
     top: 15vh;
     left: 2vw;
     border-style: solid;
@@ -24,13 +24,27 @@
     -webkit-animation: wobble-hor-bottom 0.8s both;
     animation: wobble-hor-bottom 0.8s both;
 }
-.Preview p{
+.Preview_Interface{
+        width: 95vw;
+        display: flex;
+}
+#exit-btn{
     position: absolute;
-    top: 49vh;
-    left: 88vw;
+    top: 43vh;
+    left: 87vw;
     color: rgb(255, 0, 0);
-    font-size: 30px;
+    font-size: 30px; 
 
+}
+#preview-upvotes{
+        position: absolute;
+        font-size: 30px;
+        color: rgb(255, 255, 255);
+        left: 0vw;
+        top: 50vh;
+}
+#preview-upvotes img{
+        width: 33px;
 }
 .Preview h1{
     position: absolute;

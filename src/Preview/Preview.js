@@ -16,29 +16,16 @@ class Preview extends Component {
         this.setState({ loaded: true });
     }
 
-    unloadImg = () =>{
-        this.setState({loaded: false})
+    unloadImg = () => {
+        this.setState({ loaded: false })
         this.props.togglePreview(-1)
     }
 
     render() {
 
-        if(this.props.lightDex !== -1){
+        if (this.props.lightDex !== -1) {
             console.log(LightStore[this.props.lightDex])
         }
-
-        let rating = [];
-        if (this.props.lightDex !== -1) {
-            for (let i = 0; i < 5; i++) {
-                if (i < LightStore[this.props.lightDex].upvotes) {
-                    rating.push(
-                        <img src="./res/star.png" alt="*" height="30" width="30" key={Math.random()}></img>
-                    )
-                }
-            }
-        }
-
-        // console.log(this.props)
 
         return (
             <div>
@@ -47,12 +34,18 @@ class Preview extends Component {
                     {this.state.loaded && <img src={LightStore[this.props.lightDex].url} id="Preview_Img" alt='hacky'></img>}
                     {!this.state.loaded && <img src="./res/splash.png" id="Loading_Img" alt='A tree'></img>}
                     {!this.state.loaded && <h1>Loading...</h1>}
-                    {this.state.loaded && rating}
-                    {this.state.loaded && <section id="Preview_Interface">
+                    {this.state.loaded && <section className="Preview_Interface">
                         <a href={'https://www.google.com/maps/search/?api=1&query=' + LightStore[this.props.lightDex].lat + ',' + LightStore[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
-                        <br></br>
+                        <p id="preview-upvotes">
+                            <img src="./res/likes.png" alt='likes'></img>
+                            {LightStore[this.props.lightDex].upvotes}
+                            
+                        </p>
+                        <p id="exit-btn" onClick={this.unloadImg.bind(this)}>
+                            x
+                        </p>
+
                     </section>}
-                    <p onClick={this.unloadImg.bind(this)}>x</p>
                 </div>}
             </div>
         )

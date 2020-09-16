@@ -10,7 +10,7 @@ class Browse extends Component {
         this.state = {
             lightDex: -1,
             db: false,
-            showFeed: true
+            showFeed: true,
         }
     }
 
@@ -37,17 +37,8 @@ class Browse extends Component {
     render() {
 
         console.log(this.state.showFeed)
-        let rating = [];
+        console.log(LightStore)
 
-        if (this.state.lightDex !== -1) {
-            for (let i = 0; i < 5; i++) {
-                if (i < LightStore[this.state.lightDex].upvotes) {
-                    rating.push(
-                        <img src="./res/star.png" alt="*" key={Math.random()}></img>
-                    )
-                }
-            }
-        }
 
         return (
             <div className="Browse" id="browse">
@@ -56,10 +47,18 @@ class Browse extends Component {
                         {LightStore.map((img, i) =>
                             <LazyLoad
                                 key={i}
-                                height={0}>
+                                height={30}>
                                 {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
                                     <img src={img.url} alt="oops" />
                                 </div>}
+                                <ul id="stats">
+                                        <li>
+                                        <img id="upvote-img" src="./res/likes.png" alt="*" key={i}></img>
+                                        </li>
+                                        <li id="upvotes">
+                                            {LightStore[i].upvotes}
+                                        </li>
+                                    </ul>
                             </LazyLoad>)}
                     </div>
                 </div>

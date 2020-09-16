@@ -26,39 +26,27 @@
     background-color: rgb(36, 47, 62);
 }
 
-.Light_Img img{
+.Light_Img{
+    height: 34vh;
+}
 
+.Light_Img img{
     width: 96vw;
     /* border-bottom: 2px solid rgb(128, 125, 125); */
     border-radius: 10px;
 }
-.Light_Img li{
-    color: white;
-}
 
-.Preview_Interface{
+#stats{
     display: flex;
-    margin-bottom: 1vh;
-    border-bottom: 2px solid rgb(128, 125, 125);
-    border-radius: 10px;  
-
+    margin-top: -42px;
+    font-size: 20px;
+    color: rgb(172, 172, 172);
 }
-.Preview_Interface img{
-    width: 30px;
-    height: 30px;
-    border: none;
+#upvote-img{
+    width: 25px;
 }
-.Navlink {
-    margin-right: auto;
-
-}
-.Navlink img{
-    width: 35px;
-    height: 35px;
-    
-}
-.Navlink a{
-    text-decoration: none; /* no underline */
+#upvotes{
+    padding-top: 13px;
 }
 
 
