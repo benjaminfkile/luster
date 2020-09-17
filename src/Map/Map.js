@@ -12,7 +12,6 @@ class Map extends React.Component {
 
   locationTimeout = 0
   mapMounted = false;
-  dragSensor = 0;
 
   constructor() {
     super();
@@ -147,19 +146,22 @@ class Map extends React.Component {
 
     return (
       <div>
-        {this.state.location && this.state.dragged && <GoogleMap
+
+        {/*LIKELINESS = 1*/}
+        {/*Location refused but found GeoData*/}
+
+        {!this.state.location && this.state.geoData && <GoogleMap
           defaultZoom={14}
-          defaultCenter={{ lat: Location.lat, lng: Location.lng }}
+          defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
           defaultOptions={defaultMapOptions}
+          onDrag={this.dragged}
         >
           <>
-            <Marker
-              //temp fix to keep pin away from sleigh
-              position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
-              icon={locationMarker}
-            />
           </>
         </GoogleMap>}
+
+        {/*LIKELINESS = 2*/}
+        {/*has Location and map is centered*/}
 
         {this.state.location && this.state.centered && <GoogleMap
           defaultZoom={14}
@@ -169,34 +171,55 @@ class Map extends React.Component {
         >
           <>
             {this.state.location && <Marker
-              //temp fix to keep pin away from sleigh
               position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
               icon={locationMarker}
             />}
           </>
         </GoogleMap>}
 
-        {!this.state.location && this.state.geoData && <GoogleMap
-          defaultZoom={12}
-          defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
+        {/*LIKELINESS = 3*/}
+        {/*has Location and user drags map*/}
+
+        {this.state.location && this.state.dragged && <GoogleMap
+          defaultZoom={14}
+          defaultCenter={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={defaultMapOptions}
-          onDrag={this.dragged}
+        >
+          <>
+            <Marker
+              position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
+              icon={locationMarker}
+            />
+          </>
+        </GoogleMap>}
+
+        {/*LIKELINESS = 4*/}
+        {/*no Location or GeoData*/}
+
+        {!this.state.location && !this.state.geoData && <GoogleMap
+          defaultZoom={1}
+          defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
+          defaultOptions={defaultMapOptions}
 
         >
           <>
           </>
         </GoogleMap>}
+
         {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
           <p>Recenter</p>
         </div>}
         <div className="Markers">
           {this.state.markers}
         </div>
+
         <Preview
           togglePreview={this.togglePreview}
           lightDex={this.state.lightDex}
         />
+
         <Snow />
+
       </div>
     );
   };
