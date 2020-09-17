@@ -3,6 +3,7 @@ import Preview from "../Preview/Preview"
 import Snow from '../Snow/Snow'
 import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
+import '../Browse/Browse.css'
 
 class Browse extends Component {
 
@@ -37,10 +38,6 @@ class Browse extends Component {
 
     render() {
 
-        console.log(this.state.showFeed)
-        console.log(LightStore)
-
-
         return (
             <div className="Browse" id="browse">
                 <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
@@ -51,14 +48,6 @@ class Browse extends Component {
                                 height={0}>
                                 {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
                                     <img src={img.url} alt="oops" />
-                                    <ul id="stats">
-                                        <li>
-                                            <img id="upvote-img" src="./res/likes.png" alt="*" key={i}></img>
-                                        </li>
-                                        <li id="upvotes">
-                                            {LightStore[i].upvotes}
-                                        </li>
-                                    </ul>
                                 </div>}
                             </LazyLoad>)}
                     </div>
@@ -67,10 +56,9 @@ class Browse extends Component {
                     togglePreview={this.togglePreview}
                     lightDex={this.state.lightDex}
                 />
-                {this.state.lightDex !== -1 && <Snow/>}
+                {this.state.lightDex !== -1 && <Snow />}
             </div>
         );
-
     }
 }
 

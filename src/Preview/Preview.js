@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import LightStore from "../LightStore"
 import './Preview.css'
-import '../Browse/Browse.css'
 
 class Preview extends Component {
 
@@ -23,10 +22,6 @@ class Preview extends Component {
 
     render() {
 
-        if (this.props.lightDex !== -1) {
-            console.log(LightStore[this.props.lightDex])
-        }
-
         return (
             <div>
                 {this.props.lightDex !== -1 && <div className="Preview">
@@ -36,10 +31,6 @@ class Preview extends Component {
                     {!this.state.loaded && <h1>Loading...</h1>}
                     {this.state.loaded && <section className="Preview_Interface">
                         <a href={'https://www.google.com/maps/search/?api=1&query=' + LightStore[this.props.lightDex].lat + ',' + LightStore[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
-                        <p id="preview-upvotes">
-                            <img src="./res/likes.png" alt='likes' key={Math.random()}></img>
-                            {LightStore[this.props.lightDex].upvotes}
-                        </p>
                         <p id="exit-btn" onClick={this.unloadImg.bind(this)}>
                             x
                         </p>

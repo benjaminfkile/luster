@@ -30,22 +30,7 @@
 
 .Light_Img img{
     width: 96vw;
-    /* border-bottom: 2px solid rgb(128, 125, 125); */
     border-radius: 10px;
-}
-
-#stats{
-    display: flex;
-    margin-top: -50px;
-    font-size: 25px;
-    color: #949494;
-}
-#upvote-img{
-    width: 30px;
-    padding-top: 13px;
-}
-#upvotes{
-    padding-top: 10px;
 }
 
 

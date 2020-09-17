@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
+import InApp from './InApp/InApp'
 import Post from './Post/Post'
 import Browse from './Browse/Browse'
 import Help from './Help/Help'
@@ -9,11 +10,30 @@ import './App.css';
 
 class App extends Component {
 
+  state = {
+    inApp: true
+  }
+
+  componentDidMount() {
+    this.inApp()
+  }
+
+  inAppDismiss = () => {
+    this.setState({inApp: false})
+  }
+
+  inApp = () => {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
+      this.setState({ inApp: false })
+    }
+  }
+
   render() {
 
     return (
       <div className="Wrapper">
-        <div className="App">
+        {!this.state.inApp && <div className="App">
           <Nav />
           <Switch>
             <Route exact path='/' component={Map} />
@@ -22,7 +42,10 @@ class App extends Component {
             <Route path='/help' component={Help} />
             <Route component={Map} />
           </Switch>
-        </div>
+        </div>}
+        {this.state.inApp && <InApp
+        dismiss = {this.inAppDismiss}
+        />}
       </div>
 
     );

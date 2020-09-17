@@ -3,7 +3,7 @@
     z-index: 102;
     width: 95vw;
     height: 50vh;
-    top: 15vh;
+    top: 20vh;
     left: 2vw;
     border-style: solid;
     border-color: rgb(39,39,39);
@@ -36,17 +36,7 @@
     font-size: 30px; 
 
 }
-#preview-upvotes{
-        position: absolute;
-        font-size: 30px;
-        color: rgb(255, 255, 255);
-        left: 0vw;
-        top: 50vh;
-}
-#preview-upvotes img{
-        padding-top: 10px;
-        width: 33px;
-}
+
 .Preview h1{
     position: absolute;
     top: 49vh;

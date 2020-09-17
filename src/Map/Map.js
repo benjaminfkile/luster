@@ -146,10 +146,8 @@ class Map extends React.Component {
 
     return (
       <div>
-
         {/*LIKELINESS = 1*/}
         {/*Location refused but found GeoData*/}
-
         {!this.state.location && this.state.geoData && <GoogleMap
           defaultZoom={14}
           defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
@@ -162,7 +160,6 @@ class Map extends React.Component {
 
         {/*LIKELINESS = 2*/}
         {/*has Location and map is centered*/}
-
         {this.state.location && this.state.centered && <GoogleMap
           defaultZoom={14}
           center={{ lat: Location.lat, lng: Location.lng }}
@@ -179,7 +176,6 @@ class Map extends React.Component {
 
         {/*LIKELINESS = 3*/}
         {/*has Location and user drags map*/}
-
         {this.state.location && this.state.dragged && <GoogleMap
           defaultZoom={14}
           defaultCenter={{ lat: Location.lat, lng: Location.lng }}
@@ -195,17 +191,14 @@ class Map extends React.Component {
 
         {/*LIKELINESS = 4*/}
         {/*no Location or GeoData*/}
-
         {!this.state.location && !this.state.geoData && <GoogleMap
           defaultZoom={1}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
           defaultOptions={defaultMapOptions}
-
         >
           <>
           </>
         </GoogleMap>}
-
         {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
           <p>Recenter</p>
         </div>}
@@ -219,7 +212,6 @@ class Map extends React.Component {
         />
 
         <Snow />
-
       </div>
     );
   };

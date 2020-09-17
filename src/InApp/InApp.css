@@ -1,0 +1,29 @@
+.InApp{
+    text-align: center;
+    height: 100vh;
+    /* background-color: black; */
+}
+#notice{
+    position: absolute;
+    height: 43vh;
+    top: 7vh;
+}
+.InApp h1{
+    color: rgb(12,191,233);
+    padding-bottom: 3vh;
+    
+    
+}
+.InApp h2{
+    font-size: 25px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    color: rgb(128, 128, 128);
+}
+.InApp h3{
+    cursor: pointer;
+    padding-top: 2vh;
+    color: rgb(	233, 54, 12);
+}
+
+
