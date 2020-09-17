@@ -10,37 +10,16 @@ import './App.css';
 
 class App extends Component {
 
-  componentDidMount() {
-    
-    window.onload = () => {
-
-      var desktopFallback = "https://luster.vercel.app/",
-        mobileFallback = "https://luster.vercel.app/",
-        app = "https://luster.vercel.app/";
-
-      if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location = app;
-        window.setTimeout(function () {
-          window.location = mobileFallback;
-        }, 25);
-      } else {
-        window.location = desktopFallback;
-      }
-
-      function killPopup() {
-        window.removeEventListener('pagehide', killPopup);
-      }
-
-      window.addEventListener('pagehide', killPopup);
-
-    };
+  inApp = () => {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
   }
 
   render() {
 
     return (
       <div className="Wrapper">
-        <div className="App">
+        {!this.inApp() && <div className="App">
           <Nav />
           <Switch>
             <Route exact path='/' component={Map} />
@@ -49,10 +28,10 @@ class App extends Component {
             <Route path='/help' component={Help} />
             <Route component={Map} />
           </Switch>
-        </div>
-        {/* {this.state.inApp && <InApp
+        </div>}
+        {this.inApp() && <InApp
           dismiss={this.inAppDismiss}
-        />} */}
+        />}
       </div>
 
     );
