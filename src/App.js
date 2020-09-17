@@ -10,27 +10,31 @@ import './App.css';
 
 class App extends Component {
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     inApp: true
-  //   }
-  // }
+  componentDidMount() {
+    
+    window.onload = () => {
 
-  // componentDidMount() {
-  //   this.inApp()
-  // }
+      var desktopFallback = "https://luster.vercel.app/",
+        mobileFallback = "https://luster.vercel.app/",
+        app = "https://luster.vercel.app/";
 
-  // inAppDismiss = () => {
-  //   this.setState({ inApp: false })
-  // }
+      if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location = app;
+        window.setTimeout(function () {
+          window.location = mobileFallback;
+        }, 25);
+      } else {
+        window.location = desktopFallback;
+      }
 
-  // inApp = () => {
-  //   var ua = navigator.userAgent || navigator.vendor || window.opera;
-  //   if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
-  //     this.setState({ inApp: false })
-  //   }
-  // }
+      function killPopup() {
+        window.removeEventListener('pagehide', killPopup);
+      }
+
+      window.addEventListener('pagehide', killPopup);
+
+    };
+  }
 
   render() {
 
