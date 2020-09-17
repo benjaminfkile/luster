@@ -10,33 +10,33 @@ import './App.css';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      inApp: true
-    }
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     inApp: true
+  //   }
+  // }
 
-  componentDidMount() {
-    this.inApp()
-  }
+  // componentDidMount() {
+  //   this.inApp()
+  // }
 
-  inAppDismiss = () => {
-    this.setState({ inApp: false })
-  }
+  // inAppDismiss = () => {
+  //   this.setState({ inApp: false })
+  // }
 
-  inApp = () => {
-    var ua = navigator.userAgent || navigator.vendor || window.opera;
-    if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
-      this.setState({ inApp: false })
-    }
-  }
+  // inApp = () => {
+  //   var ua = navigator.userAgent || navigator.vendor || window.opera;
+  //   if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
+  //     this.setState({ inApp: false })
+  //   }
+  // }
 
   render() {
 
     return (
       <div className="Wrapper">
-        {!this.state.inApp && <div className="App">
+        <div className="App">
           <Nav />
           <Switch>
             <Route exact path='/' component={Map} />
@@ -45,10 +45,10 @@ class App extends Component {
             <Route path='/help' component={Help} />
             <Route component={Map} />
           </Switch>
-        </div>}
-        {this.state.inApp && <InApp
+        </div>
+        {/* {this.state.inApp && <InApp
           dismiss={this.inAppDismiss}
-        />}
+        />} */}
       </div>
 
     );
