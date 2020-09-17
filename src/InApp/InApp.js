@@ -13,18 +13,28 @@ class InApp extends Component {
         }
     }
 
+    openInBrowser = () => {
+        window.open('https://luster.vercel.app/', '_system')
+    }
+
     render() {
         return (
             <div className="InApp">
                 <section id="notice">
-                <h1>
-                Welcome to Luster!
+                    <h1>
+                        Welcome to Luster!
                 </h1>
-                <h2>
-                You seem to be viewing this page inside of Facebook which is fine, if you want more features open it in your devices web browser
+                    <h2>
+                        You seem to be viewing this page inside of Facebook which is fine, if you want more features open it in your devices web browser
                 </h2>
-                <h3 onClick={this.props.dismiss}>
-                DISMISS
+                    <h3 onClick={this.props.dismiss}>
+                        DISMISS
+                </h3>
+                    <h2>
+                        or..
+                </h2>
+                <h3 onClick={this.openInBrowser}>
+                        OPEN IN BROWSER
                 </h3>
                 </section>
                 {/* <Snow/> */}
