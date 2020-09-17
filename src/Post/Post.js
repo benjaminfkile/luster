@@ -18,9 +18,6 @@ class Post extends Component {
         }
     }
 
-    componentDidMount() {
-    }
-
     imgSelectedHandler = (event) => {
 
         this.setState({

@@ -10,8 +10,11 @@ import './App.css';
 
 class App extends Component {
 
-  state = {
-    inApp: true
+  constructor(props) {
+    super(props);
+    this.state = {
+      inApp: true
+    }
   }
 
   componentDidMount() {
@@ -19,7 +22,7 @@ class App extends Component {
   }
 
   inAppDismiss = () => {
-    this.setState({inApp: false})
+    this.setState({ inApp: false })
   }
 
   inApp = () => {
@@ -44,7 +47,7 @@ class App extends Component {
           </Switch>
         </div>}
         {this.state.inApp && <InApp
-        dismiss = {this.inAppDismiss}
+          dismiss={this.inAppDismiss}
         />}
       </div>
 
