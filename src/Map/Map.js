@@ -12,6 +12,15 @@ class Map extends React.Component {
 
   locationTimeout = 0
   mapMounted = false;
+  zoom = 11;
+  defaultMapOptions = {
+    styles: mapStyles,
+    fullscreenControl: false,
+    zoomControl: false,
+    mapTypeControl: false,
+    streetViewControl: false,
+    gestureHandling: 'greedy'
+  };
 
   constructor() {
     super();
@@ -30,8 +39,8 @@ class Map extends React.Component {
   componentDidMount() {
     this.inApp()
     this.mapMounted = true;
-    this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
-    this.updateLocationInterval = setInterval(this.updateLocation, 1000)
+    this.listen4LocationInterval = setInterval(this.listenForLocation, 100)
+    this.updateLocationInterval = setInterval(this.updateLocation, 100)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.geoInterval = setInterval(this.listen4GEO, 100)
     this.setState({ lights: LightStore })
@@ -135,25 +144,18 @@ class Map extends React.Component {
       null,
       new window.google.maps.Size(50, 50))
 
-    const defaultMapOptions = {
-      styles: mapStyles,
-      fullscreenControl: false,
-      zoomControl: false,
-      mapTypeControl: false,
-      streetViewControl: false,
-      gestureHandling: 'greedy'
-    };
+
 
     return (
       <div>
         {/*LIKELINESS = 1*/}
         {/*Location refused but found GeoData*/}
-        {!this.state.location && this.state.geoData && <GoogleMap
+        {!this.state.location && this.state.geoData && <GoogleMap 
           defaultZoom={11}
           defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
-          defaultOptions={defaultMapOptions}
+          defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
-        >
+        > 
           <>
           </>
         </GoogleMap>}
@@ -163,7 +165,7 @@ class Map extends React.Component {
         {this.state.location && this.state.centered && <GoogleMap
           defaultZoom={11}
           center={{ lat: Location.lat, lng: Location.lng }}
-          defaultOptions={defaultMapOptions}
+          defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
         >
           <>
@@ -179,7 +181,7 @@ class Map extends React.Component {
         {this.state.location && this.state.dragged && <GoogleMap
           defaultZoom={11}
           defaultCenter={{ lat: Location.lat, lng: Location.lng }}
-          defaultOptions={defaultMapOptions}
+          defaultOptions={this.defaultMapOptions}
         >
           <>
             <Marker
@@ -191,10 +193,11 @@ class Map extends React.Component {
 
         {/*LIKELINESS = 4*/}
         {/*no Location or GeoData*/}
-        {!this.state.location && /*!this.state.geoData && */ <GoogleMap
+        {!this.state.location && <GoogleMap
           defaultZoom={11}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
-          defaultOptions={defaultMapOptions}
+          defaultOptions={this.defaultMapOptions}
+
         >
           <>
           </>
@@ -220,8 +223,8 @@ class Map extends React.Component {
 const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
-    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
+    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
     mapElement={<div style={{ height: `100%` }} />}

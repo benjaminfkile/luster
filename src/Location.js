@@ -26,6 +26,6 @@ navigator.geolocation.getCurrentPosition(setLocation)
 inApp()
 const interval = setInterval(function () {
     getLocation()
-}, 1000);
+}, 100);
 
 export default Location
