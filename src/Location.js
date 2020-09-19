@@ -1,5 +1,5 @@
 let Location = []
-let app = true
+let app = false
 
 function inApp() {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
