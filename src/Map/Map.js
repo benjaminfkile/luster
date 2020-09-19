@@ -28,22 +28,22 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    this.inApp()
+    // this.inApp()
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
     // this.updateLocationInterval = setInterval(this.updateLocation, 1000)
-    this.updateLocation()
+    // this.updateLocation()
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.geoInterval = setInterval(this.listen4GEO, 100)
-    this.setState({ lights: LightStore })
+    // this.setState({ lights: LightStore })
   }
 
-  inApp = () => {
-    var ua = navigator.userAgent || navigator.vendor || window.opera;
-    if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
-      this.setState({ inApp: false })
-    }
-  }
+  // inApp = () => {
+  //   var ua = navigator.userAgent || navigator.vendor || window.opera;
+  //   if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
+  //     this.setState({ inApp: false })
+  //   }
+  // }
 
   componentWillUnmount() {
     this.mapMounted = false;
@@ -71,14 +71,14 @@ class Map extends React.Component {
     }
   }
 
-  updateLocation = () => {
-    if (!this.state.recenter && /*!this.state.inApp &&*/ Location.lat && this.mapMounted) {
-      this.setState({ location: true })
-    }
-  }
+  // updateLocation = () => {
+  //   if (!this.state.recenter && /*!this.state.inApp &&*/ Location.lat && this.mapMounted) {
+  //     this.setState({ location: true })
+  //   }
+  // }
 
   listen4GEO = () => {
-    if (GeoData[0] && this.mapMounted) {
+    if (this.mapMounted && this.state.geoData) {
       this.setState({ geoData: true })
       clearInterval(this.geoInterval)
     }
@@ -128,6 +128,7 @@ class Map extends React.Component {
   render = () => {
 
     console.log('rerender')
+    // console.log(this.state)
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
@@ -150,7 +151,7 @@ class Map extends React.Component {
         {/*LIKELINESS = 1*/}
         {/*Location refused but found GeoData*/}
         {!this.state.location && this.state.geoData && <GoogleMap
-          defaultZoom={14}
+          defaultZoom={11}
           defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
           defaultOptions={defaultMapOptions}
           onDrag={this.dragged}
@@ -162,7 +163,7 @@ class Map extends React.Component {
         {/*LIKELINESS = 2*/}
         {/*has Location and map is centered*/}
         {this.state.location && this.state.centered && <GoogleMap
-          defaultZoom={14}
+          defaultZoom={11}
           center={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={defaultMapOptions}
           onDrag={this.dragged}
@@ -178,7 +179,7 @@ class Map extends React.Component {
         {/*LIKELINESS = 3*/}
         {/*has Location and user drags map*/}
         {this.state.location && this.state.dragged && <GoogleMap
-          defaultZoom={14}
+          defaultZoom={11}
           defaultCenter={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={defaultMapOptions}
         >
@@ -192,8 +193,8 @@ class Map extends React.Component {
 
         {/*LIKELINESS = 4*/}
         {/*no Location or GeoData*/}
-        {!this.state.location && /*!this.state.geoData && */ <GoogleMap
-          defaultZoom={1}
+        {!this.state.location && !this.state.geoData && <GoogleMap
+          defaultZoom={11}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
           defaultOptions={defaultMapOptions}
         >

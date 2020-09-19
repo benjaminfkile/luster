@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
-import InApp from './InApp/InApp'
+// import InApp from './InApp/InApp'
 import Post from './Post/Post'
 import Browse from './Browse/Browse'
 import Help from './Help/Help'
