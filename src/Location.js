@@ -24,7 +24,7 @@ function setLocation(position) {
 
 navigator.geolocation.getCurrentPosition(setLocation)
 inApp()
-const interval = setInterval(function () {
+setInterval(function () {
     getLocation()
 }, 100);
 
