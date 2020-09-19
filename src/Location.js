@@ -22,6 +22,7 @@ function setLocation(position) {
 }
 
 inApp()
-setInterval(getLocation, 1000)
+// setInterval(getLocation, 1000)
+getLocation()
 
 export default Location

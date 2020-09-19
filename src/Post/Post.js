@@ -68,7 +68,7 @@ class Post extends Component {
 
         if (this.state.response) {
             fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
-            // fetch('http://localhost:8000/api/lights', {
+            // // fetch('http://localhost:8000/api/lights', {
 
                 method: 'POST',
                 headers: {
