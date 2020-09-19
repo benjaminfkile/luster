@@ -23,27 +23,26 @@ class Map extends React.Component {
       geoData: false,
       centered: true,
       dragged: true,
-      inApp: false
+      inApp: true
     }
   }
 
   componentDidMount() {
-    // this.inApp()
+    this.inApp()
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
-    // this.updateLocationInterval = setInterval(this.updateLocation, 1000)
-    // this.updateLocation()
+    this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 100)
     this.geoInterval = setInterval(this.listen4GEO, 100)
-    // this.setState({ lights: LightStore })
+    this.setState({ lights: LightStore })
   }
 
-  // inApp = () => {
-  //   var ua = navigator.userAgent || navigator.vendor || window.opera;
-  //   if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
-  //     this.setState({ inApp: false })
-  //   }
-  // }
+  inApp = () => {
+    var ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
+      this.setState({ inApp: false })
+    }
+  }
 
   componentWillUnmount() {
     this.mapMounted = false;
@@ -58,27 +57,27 @@ class Map extends React.Component {
   }
 
   listenForLocation = () => {
-    if (Location.lat && /*!this.state.inApp &&*/ this.mapMounted) {
+    if (Location.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
       clearInterval(this.listen4LocationInterval)
     } else {
       this.setState({ location: false })
       this.locationTimeout++
       if (this.locationTimeout > 19) {
-        // console.log('location denied')
+        console.log('location denied')
         clearInterval(this.listen4LocationInterval)
       }
     }
   }
 
-  // updateLocation = () => {
-  //   if (!this.state.recenter && /*!this.state.inApp &&*/ Location.lat && this.mapMounted) {
-  //     this.setState({ location: true })
-  //   }
-  // }
+  updateLocation = () => {
+    if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
+      this.setState({ location: true })
+    }
+  }
 
   listen4GEO = () => {
-    if (this.mapMounted && this.state.geoData) {
+    if (GeoData[0] && this.mapMounted) {
       this.setState({ geoData: true })
       clearInterval(this.geoInterval)
     }
@@ -127,8 +126,7 @@ class Map extends React.Component {
 
   render = () => {
 
-    console.log('rerender')
-    // console.log(this.state)
+    console.log('render')
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
@@ -193,7 +191,7 @@ class Map extends React.Component {
 
         {/*LIKELINESS = 4*/}
         {/*no Location or GeoData*/}
-        {!this.state.location && !this.state.geoData && <GoogleMap
+        {!this.state.location && /*!this.state.geoData && */ <GoogleMap
           defaultZoom={11}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
           defaultOptions={defaultMapOptions}

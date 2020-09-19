@@ -36,7 +36,7 @@ class App extends Component {
 
     return (
       <div className="Wrapper">
-        {/*!this.state.inApp &&*/ <div className="App">
+        <div className="App">
           <Nav />
           <Switch>
             <Route exact path='/' component={Map} />
@@ -45,10 +45,7 @@ class App extends Component {
             <Route path='/help' component={Help} />
             <Route component={Map} />
           </Switch>
-        </div>}
-        {/* {this.state.inApp && <InApp
-        dismiss = {this.inAppDismiss}
-        />} */}
+        </div>
       </div>
 
     );
