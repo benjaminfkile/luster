@@ -15,10 +15,6 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(setLocation)
         // console.log("Web")
     }
-    else {
-        clearInterval(interval);
-        // console.log("App")
-    }
 }
 
 function setLocation(position) {
@@ -26,8 +22,8 @@ function setLocation(position) {
     Location.lng = position.coords.longitude
 }
 
+navigator.geolocation.getCurrentPosition(setLocation)
 inApp()
-getLocation()
 const interval = setInterval(function () {
     getLocation()
 }, 1000);
