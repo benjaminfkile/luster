@@ -23,7 +23,7 @@ class Map extends React.Component {
       geoData: false,
       centered: true,
       dragged: true,
-      inApp: true
+      inApp: false
     }
   }
 

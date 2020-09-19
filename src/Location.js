@@ -21,7 +21,7 @@ function setLocation(position) {
     Location.lng = position.coords.longitude
 }
 
-inApp()
+// inApp()
 // setInterval(getLocation, 1000)
 getLocation()
 
