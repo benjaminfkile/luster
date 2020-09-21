@@ -2,7 +2,7 @@
     position: absolute;
     z-index: 102;
     width: 95vw;
-    height: 50vh;
+    height: 42vh;
     top: 20vh;
     left: 2vw;
     border-style: solid;
@@ -12,7 +12,7 @@
 }
 #Preview_Img{
     width: 95vw;
-    height: 42vh;
+    height: 35vh;
     border-radius: 2%;
 }
 #Loading_Img{
@@ -20,7 +20,7 @@
     top: 0vh;
     left: 0vh;
     width: 95vw;
-    height: 50vh;
+    height: 35vh;
     -webkit-animation: wobble-hor-bottom 0.8s both;
     animation: wobble-hor-bottom 0.8s both;
 }
@@ -30,7 +30,7 @@
 }
 #exit-btn{
     position: absolute;
-    top: 43vh;
+    top: 36vh;
     left: 87vw;
     color: rgb(255, 0, 0);
     font-size: 30px; 
