@@ -37,18 +37,19 @@
 }
 #stats{
     display: flex;
-    height: 4vh;
+    height: 6vh;
 }
 #stats p{
     color: rgb(255, 255, 255);
+    font-size: 25px;
 }
 #upvotes-img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 #like-img{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     margin-left: auto;
     margin-right: 5px;
 }
