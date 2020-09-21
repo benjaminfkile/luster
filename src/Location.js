@@ -26,6 +26,6 @@ navigator.geolocation.getCurrentPosition(setLocation)
 inApp()
 setInterval(function () {
     getLocation()
-}, 100);
+}, 1000);
 
 export default Location

@@ -16,22 +16,39 @@
 
 }
 .Img_Container{
-
     position: absolute;
     overflow-y: auto;
-    top: 1vh;
+    top: 7vh;
     left: 2vw;
-    height: 90vh;
+    height: 100vh;
     width: 98vw;
     background-color: rgb(36, 47, 62);
-    margin-bottom: 50px;
-
 }
 
-.Light_Img img{
+.Item{
     width: 96vw;
-    border-radius: 10px;
+    margin-bottom: 5px;
+    background-color: black;
 }
 
-
-
+.Item img{
+    width: 96vw;
+    height: 35vh;
+}
+#stats{
+    display: flex;
+    height: 4vh;
+}
+#stats p{
+    color: rgb(255, 255, 255);
+}
+#upvotes-img{
+    width: 20px;
+    height: 20px;
+}
+#like-img{
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+    margin-right: 5px;
+}

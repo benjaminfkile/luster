@@ -13,11 +13,18 @@ class Browse extends Component {
             lightDex: -1,
             db: false,
             showFeed: true,
+            render: true
         }
     }
 
     componentDidMount() {
         this.dbInterval = setInterval(this.listen4DB, 100)
+    }
+
+    upvote = (args) => {
+        LightStore[args].upvotes++
+        this.setState({ render: true })
+        console.log(LightStore[args])
     }
 
     listen4DB = () => {
@@ -46,9 +53,18 @@ class Browse extends Component {
                             <LazyLoad
                                 key={i}
                                 height={0}>
-                                {LightStore[i].flag === "0" && <div className="Light_Img" onClick={() => this.togglePreview(i)}>
-                                    <img src={img.url} alt="oops" />
-                                </div>}
+                                {img.flag === "0" &&
+                                    <div className="Item">
+                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                        <div id="stats">
+                                            <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                            <p>
+                                                {img.upvotes}
+                                            </p>
+                                            <img id="like-img" src="./res/like-btn.png" alt="oops" onClick={() => this.upvote(i)}></img>
+                                        </div>
+
+                                    </div>}
                             </LazyLoad>)}
                     </div>
                 </div>
