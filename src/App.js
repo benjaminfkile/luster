@@ -1,38 +1,17 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
-// import InApp from './InApp/InApp'
 import Post from './Post/Post'
 import Browse from './Browse/Browse'
-import Help from './Help/Help'
+import Login from './Login/Login'
 import Map from './Map/Map'
 import Nav from './Nav/Nav'
 import './App.css';
 
 class App extends Component {
 
-  // state = {
-  //   inApp: true
-  // }
-
-  // componentDidMount(){
-  //   if(!this.inApp()){
-  //     this.setState({inApp: false})
-  //   }else{
-  //     this.setState({inApp: true})
-  //   }
-  // }
-
-  // inAppDismiss = () => {
-  //   this.setState({inApp: false})
-  // }
-
-  // inApp = () => {
-  //   var ua = navigator.userAgent || navigator.vendor || window.opera;
-  //   return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)
-    
-  // }
-
   render() {
+
+    // console.log(window.navigator)
 
     return (
       <div className="Wrapper">
@@ -42,7 +21,7 @@ class App extends Component {
             <Route exact path='/' component={Map} />
             <Route path='/post' component={Post} />
             <Route path='/browse' component={Browse} />
-            <Route path='/help' component={Help} />
+            <Route path='/login' component={Login} />
             <Route component={Map} />
           </Switch>
         </div>

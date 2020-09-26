@@ -3,6 +3,7 @@ import Location from "../Location"
 import axios from 'axios'
 import uuid from "uuid";
 import '../Post/Post.css'
+import GeoData from '../GeoData';
 
 class Post extends Component {
 
@@ -60,7 +61,7 @@ class Post extends Component {
         })
             .then(res => {
                 this.setState({ response: res, finished: true, progress: null, image: null, selectedFile: null })
-                this.updateRows(this.state.response.data.data.display_url,this.state.response.data.data.thumb.url, this.state.response.data.data.delete_url)
+                this.updateRows(this.state.response.data.data.display_url, this.state.response.data.data.thumb.url, this.state.response.data.data.delete_url)
             });
     }
 
@@ -79,11 +80,11 @@ class Post extends Component {
                     lat: Location.lat,
                     lng: Location.lng,
                     url: large,
-                    upvotes: 1,
                     id: uuid.v4(),
                     flag: 1,
                     thumb: thumb,
-                    del: del
+                    del: del,
+                    upvotes: '{' + GeoData[0].IPv4 + '}'
                 })
             })
         }

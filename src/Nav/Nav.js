@@ -55,11 +55,11 @@ class Nav extends Component {
                             </Link>
                         </li>
                     </div>
-                    <div className="Help_Route" tabIndex="4">
+                    <div className="Login_Route" tabIndex="4">
                         <li onClick={this.toggleBurger}>
 
-                            <Link to='/help'>
-                                Help
+                            <Link to='/login'>
+                                Login
                             </Link>
                         </li>
                     </div>

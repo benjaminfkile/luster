@@ -13,7 +13,7 @@
 #Preview_Img{
     width: 95vw;
     height: 35vh;
-    border-radius: 2%;
+    /* border-radius: 2%; */
 }
 #Loading_Img{
     position: absolute;

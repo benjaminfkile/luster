@@ -11,6 +11,12 @@ class Preview extends Component {
         };
     }
 
+    navClicked = (args) =>{
+        console.log(args)
+    }
+
+    
+
     handleImageLoaded = () => {
         this.setState({ loaded: true });
     }
@@ -30,7 +36,7 @@ class Preview extends Component {
                     {!this.state.loaded && <img src="./res/splash.png" id="Loading_Img" alt='A tree'></img>}
                     {/* {!this.state.loaded && <h1>Loading...</h1>} */}
                     {this.state.loaded && <section className="Preview_Interface">
-                        <a href={'https://www.google.com/maps/search/?api=1&query=' + LightStore[this.props.lightDex].lat + ',' + LightStore[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
+                        <a href={'https://www.google.com/maps/search/?api=1&query=' + LightStore[this.props.lightDex].lat + ',' + LightStore[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} onClick={() => this.navClicked(this.props.lightDex)} /> &nbsp;</a>
                         <p id="exit-btn" onClick={this.unloadImg.bind(this)}>
                             x
                         </p>
