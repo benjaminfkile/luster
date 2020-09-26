@@ -84,7 +84,7 @@ class Post extends Component {
                     flag: 1,
                     thumb: thumb,
                     del: del,
-                    upvotes: '{' + GeoData[0].IPv4 + '}'
+                    // upvotes: '{' + GeoData[0].IPv4 + '}'
                 })
             })
         }
