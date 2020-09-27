@@ -6,11 +6,13 @@ class Register extends Component {
     constructor() {
         super();
         this.state = {
-            uName: ' ',
+            name: '',
             email: '',
-            password: '',
+            pass1: '',
+            pass2: '',
             code: '',
             error: '',
+            registrationError: false,
             codeSent: false,
             registered: false,
             emailTaken: false
@@ -18,7 +20,8 @@ class Register extends Component {
 
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleCodeChange = this.handleCodeChange.bind(this);
-        this.handlePassChange = this.handlePassChange.bind(this);
+        this.handlePass1Change = this.handlePass1Change.bind(this);
+        this.handlePass2Change = this.handlePass2Change.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.dismissError = this.dismissError.bind(this);
@@ -31,15 +34,52 @@ class Register extends Component {
     handleSubmit(evt) {
         evt.preventDefault();
 
+        if (!this.state.name) {
+            return this.setState({ error: 'Name is required' });
+        }
+
         if (!this.state.email) {
             return this.setState({ error: 'Email is required' });
         }
 
-        if (!this.state.password) {
+        if (!this.state.pass1) {
             return this.setState({ error: 'Password is required' });
         }
 
-        fetch('http://localhost:8000/api/users/new', {
+        if (this.state.name && this.state.email && this.state.pass1 && !this.state.codeSent) {
+            // fetch('http://localhost:8000/api/users/new', {
+            fetch('https://agile-wildwood-40014.herokuapp.com/api/users/new', {
+
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    email: this.state.email,
+                    pass: this.state.pass1
+                })
+            }).then(res => {
+                console.log(res)
+                if (res.status === 200) {
+                    this.setState({ emailTaken: false, codeSent: true })
+                    console.log("code sent")
+                }
+                if (res.status === 403) {
+                    console.log(res.body)
+                    this.setState({ emailTaken: true })
+                    console.log("code not sent, email taken")
+                }
+            })
+        }
+        return this.setState({ error: '' });
+    }
+
+    checkCode = () => {
+        // fetch('http://localhost:8000/api/users/valCode', {
+        fetch('https://agile-wildwood-40014.herokuapp.com/api/users/valCode', {
+
 
             method: 'POST',
             headers: {
@@ -47,25 +87,18 @@ class Register extends Component {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                name: 'Ben',
                 email: this.state.email,
-                pass: this.state.password
+                code: this.state.code
             })
         }).then(res => {
-            console.log(res)
             if (res.status === 200) {
-                this.setState({ registered: true, emailTaken: false, codeSent: true})
-                console.log("Registered?: " + this.state.registered)
-            }
-            if(res.status === 403){
-                console.log(res.body)
-                this.setState({ registered: false, emailTaken: true })
-                console.log("Registered?: " + this.state.registered)
+                this.setState({ registered: true })
+                alert("registered, now wtf?")
+            } else {//what to do with this?
+                this.setState({ registrationError: true })
+                alert("you fucked up")
             }
         })
-
-        return this.setState({ error: '' });
-
     }
 
     handleUserChange(evt) {
@@ -74,46 +107,52 @@ class Register extends Component {
         });
     };
 
-    handlePassChange(evt) {
+    handlePass1Change(evt) {
         this.setState({
-            password: evt.target.value,
+            pass1: evt.target.value,
+        });
+    }
+
+    handlePass2Change(evt) {
+        this.setState({
+            pass2: evt.target.value,
         });
     }
 
     handleCodeChange(evt) {
         this.setState({
-            code: evt.target.code,
+            code: evt.target.value,
         });
     }
 
     handleNameChange(evt) {
         this.setState({
-            uName: evt.target.uName,
+            name: evt.target.value,
         });
     }
 
     render() {
-        // NOTE: I use data-attributes for easier E2E testing
-        // but you don't need to target those (any css-selector will work)
 
-        console.log("Registered?: " + this.state.loggedIn)
+        console.log("Registered?: " + this.state.registered)
+        console.log(this.state.code)
 
         return (
             <div className="Register">
                 <form className="RegisterForm" onSubmit={this.handleSubmit}>
                     {
                         this.state.error &&
-                        <h3 data-test="error" onClick={this.dismissError}>
-                            <button onClick={this.dismissError}>✖</button>
+                        <h3 onClick={this.dismissError}>
+                            <button onClick={this.dismissError}>x</button>
                             {this.state.error}
                         </h3>
                     }
                     <h1>
                         Register
                     </h1>
+                    <br></br>
                     <label>Name</label>
                     <br></br>
-                    <input type="text" value={this.state.uName} onChange={this.handleNameChange} />
+                    <input type="text" value={this.state.name} onChange={this.handleNameChange} />
                     <br></br>
                     <label>Email</label>
                     <br></br>
@@ -121,15 +160,22 @@ class Register extends Component {
                     <br></br>
                     <label>Password</label>
                     <br></br>
-                    <input type="password" value={this.state.password} onChange={this.handlePassChange} />
+                    <input type="password" value={this.state.pass1} onChange={this.handlePass1Change} />
+                    <br></br>
+                    <label>Re Enter Password</label>
+                    <br></br>
+                    <input type="password" value={this.state.pass2} onChange={this.handlePass2Change} />
                     <br></br>
                     {this.state.codeSent && <div className="CodeSent">
-                    <label>Code</label>
-                    <br></br>
-                    <input type="text" value={this.state.code} onChange={this.handleCodeChange} />
-                    <br></br>
+                        <label>Code</label>
+                        <br></br>
+                        <input type="text" value={this.state.code} onChange={this.handleCodeChange} />
+                        <br></br>
                     </div>}
-                    <input type="submit" value="Register" />
+                    <br></br>
+                    {!this.state.codeSent && <input type="submit" value="Next" />}
+                    {this.state.codeSent && <button onClick={this.checkCode}>Submit</button>}
+
 
                 </form>
             </div>

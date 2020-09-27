@@ -35,7 +35,8 @@ class Login extends Component {
             return this.setState({ error: 'Password is required' });
         }
 
-        fetch('http://localhost:8000/api/users/validate', {
+        // fetch('http://localhost:8000/api/users/validate', {
+        fetch('https://agile-wildwood-40014.herokuapp.com/api/users/validate', {
 
             method: 'POST',
             headers: {
@@ -107,7 +108,7 @@ class Login extends Component {
                     <br></br>
                     <button id="register-btn" onClick={this.register}>Register</button>
                 </form>}
-                {this.state.register && <Register/>}
+                {this.state.register && <Register />}
             </div>
         );
     }

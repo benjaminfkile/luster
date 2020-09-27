@@ -2,5 +2,8 @@
     color: silver;
     font-family: 'Red Rose', cursive;
     text-align: center;
-    margin-top: 40vh;
+    margin-top: 15vh;
+}
+.Login label, input{
+    font-size: 20px;
 }
