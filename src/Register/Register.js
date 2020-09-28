@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import Failure from '../Register/Failure'
+import Success from '../Register/Success'
 import '../Login/Login.css'
 
 class Register extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             name: '',
             email: '',
@@ -15,7 +17,9 @@ class Register extends Component {
             registrationError: false,
             codeSent: false,
             registered: false,
-            emailTaken: false
+            emailTaken: false,
+            successRegister: false,
+            failRegister: false
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -42,8 +46,12 @@ class Register extends Component {
             return this.setState({ error: 'Email is required' });
         }
 
-        if (!this.state.pass1) {
+        if (!this.state.pass1 && this.state.pass2) {
             return this.setState({ error: 'Password is required' });
+        }
+
+        if (this.state.pass1 !== this.state.pass2) {
+            return this.setState({ error: 'Passwords dont match' });
         }
 
         if (this.state.name && this.state.email && this.state.pass1 && !this.state.codeSent) {
@@ -92,11 +100,11 @@ class Register extends Component {
             })
         }).then(res => {
             if (res.status === 200) {
-                this.setState({ registered: true })
-                alert("registered, now wtf?")
+                this.setState({ registered: true, successRegister: true })
+                this.props.register(1)
             } else {//what to do with this?
-                this.setState({ registrationError: true })
-                alert("you fucked up")
+                this.setState({ registrationError: true, failRegister: true })
+                alert("error registering")
             }
         })
     }
@@ -175,9 +183,9 @@ class Register extends Component {
                     <br></br>
                     {!this.state.codeSent && <input type="submit" value="Next" />}
                     {this.state.codeSent && <button onClick={this.checkCode}>Submit</button>}
-
-
                 </form>
+                {this.state.failRegister && <Failure/>}
+                {this.state.successRegister && <Success/>}
             </div>
         );
     }

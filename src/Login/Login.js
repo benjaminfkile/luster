@@ -11,7 +11,7 @@ class Login extends Component {
             password: '',
             error: '',
             loggedIn: false,
-            register: true
+            register: false
         };
 
         this.handlePassChange = this.handlePassChange.bind(this);
@@ -36,7 +36,7 @@ class Login extends Component {
         }
 
         // fetch('http://localhost:8000/api/users/validate', {
-        fetch('https://agile-wildwood-40014.herokuapp.com/api/users/validate', {
+            fetch('https://agile-wildwood-40014.herokuapp.com/api/users/validate', {
 
             method: 'POST',
             headers: {
@@ -71,8 +71,13 @@ class Login extends Component {
         });
     }
 
-    register = () => {
-        this.setState({ register: true })
+    register = (args) => {
+
+        if (args === 1) {
+            this.setState({ register: false })
+        } else {
+            this.setState({ register: true })
+        }
     }
 
     render() {
@@ -108,7 +113,10 @@ class Login extends Component {
                     <br></br>
                     <button id="register-btn" onClick={this.register}>Register</button>
                 </form>}
-                {this.state.register && <Register />}
+                {this.state.register &&
+                    <Register
+                        register={this.register}
+                    />}
             </div>
         );
     }
