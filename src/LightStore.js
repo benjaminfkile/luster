@@ -12,7 +12,6 @@ function getLights() {
             }
         })
         .catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
-        console.log(LightStore)
 }
 
 getLights()

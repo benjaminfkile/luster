@@ -11,8 +11,6 @@ class App extends Component {
 
   render() {
 
-    // console.log(window.navigator)
-
     return (
       <div className="Wrapper">
         <div className="App">

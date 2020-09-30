@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import Failure from '../Register/Failure'
-import Success from '../Register/Success'
 import '../Login/Login.css'
 
 class Register extends Component {
@@ -14,12 +12,9 @@ class Register extends Component {
             pass2: '',
             code: '',
             error: '',
-            registrationError: false,
             codeSent: false,
             registered: false,
             emailTaken: false,
-            successRegister: false,
-            failRegister: false
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -36,6 +31,7 @@ class Register extends Component {
     }
 
     handleSubmit(evt) {
+
         evt.preventDefault();
 
         if (!this.state.name) {
@@ -46,7 +42,7 @@ class Register extends Component {
             return this.setState({ error: 'Email is required' });
         }
 
-        if (!this.state.pass1 && this.state.pass2) {
+        if (!this.state.pass1 && !this.state.pass2) {
             return this.setState({ error: 'Password is required' });
         }
 
@@ -54,9 +50,17 @@ class Register extends Component {
             return this.setState({ error: 'Passwords dont match' });
         }
 
+        if (this.state.codeSent && !this.state.code) {
+            return this.setState({ error: '5 digit code required' });
+        }
+
+        if (this.state.emailTaken) {
+            return this.setState({ error: 'Email already registered' });
+        }
+    
         if (this.state.name && this.state.email && this.state.pass1 && !this.state.codeSent) {
             // fetch('http://localhost:8000/api/users/new', {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/users/new', {
+                fetch('https://agile-wildwood-40014.herokuapp.com/api/users/new', {
 
                 method: 'POST',
                 headers: {
@@ -86,8 +90,7 @@ class Register extends Component {
 
     checkCode = () => {
         // fetch('http://localhost:8000/api/users/valCode', {
-        fetch('https://agile-wildwood-40014.herokuapp.com/api/users/valCode', {
-
+            fetch('https://agile-wildwood-40014.herokuapp.com/api/users/valCode', {
 
             method: 'POST',
             headers: {
@@ -100,11 +103,13 @@ class Register extends Component {
             })
         }).then(res => {
             if (res.status === 200) {
-                this.setState({ registered: true, successRegister: true })
+                this.setState({ registered: true})
                 this.props.register(1)
-            } else {//what to do with this?
-                this.setState({ registrationError: true, failRegister: true })
-                alert("error registering")
+            } 
+            if(res.status === 403){
+                return this.setState({ error: 'Invalid code' });            }
+            if(res.status === 400){
+                return this.setState({ error: 'Registratoin Error, please your credentials and try again' });
             }
         })
     }
@@ -129,7 +134,7 @@ class Register extends Component {
 
     handleCodeChange(evt) {
         this.setState({
-            code: evt.target.value,
+            code: evt.target.value, invalidCode: false
         });
     }
 
@@ -141,19 +146,9 @@ class Register extends Component {
 
     render() {
 
-        console.log("Registered?: " + this.state.registered)
-        console.log(this.state.code)
-
         return (
             <div className="Register">
                 <form className="RegisterForm" onSubmit={this.handleSubmit}>
-                    {
-                        this.state.error &&
-                        <h3 onClick={this.dismissError}>
-                            <button onClick={this.dismissError}>x</button>
-                            {this.state.error}
-                        </h3>
-                    }
                     <h1>
                         Register
                     </h1>
@@ -184,8 +179,14 @@ class Register extends Component {
                     {!this.state.codeSent && <input type="submit" value="Next" />}
                     {this.state.codeSent && <button onClick={this.checkCode}>Submit</button>}
                 </form>
-                {this.state.failRegister && <Failure/>}
-                {this.state.successRegister && <Success/>}
+                {this.state.error &&
+                    <h3 id="registration" onClick={this.dismissError}>
+                        <br></br>
+                        <button onClick={this.dismissError}>x</button>
+                        {this.state.error}
+                    </h3>}
+                    <br></br>
+                    <button onClick={() => this.props.register(1)}>Back</button>
             </div>
         );
     }

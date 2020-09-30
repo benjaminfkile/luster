@@ -21,8 +21,6 @@ class Browse extends Component {
         this.dbInterval = setInterval(this.listen4DB, 100)
     }
 
-
-
     listen4DB = () => {
         if (LightStore.length > 0) {
             clearInterval(this.dbInterval)
@@ -40,6 +38,8 @@ class Browse extends Component {
     }
 
     render() {
+
+        console.log(window.user)
 
         return (
             <div className="Browse" id="browse">

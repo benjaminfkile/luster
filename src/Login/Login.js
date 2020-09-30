@@ -2,22 +2,30 @@ import React, { Component } from 'react'
 import Register from '../Register/Register'
 import '../Login/Login.css'
 
+
 class Login extends Component {
 
     constructor() {
         super();
         this.state = {
+            name: '',
             email: '',
             password: '',
             error: '',
-            loggedIn: false,
-            register: false
+            register: false,
+            loggedIn: false
         };
 
         this.handlePassChange = this.handlePassChange.bind(this);
         this.handleUserChange = this.handleUserChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.dismissError = this.dismissError.bind(this);
+    }
+
+    componentDidMount() {
+        if(window.user){
+            this.setState({loggedIn: true , email: window.user})
+        }
     }
 
     dismissError() {
@@ -51,12 +59,15 @@ class Login extends Component {
             console.log(res)
             if (res.status === 200) {
                 this.setState({ loggedIn: true })
-                console.log("Logged in?: " + this.state.loggedIn)
+                window.user = this.state.email
             }
         })
-
         return this.setState({ error: '' });
+    }
 
+    logOut = () => {
+        window.user = null
+        this.setState({ loggedIn: false, email: '', password: '' })
     }
 
     handleUserChange(evt) {
@@ -81,34 +92,36 @@ class Login extends Component {
     }
 
     render() {
-        // NOTE: I use data-attributes for easier E2E testing
-        // but you don't need to target those (any css-selector will work)
 
-        console.log("Logged in?: " + this.state.loggedIn)
-
+        console.log(window.user)
+        
         return (
             <div className="Login">
-                {!this.state.register && <form className="LoginForm" onSubmit={this.handleSubmit}>
-                    {
-                        this.state.error &&
-                        <h3 data-test="error" onClick={this.dismissError}>
-                            <button onClick={this.dismissError}>✖</button>
-                            {this.state.error}
-                        </h3>
-                    }
+                {this.state.loggedIn && <div className="Logout">
+                    <h2>
+                        Signed in as 
+                    </h2>
+                    <br></br>
+                    <h3>
+                        {this.state.email}
+                    </h3>
+                    <br></br>
+                    <button onClick={this.logOut}>Log Out</button>
+                </div>}
+                {!this.state.register && !this.state.loggedIn && <form className="LoginForm" id="login-form" onSubmit={this.handleSubmit}>
                     <h1>
                         Log In
                     </h1>
                     <label>Email</label>
                     <br></br>
-                    <input type="text" data-test="email" value={this.state.email} onChange={this.handleUserChange} />
+                    <input type="text" value={this.state.email} onChange={this.handleUserChange} />
                     <br></br>
                     <label>Password</label>
                     <br></br>
-                    <input type="password" data-test="password" value={this.state.password} onChange={this.handlePassChange} />
+                    <input type="password" value={this.state.password} onChange={this.handlePassChange} />
                     <br></br>
                     <br></br>
-                    <input type="submit" value="Log In" data-test="submit" />
+                    <input type="submit" value="Log In" />
                     <br></br>
                     <br></br>
                     <button id="register-btn" onClick={this.register}>Register</button>
@@ -117,10 +130,14 @@ class Login extends Component {
                     <Register
                         register={this.register}
                     />}
+                {this.state.error &&
+                    <h3 onClick={this.dismissError}>
+                        <button onClick={this.dismissError}>✖</button>
+                        {this.state.error}
+                    </h3>}
             </div>
         );
     }
-
 }
 
 export default Login

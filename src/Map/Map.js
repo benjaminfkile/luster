@@ -135,6 +135,7 @@ class Map extends React.Component {
   render = () => {
 
     console.log('render')
+    // console.log(this.context)
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
