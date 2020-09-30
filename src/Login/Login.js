@@ -23,8 +23,8 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        if(window.user){
-            this.setState({loggedIn: true , email: window.user})
+        if (window.user) {
+            this.setState({ loggedIn: true, email: window.user })
         }
     }
 
@@ -44,7 +44,7 @@ class Login extends Component {
         }
 
         // fetch('http://localhost:8000/api/users/validate', {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/users/validate', {
+        fetch('https://agile-wildwood-40014.herokuapp.com/api/users/validate', {
 
             method: 'POST',
             headers: {
@@ -61,6 +61,15 @@ class Login extends Component {
                 this.setState({ loggedIn: true })
                 window.user = this.state.email
             }
+            if (res.status === 202) {
+                this.setState({ loggedIn: false })
+                return this.setState({ error: 'User not registered' });
+            }
+            if (res.status === 403) {
+                this.setState({ loggedIn: false })
+                return this.setState({ error: 'Invalid Credentials' });
+            }
+            
         })
         return this.setState({ error: '' });
     }
@@ -94,12 +103,12 @@ class Login extends Component {
     render() {
 
         console.log(window.user)
-        
+
         return (
             <div className="Login">
                 {this.state.loggedIn && <div className="Logout">
                     <h2>
-                        Signed in as 
+                        Signed in as
                     </h2>
                     <br></br>
                     <h3>

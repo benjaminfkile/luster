@@ -109,7 +109,7 @@ class Register extends Component {
             if(res.status === 403){
                 return this.setState({ error: 'Invalid code' });            }
             if(res.status === 400){
-                return this.setState({ error: 'Registratoin Error, please your credentials and try again' });
+                return this.setState({ error: 'Registratoin Error, please check your credentials and try again' });
             }
         })
     }
