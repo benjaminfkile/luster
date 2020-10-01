@@ -3,7 +3,6 @@ import Location from "../Location"
 import axios from 'axios'
 import uuid from "uuid";
 import '../Post/Post.css'
-import GeoData from '../GeoData';
 
 class Post extends Component {
 
@@ -61,15 +60,15 @@ class Post extends Component {
         })
             .then(res => {
                 this.setState({ response: res, finished: true, progress: null, image: null, selectedFile: null })
-                this.updateRows(this.state.response.data.data.display_url, this.state.response.data.data.thumb.url, this.state.response.data.data.delete_url)
+                this.updateRows(this.state.response.data.data.display_url, this.state.response.data.data.delete_url)
             });
     }
 
-    updateRows = async (large, thumb, del) => {
+    updateRows = async (large, del) => {
 
         if (this.state.response) {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
-            // fetch('http://localhost:8000/api/lights', {
+            fetch('https://sleepy-wildwood-78286.herokuapp.com/api/queu', {
+            // fetch('http://localhost:8080/api/queu', {
 
                 method: 'POST',
                 headers: {
@@ -81,10 +80,8 @@ class Post extends Component {
                     lng: Location.lng,
                     url: large,
                     id: uuid.v4(),
-                    flag: 1,
-                    thumb: thumb,
-                    del: del,
-                    // upvotes: '{' + GeoData[0].IPv4 + '}'
+                    email: window.user,
+                    del: del
                 })
             })
         }
@@ -92,22 +89,30 @@ class Post extends Component {
 
 
     render() {
-
+        console.log(window.user)
         return (
-            <div className="Upload_Container">
-                {this.state.finished && <p id="success">Success!!!</p>}
-                <label className="custom-file-upload">
-                    <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
+            <div>
+                {window.user && <div className="Upload_Container">
+                    {this.state.finished && <p id="success">Success!!!</p>}
+                    <label className="custom-file-upload">
+                        <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
                 Choose File
                 </label>
-                {!this.state.image && <p id="arrow">^</p>}
-                {!this.state.image && <img src="./res/2.png" id="noImg" alt='A tree'></img>}
-                {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
-                {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
-                {this.state.image && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
-                {this.state.warning && <p id="warning">Warning!!! The photo seems to be in portrait, Luster is intended for landscape photos. You can still upload it but the photo might not pass review if it is too stretched and blurry.</p>}
-                {this.state.finished && !this.state.warning && <p id="finished">Your photo looks good so far, if for some reason it does not pass review you can use the contact form in the contact section of the page and reach out to me. </p>}
+                    {!this.state.image && <p id="arrow">^</p>}
+                    {!this.state.image && <img src="./res/2.png" id="noImg" alt='A tree'></img>}
+                    {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
+                    {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
+                    {this.state.image && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
+                    {this.state.warning && <p id="warning">Warning!!! The photo seems to be in portrait, Luster is intended for landscape photos. You can still upload it but the photo might not pass review if it is too stretched and blurry.</p>}
+                    {this.state.finished && !this.state.warning && <p id="finished">Your photo looks good so far, if for some reason it does not pass review you can use the contact form in the contact section of the page and reach out to me. </p>}
+                </div>}
+                {!window.user && <div>
+                    <h3>
+                        Must be logged in to post
+                </h3>
+                </div>}
             </div>
+
         );
     }
 }

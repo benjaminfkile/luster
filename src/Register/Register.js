@@ -54,10 +54,8 @@ class Register extends Component {
             return this.setState({ error: '5 digit code required' });
         }
 
-        if (this.state.emailTaken) {
-            return this.setState({ error: 'Email already registered' });
-        }
-    
+
+
         if (this.state.name && this.state.email && this.state.pass1 && !this.state.codeSent) {
             // fetch('http://localhost:8000/api/users/new', {
                 fetch('https://agile-wildwood-40014.herokuapp.com/api/users/new', {
@@ -78,10 +76,14 @@ class Register extends Component {
                     this.setState({ emailTaken: false, codeSent: true })
                     console.log("code sent")
                 }
+                if (res.status === 202) {
+                    this.setState({ emailTaken: true, codeSent: false, error: 'Email already registered' })
+                    console.log("code sent")
+
+                }
                 if (res.status === 403) {
                     console.log(res.body)
-                    this.setState({ emailTaken: true })
-                    console.log("code not sent, email taken")
+                    console.log("bad request")
                 }
             })
         }
@@ -103,12 +105,13 @@ class Register extends Component {
             })
         }).then(res => {
             if (res.status === 200) {
-                this.setState({ registered: true})
+                this.setState({ registered: true })
                 this.props.register(1)
-            } 
-            if(res.status === 403){
-                return this.setState({ error: 'Invalid code' });            }
-            if(res.status === 400){
+            }
+            if (res.status === 403) {
+                return this.setState({ error: 'Invalid code' });
+            }
+            if (res.status === 400) {
                 return this.setState({ error: 'Registratoin Error, please check your credentials and try again' });
             }
         })
@@ -178,6 +181,9 @@ class Register extends Component {
                     <br></br>
                     {!this.state.codeSent && <input type="submit" value="Next" />}
                     {this.state.codeSent && <button onClick={this.checkCode}>Submit</button>}
+                    <br></br>
+                    <br></br>
+                    {this.state.codeSent && <p>I sent you an email with a verification code, please enter the code to finish registering.</p>}
                 </form>
                 {this.state.error &&
                     <h3 id="registration" onClick={this.dismissError}>
@@ -185,8 +191,8 @@ class Register extends Component {
                         <button onClick={this.dismissError}>x</button>
                         {this.state.error}
                     </h3>}
-                    <br></br>
-                    <button onClick={() => this.props.register(1)}>Back</button>
+                <br></br>
+                <button onClick={() => this.props.register(1)}>Back</button>
             </div>
         );
     }

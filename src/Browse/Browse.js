@@ -49,7 +49,6 @@ class Browse extends Component {
                             <LazyLoad
                                 key={i}
                                 height={0}>
-                                {img.flag === "0" &&
                                     <div className="Item">
                                         <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                         {/* <div id="stats">
@@ -60,7 +59,7 @@ class Browse extends Component {
                                             <img id="like-img" src="./res/like-btn.png" alt="oops" onClick={() => this.upvote(i)}></img>
                                         </div> */}
 
-                                    </div>}
+                                    </div>
                             </LazyLoad>)}
                     </div>
                 </div>

@@ -43,8 +43,8 @@ class Login extends Component {
             return this.setState({ error: 'Password is required' });
         }
 
-        // fetch('http://localhost:8000/api/users/validate', {
-        fetch('https://agile-wildwood-40014.herokuapp.com/api/users/validate', {
+        fetch('http://localhost:8000/api/users/validate', {
+            // fetch('https://agile-wildwood-40014.herokuapp.com/api/users/validate', {
 
             method: 'POST',
             headers: {
@@ -60,6 +60,7 @@ class Login extends Component {
             if (res.status === 200) {
                 this.setState({ loggedIn: true })
                 window.user = this.state.email
+                this.setName(this.state.email)
             }
             if (res.status === 202) {
                 this.setState({ loggedIn: false })
@@ -69,9 +70,20 @@ class Login extends Component {
                 this.setState({ loggedIn: false })
                 return this.setState({ error: 'Invalid Credentials' });
             }
-            
+
         })
         return this.setState({ error: '' });
+    }
+
+    setName = () => {
+        // let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/users/' + this.state.email;
+        let targetUrl = 'http://localhost:8000/api/users/' + this.state.email
+
+        fetch(targetUrl)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ name: data })
+            })
     }
 
     logOut = () => {
@@ -107,8 +119,10 @@ class Login extends Component {
         return (
             <div className="Login">
                 {this.state.loggedIn && <div className="Logout">
+                        <h1>Hi {this.state.name},</h1>
+                        <br></br>
                     <h2>
-                        Signed in as
+                        You are signed in using
                     </h2>
                     <br></br>
                     <h3>
@@ -139,6 +153,7 @@ class Login extends Component {
                     <Register
                         register={this.register}
                     />}
+                    <br></br>
                 {this.state.error &&
                     <h3 onClick={this.dismissError}>
                         <button onClick={this.dismissError}>✖</button>

@@ -110,7 +110,6 @@ class Map extends React.Component {
 
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
-      if (this.state.lights[i].flag === "0") {
         let markerImg = new window.google.maps.MarkerImage(
           './res/' + Math.floor((Math.random() * (23 - 1) + 1)) + '.png',
           null,
@@ -126,7 +125,6 @@ class Map extends React.Component {
             icon={markerImg}
           />
         temp.push(marker)
-      }
     }
 
     this.setState({ markers: temp })
