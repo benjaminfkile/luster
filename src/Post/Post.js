@@ -67,7 +67,7 @@ class Post extends Component {
     updateRows = async (large, del) => {
 
         if (this.state.response) {
-            fetch('https://sleepy-wildwood-78286.herokuapp.com/api/queu', {
+            fetch('https://agile-wildwood-40014.herokuapp.com/api/queu', {
             // fetch('http://localhost:8080/api/queu', {
 
                 method: 'POST',
