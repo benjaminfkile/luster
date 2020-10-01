@@ -76,8 +76,8 @@ class Login extends Component {
     }
 
     setName = () => {
-        // let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/users/' + this.state.email;
-        let targetUrl = 'http://localhost:8000/api/users/' + this.state.email
+        let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/users/' + this.state.email;
+        // let targetUrl = 'http://localhost:8000/api/users/' + this.state.email
 
         fetch(targetUrl)
             .then(response => response.json())
