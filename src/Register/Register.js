@@ -156,7 +156,7 @@ class Register extends Component {
                         Register
                     </h1>
                     <br></br>
-                    <label>Name</label>
+                    <label>First Name</label>
                     <br></br>
                     <input type="text" value={this.state.name} onChange={this.handleNameChange} />
                     <br></br>

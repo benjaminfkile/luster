@@ -18,9 +18,9 @@
 .Img_Container{
     position: absolute;
     overflow-y: auto;
-    top: 7vh;
+    top: 1vh;
     left: 2vw;
-    height: 85vh;
+    height: 98vh;
     width: 98vw;
     background-color: rgb(36, 47, 62);
 }
@@ -52,4 +52,28 @@
     height: 30px;
     margin-left: auto;
     margin-right: 5px;
+}
+
+@media screen and (orientation:landscape) {
+    .Img_Container {
+        top: 1vh;
+        left: 1vw;
+        height: 98vh;
+        width: 98vw;
+    }
+
+    .Item{
+        width: 98vw;
+    }
+
+    .Item img{
+        width: 98vw;
+        height: 88vh;
+    }
+    #stats{
+        height: 10vh;
+        width: 98vw;
+    }
+
+
 }
