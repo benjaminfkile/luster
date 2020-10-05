@@ -68,7 +68,7 @@ class Post extends Component {
 
         if (this.state.response) {
             fetch('https://agile-wildwood-40014.herokuapp.com/api/queu', {
-            // fetch('http://localhost:8080/api/queu', {
+            // fetch('http://localhost:8000/api/queu', {
 
                 method: 'POST',
                 headers: {

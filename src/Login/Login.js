@@ -24,7 +24,7 @@ class Login extends Component {
 
     componentDidMount() {
         if (window.user) {
-            this.setState({ loggedIn: true, email: window.user })
+            this.setState({ loggedIn: true, name: window.name })
         }
     }
 
@@ -56,10 +56,9 @@ class Login extends Component {
                 pass: this.state.password
             })
         }).then(res => {
-            console.log(res)
             if (res.status === 200) {
                 this.setState({ loggedIn: true })
-                window.user = this.state.email
+                //window.user = this.state.email
                 this.setName(this.state.email)
             }
             if (res.status === 202) {
@@ -82,7 +81,9 @@ class Login extends Component {
         fetch(targetUrl)
             .then(response => response.json())
             .then(data => {
-                this.setState({ name: data })
+                window.user = data.id
+                window.name = data.name
+                this.setState({ name: data.name })
             })
     }
 
@@ -113,21 +114,11 @@ class Login extends Component {
     }
 
     render() {
-
-        console.log(window.user)
-
+        // console.log(window.user)
         return (
             <div className="Login">
                 {this.state.loggedIn && <div className="Logout">
-                        <h1>Hi {this.state.name},</h1>
-                        <br></br>
-                    <h2>
-                        You are signed in using
-                    </h2>
-                    <br></br>
-                    <h3>
-                        {this.state.email}
-                    </h3>
+                    <h1>Hi {this.state.name}</h1>
                     <br></br>
                     <button onClick={this.logOut}>Log Out</button>
                 </div>}
@@ -153,7 +144,7 @@ class Login extends Component {
                     <Register
                         register={this.register}
                     />}
-                    <br></br>
+                <br></br>
                 {this.state.error &&
                     <h3 onClick={this.dismissError}>
                         <button onClick={this.dismissError}>✖</button>

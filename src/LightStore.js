@@ -16,5 +16,4 @@ function getLights() {
 
 getLights()
 
-
 export default LightStore

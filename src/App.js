@@ -9,6 +9,11 @@ import './App.css';
 
 class App extends Component {
 
+  // componentDidMount(){
+  //   window.user = "c8712b47d79d63e97c412d394d2f77b1"
+  //   window.name = "Ben"
+  // }
+
   render() {
 
     return (

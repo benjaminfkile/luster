@@ -39,8 +39,6 @@ class Browse extends Component {
 
     render() {
 
-        console.log(window.user)
-
         return (
             <div className="Browse" id="browse">
                 <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
@@ -49,17 +47,16 @@ class Browse extends Component {
                             <LazyLoad
                                 key={i}
                                 height={0}>
-                                    <div className="Item">
-                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                        {/* <div id="stats">
-                                            <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                            <p>
-                                                {img.upvotes.length}
-                                            </p>
-                                            <img id="like-img" src="./res/like-btn.png" alt="oops" onClick={() => this.upvote(i)}></img>
-                                        </div> */}
-
+                                <div className="Item">
+                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                    <div id="stats">
+                                        <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                        <p>
+                                            {img.upvotes.length}
+                                        </p>
                                     </div>
+
+                                </div>
                             </LazyLoad>)}
                     </div>
                 </div>
