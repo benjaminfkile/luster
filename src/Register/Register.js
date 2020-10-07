@@ -71,19 +71,16 @@ class Register extends Component {
                     pass: this.state.pass1
                 })
             }).then(res => {
-                console.log(res)
                 if (res.status === 200) {
                     this.setState({ emailTaken: false, codeSent: true })
-                    console.log("code sent")
+                    // console.log("code sent")
                 }
                 if (res.status === 202) {
                     this.setState({ emailTaken: true, codeSent: false, error: 'Email already registered' })
-                    console.log("code sent")
 
                 }
                 if (res.status === 403) {
-                    console.log(res.body)
-                    console.log("bad request")
+                    this.setState({error: 'go away!!!' })
                 }
             })
         }

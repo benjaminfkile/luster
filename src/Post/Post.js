@@ -37,24 +37,24 @@ class Post extends Component {
 
         if (height > width) {
             this.setState({ warning: true })
-            console.log('bad ' + width + 'x' + height)
+            // console.log('bad ' + width + 'x' + height)
 
         } else {
             this.setState({ warning: false })
-            console.log('good ' + width + 'x' + height)
+            // console.log('good ' + width + 'x' + height)
         }
 
-        console.log(this.state.warning)
+        // console.log(this.state.warning)
     }
 
     imgUploadHandler = () => {
 
         const fd = new FormData()
         fd.append('image', this.state.selectedFile)
-        console.log(fd)
+        // console.log(fd)
         axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
             onUploadProgress: ProgressEvent => {
-                console.log("Progress: " + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + "%")
+                // console.log("Progress: " + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + "%")
                 this.setState({ progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) })
             }
         })
@@ -89,7 +89,7 @@ class Post extends Component {
 
 
     render() {
-        console.log(window.user)
+        // console.log(window.user)
         return (
             <div>
                 {window.user && <div className="Upload_Container">

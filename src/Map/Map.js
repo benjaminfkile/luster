@@ -73,7 +73,7 @@ class Map extends React.Component {
       this.setState({ location: false })
       this.locationTimeout++
       if (this.locationTimeout > 19) {
-        console.log('location denied')
+        // console.log('location denied')
         clearInterval(this.listen4LocationInterval)
       }
     }

@@ -13,7 +13,6 @@ function inApp() {
 function getLocation() {
     if (!app && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setLocation)
-        // console.log("Web")
     }
 }
 
