@@ -39,6 +39,8 @@ class Browse extends Component {
 
     render() {
 
+        console.log(window.user)
+
         return (
             <div className="Browse" id="browse">
                 <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >

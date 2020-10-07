@@ -80,7 +80,7 @@ class Post extends Component {
                     lng: Location.lng,
                     url: large,
                     id: uuid.v4(),
-                    email: window.user,
+                    userId: window.user,
                     del: del
                 })
             })
