@@ -52,7 +52,7 @@ class Post extends Component {
         const fd = new FormData()
         fd.append('image', this.state.selectedFile)
         // console.log(fd)
-        axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
+        axios.post("https://api.imgbb.com/1/upload?expiration=60&key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
             onUploadProgress: ProgressEvent => {
                 // console.log("Progress: " + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + "%")
                 this.setState({ progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) })
@@ -67,8 +67,8 @@ class Post extends Component {
     updateRows = async (large, del) => {
 
         if (this.state.response) {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/queu', {
-            // fetch('http://localhost:8000/api/queu', {
+            fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
+            // fetch('http://localhost:8000/api/lights', {
 
                 method: 'POST',
                 headers: {
@@ -80,8 +80,9 @@ class Post extends Component {
                     lng: Location.lng,
                     url: large,
                     id: uuid.v4(),
-                    userId: window.user,
-                    del: del
+                    user: window.user,
+                    del: del,
+                    upvotes: '{}'
                 })
             })
         }
