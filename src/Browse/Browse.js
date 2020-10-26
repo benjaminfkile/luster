@@ -7,25 +7,40 @@ import '../Browse/Browse.css'
 
 class Browse extends Component {
 
+    lights = []
+
     constructor() {
         super();
         this.state = {
             lightDex: -1,
-            db: false,
             showFeed: true,
-            render: true
+            sorted: false,
         }
     }
 
     componentDidMount() {
-        this.dbInterval = setInterval(this.listen4DB, 100)
+        this.dbInterval = setInterval(this.listen4DB, 700)
     }
 
     listen4DB = () => {
         if (LightStore.length > 0) {
             clearInterval(this.dbInterval)
             this.setState({ db: true })
+            this.maxDistance(46.83, -114.03)
         }
+    }
+
+    maxDistance = (latMax, lngMax) => {
+        this.setState({ sorted: false })
+        let a = LightStore
+        for (let i = 0; i < a.length; i++) {
+            if ((a[i].lat < latMax) && (a[i].lng < lngMax)) {
+                this.lights.push(a[i])
+            }
+        }
+        this.setState({ sorted: true })
+        console.log(this.lights)
+
     }
 
     togglePreview = (args) => {
@@ -40,9 +55,14 @@ class Browse extends Component {
     render() {
         return (
             <div className="Browse" id="browse">
+                <h1 id="browse-header">Browse</h1>
+                {/* <div className="Sort">
+                    <p>Distance</p>
+                    <p>Likes</p>
+                </div> */}
                 <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
                     <div className="Img_Container">
-                        {LightStore.map((img, i) =>
+                        {this.lights.map((img, i) =>
                             <LazyLoad
                                 key={i}
                                 height={0}>
@@ -61,6 +81,7 @@ class Browse extends Component {
                 </div>
                 <Preview
                     togglePreview={this.togglePreview}
+                    lights={this.lights}
                     lightDex={this.state.lightDex}
                     contributions={false}
                 />

@@ -1,5 +1,22 @@
 .Browse{
     position: fixed;
+    width: 0vw;
+    height: 0vh;
+}
+#browse-header{
+    position: absolute;
+    text-align: center;
+    top: 2vh;
+    width: 100vw;
+    color: rgb(10, 190, 231);
+}
+.Sort{
+    position: absolute;
+    display: flex;
+    text-align: center;
+    top: 5vh;
+    width: 100vw;
+    color: rgb(255, 255, 255);
 }
 .Fade_Out{
     opacity:0;
@@ -18,9 +35,9 @@
 .Img_Container{
     position: absolute;
     overflow-y: auto;
-    top: 1vh;
+    top: 15vh;
     left: 2vw;
-    height: 98vh;
+    height: 85vh;
     width: 98vw;
     background-color: rgb(36, 47, 62);
 }
@@ -35,24 +52,7 @@
     width: 96vw;
     height: 35vh;
 }
-#stats{
-    display: flex;
-    height: 6vh;
-}
-#stats p{
-    color: rgb(255, 255, 255);
-    font-size: 25px;
-}
-#upvotes-img{
-    width: 30px;
-    height: 30px;
-}
-#like-img{
-    width: 30px;
-    height: 30px;
-    margin-left: auto;
-    margin-right: 5px;
-}
+
 
 @media screen and (orientation:landscape) {
     .Img_Container {

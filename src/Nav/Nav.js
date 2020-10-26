@@ -24,10 +24,10 @@ class Nav extends Component {
 
                 <div className="Menu">
                     {!this.state.hamburger && <div className="MenuClosed">
-                        <img src="./res/openMenu.png" alt="*" onClick={this.toggleBurger}></img>
+                        <img src="./res/open-menu.png" alt="*" onClick={this.toggleBurger}></img>
                     </div>}
                     {this.state.hamburger && <div className="MenuOpen">
-                        <img src="./res/closeMenu.png" alt="*" onClick={this.toggleBurger}></img>
+                        <img src="./res/close-menu.png" alt="*" onClick={this.toggleBurger}></img>
                     </div>}
                 </div>
 

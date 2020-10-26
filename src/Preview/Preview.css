@@ -1,14 +1,21 @@
-.Preview {
+.Preview_User {
 	position: absolute;
 	z-index: 1002;
 	width: 95vw;
-	height: 42vh;
-	top: 20vh;
+	height: 85vh;
+	top: 15vh;
 	left: 2vw;
-	border-style: solid;
-	border-color: rgb(39, 39, 39);
-	background-color: rgb(0, 0, 0);
+	background-color: rgb(0,0, 0);
 	border-radius: 2%;
+}
+.Preview_Manager{
+	position: absolute;
+	z-index: 1002;
+	width: 95vw;
+	height: 55vh;
+	top: 15vh;
+	left: 2vw;
+	background-color: rgb(0, 0, 0);
 }
 
 #Preview_Img {
@@ -29,17 +36,31 @@
 .Preview_Interface {
 	width: 95vw;
 	display: flex;
+	background-color: rgb(0,0,0);
 }
 
-#exit-btn {
-	position: absolute;
-	top: 45vh;
-	left: 87vw;
-	color: rgb(255, 0, 0);
-	font-size: 30px;
+.Exit{
+position: absolute;
+background-color: rgb(36, 47, 62);
+width: 100vw;
+height: 100vh;
 }
 
-.Preview h1 {
+.ExitManager{
+	 position: absolute;
+	background-color: rgb(36, 47, 62);
+	width: 100vw;
+	height: 0vh; 
+	}
+
+#exit-img {
+position: absolute;
+width: 8vw;
+top: 1vh;
+left: 48vh;
+}
+
+.Preview_User h1 {
 	position: absolute;
 	top: 49vh;
 	left: 1vh;
@@ -48,11 +69,35 @@
 	animation: heartbeat 1.5s ease-in-out infinite both;
 }
 
-.Preview a {
+.Preview_User, .Preview_Manager a {
 	text-decoration: none;
 }
+#stats{
+	display: flex;
+	padding-top: 5px;
+    height: 6vh;
+}
+#stats p{
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+}
 
-@media screen and (orientation:landscape) {
+
+
+#upvotes-img{
+	/* margin-top: 5px; */
+    width: 30px;
+    height: 30px;
+}
+#like-img{
+    width: 35px;
+	height: 35px;
+	margin-top: 5px;
+    margin-left: auto;
+    margin-right: 5px;
+}
+
+/* @media screen and (orientation:landscape) {
 	.Preview {
 		width: 98vw;
 		height: 98vh;
@@ -62,7 +107,6 @@
 	#Preview_Img {
 		width: 98vw;
 		height: 85vh;
-		/* border-radius: 2%; */
         }
         
         #exit-btn {
@@ -70,7 +114,7 @@
                 top: 86vh;
                 left: 48vw;
         }
-}
+} */
 
 
 /* ----------------------------------------------

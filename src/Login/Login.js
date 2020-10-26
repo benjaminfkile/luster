@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import UrlStore from '../UrlStore'
 import Preview from "../Preview/Preview"
-// import Snow from '../Snow/Snow'
 import LazyLoad from 'react-lazyload';
 import Register from '../Register/Register'
 import '../Login/Login.css'
@@ -13,7 +12,6 @@ class Login extends Component {
     constructor() {
         super();
         this.state = {
-            name: '',
             email: '',
             password: '',
             error: '',
@@ -31,10 +29,17 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        contribs = []
         if (window.user) {
-            this.setState({ loggedIn: true, name: window.name })
+            this.setState({ loggedIn: true })
+        }
+        contribs = []
+        this.interval = setInterval(this.listen4User, 1000)
+    }
+
+    listen4User = () => {
+        if (window.user) {
             this.getContributions()
+            clearInterval(this.interval)
         }
     }
 
@@ -44,7 +49,6 @@ class Login extends Component {
             .then(response => response.json())
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
-                    //console.log(data[i])
                     contribs.push(data[i])
                     let date = new Date(parseInt(data[0].uploaded)).toLocaleDateString("en-US")
                     var time = new Date(parseInt(data[0].uploaded)).toLocaleTimeString("en-US")
@@ -58,7 +62,6 @@ class Login extends Component {
 
     renderContributions = () => {
         if (contribs.length > 0) {
-            //console.log(contribs)
             this.setState({ hasContribs: true })
         } else {
             this.setState({ hasContribs: false })
@@ -79,7 +82,7 @@ class Login extends Component {
         if (!this.state.password) {
             return this.setState({ error: 'Password is required' });
         }
-            fetch(UrlStore + '/api/users/validate', {
+        fetch(UrlStore + '/api/users/validate', {
 
             method: 'POST',
             headers: {
@@ -116,7 +119,6 @@ class Login extends Component {
             .then(data => {
                 window.user = data.id
                 window.name = data.name
-                this.setState({ name: data.name })
             })
     }
 
@@ -160,15 +162,16 @@ class Login extends Component {
         return (
             <div className="Login">
                 {this.state.loggedIn && <div className="Logout">
-                    <h1>Hi {this.state.name}</h1>
+                    <h1>Hi {window.name}</h1>
                     <br></br>
                     <button onClick={this.logOut}>Log Out</button>
+                    <br></br>
+                    <br></br>
+                    {this.state.hasContribs && <h1>
+                        Your Contributions({contribs.length})
+                    </h1>}
                     {this.state.hasContribs && <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
                         <div className="Contribs_Container">
-                            <h1>
-                                Your Contributions
-                            </h1>
-                            <br></br>
                             {contribs.map((img, i) =>
                                 <LazyLoad
                                     key={i}
@@ -209,7 +212,7 @@ class Login extends Component {
                         togglePreview={this.togglePreview}
                         lightDex={this.state.lightDex}
                         contributions={true}
-                        LightStore={contribs}
+                        lights={contribs}
                     />
                 </div>}
                 {!this.state.register && !this.state.loggedIn && <form className="LoginForm" id="login-form" onSubmit={this.handleSubmit}>

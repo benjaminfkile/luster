@@ -13,9 +13,9 @@
 .Contribs_Container{
     position: absolute;
     overflow-y: auto;
-    top: 15vh;
+    top: 20vh;
     left: 2vw;
-    height: 75vh;
+    height: 70vh;
     width: 96vw;
     background-color: rgb(36, 47, 62);
 

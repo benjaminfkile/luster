@@ -99,7 +99,6 @@ class Manager extends Component {
                     <p id="off" onClick={this.toggleSwitch}>Turn Off</p>
                 </div>}
                 <br></br>
-                <br></br>
                 <div className="Delete">
                     <p onClick={this.valdel}>Delete</p>
 

@@ -1,3 +1,7 @@
+.Manager p{
+    margin-left: 5px;
+    text-align: left;
+}
 #on{
     color: rgb(72, 255, 0);
 }

@@ -9,14 +9,11 @@ import './App.css';
 
 class App extends Component {
 
-  //componentDidMount(){
-  //valid user =>
-  // window.user = "5417cdb0dba8a938f3774941d23d323e"
+  // componentDidMount(){
+  // window.user = "510295233cd1919aa43736c145e077a4"
   // window.name = "Ben"
-  //invalid user =>
-  // window.user = "invalidUUID"
-  // window.name = "Ben"
-  //}
+
+  // }
 
   render() {
 
