@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import GeoData from '../GeoData'
 import LightStore from "../LightStore"
+import Manager from '../Manager/Manager';
 import './Preview.css'
 
 class Preview extends Component {
@@ -9,7 +11,7 @@ class Preview extends Component {
         this.state = {
             loaded: false,
             liked: false,
-            likes: 0
+            likes: 0,
         };
     }
 
@@ -24,7 +26,7 @@ class Preview extends Component {
     upvote = (args) => {
         if (window.user) {
             fetch('https://agile-wildwood-40014.herokuapp.com/api/upvote', {
-            // fetch('http://localhost:8000/api/upvote', {
+            // fetch('http://localhost:8000/api/stats/upvote', {
 
                 method: 'POST',
                 headers: {
@@ -37,7 +39,31 @@ class Preview extends Component {
                 })
             })
             LightStore[args].upvotes.push(window.user)
-            this.setState({liked: true, likes: LightStore[args].upvotes.length})
+            this.setState({ liked: true, likes: LightStore[args].upvotes.length })
+        }
+    }
+
+    trip = (args) => {
+        if (GeoData.length > 0) {
+            let user = ''
+            if (window.user) {
+                user += window.user + "@:" + Date.now()
+            } else {
+                user += GeoData[0].IPv4 + "@:" + Date.now()
+            }
+            fetch('https://agile-wildwood-40014.herokuapp.com/api/stats/trip', {
+            // fetch('http://localhost:8000/api/stats/trip', {
+
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    id: LightStore[args].id,
+                    ip: user
+                })
+            })
         }
     }
 
@@ -52,16 +78,14 @@ class Preview extends Component {
     }
 
     render() {
-
         return (
             <div>
-                {this.props.lightDex !== -1 && <div className="Preview">
+                {this.props.lightDex !== -1 && !this.props.contributions && <div className="Preview">
                     <img src={LightStore[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>
                     {this.state.loaded && <img src={LightStore[this.props.lightDex].url} id="Preview_Img" alt='hacky'></img>}
                     {!this.state.loaded && <img src="./res/splash.png" id="Loading_Img" alt='A tree'></img>}
-                    {/* {!this.state.loaded && <h1>Loading...</h1>} */}
-                    {this.state.loaded && <section className="Preview_Interface">
-                        <a href={'https://www.google.com/maps/search/?api=1&query=' + LightStore[this.props.lightDex].lat + ',' + LightStore[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
+                    {this.state.loaded && <div className="Preview_Interface">
+                        <a href={'https://www.google.com/maps/search/?api=1&query=' + LightStore[this.props.lightDex].lat + ',' + LightStore[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} onClick={() => this.trip(this.props.lightDex)} /> &nbsp;</a>
                         <div id="stats">
                             <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
                             <p>
@@ -70,10 +94,31 @@ class Preview extends Component {
                         </div>
                         {window.user && this.state.liked && <img id="like-img" src="./res/like-btn.png" alt="oops"></img>}
                         {window.user && !this.state.liked && <img id="like-img" src="./res/not-liked.png" alt="oops" onClick={() => this.upvote(this.props.lightDex)}></img>}
+
                         <p id="exit-btn" onClick={this.unloadImg.bind(this)}>
                             x
                         </p>
-                    </section>}
+                    </div>}
+                </div>}
+                {this.props.lightDex !== -1 && this.props.contributions && <div className="Preview">
+                    <img src={this.props.LightStore[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>
+                    {this.state.loaded && <img src={this.props.LightStore[this.props.lightDex].url} id="Preview_Img" alt='hacky'></img>}
+                    {!this.state.loaded && <img src="./res/splash.png" id="Loading_Img" alt='A tree'></img>}
+                    {this.state.loaded && <div className="Preview_Interface">
+                        <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.LightStore[this.props.lightDex].lat + ',' + this.props.LightStore[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
+                        <div id="stats">
+                            <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                            <p>
+                                {this.props.LightStore[this.props.lightDex].upvotes.length}
+                            </p>
+                        </div>
+                        <p id="exit-btn" onClick={this.unloadImg.bind(this)}>
+                            x
+                        </p>
+                    </div>}
+                    <Manager
+                        contribution={this.props.LightStore[this.props.lightDex]}
+                    />
                 </div>}
             </div>
         )
@@ -81,4 +126,3 @@ class Preview extends Component {
 }
 
 export default Preview
-

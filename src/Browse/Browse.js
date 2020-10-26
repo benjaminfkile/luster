@@ -62,6 +62,7 @@ class Browse extends Component {
                 <Preview
                     togglePreview={this.togglePreview}
                     lightDex={this.state.lightDex}
+                    contributions={false}
                 />
                 {this.state.lightDex !== -1 && <Snow />}
             </div>

@@ -110,21 +110,21 @@ class Map extends React.Component {
 
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
-        let markerImg = new window.google.maps.MarkerImage(
-          './res/' + Math.floor((Math.random() * (23 - 1) + 1)) + '.png',
-          null,
-          null,
-          null,
-          new window.google.maps.Size(40, 40)
-        )
-        let marker =
-          <Marker
-            key={i}
-            onClick={() => this.togglePreview(i)}
-            position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
-            icon={markerImg}
-          />
-        temp.push(marker)
+      let markerImg = new window.google.maps.MarkerImage(
+        './res/' + Math.floor((Math.random() * (23 - 1) + 1)) + '.png',
+        null,
+        null,
+        null,
+        new window.google.maps.Size(40, 40)
+      )
+      let marker =
+        <Marker
+          key={i}
+          onClick={() => this.togglePreview(i)}
+          position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
+          icon={markerImg}
+        />
+      temp.push(marker)
     }
 
     this.setState({ markers: temp })
@@ -133,7 +133,7 @@ class Map extends React.Component {
   render = () => {
 
     //console.log('render')
-    
+
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
       null,
@@ -147,12 +147,12 @@ class Map extends React.Component {
       <div>
         {/*LIKELINESS = 1*/}
         {/*Location refused but found GeoData*/}
-        {!this.state.location && this.state.geoData && <GoogleMap 
+        {!this.state.location && this.state.geoData && <GoogleMap
           defaultZoom={11}
           defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
-        > 
+        >
           <>
           </>
         </GoogleMap>}
@@ -210,8 +210,8 @@ class Map extends React.Component {
         <Preview
           togglePreview={this.togglePreview}
           lightDex={this.state.lightDex}
+          contributions={false}
         />
-
         <Snow />
       </div>
     );

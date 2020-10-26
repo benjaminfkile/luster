@@ -57,7 +57,6 @@ class Nav extends Component {
                     </div>
                     {!window.user && <div className="Login_Route" tabIndex="4">
                         <li onClick={this.toggleBurger}>
-
                             <Link to='/login'>
                                 Login
                             </Link>
@@ -65,9 +64,8 @@ class Nav extends Component {
                     </div>}
                     {window.user && <div className="Login_Route" tabIndex="4">
                         <li onClick={this.toggleBurger}>
-
                             <Link to='/login'>
-                                Logout
+                                Profile
                             </Link>
                         </li>
                     </div>}

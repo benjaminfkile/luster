@@ -1,9 +1,65 @@
 .Login{
+    position: fixed;
     color: silver;
     font-family: 'Red Rose', cursive;
     text-align: center;
-    margin-top: 15vh;
+    margin-top: 10vh;
+    width: 100vw;
+    height: 20vh;
 }
 .Login label, input{
     font-size: 20px;
+}
+.Contribs_Container{
+    position: absolute;
+    overflow-y: auto;
+    top: 15vh;
+    left: 2vw;
+    height: 75vh;
+    width: 96vw;
+    background-color: rgb(36, 47, 62);
+
+}
+.Contrib_Item{
+    display: flex;
+    width: 94vw;
+    text-align: left;
+    margin-bottom: 5px;
+    background-color: rgb(0, 0, 0);
+    border-style: solid;
+    /*-2px*/
+    border-color: rgb(0, 0, 0);
+}
+.Contrib_Item img{
+    width: 40vw;
+}
+#contrib-stats{
+    /* display: flex; */
+    margin-top: 5px;
+    margin-left: 10px;
+}
+#upvote-section{
+    display: flex;
+}
+#trip-section{
+    display: flex;
+}
+#on-section, #off-section{
+display: flex;
+}
+#contrib-stats-upvote{
+    width: 20px;
+    height: 20px;
+}
+#contrib-stats-trips{
+    width: 30px;
+    height: 30px;
+}
+#contrib-stats-on{
+    width: 25px;
+    height: 25px;
+}
+#contrib-stats-off{
+    width: 25px;
+    height: 25px;
 }

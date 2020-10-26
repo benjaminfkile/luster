@@ -51,8 +51,8 @@ class Post extends Component {
 
         const fd = new FormData()
         fd.append('image', this.state.selectedFile)
-        // console.log(fd)
         axios.post("https://api.imgbb.com/1/upload?expiration=60&key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
+        // axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
             onUploadProgress: ProgressEvent => {
                 // console.log("Progress: " + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + "%")
                 this.setState({ progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) })
@@ -82,7 +82,10 @@ class Post extends Component {
                     id: uuid.v4(),
                     user: window.user,
                     del: del,
-                    upvotes: '{}'
+                    upvotes: '{}',
+                    trips: '{}',
+                    uploaded: Date.now(),
+                    on: 't'
                 })
             })
         }
