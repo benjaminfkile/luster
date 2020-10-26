@@ -30,30 +30,25 @@
     width:100px;
     height:100px;
     transition: width 0.5s, height 0.5s, opacity 0.2s 0.2s;
-
 }
 .Img_Container{
     position: absolute;
     overflow-y: auto;
     top: 15vh;
     left: 2vw;
-    height: 80vh;
+    height: 75vh;
     width: 98vw;
     background-color: rgb(36, 47, 62);
 }
-
 .Item{
     width: 96vw;
     margin-bottom: 5px;
     background-color: black;
 }
-
 .Item img{
     width: 96vw;
     height: 35vh;
 }
-
-
 @media screen and (orientation:landscape) {
     .Img_Container {
         top: 1vh;
