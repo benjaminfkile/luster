@@ -209,6 +209,7 @@ class Map extends React.Component {
           togglePreview={this.togglePreview}
           lightDex={this.state.lightDex}
           contributions={false}
+          lights={LightStore}
         />
         <Snow />
       </div>
