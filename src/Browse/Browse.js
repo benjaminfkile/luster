@@ -26,7 +26,7 @@ class Browse extends Component {
         if (LightStore.length > 0) {
             clearInterval(this.dbInterval)
             this.setState({ db: true })
-            this.maxDistance(46.83, -114.03)
+            this.maxDistance(1000, 1000)
         }
     }
 
