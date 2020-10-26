@@ -25,7 +25,7 @@ class Preview extends Component {
 
     upvote = (args) => {
         if (window.user) {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/upvote', {
+            fetch('https://agile-wildwood-40014.herokuapp.com/api/stats/upvote', {
             // fetch('http://localhost:8000/api/stats/upvote', {
 
                 method: 'POST',
