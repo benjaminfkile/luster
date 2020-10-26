@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UrlStore from '../UrlStore'
 import '../Login/Login.css'
 
 class Register extends Component {
@@ -57,8 +58,7 @@ class Register extends Component {
 
 
         if (this.state.name && this.state.email && this.state.pass1 && !this.state.codeSent) {
-            // fetch('http://localhost:8000/api/users/new', {
-                fetch('https://agile-wildwood-40014.herokuapp.com/api/users/new', {
+                fetch(UrlStore + '/api/users/new', {
 
                 method: 'POST',
                 headers: {
@@ -88,8 +88,7 @@ class Register extends Component {
     }
 
     checkCode = () => {
-        // fetch('http://localhost:8000/api/users/valCode', {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/users/valCode', {
+            fetch(UrlStore + '/api/users/valCode', {
 
             method: 'POST',
             headers: {

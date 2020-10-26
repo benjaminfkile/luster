@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UrlStore from '../UrlStore'
 import Location from "../Location"
 import axios from 'axios'
 import uuid from "uuid";
@@ -67,8 +68,7 @@ class Post extends Component {
     updateRows = async (large, del) => {
 
         if (this.state.response) {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/lights', {
-            // fetch('http://localhost:8000/api/lights', {
+            fetch(UrlStore + '/api/lights', {
 
                 method: 'POST',
                 headers: {

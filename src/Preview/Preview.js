@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UrlStore from '../UrlStore'
 import GeoData from '../GeoData'
 import LightStore from "../LightStore"
 import Manager from '../Manager/Manager';
@@ -25,8 +26,7 @@ class Preview extends Component {
 
     upvote = (args) => {
         if (window.user) {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/stats/upvote', {
-            // fetch('http://localhost:8000/api/stats/upvote', {
+            fetch(UrlStore + '/api/stats/upvote', {
 
                 method: 'POST',
                 headers: {
@@ -51,8 +51,7 @@ class Preview extends Component {
             } else {
                 user += GeoData[0].IPv4 + "@:" + Date.now()
             }
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/stats/trip', {
-            // fetch('http://localhost:8000/api/stats/trip', {
+            fetch(UrlStore + '/api/stats/trip', {
 
                 method: 'POST',
                 headers: {
@@ -68,8 +67,12 @@ class Preview extends Component {
     }
 
     handleImageLoaded = () => {
-        this.setState({ loaded: true, liked: false, likes: LightStore[this.props.lightDex].upvotes.length });
-        this.upvoteHistory(this.props.lightDex)
+        if(!this.props.contributions){
+            this.setState({ loaded: true, liked: false, likes: LightStore[this.props.lightDex].upvotes.length });
+            this.upvoteHistory(this.props.lightDex)
+        }else{
+            this.setState({ loaded: true, liked: false})
+        }
     }
 
     unloadImg = () => {

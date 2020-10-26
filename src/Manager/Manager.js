@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UrlStore from '../UrlStore'
 import './Manager.css'
 
 class Manager extends Component {
@@ -29,8 +30,7 @@ class Manager extends Component {
     }
 
     valToggle = () => {
-        // let targetUrl = 'http://localhost:8000/api/users/validate/toggle/' + window.user
-        let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/users/validate/toggle/' + window.user
+        let targetUrl = UrlStore + '/api/users/validate/toggle/' + window.user
         fetch(targetUrl, {
 
             method: 'POST',
@@ -58,14 +58,12 @@ class Manager extends Component {
             if (res.status === 403) {
                 console.log('invalid')
             }
-
         })
         // return this.setState({ error: '' });
     }
 
     valdel = () => {
-        // let targetUrl = 'http://localhost:8000/api/users/validate/del/' + window.user
-        let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/users/validate/del/' + window.user
+        let targetUrl = UrlStore + '/api/users/validate/del/' + window.user
         fetch(targetUrl, {
 
             method: 'POST',

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import UrlStore from '../UrlStore'
 import Preview from "../Preview/Preview"
 // import Snow from '../Snow/Snow'
 import LazyLoad from 'react-lazyload';
@@ -38,8 +39,7 @@ class Login extends Component {
     }
 
     getContributions = () => {
-        // let targetUrl = 'http://localhost:8000/api/lights/contributor/' + window.user
-        let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/lights/contributor/' + window.user
+        let targetUrl = UrlStore + '/api/lights/contributor/' + window.user
         fetch(targetUrl)
             .then(response => response.json())
             .then(data => {
@@ -79,9 +79,7 @@ class Login extends Component {
         if (!this.state.password) {
             return this.setState({ error: 'Password is required' });
         }
-
-        // fetch('http://localhost:8000/api/users/validate', {
-            fetch('https://agile-wildwood-40014.herokuapp.com/api/users/validate', {
+            fetch(UrlStore + '/api/users/validate', {
 
             method: 'POST',
             headers: {
@@ -112,9 +110,7 @@ class Login extends Component {
     }
 
     setName = () => {
-        let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/users/' + this.state.email;
-        // let targetUrl = 'http://localhost:8000/api/users/' + this.state.email
-
+        let targetUrl = UrlStore + '/api/users/' + this.state.email;
         fetch(targetUrl)
             .then(response => response.json())
             .then(data => {
