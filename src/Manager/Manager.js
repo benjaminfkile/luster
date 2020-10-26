@@ -30,7 +30,7 @@ class Manager extends Component {
 
     valToggle = () => {
         // let targetUrl = 'http://localhost:8000/api/users/validate/toggle/' + window.user
-        let targetUrl = 'https://agile-wildwood-40014.herokuapp/api/users/validate/toggle/' + window.user
+        let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/users/validate/toggle/' + window.user
         fetch(targetUrl, {
 
             method: 'POST',
@@ -56,7 +56,7 @@ class Manager extends Component {
 
             }
             if (res.status === 403) {
-                console.log("invalid")
+                console.log('invalid')
             }
 
         })
@@ -65,7 +65,7 @@ class Manager extends Component {
 
     valdel = () => {
         // let targetUrl = 'http://localhost:8000/api/users/validate/del/' + window.user
-        let targetUrl = 'https://agile-wildwood-40014.herokuapp/api/users/validate/del/' + window.user
+        let targetUrl = 'https://agile-wildwood-40014.herokuapp.com/api/users/validate/del/' + window.user
         fetch(targetUrl, {
 
             method: 'POST',
