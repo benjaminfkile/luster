@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import UrlStore from '../UrlStore'
 import GeoData from '../GeoData'
-import Manager from '../Manager/Manager';
+import Contributor from '../Contributor/Contributor';
 import './Preview.css'
 
 class Preview extends Component {
@@ -119,7 +119,7 @@ class Preview extends Component {
                         <img id="exit-img" src="./res/exit-btn.png" alt="oops"></img>
 
                     </div>
-                    <Manager
+                    <Contributor
                         contribution={this.props.lights[this.props.lightDex]}
                     />
                 </div>}

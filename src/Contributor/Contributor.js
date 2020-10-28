@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import UrlStore from '../UrlStore'
-import './Manager.css'
+import './Contributor.css'
 
 class Manager extends Component {
     constructor() {

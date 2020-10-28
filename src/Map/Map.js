@@ -189,6 +189,7 @@ class Map extends React.Component {
 
         {/*LIKELINESS = 4*/}
         {/*no Location or GeoData*/}
+        {/*center of USA*/}
         {!this.state.location && <GoogleMap
           defaultZoom={11}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
