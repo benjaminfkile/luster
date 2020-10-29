@@ -3,6 +3,7 @@ import Preview from "../Preview/Preview"
 import Snow from '../Snow/Snow'
 import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
+import RadarAnimation from './RadarAnimation'
 import Radar from '../Radar'
 import '../Browse/Browse.css'
 
@@ -15,19 +16,19 @@ class Browse extends Component {
         this.state = {
             lightDex: -1,
             showFeed: true,
-            sorted: false,
             radar: false,
             showSlider: false,
-            maxDistance: 10,
+            maxDistance: 0,
+            oldDistance: 10,
+            sliderMax: 300,
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
-
     }
 
     componentDidMount() {
         this.dbInterval = setInterval(this.listen4DB, 700)
-        this.radarInterval = setInterval(this.listen4Radar, 700)
-
+        this.radarInterval = setInterval(this.listen4Radar, 1000)
+        this.distanceInterval = setInterval(this.listen4DistanceChange, 1500)
     }
 
     listen4DB = () => {
@@ -39,25 +40,34 @@ class Browse extends Component {
     }
 
     listen4Radar = () => {
-        console.log('listening 4 radar')
         if (Radar.length > 0) {
             clearInterval(this.radarInterval)
             this.setState({ radar: true })
-            this.pruneByDistance(this.state.maxDistance)
+            this.filterByDistance(this.state.maxDistance)
         }
     }
 
-    pruneByDistance = async (miles) => {
+    listen4DistanceChange = () => {
+        if (this.state.oldDistance !== this.state.maxDistance) {
+            this.filterByDistance(this.state.maxDistance)
+        }
+        if (this.lights.length === 0) {
+            console.log('no nearby lights (from Browse.js)')
+            this.setState({ maxDistance: this.state.maxDistance + 100, sliderMax: this.state.sliderMax + 100, showSlider: true})
+        }
+    }
+
+    filterByDistance = async (miles) => {
         if (Radar.length > 0) {
             this.lights = []
             let temp = Radar.sort((a, b) => a[0] - b[0])
             for (let i = 0; i < temp.length; i++) {
                 if (temp[i][0] < miles) {
                     this.lights.push(temp[i][1])
+                    this.lights[i].distance = temp[i][0].toFixed(2)
                 }
             }
-            console.log(temp)
-            this.setState({ maxDistance: miles })
+            this.setState({ maxDistance: miles, oldDistance: miles })
         }
     }
 
@@ -71,9 +81,9 @@ class Browse extends Component {
     }
 
     handleSliderDrag(evt) {
-        // this.setState({ maxDistance: evt.target.value });
         if (Radar.length > 0) {
-            this.pruneByDistance(evt.target.value)
+            this.setState({ maxDistance: evt.target.value });
+            this.lights = []
         }
     }
 
@@ -86,17 +96,20 @@ class Browse extends Component {
     }
 
     render() {
-
-        console.log(this.state.sliderValue)
+        // console.log(this.state)
         return (
             <div className="Browse" id="browse">
-                {!this.state.showSlider && <div className="Toggle_Slider" onClick={this.toggleSlider}>
-                <img id="distance-img" src="./res/distance.png" alt="oops"></img>
+                {this.lights.length === 0 && <div className="Search_Radius">
+                    <p>Search Radius {this.state.maxDistance} nm</p>
                 </div>}
-                {this.state.showSlider && <div className="Slide_Container">
-                    <p>Range: {this.state.maxDistance} miles</p>
+                {this.lights.length === 0 && <RadarAnimation />}
+                {!this.state.showSlider && this.state.lightDex === -1 && <div className="Toggle_Slider" onClick={this.toggleSlider}>
+                    <img id="distance-img" src="./res/distance.png" alt="oops"></img>
+                </div>}
+                {this.state.showSlider && this.state.lightDex === -1 && <div className="Slide_Container">
+                    <p id="range-counter">Nearest Lights: ~ {this.state.maxDistance} nm ({this.lights.length}) results</p>
                     <br></br>
-                    <input type="range" min="1" max="100" value={this.state.maxDistance} className="Slider" id="slider" onChange={this.handleSliderDrag}></input>
+                    <input type="range" min="1" max={this.state.sliderMax} value={this.state.maxDistance} className="Slider" id="slider" onChange={this.handleSliderDrag}></input>
                     {this.state.showSlider && <img id="close-slider-img" src="./res/close-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
                 </div>}
                 <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
@@ -112,8 +125,10 @@ class Browse extends Component {
                                         <p>
                                             {img.upvotes.length}
                                         </p>
+                                        <p id="distance">
+                                            {img.distance} nm
+                                        </p>
                                     </div>
-
                                 </div>
                             </LazyLoad>)}
                     </div>
@@ -124,7 +139,7 @@ class Browse extends Component {
                     lightDex={this.state.lightDex}
                     contributions={false}
                 />
-                {this.state.lightDex !== -1 && <Snow />}
+                <Snow />
             </div>
         );
     }

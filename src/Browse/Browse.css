@@ -48,9 +48,17 @@
 .Item img{
     width: 96vw;
     height: 35vh;
+    z-index: 10000;
 }
 a{
     text-decoration: none
+}
+#range-counter{
+    color: white;
+}
+#distance{
+    margin-left: auto;
+    margin-right: 10px;
 }
 .Slide_Container{
     position: absolute;
@@ -104,6 +112,16 @@ a{
     left: -4vw;
     width: 20vw;
   }
+  .Search_Radius{
+      position: absolute;
+      top: 20vh;
+      width: 100vw;
+      text-align: center;
+      z-index: 1000;
+      color: rgb(10, 190, 231);
+
+  }
+
 @media screen and (orientation:landscape) {
     .Img_Container {
         top: 1vh;
@@ -111,7 +129,6 @@ a{
         height: 98vh;
         width: 98vw;
     }
-
     .Item{
         width: 98vw;
     }
@@ -125,3 +142,5 @@ a{
         width: 98vw;
     }
 }
+
+  

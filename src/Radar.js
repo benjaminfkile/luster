@@ -26,7 +26,6 @@ function updateCoords() {
     }
 
     if (Location.lat || GeoData[0].latitude) {
-
         if (locationHistory.length > 1 && locationHistory[0][0] !== locationHistory[1][0] && locationHistory[0][1] !== locationHistory[1][1]) {
             polulateRadar()
         }
@@ -34,7 +33,7 @@ function updateCoords() {
 }
 
 function polulateRadar() {
-    
+    //why doesnt Radar = [] work?
     Radar.length = 0
 
     if (Location.lat) {
@@ -52,6 +51,7 @@ function polulateRadar() {
             }
         }
     }
+    console.log('populate radar (from Radar.js')
 }
 
 function distance(lat1, lon1, lat2, lon2, unit) {
