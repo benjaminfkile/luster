@@ -38,14 +38,9 @@ class Post extends Component {
 
         if (height > width) {
             this.setState({ warning: true })
-            // console.log('bad ' + width + 'x' + height)
-
         } else {
             this.setState({ warning: false })
-            // console.log('good ' + width + 'x' + height)
         }
-
-        // console.log(this.state.warning)
     }
 
     imgUploadHandler = () => {
@@ -91,9 +86,7 @@ class Post extends Component {
         }
     }
 
-
     render() {
-        // console.log(window.user)
         return (
             <div>
                 {window.user && <div className="Upload_Container">
@@ -102,18 +95,20 @@ class Post extends Component {
                         <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
                 Choose File
                 </label>
-                    {!this.state.image && <p id="arrow">^</p>}
                     {!this.state.image && <img src="./res/2.png" id="noImg" alt='A tree'></img>}
                     {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
+                    <img id="arrow-img" src="./res/upload.png" alt="oops" />
                     {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
-                    {this.state.image && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
-                    {this.state.warning && <p id="warning">Warning!!! The photo seems to be in portrait, Luster is intended for landscape photos. You can still upload it but the photo might not pass review if it is too stretched and blurry.</p>}
-                    {this.state.finished && !this.state.warning && <p id="finished">Your photo looks good so far, if for some reason it does not pass review you can use the contact form in the contact section of the page and reach out to me. </p>}
+                    {this.state.image && !this.state.warning && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
+                    {this.state.warning && <p id="warning">Error!!! The photo seems to be in portrait, Luster is intended for landscape photos only.</p>}
+                    {this.state.finished && !this.state.warning && <p id="finished">Your photo is under review by the LightMaps Image AI, you should receive an email shortly with a decision. </p>}
                 </div>}
-                {!window.user && <div>
+                {!window.user && <div className="Unvalidated">
                     <h3>
-                        Must be logged in to post
+                        Log in or Register to post photos!
                 </h3>
+                    <img src="./res/2.png" id="noImg" alt='A tree'></img>
+
                 </div>}
             </div>
 

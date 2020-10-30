@@ -80,6 +80,9 @@ class Preview extends Component {
     }
 
     render() {
+        if(this.props.lightDex !== -1){
+            console.log(this.props.lights[this.props.lightDex].id)
+        }
         return (
             <div>
                 {this.props.lightDex !== -1 && !this.props.contributions && <div className="Preview_User">
@@ -116,7 +119,7 @@ class Preview extends Component {
                         </div>
                     </div>}
                     <div className="ExitManager" onClick={this.unloadImg.bind(this)}>
-                        <img id="exit-img" src="./res/exit-btn.png" alt="oops"></img>
+                        <img id="exit-manager-img" src="./res/exit-btn.png" alt="oops"></img>
 
                     </div>
                     <Contributor

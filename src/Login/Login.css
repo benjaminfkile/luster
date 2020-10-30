@@ -10,6 +10,12 @@
 .Login label, input{
     font-size: 20px;
 }
+.Login h1{
+margin-bottom: 10px;
+}
+.Login h3{
+margin-top: 10px;
+}
 .Contribs_Container{
     position: absolute;
     overflow-y: auto;

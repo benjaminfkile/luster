@@ -20,15 +20,15 @@ class Browse extends Component {
             showSlider: false,
             maxDistance: 0,
             oldDistance: 10,
-            sliderMax: 300,
+            sliderMax: 100,
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
     }
 
     componentDidMount() {
         this.dbInterval = setInterval(this.listen4DB, 700)
-        this.radarInterval = setInterval(this.listen4Radar, 1000)
-        this.distanceInterval = setInterval(this.listen4DistanceChange, 1500)
+        this.radarInterval = setInterval(this.listen4Radar, 700)
+        this.distanceInterval = setInterval(this.listen4DistanceChange, 700)
     }
 
     listen4DB = () => {
@@ -53,7 +53,7 @@ class Browse extends Component {
         }
         if (this.lights.length === 0) {
             console.log('no nearby lights (from Browse.js)')
-            this.setState({ maxDistance: this.state.maxDistance + 100, sliderMax: this.state.sliderMax + 100, showSlider: true})
+            this.setState({ maxDistance: this.state.maxDistance + 20, sliderMax: this.state.sliderMax + 20, showSlider: true})
         }
     }
 
@@ -81,9 +81,10 @@ class Browse extends Component {
     }
 
     handleSliderDrag(evt) {
+        console.log(evt.target.value)
         if (Radar.length > 0) {
             this.setState({ maxDistance: evt.target.value });
-            this.lights = []
+            // this.lights = []
         }
     }
 
@@ -96,20 +97,19 @@ class Browse extends Component {
     }
 
     render() {
-        // console.log(this.state)
         return (
             <div className="Browse" id="browse">
+                {/* <RadarAnimation/> */}
                 {this.lights.length === 0 && <div className="Search_Radius">
                     <p>Search Radius {this.state.maxDistance} nm</p>
                 </div>}
                 {this.lights.length === 0 && <RadarAnimation />}
+                <p id="range-counter"> Lights less than {this.state.maxDistance} nm ({this.lights.length})</p>
                 {!this.state.showSlider && this.state.lightDex === -1 && <div className="Toggle_Slider" onClick={this.toggleSlider}>
                     <img id="distance-img" src="./res/distance.png" alt="oops"></img>
                 </div>}
                 {this.state.showSlider && this.state.lightDex === -1 && <div className="Slide_Container">
-                    <p id="range-counter">Nearest Lights: ~ {this.state.maxDistance} nm ({this.lights.length}) results</p>
-                    <br></br>
-                    <input type="range" min="1" max={this.state.sliderMax} value={this.state.maxDistance} className="Slider" id="slider" onChange={this.handleSliderDrag}></input>
+                    <input type="range" min="5" max={this.state.sliderMax} value={this.state.maxDistance} className="Slider" id="slider" onChange={this.handleSliderDrag}></input>
                     {this.state.showSlider && <img id="close-slider-img" src="./res/close-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
                 </div>}
                 <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >

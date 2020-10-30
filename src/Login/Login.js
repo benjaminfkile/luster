@@ -163,13 +163,10 @@ class Login extends Component {
             <div className="Login">
                 {this.state.loggedIn && <div className="Logout">
                     <h1>Hi {window.name}</h1>
-                    <br></br>
                     <button onClick={this.logOut}>Log Out</button>
-                    <br></br>
-                    <br></br>
-                    {this.state.hasContribs && <h1>
+                    {this.state.hasContribs && <h3>
                         Your Contributions({contribs.length})
-                    </h1>}
+                    </h3>}
                     {this.state.hasContribs && <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
                         <div className="Contribs_Container">
                             {contribs.map((img, i) =>

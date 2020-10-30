@@ -3,7 +3,7 @@
 	z-index: 1002;
 	width: 95vw;
 	height: 40vh;
-	top: 15vh;
+	top: 20vh;
 	left: 2vw;
 	background-color: rgb(0,0, 0);
 	border-radius: 2%;
@@ -11,15 +11,23 @@
 .Preview_Manager{
 	position: absolute;
 	z-index: 1002;
-	width: 95vw;
-	height: 55vh;
-	top: 15vh;
+	width: 96vw;
+	height: 60vh;
+	top: 5vh;
 	left: 2vw;
 	background-color: rgb(0, 0, 0);
 }
 
+.Manager{
+	margin-top: 20px;
+}
+
+.Manager p{
+	text-align: center;
+}
+
 #Preview_Img {
-	width: 95vw;
+	width: 96vw;
 	height: 35vh;
 }
 
@@ -34,31 +42,45 @@
 }
 
 .Preview_Interface {
-	width: 95vw;
+	width: 96vw;
+	top: 20vh;
 	display: flex;
 	background-color: rgb(0,0,0);
 }
 
 .Exit{
 position: absolute;
+top: -20vh;
+left: 0vw;
 background-color: rgb(36, 47, 62);
 width: 100vw;
-height: 0vh;
+height: 100vh;
+z-index: -1;
 }
 
 .ExitManager{
-	 position: absolute;
+	position: absolute;
+	top: -20vh;
+	left: 0vw;
 	background-color: rgb(36, 47, 62);
 	width: 100vw;
-	height: 0vh; 
+	height: 100vh;
+	z-index: -1;
 	}
 
 #exit-img {
 position: absolute;
 width: 8vw;
-top: 1vh;
+top: 70vh;
 left: 48vh;
 }
+
+#exit-manager-img {
+	position: absolute;
+	width: 8vw;
+	top: 85vh;
+	left: 25vh;
+	}
 
 .Preview_User h1 {
 	position: absolute;

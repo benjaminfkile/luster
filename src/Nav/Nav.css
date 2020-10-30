@@ -6,7 +6,7 @@
 
 .Menu img{
     position: absolute;
-    left: 89vw;
+    left: 87vw;
     width: 40px;
     /* -webkit-animation: heartbeat 3.5s ease-in-out infinite both;
     animation: heartbeat 3.5s ease-in-out infinite both; */
@@ -27,7 +27,7 @@
 }
 
 .Routes li{
-    padding-top: 15px;
+    padding-top: 12px;
     text-align: center;
     -webkit-animation: flip-in-hor-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
     animation: flip-in-hor-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
