@@ -28,7 +28,7 @@ class Browse extends Component {
     componentDidMount() {
         this.dbInterval = setInterval(this.listen4DB, 700)
         this.radarInterval = setInterval(this.listen4Radar, 700)
-        this.distanceInterval = setInterval(this.listen4DistanceChange, 700)
+        this.distanceInterval = setInterval(this.listen4DistanceChange, 200)
     }
 
     listen4DB = () => {
