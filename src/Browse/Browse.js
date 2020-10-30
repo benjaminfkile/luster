@@ -28,7 +28,7 @@ class Browse extends Component {
     componentDidMount() {
         this.dbInterval = setInterval(this.listen4DB, 700)
         this.radarInterval = setInterval(this.listen4Radar, 700)
-        this.distanceInterval = setInterval(this.listen4DistanceChange, 200)
+        this.distanceInterval = setInterval(this.listen4DistanceChange, 100)
     }
 
     listen4DB = () => {
@@ -53,7 +53,7 @@ class Browse extends Component {
         }
         if (this.lights.length === 0) {
             console.log('no nearby lights (from Browse.js)')
-            this.setState({ maxDistance: this.state.maxDistance + 20, sliderMax: this.state.sliderMax + 20, showSlider: true })
+            this.setState({ maxDistance: this.state.maxDistance + 50, sliderMax: this.state.sliderMax + 50, showSlider: true })
         }
     }
 
