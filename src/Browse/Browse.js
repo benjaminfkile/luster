@@ -48,6 +48,7 @@ class Browse extends Component {
     }
 
     listen4DistanceChange = () => {
+        // y u no build?
         if (this.state.oldDistance !== this.state.maxDistance) {
             this.filterByDistance(this.state.maxDistance)
         }
