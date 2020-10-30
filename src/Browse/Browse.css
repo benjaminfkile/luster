@@ -1,150 +1,117 @@
-.Browse{
-    position: fixed;
-    width: 0vw;
-    height: 0vh;
+.Browse {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
 }
-#browse-header{
-    position: absolute;
-    text-align: center;
-    top: 2vh;
-    width: 100vw;
-    color: rgb(10, 190, 231);
-}
-.Sort{
-    position: absolute;
-    display: flex;
-    text-align: center;
-    top: 5vh;
-    width: 100vw;
-    color: rgb(255, 255, 255);
-}
-.Fade_Out{
-    opacity:0;
-    width:0;
-    height:0;
-    transition: width 0.5s 0.5s, height 0.5s 0.2s, opacity 0.2s;
 
-}
-.Fade_In{
-    opacity:1;
-    width:100px;
-    height:100px;
-    transition: width 0.5s, height 0.5s, opacity 0.2s 0.2s;
-}
-.Img_Container{
-    position: absolute;
-    overflow-y: auto;
-    top: 12vh;
-    left: 2vw;
-    height: 78vh;
-    width: 98vw;
-    background-color: rgb(36, 47, 62);
-}
-.Item{
-    width: 96vw;
-    margin-bottom: 5px;
-    background-color: black;
-}
-.Item img{
-    width: 96vw;
-    height: 35vh;
-    z-index: 10000;
-}
-a{
-    text-decoration: none
-}
-#range-counter{
-    position: absolute;
-    top: 3vh;
-    width: 100vw;
-    text-align: center;
-    color: white;
-}
-#distance{
-    margin-left: auto;
-    margin-right: 10px;
-}
-.Slide_Container{
-    position: absolute;
-    top: 8vh;
-    left: 10vw;
-    width: 96vw;
-    height: 10vh;
+#range-info {
+	width: 100vw;
+	margin-top: 3vh;
+	text-align: center;
+	color: rgb(255, 255, 255)
 }
 
 .Slider {
-    -webkit-appearance: none;
-    width: 80vw;
-    height: 10px;
-    border-radius: 5px;  
-    background: #000000;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-  }
-  
-  .Slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%; 
-    background: rgb(10, 190, 231);
-    cursor: pointer;
-  }
-  
-  .Slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: rgb(10, 190, 231);
-    cursor: pointer;
-  }
-  .Toggle_Slider{
-      position: absolute;
-      width: 100vw;
-      top: 0vh;
-      left: 0vw;
-  }
-  .Toggle_Slider img{
-      width: 15vw;
-  }
-  #close-slider-img{
-    position: absolute;
-    top: -8vh;
-    left: -8vw;
-    width: 15vw;
-  }
-  .Search_Radius{
-      position: absolute;
-      top: 20vh;
-      width: 100vw;
-      text-align: center;
-      z-index: 1000;
-      color: rgb(10, 190, 231);
-
-  }
-
-@media screen and (orientation:landscape) {
-    .Img_Container {
-        top: 1vh;
-        left: 1vw;
-        height: 98vh;
-        width: 98vw;
-    }
-    .Item{
-        width: 98vw;
-    }
-
-    .Item img{
-        width: 98vw;
-        height: 88vh;
-    }
-    #stats{
-        height: 10vh;
-        width: 98vw;
-    }
+	margin-left: 5vw;
+	width: 100vw;
+	height: 5vh;
 }
 
-  
+#nested-slider {
+	width: 80vw;
+	height: 10px;
+	margin-top: 4vh;
+	margin-left: 5vw;
+}
+
+#nested-slider {
+	-webkit-appearance: none;
+	border-radius: 5px;
+	background-color: rgb(65, 65, 65);
+	outline: none;
+	opacity: 0.7;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+}
+
+#nested-slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: rgb(10, 190, 231);
+	cursor: pointer;
+}
+
+#nested-slider::-moz-range-thumb {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: rgb(10, 190, 231);
+	cursor: pointer;
+}
+
+.Toggle_Slider {
+	height: 0vh;
+}
+
+#toggle-slider-img {
+	height: 10vh;
+	margin-top: -6vh;
+}
+
+.Img_Container {
+	overflow-y: auto;
+	width: 100vw;
+	height: 85vh;
+	margin-top: 2vh;
+}
+
+.Item {
+	width: 96vw;
+	margin-bottom: 5px;
+	margin-left: 2vw;
+	background-color: black;
+}
+
+.Item img {
+	width: 96vw;
+	height: 35vh;
+	z-index: 10000;
+}
+
+a {
+	text-decoration: none
+}
+
+#browse-stats {
+	display: flex;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+#browse-upvotes-img {
+	width: 4vh;
+	height: 4vh;
+}
+
+#browse-like-img {
+	height: 4vh;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-left: auto;
+}
+
+#browse-stats p{
+    font-size: 20px;
+}
+
+#distance {
+	margin-right: 10px;
+	margin-left: auto;
+}
+
+.snowflake {
+	z-index: -1;
+}

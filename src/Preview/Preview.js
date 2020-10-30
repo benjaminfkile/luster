@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UrlStore from '../UrlStore'
+import api from '../api'
 import GeoData from '../GeoData'
 import Contributor from '../Contributor/Contributor';
 import './Preview.css'
@@ -25,7 +25,7 @@ class Preview extends Component {
 
     upvote = (args) => {
         if (window.user) {
-            fetch(UrlStore + '/api/stats/upvote', {
+            fetch(api + '/api/stats/upvote', {
 
                 method: 'POST',
                 headers: {
@@ -50,7 +50,7 @@ class Preview extends Component {
             } else {
                 user += GeoData[0].IPv4 + "@:" + Date.now()
             }
-            fetch(UrlStore + '/api/stats/trip', {
+            fetch(api + '/api/stats/trip', {
 
                 method: 'POST',
                 headers: {
@@ -80,16 +80,16 @@ class Preview extends Component {
     }
 
     render() {
-        if(this.props.lightDex !== -1){
+        if (this.props.lightDex !== -1) {
             console.log(this.props.lights[this.props.lightDex].id)
         }
         return (
             <div>
                 {this.props.lightDex !== -1 && !this.props.contributions && <div className="Preview_User">
                     <img src={this.props.lights[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>
-                    {this.state.loaded && <img src={this.props.lights[this.props.lightDex].url} id="Preview_Img" alt='hacky'></img>}
-                    {!this.state.loaded && <img src="./res/splash.png" id="Loading_Img" alt='A tree'></img>}
-                    {this.state.loaded && <div className="Preview_Interface">
+                    {this.state.loaded && <img src={this.props.lights[this.props.lightDex].url} id="preview-img" alt='hacky'></img>}
+                    {!this.state.loaded && <img src="./res/splash.png" id="preview-img" alt='A tree'></img>}
+                    {this.state.loaded && <div className="Preview_User_Interface">
                         <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} onClick={() => this.trip(this.props.lightDex)} /> &nbsp;</a>
                         <div id="stats">
                             <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
@@ -107,9 +107,9 @@ class Preview extends Component {
                 </div>}
                 {this.props.lightDex !== -1 && this.props.contributions && <div className="Preview_Manager">
                     <img src={this.props.lights[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>
-                    {this.state.loaded && <img src={this.props.lights[this.props.lightDex].url} id="Preview_Img" alt='hacky'></img>}
-                    {!this.state.loaded && <img src="./res/splash.png" id="Loading_Img" alt='A tree'></img>}
-                    {this.state.loaded && <div className="Preview_Interface">
+                    {this.state.loaded && <img src={this.props.lights[this.props.lightDex].url} id="preview-img" alt='hacky'></img>}
+                    {!this.state.loaded && <img src="./res/splash.png" id="preview-img" alt='A tree'></img>}
+                    {this.state.loaded && <div className="Preview_Manager_Interface">
                         <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
                         <div id="stats">
                             <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
@@ -117,14 +117,14 @@ class Preview extends Component {
                                 {this.props.lights[this.props.lightDex].upvotes.length}
                             </p>
                         </div>
+                        <Contributor
+                            contribution={this.props.lights[this.props.lightDex]}
+                        />
                     </div>}
-                    <div className="ExitManager" onClick={this.unloadImg.bind(this)}>
-                        <img id="exit-manager-img" src="./res/exit-btn.png" alt="oops"></img>
-
+                    <div className="Exit" onClick={this.unloadImg.bind(this)}>
+                        <img id="exit-img" src="./res/exit-btn.png" alt="oops"></img>
                     </div>
-                    <Contributor
-                        contribution={this.props.lights[this.props.lightDex]}
-                    />
+
                 </div>}
 
             </div>

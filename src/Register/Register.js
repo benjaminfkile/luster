@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import UrlStore from '../UrlStore'
-import '../Login/Login.css'
+import api from '../api'
+import '../Profile/Profile.css'
 
 class Register extends Component {
 
@@ -58,7 +58,7 @@ class Register extends Component {
 
 
         if (this.state.name && this.state.email && this.state.pass1 && !this.state.codeSent) {
-                fetch(UrlStore + '/api/users/new', {
+                fetch(api + '/api/users/new', {
 
                 method: 'POST',
                 headers: {
@@ -88,7 +88,7 @@ class Register extends Component {
     }
 
     checkCode = () => {
-            fetch(UrlStore + '/api/users/valCode', {
+            fetch(api + '/api/users/valCode', {
 
             method: 'POST',
             headers: {

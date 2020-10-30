@@ -53,7 +53,7 @@ class Browse extends Component {
         }
         if (this.lights.length === 0) {
             console.log('no nearby lights (from Browse.js)')
-            this.setState({ maxDistance: this.state.maxDistance + 20, sliderMax: this.state.sliderMax + 20, showSlider: true})
+            this.setState({ maxDistance: this.state.maxDistance + 20, sliderMax: this.state.sliderMax + 20, showSlider: true })
         }
     }
 
@@ -98,41 +98,36 @@ class Browse extends Component {
 
     render() {
         return (
-            <div className="Browse" id="browse">
+            <div className="Browse">
                 {/* <RadarAnimation/> */}
-                {this.lights.length === 0 && <div className="Search_Radius">
-                    <p>Search Radius {this.state.maxDistance} nm</p>
-                </div>}
                 {this.lights.length === 0 && <RadarAnimation />}
-                <p id="range-counter"> Lights less than {this.state.maxDistance} nm ({this.lights.length})</p>
-                {!this.state.showSlider && this.state.lightDex === -1 && <div className="Toggle_Slider" onClick={this.toggleSlider}>
-                    <img id="distance-img" src="./res/distance.png" alt="oops"></img>
-                </div>}
-                {this.state.showSlider && this.state.lightDex === -1 && <div className="Slide_Container">
-                    <input type="range" min="5" max={this.state.sliderMax} value={this.state.maxDistance} className="Slider" id="slider" onChange={this.handleSliderDrag}></input>
-                    {this.state.showSlider && <img id="close-slider-img" src="./res/close-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
-                </div>}
-                <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
-                    <div className="Img_Container">
-                        {this.lights.map((img, i) =>
-                            <LazyLoad
-                                key={i}
-                                height={0}>
-                                <div className="Item">
-                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                    <div id="stats">
-                                        <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                        <p>
-                                            {img.upvotes.length}
-                                        </p>
-                                        <p id="distance">
-                                            {img.distance} nm
-                                        </p>
-                                    </div>
-                                </div>
-                            </LazyLoad>)}
-                    </div>
+                <p id="range-info"> Lights less than {this.state.maxDistance} nm ({this.lights.length})</p>
+                <div className="Toggle_Slider" onClick={this.toggleSlider}>
+                    {this.state.showSlider && <img id="toggle-slider-img" src="./res/close-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
+                    {!this.state.showSlider && <img id="toggle-slider-img" src="./res/open-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
                 </div>
+                {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
+                    <input type="range" min="5" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
+                </div>}
+                {this.state.showFeed && <div className="Img_Container">
+                    {this.lights.map((img, i) =>
+                        <LazyLoad
+                            key={i}
+                            height={0}>
+                            <div className="Item">
+                                <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                <div id="browse-stats">
+                                    <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                    <p>
+                                        {img.upvotes.length}
+                                    </p>
+                                    <p id="distance">
+                                        {img.distance} nm
+                                        </p>
+                                </div>
+                            </div>
+                        </LazyLoad>)}
+                </div>}
                 <Preview
                     togglePreview={this.togglePreview}
                     lights={this.lights}

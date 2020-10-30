@@ -11,17 +11,17 @@
     font-size: 20px;
 }
 .Login h1{
-margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 .Login h3{
-margin-top: 10px;
+    margin-top: 10px;
 }
 .Contribs_Container{
     position: absolute;
     overflow-y: auto;
     top: 20vh;
     left: 2vw;
-    height: 60vh;
+    height: 67vh;
     width: 96vw;
     background-color: rgb(36, 47, 62);
 
@@ -33,14 +33,12 @@ margin-top: 10px;
     margin-bottom: 5px;
     background-color: rgb(0, 0, 0);
     border-style: solid;
-    /*-2px*/
     border-color: rgb(0, 0, 0);
 }
 .Contrib_Item img{
     width: 40vw;
 }
 #contrib-stats{
-    /* display: flex; */
     margin-top: 5px;
     margin-left: 10px;
 }
@@ -51,7 +49,7 @@ margin-top: 10px;
     display: flex;
 }
 #on-section, #off-section{
-display: flex;
+    display: flex;
 }
 #contrib-stats-upvote{
     width: 20px;

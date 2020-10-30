@@ -1,6 +1,10 @@
+.Manager{
+    margin-left: auto;
+    margin-right: 3vw;
+    text-align: right;
+}
 .Manager p{
     margin-left: 5px;
-    text-align: left;
 }
 #on{
     color: rgb(72, 255, 0);

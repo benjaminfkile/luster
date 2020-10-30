@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UrlStore from '../UrlStore'
+import api from '../api'
 import Location from "../Location"
 import axios from 'axios'
 import uuid from "uuid";
@@ -63,7 +63,7 @@ class Post extends Component {
     updateRows = async (large, del) => {
 
         if (this.state.response) {
-            fetch(UrlStore + '/api/lights', {
+            fetch(api + '/api/lights', {
 
                 method: 'POST',
                 headers: {

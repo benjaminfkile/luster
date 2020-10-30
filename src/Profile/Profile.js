@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import UrlStore from '../UrlStore'
+import api from '../api'
 import Preview from "../Preview/Preview"
 import LazyLoad from 'react-lazyload';
 import Register from '../Register/Register'
-import '../Login/Login.css'
+import './Profile.css'
 
 let contribs = []
 
-class Login extends Component {
+class Profile extends Component {
 
     constructor() {
         super();
@@ -44,7 +44,7 @@ class Login extends Component {
     }
 
     getContributions = () => {
-        let targetUrl = UrlStore + '/api/lights/contributor/' + window.user
+        let targetUrl = api + '/api/lights/contributor/' + window.user
         fetch(targetUrl)
             .then(response => response.json())
             .then(data => {
@@ -82,7 +82,7 @@ class Login extends Component {
         if (!this.state.password) {
             return this.setState({ error: 'Password is required' });
         }
-        fetch(UrlStore + '/api/users/validate', {
+        fetch(api + '/api/users/validate', {
 
             method: 'POST',
             headers: {
@@ -113,7 +113,7 @@ class Login extends Component {
     }
 
     setName = () => {
-        let targetUrl = UrlStore + '/api/users/' + this.state.email;
+        let targetUrl = api + '/api/users/' + this.state.email;
         fetch(targetUrl)
             .then(response => response.json())
             .then(data => {
@@ -161,14 +161,13 @@ class Login extends Component {
 
         return (
             <div className="Login">
-                {this.state.loggedIn && <div className="Logout">
+                {this.state.loggedIn && <div className="Profile">
                     <h1>Hi {window.name}</h1>
                     <button onClick={this.logOut}>Log Out</button>
                     {this.state.hasContribs && <h3>
                         Your Contributions({contribs.length})
                     </h3>}
-                    {this.state.hasContribs && <div className={this.state.showFeed ? 'Fade_In' : 'Fade_Out'} >
-                        <div className="Contribs_Container">
+                    {this.state.hasContribs && this.state.showFeed && <div className="Contribs_Container">
                             {contribs.map((img, i) =>
                                 <LazyLoad
                                     key={i}
@@ -203,8 +202,8 @@ class Login extends Component {
                                         </div>
                                     </div>
                                 </LazyLoad>)}
-                        </div>
-                    </div>}
+                        </div>}
+  
                     <Preview
                         togglePreview={this.togglePreview}
                         lightDex={this.state.lightDex}
@@ -245,4 +244,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default Profile

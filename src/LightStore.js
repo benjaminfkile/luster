@@ -1,9 +1,9 @@
-import UrlStore from './UrlStore'
+import api from './api'
 
 let LightStore = []
 
 function getLights() {
-    let targetUrl = UrlStore + '/api/lights';
+    let targetUrl = api + '/api/lights';
 
     fetch(targetUrl)
         .then(response => response.json())

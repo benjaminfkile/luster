@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UrlStore from '../UrlStore'
+import api from '../api'
 import './Contributor.css'
 
 class Manager extends Component {
@@ -30,7 +30,7 @@ class Manager extends Component {
     }
 
     valToggle = () => {
-        let targetUrl = UrlStore + '/api/users/validate/toggle/' + window.user
+        let targetUrl = api + '/api/users/validate/toggle/' + window.user
         fetch(targetUrl, {
 
             method: 'POST',
@@ -63,7 +63,7 @@ class Manager extends Component {
     }
 
     valdel = () => {
-        let targetUrl = UrlStore + '/api/users/validate/del/' + window.user
+        let targetUrl = api + '/api/users/validate/del/' + window.user
         fetch(targetUrl, {
 
             method: 'POST',

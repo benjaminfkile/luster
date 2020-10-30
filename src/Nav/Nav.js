@@ -55,16 +55,16 @@ class Nav extends Component {
                             </Link>
                         </li>
                     </div>
-                    {!window.user && <div className="Login_Route" tabIndex="4">
+                    {!window.user && <div className="Profile_Route" tabIndex="4">
                         <li onClick={this.toggleBurger}>
-                            <Link to='/login'>
+                            <Link to='/profile'>
                                 Login
                             </Link>
                         </li>
                     </div>}
-                    {window.user && <div className="Login_Route" tabIndex="4">
+                    {window.user && <div className="Profile_Route" tabIndex="4">
                         <li onClick={this.toggleBurger}>
-                            <Link to='/login'>
+                            <Link to='/profile'>
                                 Profile
                             </Link>
                         </li>
