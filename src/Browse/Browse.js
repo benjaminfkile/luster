@@ -84,7 +84,7 @@ class Browse extends Component {
         console.log(evt.target.value)
         if (Radar.length > 0) {
             this.setState({ maxDistance: evt.target.value });
-            // this.lights = []
+            this.lights = []
         }
     }
 
