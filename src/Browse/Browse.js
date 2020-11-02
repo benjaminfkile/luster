@@ -3,7 +3,7 @@ import Preview from "../Preview/Preview"
 import Snow from '../Snow/Snow'
 import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
-import RadarAnimation from './RadarAnimation'
+import Spinner from '../Spinner/Spinner'
 import Radar from '../Radar'
 import '../Browse/Browse.css'
 
@@ -101,7 +101,7 @@ class Browse extends Component {
         return (
             <div className="Browse">
                 {/* <RadarAnimation/> */}
-                {this.lights.length === 0 && <RadarAnimation />}
+                {this.lights.length === 0 && <Spinner />}
                 <p id="range-info"> Lights less than {this.state.maxDistance} nm ({this.lights.length})</p>
                 <div className="Toggle_Slider" onClick={this.toggleSlider}>
                     {this.state.showSlider && <img id="toggle-slider-img" src="./res/close-slider.png" alt="oops" onClick={this.toggleSlider}></img>}

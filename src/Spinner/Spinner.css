@@ -1,0 +1,24 @@
+.Spinner {
+  position: absolute;
+  top: 30vh;
+  left: 44.5vw;
+  border: 1vw solid #646464;
+  border-radius: 50%;
+  border-top: 1vh solid rgb(12,191,232);
+  border-bottom: 1vh solid rgb(12, 191, 232);
+  width: 10vw;
+  height: 10vw;
+  -webkit-animation: spin .4s linear infinite;
+  animation: spin .4s linear infinite;
+  z-index: 10005;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

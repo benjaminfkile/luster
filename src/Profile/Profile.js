@@ -3,6 +3,7 @@ import api from '../api'
 import Preview from "../Preview/Preview"
 import LazyLoad from 'react-lazyload';
 import Register from '../Register/Register'
+import Spinner from '../Spinner/Spinner'
 import './Profile.css'
 
 
@@ -17,10 +18,11 @@ class Profile extends Component {
             password: '',
             error: '',
             register: false,
+            loading: false,
             loggedIn: false,
-            hasContribs: false,
+            hasContribs: true,
             showFeed: true,
-            lightDex: -1
+            lightDex: -1,
         };
 
         this.handlePassChange = this.handlePassChange.bind(this);
@@ -49,6 +51,7 @@ class Profile extends Component {
     }
 
     getContributions = () => {
+        this.setState({loading: true})
         let targetUrl = api + '/api/lights/contributor/' + window.user
         fetch(targetUrl)
             .then(response => response.json())
@@ -61,17 +64,19 @@ class Profile extends Component {
                     this.contribs[i].uploaded = timestamp
                 }
             }).then(() =>
-                this.renderContributions())
+                // this.renderContributions(),
+                this.setState({loading: false})
+                )
             .catch(error => alert('Sorry the service is down \n:(\nPlease try asadfsdfsdafsadfsadfasdfgain later'));
     }
 
-    renderContributions = () => {
-        if (this.contribs.length > 0) {
-            this.setState({ hasContribs: true })
-        } else {
-            this.setState({ hasContribs: false })
-        }
-    }
+    // renderContributions = () => {
+    //     if (this.contribs.length > 0) {
+    //         this.setState({ hasContribs: true})
+    //     } else {
+    //         this.setState({ hasContribs: false})
+    //     }
+    // }
 
     dismissError() {
         this.setState({ error: '' });
@@ -79,6 +84,8 @@ class Profile extends Component {
 
     handleSubmit(evt) {
         evt.preventDefault();
+
+        this.setState({loading: true})
 
         if (!this.state.email) {
             return this.setState({ error: ' Email is required' });
@@ -99,6 +106,7 @@ class Profile extends Component {
                 pass: this.state.password
             })
         }).then(res => {
+            this.setState({loading: false})
             if (res.status === 200) {
                 this.setState({ loggedIn: true })
                 //window.user = this.state.email
@@ -166,16 +174,19 @@ class Profile extends Component {
 
         return (
             <div className="Login">
-                {this.state.loggedIn && <div className="Profile">
+                <div className="Loading">
+                {this.state.loading && <Spinner/>}
+                </div>
+                {this.state.loggedIn && !this.state.loading && <div className="Profile">
                     <h1>Hi {window.name}</h1>
                     <div id="logout-btn" onClick={this.logOut}>
                         <img id="logout-img" src="./res/logout.png" alt="oops"></img>
                         <p>Logout</p>
                     </div>
-                    {this.state.hasContribs && <h3>
+                    {this.state.hasContribs && !this.state.loading && <h3>
                         Your Contributions ( {this.contribs.length} )
                     </h3>}
-                    {this.state.hasContribs && this.state.showFeed && <div className="Contribs_Container">
+                    {this.state.hasContribs && this.state.showFeed && !this.state.loading && <div className="Contribs_Container">
                         {this.contribs.map((img, i) =>
                             <LazyLoad
                                 key={i}
@@ -203,15 +214,11 @@ class Profile extends Component {
                                             <img id="contrib-stats-off" src="./res/off.png" alt="oops"></img>
                                             <p>Off</p>
                                         </div>}
-                                        {/* <br></br>
-                                            <p>
-                                                {img.uploaded}
-                                            </p> */}
                                     </div>
                                 </div>
                             </LazyLoad>)}
                     </div>}
-                    {!this.state.hasContribs && <div className="Welcome">
+                    {!this.state.hasContribs && !this.state.loading && <div className="Welcome">
                         <h2>Welcome to LightMaps!!!</h2>
                         <br></br>
                         <h3>You can now upvote other peoples contributions</h3>
@@ -228,7 +235,7 @@ class Profile extends Component {
                         lights={this.contribs}
                     />
                 </div>}
-                {!this.state.register && !this.state.loggedIn && <form className="Login_Form" id="login-form" onSubmit={this.handleSubmit}>
+                {!this.state.register && !this.state.loggedIn && !this.state.loading && !this.state.loading && <form className="Login_Form" id="login-form" onSubmit={this.handleSubmit}>
                     <h1>
                         Log In
                     </h1>
