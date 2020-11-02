@@ -1,107 +1,189 @@
-import React, { Component } from 'react'
-import api from '../api'
-import Location from "../Location"
-import axios from 'axios'
-import uuid from "uuid";
-import '../Post/Post.css'
+import React, { Component } from 'react';
+import Location from '../Location'
+import GeoData from '../GeoData'
+import Geocode from "react-geocode";
+import Upload from './Upload'
+import './Post.css'
+Geocode.setApiKey("AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM");
+Geocode.setLanguage("en");
+
 
 class Post extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedFile: null,
-            response: null,
-            image: null,
-            progress: null,
-            warning: false,
-            finished: false
+            address: '',
+            input: '',
+            placeholder: "Search address",
+            results: [],
+            typing: false,
+            typingTimeout: 0,
+            geoLat: 37.0902,
+            geoLng: -95.7129,
+            lat: null,
+            lng: null,
+            hasLocation: false,
+            accurateLocation: false,
+            locationAccuracy: null
         }
+        this.handleChange = this.handleChange.bind(this);
+        this.clearPlaceholder = this.clearPlaceholder.bind(this);
     }
 
-    imgSelectedHandler = (event) => {
-
-        this.setState({
-            selectedFile: event.target.files[0]
-        })
-        if (event.target.files && event.target.files[0]) {
-            let img = event.target.files[0];
-            this.setState({ image: URL.createObjectURL(img), finished: false });
-        }
+    componentDidMount() {
+        this.geoInterval = setInterval(this.getGeo, 100)
+        this.accuracyInterval = setInterval(this.checkLocationAccuracy, 100)
     }
 
-    checkDimensions = () => {
-
-        let img = document.getElementById("UploadImg");
-        let width = img.naturalWidth;
-        let height = img.naturalHeight;
-
-        if (height > width) {
-            this.setState({ warning: true })
-        } else {
-            this.setState({ warning: false })
-        }
-    }
-
-    imgUploadHandler = () => {
-
-        const fd = new FormData()
-        fd.append('image', this.state.selectedFile)
-        // axios.post("https://api.imgbb.com/1/upload?expiration=60&key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
-        axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
-            onUploadProgress: ProgressEvent => {
-                // console.log("Progress: " + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + "%")
-                this.setState({ progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) })
+    checkLocationAccuracy = () => {
+        if (Location.lat) {
+            if (Location.accuracy > 50) {
+                this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy })
+            } else {
+                this.setState({ accurateLocation: true, lat: Location.lat, lng: Location.lng, locationAccuracy: Location.accuracy })
             }
-        })
-            .then(res => {
-                this.setState({ response: res, finished: true, progress: null, image: null, selectedFile: null })
-                this.updateRows(this.state.response.data.data.display_url, this.state.response.data.data.delete_url)
-            });
+            clearInterval(this.accuracyInterval)
+        }
     }
 
-    updateRows = async (large, del) => {
+    getGeo = () => {
 
-        if (this.state.response) {
-            fetch(api + '/api/lights', {
-
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    lat: Location.lat,
-                    lng: Location.lng,
-                    url: large,
-                    id: uuid.v4(),
-                    user: window.user,
-                    del: del,
-                    upvotes: '{}',
-                    trips: '{}',
-                    uploaded: Date.now(),
-                    on: 't'
-                })
-            })
+        if (GeoData.length > 0 && GeoData[0].latitude) {
+            clearInterval(this.geoInterval)
+            this.setState({ geoLat: GeoData[0].latitude, geoLng: GeoData[0].longitude, radius: 50 })
         }
+    }
+
+    handleChange = (event) => {
+        const self = this;
+
+        if (self.state.typingTimeout) {
+            clearTimeout(self.state.typingTimeout);
+        }
+
+        self.setState({
+            input: event.target.value,
+            typing: false,
+            typingTimeout: setTimeout(function () {
+                self.searchAddress(self.state.input);
+            }, 1000)
+        });
+    }
+
+    clearPlaceholder = () => {
+        this.setState({ placeholder: "" })
+    }
+
+    searchAddress = (input) => {
+        let temp = []
+        this.setState({ results: null })
+        let targetUrl = "https://maps.googleapis.com/maps/api/place/queryautocomplete/json?location=" + this.state.geoLat + "," + this.state.geoLng + "&radius=" + this.state.radius + "&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM&input=" + input.split(' ').join('+')
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        fetch(proxyurl + targetUrl)
+            .then(res => res.json())
+            .then(res => {
+                for (let i = 0; i < res.predictions.length; i++) {
+                    temp.push(res.predictions[i].description)
+                }
+                this.setState({ results: temp, address: '', lat: null, lng: null })
+            })
+            .catch(() => console.log("Can’t access " + targetUrl + " response. Blocked by browser?"))
+    }
+
+    convertAddressToCoords = (address) => {
+        Geocode.fromAddress(address).then(
+            response => {
+                const { lat, lng } = response.results[0].geometry.location;
+                this.setState({ lat: lat, lng: lng, address: address, results: null })
+            },
+            error => {
+                console.error(error);
+            }
+        );
+    }
+
+    toDegreesMinutesAndSeconds = (coordinate) => {
+        let absolute = Math.abs(coordinate);
+        let degrees = Math.floor(absolute);
+        let minutesNotTruncated = (absolute - degrees) * 60;
+        let minutes = Math.floor(minutesNotTruncated);
+        let seconds = Math.floor((minutesNotTruncated - minutes) * 60);
+        return degrees + '\u00BA ' + minutes + '\u0027 ' + seconds + '\u0022';
+    }
+
+    convertDMS = (lat, lng) => {
+        let latitude = this.toDegreesMinutesAndSeconds(lat);
+        let latitudeCardinal = lat >= 0 ? 'N' : 'S';
+        let longitude = this.toDegreesMinutesAndSeconds(lng);
+        let longitudeCardinal = lng >= 0 ? 'E' : 'W';
+        return latitude + ' ' + latitudeCardinal + '\n' + longitude + ' ' + longitudeCardinal;
+    }
+
+    useAddress = () => {
+        this.setState({ hasLocation: true })
+    }
+
+    discardAddress = () => {
+        this.setState({ address: '', input: '', results: [], lat: null, lng: null })
     }
 
     render() {
+
+        console.log(Location.accuracy)
+
         return (
             <div>
-                {window.user && <div className="Upload_Container">
-                    {this.state.finished && <p id="success">Success!!!</p>}
-                    <label className="custom-file-upload">
-                        <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
-                Choose File
-                </label>
-                    {!this.state.image && <img src="./res/2.png" id="noImg" alt='A tree'></img>}
-                    {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
-                    <img id="arrow-img" src="./res/upload.png" alt="oops" />
-                    {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
-                    {this.state.image && !this.state.warning && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
-                    {this.state.warning && <p id="warning">Error!!! The photo seems to be in portrait, Luster is intended for landscape photos only.</p>}
-                    {this.state.finished && !this.state.warning && <p id="finished">Your photo is under review by the LightMaps Image AI, you should receive an email shortly with a decision. </p>}
+                {window.user && !this.state.hasLocation && <div className="Post">
+                    <h1>Post</h1>
+                    <input type="text" value={this.state.input} placeholder={this.state.placeholder} onClick={this.clearPlaceholder} onChange={this.handleChange} />
+                    {this.state.results && <div className="Address_Container">
+                        {this.state.results.map((result, i) =>
+                            <p className="Address_Suggestion" key={i} onClick={() => this.convertAddressToCoords(result)}>{result}</p>
+                        )}
+                    </div>}
+                    {this.state.lat && this.state.address !== '' && <div className="Selection">
+                        <p id="address">Your Address:</p>
+                        <p id="address1">{this.state.address}</p>
+                        <p id="coords">Address Coordinates:</p>
+                        <p id="coords1">{this.convertDMS(this.state.lat, this.state.lng)}</p>
+                        <div className="Yes_Option" onClick={this.useAddress}>
+                            <img id="use-img" src="./res/yes.png" alt="oops" />
+                            <p>Use</p>
+                        </div>
+                        <div className="No_Option" onClick={this.discardAddress}>
+                            <img id="use-img" src="./res/no.png" alt="oops" />
+                            <p>Clear</p>
+                        </div>
+                    </div>}
+                    {this.state.lat && this.state.address === '' && this.state.accurateLocation && <div className="Selection">
+                        <p id="coords">Your Coordinates:</p>
+                        <p id="coords1">{this.convertDMS(this.state.lat, this.state.lng)}</p>
+                        <p id="accuracy"> Coordinate Accuracy:</p>
+                        <p id="accuracy1">{this.state.locationAccuracy} m</p>
+                        <div className="Yes_Option" onClick={this.useAddress}>
+                            <img id="use-img" src="./res/yes.png" alt="oops" />
+                            <p>Use</p>
+                        </div>
+                        <div className="No_Option" onClick={this.discardAddress}>
+                            <img id="use-img" src="./res/no.png" alt="oops" />
+                            <p>Clear</p>
+                        </div>
+                    </div>}
+                    {(!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0) && <div className="Location_Error">
+                            <h3>I cant get an accurate bead on your location.</h3>
+                            <br></br>
+                            <p>This could be caused by a weak signal from a satelite or you have denied LightMaps access to your location</p>
+                            <br></br>
+                            <p>You will have to manually enter your address instead</p>
+
+                    </div>}
+                </div>}
+                {window.user && this.state.hasLocation && <div>
+                    <Upload
+                        lat={this.state.lat}
+                        lng={this.state.lng}
+                    />
                 </div>}
                 {!window.user && <div className="Unvalidated">
                     <h3>
@@ -112,8 +194,8 @@ class Post extends Component {
                 </div>}
             </div>
 
-        );
+
+        )
     }
 }
-
 export default Post

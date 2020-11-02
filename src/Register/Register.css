@@ -1,0 +1,37 @@
+#next-btn{
+    width: 30vw;
+    margin-left: 35vw;
+    margin-bottom: 3vh;
+
+}
+#next-btn img{
+    width: 50px;
+}
+#next-btn p{
+    margin-top: -3vh;
+}
+#verify-btn{
+    width: 30vw;
+    margin-top: -4vh;
+    margin-bottom: 2vh;
+    margin-left: 35vw;
+}
+#verify-btn img{
+    width: 100px;
+}
+#verify-btn p{
+    margin-top: -7vh;
+}
+
+#back-btn{
+    width: 30vw;
+    margin-top: -4vh;
+    margin-bottom: 2vh;
+    margin-left: 35vw;
+}
+#back-btn img{
+    width: 75px;
+}
+#back-btn p{
+    margin-top: -4vh;
+}

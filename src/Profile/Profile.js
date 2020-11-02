@@ -76,11 +76,11 @@ class Profile extends Component {
         evt.preventDefault();
 
         if (!this.state.email) {
-            return this.setState({ error: 'Email is required' });
+            return this.setState({ error: ' Email is required' });
         }
 
         if (!this.state.password) {
-            return this.setState({ error: 'Password is required' });
+            return this.setState({ error: ' Password is required' });
         }
         fetch(api + '/api/users/validate', {
 
@@ -101,11 +101,11 @@ class Profile extends Component {
             }
             if (res.status === 202) {
                 this.setState({ loggedIn: false })
-                return this.setState({ error: 'User not registered' });
+                return this.setState({ error: ' User not registered' });
             }
             if (res.status === 403) {
                 this.setState({ loggedIn: false })
-                return this.setState({ error: 'Invalid Credentials' });
+                return this.setState({ error: ' Invalid Credentials' });
             }
 
         })
@@ -163,47 +163,59 @@ class Profile extends Component {
             <div className="Login">
                 {this.state.loggedIn && <div className="Profile">
                     <h1>Hi {window.name}</h1>
-                    <button onClick={this.logOut}>Log Out</button>
+                    <div id="logout-btn" onClick={this.logOut}>
+                        <img id="logout-img" src="./res/logout.png" alt="oops"></img>
+                        <p>Logout</p>
+                    </div>
                     {this.state.hasContribs && <h3>
-                        Your Contributions({contribs.length})
+                        Your Contributions ( {contribs.length} )
                     </h3>}
                     {this.state.hasContribs && this.state.showFeed && <div className="Contribs_Container">
-                            {contribs.map((img, i) =>
-                                <LazyLoad
-                                    key={i}
-                                    height={0}>
-                                    <div className="Contrib_Item" onClick={() => this.togglePreview(i)}>
-                                        <img src={img.url} alt="oops" />
-                                        <div id="contrib-stats">
-                                            <div id="upvote-section">
-                                                <img id="contrib-stats-upvote" src="./res/upvotes.png" alt="oops"></img>
-                                                <p>
-                                                    {img.upvotes.length}
-                                                </p>
-                                            </div>
-                                            <div id="trip-section">
-                                                <img id="contrib-stats-trips" src="./res/navi-btn.png" alt="oops"></img>
-                                                <p>
-                                                    {img.trips.length}
-                                                </p>
-                                            </div>
-                                            {img.on === "t" && <div id="on-section">
-                                                <img id="contrib-stats-on" src="./res/on.png" alt="oops"></img>
-                                                <p>On</p>
-                                            </div>}
-                                            {img.on === "f" && <div id="off-section">
-                                                <img id="contrib-stats-off" src="./res/off.png" alt="oops"></img>
-                                                <p>Off</p>
-                                            </div>}
-                                            <br></br>
+                        {contribs.map((img, i) =>
+                            <LazyLoad
+                                key={i}
+                                height={0}>
+                                <div className="Contrib_Item" onClick={() => this.togglePreview(i)}>
+                                    <img src={img.url} alt="oops" />
+                                    <div id="contrib-stats">
+                                        <div id="upvote-section">
+                                            <img id="contrib-stats-upvote" src="./res/upvotes.png" alt="oops"></img>
                                             <p>
-                                                {img.uploaded}
+                                                {img.upvotes.length}
                                             </p>
                                         </div>
+                                        <div id="trip-section">
+                                            <img id="contrib-stats-trips" src="./res/navi-btn.png" alt="oops"></img>
+                                            <p>
+                                                {img.trips.length}
+                                            </p>
+                                        </div>
+                                        {img.on === "t" && <div id="on-section">
+                                            <img id="contrib-stats-on" src="./res/on.png" alt="oops"></img>
+                                            <p>On</p>
+                                        </div>}
+                                        {img.on === "f" && <div id="off-section">
+                                            <img id="contrib-stats-off" src="./res/off.png" alt="oops"></img>
+                                            <p>Off</p>
+                                        </div>}
+                                        {/* <br></br>
+                                            <p>
+                                                {img.uploaded}
+                                            </p> */}
                                     </div>
-                                </LazyLoad>)}
+                                </div>
+                            </LazyLoad>)}
+                    </div>}
+                    {!this.state.hasContribs && <div className="Welcome">
+                        <h2>Welcome to LightMaps!!!</h2>
+                        <br></br>
+                        <h3>You can now upvote other peoples contributions</h3>
+                        <br></br>
+                        <p>LightMaps is free and always will be, this year I am raising money for suicide awareness.  You can donate following the link below if you would like to</p>
+                        <br></br>
+                        <p>You havent posted any photos yet, if you choose to post anything you will be able to manage your post here.</p>
                         </div>}
-  
+
                     <Preview
                         togglePreview={this.togglePreview}
                         lightDex={this.state.lightDex}
@@ -211,7 +223,7 @@ class Profile extends Component {
                         lights={contribs}
                     />
                 </div>}
-                {!this.state.register && !this.state.loggedIn && <form className="LoginForm" id="login-form" onSubmit={this.handleSubmit}>
+                {!this.state.register && !this.state.loggedIn && <form className="Login_Form" id="login-form" onSubmit={this.handleSubmit}>
                     <h1>
                         Log In
                     </h1>
@@ -219,15 +231,19 @@ class Profile extends Component {
                     <br></br>
                     <input type="text" value={this.state.email} onChange={this.handleUserChange} />
                     <br></br>
+                    <br></br>
                     <label>Password</label>
                     <br></br>
                     <input type="password" value={this.state.password} onChange={this.handlePassChange} />
-                    <br></br>
-                    <br></br>
-                    <input type="submit" value="Log In" />
-                    <br></br>
-                    <br></br>
-                    <button id="register-btn" onClick={this.register}>Register</button>
+
+                    <div id="login-btn" onClick={this.handleSubmit}>
+                        <img id="logout-img" src="./res/login.png" alt="oops"></img>
+                        <p>Login</p>
+                    </div>
+                    <div id="register-btn" onClick={this.register}>
+                        <img id="register-img" src="./res/register.png" alt="oops"></img>
+                        <p>Register</p>
+                    </div>
                 </form>}
                 {this.state.register &&
                     <Register
@@ -236,7 +252,7 @@ class Profile extends Component {
                 <br></br>
                 {this.state.error &&
                     <h3 onClick={this.dismissError}>
-                        <button onClick={this.dismissError}>✖</button>
+                        <button id="error-btn" onClick={this.dismissError}>✖</button>
                         {this.state.error}
                     </h3>}
             </div>

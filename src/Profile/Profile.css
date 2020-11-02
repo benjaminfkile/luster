@@ -11,11 +11,60 @@
     font-size: 20px;
 }
 .Login h1{
-    margin-bottom: 10px;
+    margin-top: -8vh;
+    margin-bottom: 1vh;
+    color: rgb(12,191,232);
+}
+.Login_Form h1{
+    margin-top: -8vh;
+    margin-bottom: 8vh;
+    color: rgb(12,191,232);
 }
 .Login h3{
-    margin-top: 10px;
+    margin-top: 0vh;
 }
+#logout-btn{
+    width: 30vw;
+    margin-left: 35vw;
+    margin-bottom: 3vh;
+
+}
+#logout-btn img{
+    width: 50px;
+}
+#logout-btn p{
+    margin-top: -2vh;
+}
+#login-btn{
+    width: 30vw;
+    margin-left: 35vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+
+}
+#login-btn img{
+    width: 100px;
+}
+#login-btn p{
+    margin-top: -3vh;
+}
+#register-btn img{
+    width: 50px;
+}
+#register-btn p{
+    margin-top: -3vh;
+}
+#register-btn img{
+    width: 100px;
+}
+#register-btn p{
+    margin-top: -3vh;
+}
+#error-btn{
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 0, 0);
+}
+
 .Contribs_Container{
     position: absolute;
     overflow-y: auto;
@@ -29,6 +78,7 @@
 .Contrib_Item{
     display: flex;
     width: 94vw;
+    height: 15vh;
     text-align: left;
     margin-bottom: 5px;
     background-color: rgb(0, 0, 0);
@@ -66,4 +116,8 @@
 #contrib-stats-off{
     width: 25px;
     height: 25px;
+}
+.Welcome{
+    padding-left: 2vw;
+    padding-right: 2vw;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import api from '../api'
-import '../Profile/Profile.css'
+import '../Register/Register.css'
 
 class Register extends Component {
 
@@ -58,7 +58,7 @@ class Register extends Component {
 
 
         if (this.state.name && this.state.email && this.state.pass1 && !this.state.codeSent) {
-                fetch(api + '/api/users/new', {
+            fetch(api + '/api/users/new', {
 
                 method: 'POST',
                 headers: {
@@ -80,7 +80,7 @@ class Register extends Component {
 
                 }
                 if (res.status === 403) {
-                    this.setState({error: 'go away!!!' })
+                    this.setState({ error: 'go away!!!' })
                 }
             })
         }
@@ -88,7 +88,7 @@ class Register extends Component {
     }
 
     checkCode = () => {
-            fetch(api + '/api/users/valCode', {
+        fetch(api + '/api/users/valCode', {
 
             method: 'POST',
             headers: {
@@ -174,11 +174,16 @@ class Register extends Component {
                         <input type="text" value={this.state.code} onChange={this.handleCodeChange} />
                         <br></br>
                     </div>}
-                    <br></br>
-                    {!this.state.codeSent && <input type="submit" value="Next" />}
-                    {this.state.codeSent && <button onClick={this.checkCode}>Submit</button>}
-                    <br></br>
-                    <br></br>
+                    {!this.state.codeSent && <div id="register-btn" onClick={this.handleSubmit}>
+                        <img id="next-img" src="./res/next.png" alt="oops"></img>
+                        <p>Submit</p>
+                    </div>}
+                    {this.state.codeSent && <div id="verify-btn" onClick={this.checkCode}>
+                        <img id="verify-img" src="./res/verify.png" alt="oops"></img>
+                        <p>Verify Code</p>
+                    </div>}
+                    {/* {this.state.codeSent && <button onClick={this.checkCode}>Submit</button>} */}
+
                     {this.state.codeSent && <p>I sent you an email with a verification code, please enter the code to finish registering.</p>}
                 </form>
                 {this.state.error &&
@@ -188,7 +193,10 @@ class Register extends Component {
                         {this.state.error}
                     </h3>}
                 <br></br>
-                <button onClick={() => this.props.register(1)}>Back</button>
+                <div id="back-btn" onClick={() => this.props.register(1)}>
+                    <img id="back-img" src="./res/back.png" alt="oops"></img>
+                    <p>Back</p>
+                </div>
             </div>
         );
     }

@@ -19,6 +19,7 @@ function getLocation() {
 function setLocation(position) {
     Location.lat = position.coords.latitude
     Location.lng = position.coords.longitude
+    Location.accuracy = position.coords.accuracy
 }
 
 navigator.geolocation.getCurrentPosition(setLocation)
