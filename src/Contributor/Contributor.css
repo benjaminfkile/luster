@@ -13,31 +13,19 @@
 #off{
     color: rgb(255, 255, 255);
 }
-.Off img, .On img, .Delete img{
+.Off img, .On img{
     height: 30px;
 }
 .Off, .On, .Delete{
     display: flex;
     margin-top: 2vh;
 }
-.Off p, .On p, .Delete p{
+.Off p, .On p{
     margin-top: 1vh;
 }
 .On, .Off{
     display: flex;
-    margin-right: 7vw;
+    margin-right: auto;
+    margin-left: 1vw;
 }
-.Delete{
-    color: rgb(255, 255, 255);
-}
-.Confirm_Del{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 10vh;
-    left: 10vw;
-    background-color: black;
-}
-.Confirm_Del img{
-    width: 50px;
-}
+

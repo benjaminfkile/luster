@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import api from '../api'
 import './Contributor.css'
 
-class Manager extends Component {
+class Contributor extends Component {
     constructor() {
         super();
         this.state = {
@@ -63,40 +63,6 @@ class Manager extends Component {
         // return this.setState({ error: '' });
     }
 
-    valdel = () => {
-        let targetUrl = api + '/api/users/validate/del/' + window.user
-        fetch(targetUrl, {
-
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                user: window.user,
-                id: this.props.contribution.id,
-                pass: 'warm_b33r',
-            })
-        }).then(res => {
-            if (res.status === 200) {
-                console.log('deleted')
-                this.props.unloadImg()
-            }
-            if (res.status === 403) {
-                console.log("invalid")
-            }
-
-        })
-    }
-
-    confirmDel = () =>{
-        if(this.state.del){
-            this.setState({del: false})
-        }else{
-            this.setState({del: true})
-        }
-    }
-
     render() {
 
         console.log(this.props)
@@ -111,14 +77,9 @@ class Manager extends Component {
                 <img id="off-img" src="./res/off.png" alt="oops" />
                     <p id="off">Off</p>
                 </div>}
-                <br></br>
-                <div className="Delete" onClick={this.valdel}>
-                <img id="del-img" src="./res/del.png" alt="oops" />
-                    <p >Delete</p>
-                </div>
             </div>
         )
     }
 }
 
-export default Manager
+export default Contributor

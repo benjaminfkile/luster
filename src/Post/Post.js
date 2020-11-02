@@ -27,6 +27,7 @@ class Post extends Component {
             accurateLocation: false,
             locationAccuracy: null
         }
+
         this.handleChange = this.handleChange.bind(this);
         this.clearPlaceholder = this.clearPlaceholder.bind(this);
     }
@@ -193,8 +194,6 @@ class Post extends Component {
 
                 </div>}
             </div>
-
-
         )
     }
 }

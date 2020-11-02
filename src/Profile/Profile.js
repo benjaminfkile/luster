@@ -5,9 +5,10 @@ import LazyLoad from 'react-lazyload';
 import Register from '../Register/Register'
 import './Profile.css'
 
-let contribs = []
 
 class Profile extends Component {
+
+    contribs = []
 
     constructor() {
         super();
@@ -32,8 +33,12 @@ class Profile extends Component {
         if (window.user) {
             this.setState({ loggedIn: true })
         }
-        contribs = []
+        this.contribs = []
         this.interval = setInterval(this.listen4User, 1000)
+    }
+
+    componentWillUnmount() {
+        this.contribs = []
     }
 
     listen4User = () => {
@@ -49,11 +54,11 @@ class Profile extends Component {
             .then(response => response.json())
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
-                    contribs.push(data[i])
+                    this.contribs.push(data[i])
                     let date = new Date(parseInt(data[0].uploaded)).toLocaleDateString("en-US")
                     var time = new Date(parseInt(data[0].uploaded)).toLocaleTimeString("en-US")
                     let timestamp = date + " at " + time
-                    contribs[i].uploaded = timestamp
+                    this.contribs[i].uploaded = timestamp
                 }
             }).then(() =>
                 this.renderContributions())
@@ -61,7 +66,7 @@ class Profile extends Component {
     }
 
     renderContributions = () => {
-        if (contribs.length > 0) {
+        if (this.contribs.length > 0) {
             this.setState({ hasContribs: true })
         } else {
             this.setState({ hasContribs: false })
@@ -168,10 +173,10 @@ class Profile extends Component {
                         <p>Logout</p>
                     </div>
                     {this.state.hasContribs && <h3>
-                        Your Contributions ( {contribs.length} )
+                        Your Contributions ( {this.contribs.length} )
                     </h3>}
                     {this.state.hasContribs && this.state.showFeed && <div className="Contribs_Container">
-                        {contribs.map((img, i) =>
+                        {this.contribs.map((img, i) =>
                             <LazyLoad
                                 key={i}
                                 height={0}>
@@ -214,13 +219,13 @@ class Profile extends Component {
                         <p>LightMaps is free and always will be, this year I am raising money for suicide awareness.  You can donate following the link below if you would like to</p>
                         <br></br>
                         <p>You havent posted any photos yet, if you choose to post anything you will be able to manage your post here.</p>
-                        </div>}
+                    </div>}
 
                     <Preview
                         togglePreview={this.togglePreview}
                         lightDex={this.state.lightDex}
                         contributions={true}
-                        lights={contribs}
+                        lights={this.contribs}
                     />
                 </div>}
                 {!this.state.register && !this.state.loggedIn && <form className="Login_Form" id="login-form" onSubmit={this.handleSubmit}>
