@@ -160,20 +160,6 @@ class Post extends Component {
                             <p>Clear</p>
                         </div>
                     </div>}
-                    {/* {this.state.lat && this.state.address === '' && this.state.accurateLocation && <div className="Selection">
-                        <p id="coords">Your Coordinates:</p>
-                        <p id="coords1">{this.convertDMS(this.state.lat, this.state.lng)}</p>
-                        <p id="accuracy"> Coordinate Accuracy:</p>
-                        <p id="accuracy1">{this.state.locationAccuracy} m</p>
-                        <div className="Yes_Option" onClick={this.useAddress}>
-                            <img id="use-img" src="./res/yes.png" alt="oops" />
-                            <p>Use</p>
-                        </div>
-                        <div className="No_Option" onClick={this.discardAddress}>
-                            <img id="use-img" src="./res/no.png" alt="oops" />
-                            <p>Clear</p>
-                        </div>
-                    </div>} */}
                     {(this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0) && <div className="Selection">
                         <p id="coords">Your Coordinates:</p>
                         <p id="coords1">{this.convertDMS(Location.lat, Location.lng)}</p>
@@ -183,13 +169,9 @@ class Post extends Component {
                             <img id="use-img" src="./res/yes.png" alt="oops" />
                             <p>Use</p>
                         </div>
-                        {/* <div className="No_Option" onClick={this.discardAddress}>
-                            <img id="use-img" src="./res/no.png" alt="oops" />
-                            <p>Clear</p>
-                        </div> */}
                     </div>}
                     {(!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0) && <div className="Location_Error">
-                        <h3>I cant get an accurate bead on your location.</h3>
+                        <h3>I cant draw an accurate bead on your location.</h3>
                         <br></br>
                         <p>This could be caused by a weak signal from a satelite or you have denied LightMaps access to your location</p>
                         <br></br>

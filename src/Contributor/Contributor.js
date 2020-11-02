@@ -7,7 +7,8 @@ class Manager extends Component {
         super();
         this.state = {
             on: true,
-            off: false
+            off: false,
+            del: true
         }
     }
 
@@ -79,29 +80,41 @@ class Manager extends Component {
         }).then(res => {
             if (res.status === 200) {
                 console.log('deleted')
+                this.props.unloadImg()
             }
             if (res.status === 403) {
                 console.log("invalid")
             }
 
         })
-        // return this.setState({ error: '' });
+    }
+
+    confirmDel = () =>{
+        if(this.state.del){
+            this.setState({del: false})
+        }else{
+            this.setState({del: true})
+        }
     }
 
     render() {
 
+        console.log(this.props)
+
         return (
             <div className="Manager">
-                {!this.state.on && <div className="On">
-                    <p id="on" onClick={this.toggleSwitch}>Turn On</p>
+                {this.state.on && <div className="On" onClick={this.toggleSwitch}>
+                <img id="on-img" src="./res/on.png" alt="oops" />
+                    <p id="on" >On</p>
                 </div>}
-                {!this.state.off && <div className="Off">
-                    <p id="off" onClick={this.toggleSwitch}>Turn Off</p>
+                {this.state.off && <div className="Off" onClick={this.toggleSwitch}>
+                <img id="off-img" src="./res/off.png" alt="oops" />
+                    <p id="off">Off</p>
                 </div>}
                 <br></br>
-                <div className="Delete">
-                    <p onClick={this.valdel}>Delete</p>
-
+                <div className="Delete" onClick={this.valdel}>
+                <img id="del-img" src="./res/del.png" alt="oops" />
+                    <p >Delete</p>
                 </div>
             </div>
         )

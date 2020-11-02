@@ -119,14 +119,13 @@ class Preview extends Component {
                         </div>
                         <Contributor
                             contribution={this.props.lights[this.props.lightDex]}
+                            unloadImg={this.unloadImg}
                         />
                     </div>}
                     <div className="Exit" onClick={this.unloadImg.bind(this)}>
                         <img id="exit-img" src="./res/exit-btn.png" alt="oops"></img>
                     </div>
-
                 </div>}
-
             </div>
         )
     }

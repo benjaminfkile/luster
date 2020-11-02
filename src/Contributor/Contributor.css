@@ -1,17 +1,43 @@
 .Manager{
+    display: flex;
     margin-left: auto;
     margin-right: 3vw;
-    text-align: right;
+    text-align: center;
 }
 .Manager p{
     margin-left: 5px;
 }
 #on{
-    color: rgb(72, 255, 0);
+    color: rgb(255, 255, 255);
 }
 #off{
-    color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.Off img, .On img, .Delete img{
+    height: 30px;
+}
+.Off, .On, .Delete{
+    display: flex;
+    margin-top: 2vh;
+}
+.Off p, .On p, .Delete p{
+    margin-top: 1vh;
+}
+.On, .Off{
+    display: flex;
+    margin-right: 7vw;
 }
 .Delete{
-    color: rgb(255, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.Confirm_Del{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 10vh;
+    left: 10vw;
+    background-color: black;
+}
+.Confirm_Del img{
+    width: 50px;
 }
