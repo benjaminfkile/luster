@@ -76,19 +76,25 @@ class Post extends Component {
     }
 
     searchAddress = (input) => {
-        let temp = []
-        this.setState({ results: null })
-        let targetUrl = "https://maps.googleapis.com/maps/api/place/queryautocomplete/json?location=" + this.state.geoLat + "," + this.state.geoLng + "&radius=" + this.state.radius + "&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM&input=" + input.split(' ').join('+')
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl + targetUrl)
-            .then(res => res.json())
-            .then(res => {
-                for (let i = 0; i < res.predictions.length; i++) {
-                    temp.push(res.predictions[i].description)
-                }
-                this.setState({ results: temp, address: '', lat: null, lng: null })
-            })
-            .catch(() => console.log("Can’t access " + targetUrl + " response. Blocked by browser?"))
+        console.log('no input')
+        if(input !== ""){
+            console.log("searching addresses")
+            let temp = []
+            this.setState({ results: null })
+            let targetUrl = "https://maps.googleapis.com/maps/api/place/queryautocomplete/json?location=" + this.state.geoLat + "," + this.state.geoLng + "&radius=" + this.state.radius + "&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM&input=" + input.split(' ').join('+')
+            const proxyurl = "https://cors-anywhere.herokuapp.com/";
+            fetch(proxyurl + targetUrl)
+                .then(res => res.json())
+                .then(res => {
+                    for (let i = 0; i < res.predictions.length; i++) {
+                        temp.push(res.predictions[i].description)
+                    }
+                    this.setState({ results: temp, address: '', lat: null, lng: null })
+                })
+                .catch(() => console.log("Can’t access " + targetUrl + " response. Blocked by browser?"))
+        }else{
+            this.setState({ results: [], address: '', lat: null, lng: null })
+        }
     }
 
     convertAddressToCoords = (address) => {
@@ -130,8 +136,6 @@ class Post extends Component {
 
     render() {
 
-        console.log(Location.accuracy)
-
         return (
             <div>
                 {window.user && !this.state.hasLocation && <div className="Post">
@@ -156,7 +160,7 @@ class Post extends Component {
                             <p>Clear</p>
                         </div>
                     </div>}
-                    {this.state.lat && this.state.address === '' && this.state.accurateLocation && <div className="Selection">
+                    {/* {this.state.lat && this.state.address === '' && this.state.accurateLocation && <div className="Selection">
                         <p id="coords">Your Coordinates:</p>
                         <p id="coords1">{this.convertDMS(this.state.lat, this.state.lng)}</p>
                         <p id="accuracy"> Coordinate Accuracy:</p>
@@ -169,13 +173,27 @@ class Post extends Component {
                             <img id="use-img" src="./res/no.png" alt="oops" />
                             <p>Clear</p>
                         </div>
+                    </div>} */}
+                    {(this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0) && <div className="Selection">
+                        <p id="coords">Your Coordinates:</p>
+                        <p id="coords1">{this.convertDMS(Location.lat, Location.lng)}</p>
+                        <p id="accuracy"> Coordinate Accuracy:</p>
+                        <p id="accuracy1">{this.state.locationAccuracy} m</p>
+                        <div className="Yes_Option" onClick={this.useAddress}>
+                            <img id="use-img" src="./res/yes.png" alt="oops" />
+                            <p>Use</p>
+                        </div>
+                        {/* <div className="No_Option" onClick={this.discardAddress}>
+                            <img id="use-img" src="./res/no.png" alt="oops" />
+                            <p>Clear</p>
+                        </div> */}
                     </div>}
                     {(!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0) && <div className="Location_Error">
-                            <h3>I cant get an accurate bead on your location.</h3>
-                            <br></br>
-                            <p>This could be caused by a weak signal from a satelite or you have denied LightMaps access to your location</p>
-                            <br></br>
-                            <p>You will have to manually enter your address instead</p>
+                        <h3>I cant get an accurate bead on your location.</h3>
+                        <br></br>
+                        <p>This could be caused by a weak signal from a satelite or you have denied LightMaps access to your location</p>
+                        <br></br>
+                        <p>You will have to manually enter your address instead</p>
 
                     </div>}
                 </div>}
