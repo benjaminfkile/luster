@@ -77,7 +77,17 @@
 .Yes_Option{
     margin-bottom: 2vh;
 }
-.Yes_Option, .No_Option{
+.Yes_Option{
+    display: flex;
+    width: 22vw;
+    margin-left: 39vw;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border-width: 1px;
+
+}
+.No_Option{
     display: flex;
     width: 25vw;
     margin-left: 37.5vw;
