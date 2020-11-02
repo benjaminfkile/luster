@@ -40,9 +40,9 @@ class Post extends Component {
     checkLocationAccuracy = () => {
         if (Location.lat) {
             if (Location.accuracy > 50) {
-                this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy })
+                this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy.toFixed(2) })
             } else {
-                this.setState({ accurateLocation: true, lat: Location.lat, lng: Location.lng, locationAccuracy: Location.accuracy })
+                this.setState({ accurateLocation: true, lat: Location.lat, lng: Location.lng, locationAccuracy: Location.accuracy.toFixed(2) })
             }
             clearInterval(this.accuracyInterval)
         }
