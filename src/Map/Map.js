@@ -4,6 +4,7 @@ import Location from '../Location'
 import GeoData from '../GeoData'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
+import Radar from '../Radar'
 import Snow from '../Snow/Snow'
 import { mapStyles } from './NightMode'
 import '../Map/Map.css'
@@ -32,6 +33,7 @@ class Map extends React.Component {
       geoData: false,
       centered: true,
       dragged: true,
+      nearest: false,
       inApp: true
     }
   }
@@ -65,6 +67,8 @@ class Map extends React.Component {
     }
   }
 
+
+
   listenForLocation = () => {
     if (Location.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
@@ -92,14 +96,24 @@ class Map extends React.Component {
     }
   }
 
+  findNearest = () => {
+    this.setState({ nearest: true })
+    this.setState({ dragged: true })
+    this.setState({ centered: false })
+  }
+
   recenter = () => {
     this.setState({ centered: true })
     this.setState({ dragged: false })
+    this.setState({ nearest: false })
+
   }
 
   dragged = () => {
     this.setState({ centered: false })
     this.setState({ dragged: true })
+    this.setState({ nearest: false })
+
   }
 
   togglePreview = (args) => {
@@ -123,6 +137,7 @@ class Map extends React.Component {
           onClick={() => this.togglePreview(i)}
           position={{ lat: parseFloat(this.state.lights[i].lat), lng: parseFloat(this.state.lights[i].lng) }}
           icon={markerImg}
+          zIndex={1005}
         />
       temp.push(marker)
     }
@@ -132,6 +147,11 @@ class Map extends React.Component {
 
   render = () => {
 
+    if (Radar.targets.length > 0) {
+      console.log(Radar.targets[0][1])
+
+    }
+
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
       null,
@@ -139,10 +159,25 @@ class Map extends React.Component {
       null,
       new window.google.maps.Size(50, 50))
 
-
-
     return (
       <div>
+
+        {/*LIKELINESS = 0*/}
+        {/*center over nearest*/}
+        {this.state.nearest && <GoogleMap
+          defaultZoom={11}
+          center={{ lat: Number(Radar.targets[0][1].lat), lng: Number(Radar.targets[0][1].lng) }}
+          defaultOptions={this.defaultMapOptions}
+          onDrag={this.dragged}
+        >
+          <>
+          </>
+          <Marker
+            position={{ lat: Number(Radar.targets[0][1].lat), lng: Number(Radar.targets[0][1].lng) }}
+            icon={locationMarker}
+          />
+        </GoogleMap>}
+
         {/*LIKELINESS = 1*/}
         {/*Location refused but found GeoData*/}
         {!this.state.location && this.state.geoData && <GoogleMap
@@ -165,7 +200,7 @@ class Map extends React.Component {
         >
           <>
             {this.state.location && <Marker
-              position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
+              position={{ lat: Location.lat, lng: Location.lng }}
               icon={locationMarker}
             />}
           </>
@@ -180,10 +215,10 @@ class Map extends React.Component {
           onDrag={this.dragged}
         >
           <>
-            <Marker
+            {!this.state.nearest && <Marker
               position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
               icon={locationMarker}
-            />
+            />}
           </>
         </GoogleMap>}
 
@@ -199,6 +234,9 @@ class Map extends React.Component {
           <>
           </>
         </GoogleMap>}
+        {!this.state.nearest && <div className="Nearest" onClick={this.findNearest}>
+          <p>Nearest</p>
+        </div>}
         {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
           <p>Recenter</p>
         </div>}

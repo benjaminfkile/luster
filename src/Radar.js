@@ -2,8 +2,10 @@ import Lighstore from './LightStore'
 import Location from './Location'
 import GeoData from './GeoData'
 
-let Radar = []
-let locationHistory = []
+let Radar = {
+    targets: [],
+    locationHistory: []
+}
 
 let dbInterval = setInterval(listen4DB, 1000)
 
@@ -18,40 +20,40 @@ function listen4DB() {
 function updateCoords() {
 
     if (Location && Location.lat) {
-        locationHistory.unshift([Location.lat, Location.lng])
+        Radar.locationHistory.unshift([Location.lat, Location.lng])
     } else {
         if (!Location.lat && GeoData[0].latitude) {
-            locationHistory.unshift([GeoData[0].latitude, GeoData[0].longitude])
+            Radar.locationHistory.unshift([GeoData[0].latitude, GeoData[0].longitude])
         }
     }
 
     if (Location.lat || GeoData[0].latitude) {
-        if (locationHistory.length > 1 && locationHistory[0][0] !== locationHistory[1][0] && locationHistory[0][1] !== locationHistory[1][1]) {
+        if (Radar.locationHistory.length > 1 && Radar.locationHistory[0][0] !== Radar.locationHistory[1][0] && Radar.locationHistory[0][1] !== Radar.locationHistory[1][1]) {
             polulateRadar()
         }
     }
 }
 
 function polulateRadar() {
-    //why doesnt Radar = [] work?
-    Radar.length = 0
+    //why doesnt Radar.targets = [] work?
+    Radar.targets.length = 0
 
     if (Location.lat) {
         for (let i = 0; i < Lighstore.length; i++) {
             if (Lighstore.length > 0) {
-                Radar.push([distance(Location.lat, Location.lng, Lighstore[i].lat, Lighstore[i].lng, "N"), Lighstore[i]])
+                Radar.targets.push([distance(Location.lat, Location.lng, Lighstore[i].lat, Lighstore[i].lng, "N"), Lighstore[i]])
             }
         }
     } else {
         if (GeoData && GeoData[0].latitude) {
             for (let i = 0; i < Lighstore.length; i++) {
                 if (Lighstore.length > 0) {
-                    Radar.push([distance(GeoData[0].latitude, GeoData[0].longitude, Lighstore[i].lat, Lighstore[i].lng, "N"), Lighstore[i]])
+                    Radar.targets.push([distance(GeoData[0].latitude, GeoData[0].longitude, Lighstore[i].lat, Lighstore[i].lng, "N"), Lighstore[i]])
                 }
             }
         }
     }
-    console.log('populate radar (from Radar.js')
+    Radar.targets = Radar.targets.sort((a, b) => a[0] - b[0])
 }
 
 function distance(lat1, lon1, lat2, lon2, unit) {
