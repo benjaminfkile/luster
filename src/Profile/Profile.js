@@ -50,8 +50,12 @@ class Profile extends Component {
         }
     }
 
+    dismissError() {
+        this.setState({ error: '' });
+    }
+
     getContributions = () => {
-        this.setState({loading: true})
+        this.setState({ loading: true })
         let targetUrl = api + '/api/lights/contributor/' + window.user
         fetch(targetUrl)
             .then(response => response.json())
@@ -64,35 +68,24 @@ class Profile extends Component {
                     this.contribs[i].uploaded = timestamp
                 }
             }).then(() =>
-                // this.renderContributions(),
-                this.setState({loading: false})
-                )
+                this.setState({ loading: false })
+            )
             .catch(error => alert('Sorry the service is down \n:(\nPlease try asadfsdfsdafsadfsadfasdfgain later'));
     }
 
-    // renderContributions = () => {
-    //     if (this.contribs.length > 0) {
-    //         this.setState({ hasContribs: true})
-    //     } else {
-    //         this.setState({ hasContribs: false})
-    //     }
-    // }
-
-    dismissError() {
-        this.setState({ error: '' });
-    }
-
     handleSubmit(evt) {
-        evt.preventDefault();
 
-        this.setState({loading: true})
+        evt.preventDefault();
+        this.setState({ loading: true })
 
         if (!this.state.email) {
-            return this.setState({ error: ' Email is required' });
+            this.errorInterval = setInterval(this.listen4Error, 3000)
+            return this.setState({ error: ' Email is required', loading: false });
         }
 
         if (!this.state.password) {
-            return this.setState({ error: ' Password is required' });
+            this.errorInterval = setInterval(this.listen4Error, 3000)
+            return this.setState({ error: ' Password is required', loading: false });
         }
         fetch(api + '/api/users/validate', {
 
@@ -106,7 +99,7 @@ class Profile extends Component {
                 pass: this.state.password
             })
         }).then(res => {
-            this.setState({loading: false})
+            this.setState({ loading: false })
             if (res.status === 200) {
                 this.setState({ loggedIn: true })
                 //window.user = this.state.email
@@ -175,7 +168,7 @@ class Profile extends Component {
         return (
             <div className="Login">
                 <div className="Loading">
-                {this.state.loading && <Spinner/>}
+                    {this.state.loading && <Spinner />}
                 </div>
                 {this.state.loggedIn && !this.state.loading && <div className="Profile">
                     <h1>Hi {window.name}</h1>

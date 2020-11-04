@@ -3,7 +3,6 @@ import Preview from "../Preview/Preview"
 import Snow from '../Snow/Snow'
 import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
-import RadarAnimation from './RadarAnimation'
 import Spinner from '../Spinner/Spinner'
 import Radar from '../Radar'
 import '../Browse/Browse.css'
@@ -30,7 +29,6 @@ class Browse extends Component {
     componentDidMount() {
         this.dbInterval = setInterval(this.listen4DB, 500)
         this.radarInterval = setInterval(this.listen4Radar, 500)
-        // this.distanceInterval = setInterval(this.listen4LocationChange, 1000)
     }
 
     listen4DB = () => {
@@ -47,12 +45,6 @@ class Browse extends Component {
             this.filterByDistance(20)
         }
     }
-
-    // listen4LocationChange = () => {
-    //     if (Radar.locationHistory.length > 1 && Radar.locationHistory[0][0] !== Radar.locationHistory[1][0] && Radar.locationHistory[0][1] !== Radar.locationHistory[1][1]) {
-    //         this.filterByDistance(this.state.maxDistance)
-    //     }
-    // }
 
     filterByDistance = (miles) => {
         clearInterval(this.searchIntevral)
@@ -72,7 +64,7 @@ class Browse extends Component {
     }
 
     findClosest = () => {
-        this.setState({ searchDistance: this.state.searchDistance + 10, sliderMax: this.state.sliderMax + 10 })
+        this.setState({ searchDistance: this.state.searchDistance + 3, sliderMax: this.state.sliderMax + 3 })
         this.filterByDistance(this.state.searchDistance)
         if (this.lights.length > 0) {
             this.setState({ searchDistance: 0 })
@@ -101,7 +93,7 @@ class Browse extends Component {
     }
 
     render() {
-        console.log(this.state.maxDistance)
+
         return (
             <div className="Browse">
                 {/* {this.lights.length === 0 && <RadarAnimation />} */}

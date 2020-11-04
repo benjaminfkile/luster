@@ -147,11 +147,6 @@ class Map extends React.Component {
 
   render = () => {
 
-    if (Radar.targets.length > 0) {
-      console.log(Radar.targets[0][1])
-
-    }
-
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
       null,

@@ -4,6 +4,7 @@ import './RadarAnimation.css'
 //credit http://jsfiddle.net/cctiger36/NZMBb/
 
 class RadarAnimation extends Component {
+
     render() {
         return (
             <div className="razar">

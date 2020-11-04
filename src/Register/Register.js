@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Spinner from '../Spinner/Spinner'
 import api from '../api'
 import '../Register/Register.css'
 
@@ -14,8 +15,10 @@ class Register extends Component {
             code: '',
             error: '',
             codeSent: false,
+            invalidCode: false,
             registered: false,
             emailTaken: false,
+            loading: false
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -34,25 +37,26 @@ class Register extends Component {
     handleSubmit(evt) {
 
         evt.preventDefault();
+        this.setState({ loading: true })
 
         if (!this.state.name) {
-            return this.setState({ error: 'Name is required' });
+            return this.setState({ error: 'Name is required', loading: false });
         }
 
         if (!this.state.email) {
-            return this.setState({ error: 'Email is required' });
+            return this.setState({ error: 'Email is required', loading: false });
         }
 
         if (!this.state.pass1 && !this.state.pass2) {
-            return this.setState({ error: 'Password is required' });
+            return this.setState({ error: 'Password is required', loading: false });
         }
 
         if (this.state.pass1 !== this.state.pass2) {
-            return this.setState({ error: 'Passwords dont match' });
+            return this.setState({ error: 'Passwords dont match', loading: false });
         }
 
         if (this.state.codeSent && !this.state.code) {
-            return this.setState({ error: '5 digit code required' });
+            return this.setState({ error: '5 digit code required', loading: false });
         }
 
 
@@ -71,6 +75,7 @@ class Register extends Component {
                     pass: this.state.pass1
                 })
             }).then(res => {
+                this.setState({ loading: false })
                 if (res.status === 200) {
                     this.setState({ emailTaken: false, codeSent: true })
                     // console.log("code sent")
@@ -87,7 +92,11 @@ class Register extends Component {
         return this.setState({ error: '' });
     }
 
-    checkCode = () => {
+    checkCode = (evt) => {
+
+        evt.preventDefault();
+        this.setState({ loading: true })
+
         fetch(api + '/api/users/valCode', {
 
             method: 'POST',
@@ -100,15 +109,16 @@ class Register extends Component {
                 code: this.state.code
             })
         }).then(res => {
+            this.setState({ loading: false })
             if (res.status === 200) {
                 this.setState({ registered: true })
                 this.props.register(1)
             }
             if (res.status === 403) {
-                return this.setState({ error: 'Invalid code' });
+                return this.setState({ error: 'Invalid code', loading: false, invalidCode: true });
             }
             if (res.status === 400) {
-                return this.setState({ error: 'Registratoin Error, please check your credentials and try again' });
+                return this.setState({ error: 'Registratoin Error, please check your credentials and try again', loading: false });
             }
         })
     }
@@ -147,7 +157,10 @@ class Register extends Component {
 
         return (
             <div className="Register">
-                <form className="RegisterForm" onSubmit={this.handleSubmit}>
+                <div className="Loading">
+                    {this.state.loading && <Spinner />}
+                </div>
+                {!this.state.loading && <form className="RegisterForm" onSubmit={this.handleSubmit}>
                     <h1>
                         Register
                     </h1>
@@ -184,19 +197,19 @@ class Register extends Component {
                     </div>}
                     {/* {this.state.codeSent && <button onClick={this.checkCode}>Submit</button>} */}
 
-                    {this.state.codeSent && <p>I sent you an email with a verification code, please enter the code to finish registering.</p>}
-                </form>
+                    {this.state.codeSent && !this.state.invalidCode && <p>I sent you an email with a verification code, please enter the code to finish registering.</p>}
+                </form>}
+                <br></br>
+                <div id="back-btn" onClick={() => this.props.register(1)}>
+                    <img id="back-img" src="./res/back.png" alt="oops"></img>
+                    <p>Back</p>
+                </div>
                 {this.state.error &&
                     <h3 id="registration" onClick={this.dismissError}>
                         <br></br>
                         <button onClick={this.dismissError}>x</button>
                         {this.state.error}
                     </h3>}
-                <br></br>
-                <div id="back-btn" onClick={() => this.props.register(1)}>
-                    <img id="back-img" src="./res/back.png" alt="oops"></img>
-                    <p>Back</p>
-                </div>
             </div>
         );
     }
