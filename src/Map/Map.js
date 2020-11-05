@@ -160,7 +160,7 @@ class Map extends React.Component {
         {/*LIKELINESS = 0*/}
         {/*center over nearest*/}
         {this.state.nearest && <GoogleMap
-          defaultZoom={11}
+          zoom={15}
           center={{ lat: Number(Radar.targets[0][1].lat), lng: Number(Radar.targets[0][1].lng) }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -176,7 +176,7 @@ class Map extends React.Component {
         {/*LIKELINESS = 1*/}
         {/*Location refused but found GeoData*/}
         {!this.state.location && this.state.geoData && <GoogleMap
-          defaultZoom={11}
+          zoom={11}
           defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -188,7 +188,7 @@ class Map extends React.Component {
         {/*LIKELINESS = 2*/}
         {/*has Location and map is centered*/}
         {this.state.location && this.state.centered && <GoogleMap
-          defaultZoom={11}
+          zoom={11}
           center={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -204,7 +204,7 @@ class Map extends React.Component {
         {/*LIKELINESS = 3*/}
         {/*has Location and user drags map*/}
         {this.state.location && this.state.dragged && <GoogleMap
-          defaultZoom={11}
+          zoom={11}
           defaultCenter={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -221,7 +221,7 @@ class Map extends React.Component {
         {/*no Location or GeoData*/}
         {/*center of USA*/}
         {!this.state.location && <GoogleMap
-          defaultZoom={11}
+          zoom={11}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
           defaultOptions={this.defaultMapOptions}
 
