@@ -47,6 +47,7 @@ class Browse extends Component {
     }
 
     filterByDistance = (miles) => {
+        this.lights = []
         clearInterval(this.searchIntevral)
         if (Radar.targets.length > 0) {
             this.lights = []
