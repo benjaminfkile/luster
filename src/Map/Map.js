@@ -67,8 +67,6 @@ class Map extends React.Component {
     }
   }
 
-
-
   listenForLocation = () => {
     if (Location.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
@@ -224,11 +222,11 @@ class Map extends React.Component {
           zoom={11}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
           defaultOptions={this.defaultMapOptions}
-
         >
           <>
           </>
         </GoogleMap>}
+
         {!this.state.nearest && <div className="Nearest" onClick={this.findNearest}>
           <p>Nearest</p>
         </div>}
