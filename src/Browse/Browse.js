@@ -47,17 +47,17 @@ class Browse extends Component {
     }
 
     filterByDistance = (miles) => {
-        this.lights = []
         clearInterval(this.searchIntevral)
         if (Radar.targets.length > 0) {
             this.lights = []
+            this.setState({showFeed : false})
             for (let i = 0; i < Radar.targets.length; i++) {
                 if (Radar.targets[i][0] < miles) {
                     this.lights.push(Radar.targets[i][1])
                     this.lights[i].distance = Radar.targets[i][0].toFixed(2)
                 }
             }
-            this.setState({ maxDistance: miles, oldDistance: miles })
+            this.setState({ maxDistance: miles, oldDistance: miles, showFeed: true })
         }
         if (this.lights.length === 0) {
             this.searchIntevral = setInterval(this.findClosest, 100)
@@ -68,7 +68,7 @@ class Browse extends Component {
         this.setState({ searchDistance: this.state.searchDistance + 3, sliderMax: this.state.sliderMax + 3 })
         this.filterByDistance(this.state.searchDistance)
         if (this.lights.length > 0) {
-            this.setState({ searchDistance: 0 })
+            this.setState({ searchDistance: 0, showFeed: true })
         }
     }
 
