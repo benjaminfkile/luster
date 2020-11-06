@@ -107,7 +107,7 @@ class Browse extends Component {
                     {!this.state.showSlider && <img id="toggle-slider-img" src="./res/open-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
                 </div>
                 {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
-                    <input type="range" min="1" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
+                    <input type="range" min="5" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                 </div>}
                 {this.state.showFeed && <div className="Img_Container">
                     {this.lights.map((img, i) =>
