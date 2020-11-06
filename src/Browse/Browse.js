@@ -11,8 +11,6 @@ class Browse extends Component {
 
     lights = []
 
-    oldDistance = 0
-
     constructor() {
         super();
         this.state = {
@@ -37,6 +35,7 @@ class Browse extends Component {
             this.setState({ db: true })
             this.lights = LightStore
         }
+        console.log(LightStore)
     }
 
     listen4Radar = () => {
@@ -44,20 +43,20 @@ class Browse extends Component {
             clearInterval(this.radarInterval)
             this.filterByDistance(20)
         }
+        console.log(Radar)
     }
 
     filterByDistance = (miles) => {
         clearInterval(this.searchIntevral)
         if (Radar.targets.length > 0) {
             this.lights = []
-            this.setState({showFeed : false})
             for (let i = 0; i < Radar.targets.length; i++) {
                 if (Radar.targets[i][0] < miles) {
                     this.lights.push(Radar.targets[i][1])
                     this.lights[i].distance = Radar.targets[i][0].toFixed(2)
                 }
             }
-            this.setState({ maxDistance: miles, oldDistance: miles, showFeed: true })
+            this.setState({ maxDistance: miles, oldDistance: miles })
         }
         if (this.lights.length === 0) {
             this.searchIntevral = setInterval(this.findClosest, 100)
@@ -68,7 +67,7 @@ class Browse extends Component {
         this.setState({ searchDistance: this.state.searchDistance + 3, sliderMax: this.state.sliderMax + 3 })
         this.filterByDistance(this.state.searchDistance)
         if (this.lights.length > 0) {
-            this.setState({ searchDistance: 0, showFeed: true })
+            this.setState({ searchDistance: 0 })
         }
     }
 
@@ -94,6 +93,9 @@ class Browse extends Component {
     }
 
     render() {
+
+        console.log('render')
+        console.log(this.state)
 
         return (
             <div className="Browse">

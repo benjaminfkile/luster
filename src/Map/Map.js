@@ -13,14 +13,16 @@ class Map extends React.Component {
 
   locationTimeout = 0
   mapMounted = false;
-  zoom = 11;
+  zoom = 10;
   defaultMapOptions = {
     styles: mapStyles,
     fullscreenControl: false,
     zoomControl: false,
     mapTypeControl: false,
     streetViewControl: false,
-    gestureHandling: 'greedy'
+    gestureHandling: 'greedy',
+    minZoom: 10,
+    maxZoom: 15
   };
 
   constructor() {
