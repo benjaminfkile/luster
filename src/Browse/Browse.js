@@ -18,7 +18,7 @@ class Browse extends Component {
             showFeed: true,
             showSlider: true,
             maxDistance: 20,
-            sliderMax: 100,
+            sliderMax: 1000,
             searchDistance: 0
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
@@ -65,7 +65,7 @@ class Browse extends Component {
     }
 
     findClosest = () => {
-        this.setState({ searchDistance: this.state.searchDistance + 3, sliderMax: this.state.sliderMax + 3 })
+        this.setState({ searchDistance: this.state.searchDistance + 20, sliderMax: this.state.sliderMax + 20 })
         this.filterByDistance(this.state.searchDistance)
         if (this.lights.length > 0) {
             this.setState({ searchDistance: 0 })
