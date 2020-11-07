@@ -14,13 +14,13 @@
 .Slider {
 	margin-left: 5vw;
 	width: 100vw;
-	height: 5vh;
+	/* height: 5vh; */
 }
 
 #nested-slider {
 	width: 80vw;
 	height: 10px;
-	margin-top: 4vh;
+	margin-top: 2vh;
 	margin-left: 5vw;
 }
 
@@ -62,10 +62,12 @@
 }
 
 .Img_Container {
+	position: absolute;
 	overflow-y: auto;
+	top: 11vh;
 	width: 100vw;
-	height: 100vh;
-	margin-top: 2vh;
+	height: 89vh;
+	/* margin-top: 2vh; */
 }
 
 .Item {

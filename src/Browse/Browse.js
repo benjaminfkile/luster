@@ -86,13 +86,13 @@ class Browse extends Component {
         this.filterByDistance(evt.target.value)
     }
 
-    toggleSlider = () => {
-        if (this.state.showSlider) {
-            this.setState({ showSlider: false })
-        } else {
-            this.setState({ showSlider: true })
-        }
-    }
+    // toggleSlider = () => {
+    //     if (this.state.showSlider) {
+    //         this.setState({ showSlider: false })
+    //     } else {
+    //         this.setState({ showSlider: true })
+    //     }
+    // }
 
     render() {
 
@@ -104,10 +104,10 @@ class Browse extends Component {
                 {/* {this.lights.length === 0 && <RadarAnimation />} */}
                 {this.lights.length === 0 && <Spinner />}
                 <p id="range-info"> Lights less than {this.state.maxDistance} nm ({this.lights.length})</p>
-                <div className="Toggle_Slider" onClick={this.toggleSlider}>
+                {/* <div className="Toggle_Slider" onClick={this.toggleSlider}>
                     {this.state.showSlider && <img id="toggle-slider-img" src="./res/close-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
                     {!this.state.showSlider && <img id="toggle-slider-img" src="./res/open-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
-                </div>
+                </div> */}
                 {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
                     <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                 </div>}
