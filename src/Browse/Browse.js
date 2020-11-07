@@ -82,7 +82,7 @@ class Browse extends Component {
     }
 
     handleSliderDrag(evt) {
-        this.setState({ showFeed: false })
+        // this.setState({ showFeed: false })
         this.filterByDistance(evt.target.value)
     }
 
