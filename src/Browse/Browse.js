@@ -18,7 +18,7 @@ class Browse extends Component {
             showFeed: true,
             showSlider: true,
             maxDistance: 20,
-            sliderMax: 1000,
+            sliderMax: 500,
             searchDistance: 0
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
@@ -35,7 +35,7 @@ class Browse extends Component {
             this.setState({ db: true })
             this.lights = LightStore
         }
-        console.log(LightStore)
+        // console.log(LightStore)
     }
 
     listen4Radar = () => {
@@ -43,7 +43,7 @@ class Browse extends Component {
             clearInterval(this.radarInterval)
             this.filterByDistance(20)
         }
-        console.log(Radar)
+        // console.log(Radar)
     }
 
     filterByDistance = (miles) => {
@@ -61,11 +61,11 @@ class Browse extends Component {
         if (this.lights.length === 0) {
             this.searchIntevral = setInterval(this.findClosest, 100)
         }
-        console.log(miles)
+        // console.log(miles)
     }
 
     findClosest = () => {
-        this.setState({ searchDistance: this.state.searchDistance + 20, sliderMax: this.state.sliderMax + 20 })
+        this.setState({ searchDistance: this.state.searchDistance + 3, sliderMax: this.state.sliderMax + 3 })
         this.filterByDistance(this.state.searchDistance)
         if (this.lights.length > 0) {
             this.setState({ searchDistance: 0 })
@@ -86,28 +86,28 @@ class Browse extends Component {
         this.filterByDistance(evt.target.value)
     }
 
-    // toggleSlider = () => {
-    //     if (this.state.showSlider) {
-    //         this.setState({ showSlider: false })
-    //     } else {
-    //         this.setState({ showSlider: true })
-    //     }
-    // }
+    toggleSlider = () => {
+        if (this.state.showSlider) {
+            this.setState({ showSlider: false })
+        } else {
+            this.setState({ showSlider: true })
+        }
+    }
 
     render() {
 
-        console.log('render')
-        console.log(this.state)
+        // console.log('render')
+        // console.log(this.state)
 
         return (
             <div className="Browse">
                 {/* {this.lights.length === 0 && <RadarAnimation />} */}
                 {this.lights.length === 0 && <Spinner />}
-                <p id="range-info"> Lights less than {this.state.maxDistance} nm ({this.lights.length})</p>
-                {/* <div className="Toggle_Slider" onClick={this.toggleSlider}>
+                <p id="range-info"> Lights less than {this.state.maxDistance} mi ({this.lights.length})</p>
+                <div className="Toggle_Slider" onClick={this.toggleSlider}>
                     {this.state.showSlider && <img id="toggle-slider-img" src="./res/close-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
                     {!this.state.showSlider && <img id="toggle-slider-img" src="./res/open-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
-                </div> */}
+                </div>
                 {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
                     <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                 </div>}
@@ -124,7 +124,7 @@ class Browse extends Component {
                                         {img.upvotes.length}
                                     </p>
                                     <p id="distance">
-                                        {img.distance} nm
+                                        {img.distance} mi
                                         </p>
                                 </div>
                             </div>

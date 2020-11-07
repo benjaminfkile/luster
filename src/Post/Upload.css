@@ -82,16 +82,16 @@ input[type="file"] {
     text-align: center;
 }
 #arrow-img{
-width: 20vw;
-margin-left: 40vw;
+  width: 20vw;
+  margin-left: 40vw;
 
 }
 
 #noImg{
-    width: 80vw;
-    height: 40vh;
-    margin-left: 10vw;
-    margin-top: 3vh;
+  width: 80vw;
+  height: 40vh;
+  margin-left: 5vw;
+  margin-top: 3vh;
 
 }
 
@@ -101,10 +101,10 @@ margin-left: 40vw;
   width: 100vw;
   text-align: center;
   margin-top: 10vh;
-    z-index: 1000;
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-    text-align: center;
+  z-index: 1000;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  text-align: center;
 }
 .Audit_Container{
   width: 50vw;
