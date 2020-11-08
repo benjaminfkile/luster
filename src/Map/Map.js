@@ -21,7 +21,7 @@ class Map extends React.Component {
     mapTypeControl: false,
     streetViewControl: false,
     gestureHandling: 'greedy',
-    minZoom: 8,
+    // minZoom: 8,
     maxZoom: 15
   };
 
