@@ -161,7 +161,7 @@ class Post extends Component {
                             <p>Clear</p>
                         </div>
                     </div>}
-                    {(this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0) && <div className="Selection">
+                    {((this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0)) && <div className="Selection">
                         <p id="coords">Your Coordinates:</p>
                         <p id="coords1">{this.convertDMS(Location.lat, Location.lng)}</p>
                         <p id="accuracy"> Coordinate Accuracy:</p>
@@ -171,7 +171,7 @@ class Post extends Component {
                             <p>Use</p>
                         </div>
                     </div>}
-                    {(!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0) && <div className="Location_Error">
+                    {((!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0)) && <div className="Location_Error">
                         <h3>I cant draw an accurate bead on your location.</h3>
                         <br></br>
                         <p>This could be caused by a weak signal from a satelite or you have denied LightMaps access to your location</p>
