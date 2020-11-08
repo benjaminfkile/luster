@@ -28,7 +28,7 @@ class Browse extends Component {
     componentDidMount() {
         this.dbInterval = setInterval(this.listen4DB, 500)
         this.radarInterval = setInterval(this.listen4Radar, 500)
-        this.distanceInterval = setInterval(this.listenForDistanceChange, 500)
+        this.distanceInterval = setInterval(this.listen4SliderDrag, 500)
     }
 
     listen4DB = () => {
@@ -46,7 +46,7 @@ class Browse extends Component {
         }
     }
 
-    listenForDistanceChange = () => {
+    listen4SliderDrag = () => {
         if(this.state.maxDistance !== this.distance){
             this.filterByDistance(this.distance)
         }
