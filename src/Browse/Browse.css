@@ -18,10 +18,10 @@
 }
 
 #nested-slider {
-	width: 80vw;
+	width: 70vw;
 	height: 10px;
 	margin-top: 2vh;
-	margin-left: 5vw;
+	margin-left: 10vw;
 }
 
 #nested-slider {
@@ -64,7 +64,7 @@
 .Img_Container {
 	position: absolute;
 	overflow-y: auto;
-	top: 11vh;
+	top: 12vh;
 	width: 100vw;
 	height: 89vh;
 	/* margin-top: 2vh; */

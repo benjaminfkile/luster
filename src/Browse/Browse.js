@@ -10,6 +10,7 @@ import '../Browse/Browse.css'
 class Browse extends Component {
 
     lights = []
+    distance = 20
 
     constructor() {
         super();
@@ -18,7 +19,7 @@ class Browse extends Component {
             showFeed: true,
             showSlider: true,
             maxDistance: 20,
-            sliderMax: 500,
+            sliderMax: 200,
             searchDistance: 0
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
@@ -27,6 +28,7 @@ class Browse extends Component {
     componentDidMount() {
         this.dbInterval = setInterval(this.listen4DB, 500)
         this.radarInterval = setInterval(this.listen4Radar, 500)
+        this.distanceInterval = setInterval(this.listenForDistanceChange, 500)
     }
 
     listen4DB = () => {
@@ -35,7 +37,6 @@ class Browse extends Component {
             this.setState({ db: true })
             this.lights = LightStore
         }
-        // console.log(LightStore)
     }
 
     listen4Radar = () => {
@@ -43,7 +44,12 @@ class Browse extends Component {
             clearInterval(this.radarInterval)
             this.filterByDistance(20)
         }
-        // console.log(Radar)
+    }
+
+    listenForDistanceChange = () => {
+        if(this.state.maxDistance !== this.distance){
+            this.filterByDistance(this.distance)
+        }
     }
 
     filterByDistance = (miles) => {
@@ -56,17 +62,17 @@ class Browse extends Component {
                     this.lights[i].distance = Radar.targets[i][0].toFixed(2)
                 }
             }
-            this.setState({ maxDistance: miles, oldDistance: miles })
+            this.setState({ maxDistance: miles, showFeed: true })
         }
         if (this.lights.length === 0) {
             this.searchIntevral = setInterval(this.findClosest, 100)
         }
-        // console.log(miles)
     }
 
     findClosest = () => {
-        this.setState({ searchDistance: this.state.searchDistance + 3, sliderMax: this.state.sliderMax + 3 })
+        this.setState({ searchDistance: this.state.searchDistance + 20, sliderMax: this.state.sliderMax + 20 })
         this.filterByDistance(this.state.searchDistance)
+        this.distance = this.state.maxDistance
         if (this.lights.length > 0) {
             this.setState({ searchDistance: 0 })
         }
@@ -82,32 +88,18 @@ class Browse extends Component {
     }
 
     handleSliderDrag(evt) {
-        // this.setState({ showFeed: false })
-        this.filterByDistance(evt.target.value)
-    }
-
-    toggleSlider = () => {
-        if (this.state.showSlider) {
-            this.setState({ showSlider: false })
-        } else {
-            this.setState({ showSlider: true })
-        }
+        this.distance = evt.target.value
+        this.setState({ showFeed: false })
     }
 
     render() {
 
-        // console.log('render')
-        // console.log(this.state)
+        console.log('render')
 
         return (
             <div className="Browse">
-                {/* {this.lights.length === 0 && <RadarAnimation />} */}
-                {this.lights.length === 0 && <Spinner />}
-                <p id="range-info"> Lights less than {this.state.maxDistance} mi ({this.lights.length})</p>
-                <div className="Toggle_Slider" onClick={this.toggleSlider}>
-                    {this.state.showSlider && <img id="toggle-slider-img" src="./res/close-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
-                    {!this.state.showSlider && <img id="toggle-slider-img" src="./res/open-slider.png" alt="oops" onClick={this.toggleSlider}></img>}
-                </div>
+                {(this.lights.length === 0 || !this.state.showFeed) && <Spinner />}
+                <p id="range-info"> Found {this.lights.length} within a {this.state.maxDistance} miles.</p>
                 {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
                     <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                 </div>}
