@@ -16,7 +16,7 @@ class App extends Component {
   geoLocationTicks = 0
 
   componentDidMount() {
-    this.zoneInterval = setInterval(this.getZone, 1000)
+    this.zoneInterval = setInterval(this.getZone, 500)
     //   window.user = "510295233cd1919aa43736c145e077a4"
     //   window.name = "Ben"
   }
@@ -25,7 +25,7 @@ class App extends Component {
 
     if (GeoData.length === 0) {
       this.geoLocationTicks += 1
-      if (this.userLocationTicks > 5) {
+      if (this.userLocationTicks > 10) {
         console.log('failed to fetch geo data')
       }
     } else {
@@ -33,12 +33,6 @@ class App extends Component {
       clearInterval(this.zoneInterval)
       this.getLights(GeoData[0].latitude, GeoData[0].longitude)
     }
-
-    if (this.userLocationTicks > 20 || this.geoLocationTicks > 5) {
-      alert('failed, reload the page')
-      clearInterval(this.zoneInterval)
-    }
-
   }
 
   getLights = (lat, lng) => {
