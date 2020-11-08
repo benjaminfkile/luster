@@ -67,7 +67,7 @@ class Upload extends Component {
             let lng = this.props.lng
 
 
-            fetch(api + '/api/lights', {
+            fetch(api + '/api/lights/whamo,blamo', {
 
                 method: 'POST',
                 headers: {
