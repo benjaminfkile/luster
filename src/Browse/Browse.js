@@ -97,7 +97,7 @@ class Browse extends Component {
         return (
             <div className="Browse">
                 {this.lights.length === 0 && <Spinner />}
-                <p id="range-info"> Found {this.lights.length} within a {this.state.maxDistance} miles.</p>
+                <p id="range-info"> Found {this.lights.length} within {this.state.maxDistance} miles.</p>
                 {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
                     <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                 </div>}
