@@ -6,33 +6,39 @@ import Profile from './Profile/Profile'
 import Map from './Map/Map'
 import Nav from './Nav/Nav'
 import api from './api'
-import GeoData from './GeoData'
+import Location from './Location'
 import LightStore from './LightStore'
 import './App.css';
 
 class App extends Component {
 
   userLocationTicks = 0
-  geoLocationTicks = 0
+  locationAttempts = 0
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasLocation: false,
+      manualLocation: false
+    }
+  }
 
   componentDidMount() {
     this.zoneInterval = setInterval(this.getZone, 500)
-    //   window.user = "510295233cd1919aa43736c145e077a4"
-    //   window.name = "Ben"
   }
 
   getZone = () => {
 
-    if (GeoData.length === 0) {
-      this.geoLocationTicks += 1
-      if (this.userLocationTicks > 10) {
-        console.log('failed to fetch geo data')
-      }
+    if (!Location.lat) {
+      this.locationAttempts += 1
+      this.setState({ hasLocation: false })
     } else {
       LightStore.length = 0
       clearInterval(this.zoneInterval)
-      this.getLights(GeoData[0].latitude, GeoData[0].longitude)
+      this.setState({ hasLocation: true })
+      this.getLights(Location.lat, Location.lng)
     }
+
   }
 
   getLights = (lat, lng) => {
@@ -51,9 +57,11 @@ class App extends Component {
 
   render() {
 
+    console.log(this.state)
+
     return (
       <div className="Wrapper">
-        <div className="App">
+        {this.state.hasLocation && <div className="App">
           <Nav />
           <Switch>
             <Route exact path='/' component={Map} />
@@ -62,7 +70,10 @@ class App extends Component {
             <Route path='/profile' component={Profile} />
             <Route component={Map} />
           </Switch>
-        </div>
+        </div>}
+        {!this.state.hasLocation && <div>
+          <p>fml</p>
+        </div>}
       </div>
 
     );
