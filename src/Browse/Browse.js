@@ -94,8 +94,6 @@ class Browse extends Component {
 
     render() {
 
-        console.log('render')
-
         return (
             <div className="Browse">
                 {(this.lights.length === 0 || !this.state.showFeed) && <Spinner />}
