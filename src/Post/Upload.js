@@ -66,7 +66,6 @@ class Upload extends Component {
             let lat = this.props.lat
             let lng = this.props.lng
 
-
             fetch(api + '/api/lights/whamo,blamo', {
 
                 method: 'POST',
