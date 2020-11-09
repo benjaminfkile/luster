@@ -17,6 +17,8 @@ Geocode.setLanguage("en");
 
 class App extends Component {
 
+  searchRadius = 3
+
   constructor(props) {
     super(props);
     this.state = {
@@ -41,6 +43,8 @@ class App extends Component {
 
   componentDidMount() {
     this.zoneInterval = setInterval(this.getZone, 500)
+    // window.user = "510295233cd1919aa43736c145e077a4"
+    // window.name = "Ben"
   }
 
   getZone = () => {
@@ -50,7 +54,7 @@ class App extends Component {
       LightStore.length = 0
       clearInterval(this.zoneInterval)
       this.setState({ hasLocation: true })
-      this.getLights(Location.lat, Location.lng)
+      this.getLights(Location.lat, Location.lng, this.searchRadius)
     }
   }
 
@@ -87,7 +91,8 @@ class App extends Component {
     this.setState({ hasLocation: true })
     Location.lat = this.state.lat
     Location.lng = this.state.lng
-    this.getLights(this.state.lat, this.state.lng)
+    Location.accuracy = 0
+    this.getLights(this.state.lat, this.state.lng, this.searchRadius)
   }
 
   discardAddress = () => {
@@ -136,14 +141,23 @@ class App extends Component {
     }
   }
 
-  getLights = (lat, lng) => {
-    let targetUrl = api + '/api/lights/' + lat + ',' + lng;
+  getLights = (lat, lng, rad) => {
+    let targetUrl = api + '/api/lights/' + lat + ',' + lng + ',' + rad;
     fetch(targetUrl)
       .then(response => response.json())
       .then(data => {
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].on === 't') {
-            LightStore.push(data[i])
+        if (data && data.length === 0) {
+          this.searchRadius += 3
+          if(this.searchRadius > 99){
+            alert('nothing found near you')
+          }else{
+            this.getLights(lat, lng, this.searchRadius)
+          }
+        } else {
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].on === 't') {
+              LightStore.push(data[i])
+            }
           }
         }
       })
@@ -188,7 +202,7 @@ class App extends Component {
             </div>
           </div>}
           {this.state.results && this.state.results.length === 0 && <RadarAnimation />}
-          <Snow/>
+          <Snow />
         </div>}
       </div>
     );

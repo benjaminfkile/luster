@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import api from '../api'
-import GeoData from '../GeoData'
+// import GeoData from '../GeoData'
 import Contributor from '../Contributor/Contributor';
 import Spinner from '../Spinner/Spinner'
 import './Preview.css'
@@ -44,26 +44,24 @@ class Preview extends Component {
     }
 
     trip = (args) => {
-        if (GeoData.length > 0) {
-            let user = ''
-            if (window.user) {
-                user += window.user + "@:" + Date.now()
-            } else {
-                user += GeoData[0].IPv4 + "@:" + Date.now()
-            }
-            fetch(api + '/api/stats/trip', {
-
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    id: this.props.lights[args].id,
-                    ip: user
-                })
-            })
+        let user = ''
+        if (window.user) {
+            user += window.user + "@:" + Date.now()
+        } else {
+            user += "no-data@:" + Date.now()
         }
+        fetch(api + '/api/stats/trip', {
+
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: this.props.lights[args].id,
+                ip: user
+            })
+        })
     }
 
     handleImageLoaded = () => {
@@ -82,13 +80,18 @@ class Preview extends Component {
 
     render() {
 
+        if(this.props.lightDex !== -1){
+            console.log("lat: " + this.props.lights[this.props.lightDex].lat)
+            console.log("lng: " + this.props.lights[this.props.lightDex].lng)
+        }
+
         return (
             <div>
                 {this.props.lightDex !== -1 && !this.props.contributions && <div className="Preview_User">
                     <img src={this.props.lights[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>
                     {this.state.loaded && <img src={this.props.lights[this.props.lightDex].url} id="preview-img" alt='hacky'></img>}
                     {/* {!this.state.loaded && <img src="./res/splash.png" id="preview-img" alt='A tree'></img>} */}
-                    {!this.state.loaded && <Spinner/>}
+                    {!this.state.loaded && <Spinner />}
                     {this.state.loaded && <div className="Preview_User_Interface">
                         <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} onClick={() => this.trip(this.props.lightDex)} /> &nbsp;</a>
                         <div id="stats">
@@ -109,7 +112,7 @@ class Preview extends Component {
                     <img src={this.props.lights[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>
                     {this.state.loaded && <img src={this.props.lights[this.props.lightDex].url} id="preview-img" alt='hacky'></img>}
                     {/* {!this.state.loaded && <img src="./res/splash.png" id="preview-img" alt='A tree'></img>} */}
-                    {!this.state.loaded && <Spinner/>}
+                    {!this.state.loaded && <Spinner />}
                     {this.state.loaded && <div className="Preview_Manager_Interface">
                         <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
                         <div id="stats">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Location from '../Location'
-import GeoData from '../GeoData'
+// import GeoData from '../GeoData'
 import Geocode from "react-geocode";
 import Upload from './Upload'
 import './Post.css'
@@ -33,7 +33,7 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        this.geoInterval = setInterval(this.getGeo, 100)
+        // this.geoInterval = setInterval(this.getGeo, 100)
         this.accuracyInterval = setInterval(this.checkLocationAccuracy, 100)
     }
 
@@ -48,13 +48,13 @@ class Post extends Component {
         }
     }
 
-    getGeo = () => {
+    // getGeo = () => {
 
-        if (GeoData.length > 0 && GeoData[0].latitude) {
-            clearInterval(this.geoInterval)
-            this.setState({ geoLat: GeoData[0].latitude, geoLng: GeoData[0].longitude, radius: 50 })
-        }
-    }
+    //     if (GeoData.length > 0 && GeoData[0].latitude) {
+    //         clearInterval(this.geoInterval)
+    //         this.setState({ geoLat: GeoData[0].latitude, geoLng: GeoData[0].longitude, radius: 50 })
+    //     }
+    // }
 
     handleChange = (event) => {
         const self = this;
@@ -161,7 +161,7 @@ class Post extends Component {
                             <p>Clear</p>
                         </div>
                     </div>}
-                    {((this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0)) && <div className="Selection">
+                    {(this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0) && <div className="Selection">
                         <p id="coords">Your Coordinates:</p>
                         <p id="coords1">{this.convertDMS(Location.lat, Location.lng)}</p>
                         <p id="accuracy"> Coordinate Accuracy:</p>
@@ -171,7 +171,7 @@ class Post extends Component {
                             <p>Use</p>
                         </div>
                     </div>}
-                    {((!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0)) && <div className="Location_Error">
+                    {(!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0) && <div className="Location_Error">
                         <h3>I cant draw an accurate bead on your location.</h3>
                         <br></br>
                         <p>This could be caused by a weak signal from a satelite or you have denied LightMaps access to your location</p>

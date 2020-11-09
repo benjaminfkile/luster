@@ -1,7 +1,7 @@
 import React from "react";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
 import Location from '../Location'
-import GeoData from '../GeoData'
+// import GeoData from '../GeoData'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Radar from '../Radar'
@@ -13,7 +13,6 @@ class Map extends React.Component {
 
   locationTimeout = 0
   mapMounted = false;
-  zoom = 10;
   defaultMapOptions = {
     styles: mapStyles,
     fullscreenControl: false,
@@ -21,7 +20,7 @@ class Map extends React.Component {
     mapTypeControl: false,
     streetViewControl: false,
     gestureHandling: 'greedy',
-    minZoom: 8,
+    // minZoom: 8,
     maxZoom: 15
   };
 
@@ -32,7 +31,7 @@ class Map extends React.Component {
       markers: null,
       lightDex: -1,
       location: false,
-      geoData: false,
+      // geoData: false,
       centered: true,
       dragged: true,
       nearest: false,
@@ -46,7 +45,7 @@ class Map extends React.Component {
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
     this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 100)
-    this.geoInterval = setInterval(this.listen4GEO, 100)
+    // this.geoInterval = setInterval(this.listen4GEO, 100)
     this.setState({ lights: LightStore })
   }
 
@@ -89,12 +88,12 @@ class Map extends React.Component {
     }
   }
 
-  listen4GEO = () => {
-    if (GeoData[0] && this.mapMounted) {
-      this.setState({ geoData: true })
-      clearInterval(this.geoInterval)
-    }
-  }
+  // listen4GEO = () => {
+  //   if (GeoData[0] && this.mapMounted) {
+  //     this.setState({ geoData: true })
+  //     clearInterval(this.geoInterval)
+  //   }
+  // }
 
   findNearest = () => {
     this.setState({ nearest: true })
@@ -147,8 +146,6 @@ class Map extends React.Component {
 
   render = () => {
 
-    console.log('render')
-
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
       null,
@@ -177,7 +174,7 @@ class Map extends React.Component {
 
         {/*LIKELINESS = 1*/}
         {/*Location refused but found GeoData*/}
-        {!this.state.location && this.state.geoData && <GoogleMap
+        {/* {!this.state.location && this.state.geoData && <GoogleMap
           zoom={11}
           defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
           defaultOptions={this.defaultMapOptions}
@@ -185,7 +182,7 @@ class Map extends React.Component {
         >
           <>
           </>
-        </GoogleMap>}
+        </GoogleMap>} */}
 
         {/*LIKELINESS = 2*/}
         {/*has Location and map is centered*/}
@@ -220,7 +217,7 @@ class Map extends React.Component {
         </GoogleMap>}
 
         {/*LIKELINESS = 4*/}
-        {/*no Location or GeoData*/}
+        {/*no Location*/}
         {/*center of USA*/}
         {!this.state.location && <GoogleMap
           zoom={11}
