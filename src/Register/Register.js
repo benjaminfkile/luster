@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Spinner from '../Spinner/Spinner'
-import api from '../api'
+import ApiStore from '../ApiStore'
 import '../Register/Register.css'
 
 class Register extends Component {
@@ -62,7 +62,7 @@ class Register extends Component {
 
 
         if (this.state.name && this.state.email && this.state.pass1 && !this.state.codeSent) {
-            fetch(api + '/api/users/new', {
+            fetch(ApiStore + '/api/users/new', {
 
                 method: 'POST',
                 headers: {
@@ -97,7 +97,7 @@ class Register extends Component {
         evt.preventDefault();
         this.setState({ loading: true })
 
-        fetch(api + '/api/users/valCode', {
+        fetch(ApiStore + '/api/users/valCode', {
 
             method: 'POST',
             headers: {

@@ -10,7 +10,7 @@ let Radar = {
 let dbInterval = setInterval(listen4DB, 1000)
 
 function listen4DB() {
-    if (Lighstore.length > 0 && /*(GeoData.latitude ||*/ Location.lat)/*)*/ {
+    if (Lighstore.length > 0 && Location.lat) {
         clearInterval(dbInterval)
         setInterval(updateCoords, 1000)
         polulateRadar()

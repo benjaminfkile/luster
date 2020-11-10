@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import api from '../api'
+import ApiStore from '../ApiStore'
 import axios from 'axios'
 import uuid from "uuid";
 import './Upload.css'
@@ -66,7 +66,7 @@ class Upload extends Component {
             let lat = this.props.lat
             let lng = this.props.lng
 
-            fetch(api + '/api/lights/whamo,blamo', {
+            fetch(ApiStore + '/api/lights/whamo,blamo', {
 
                 method: 'POST',
                 headers: {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import api from '../api'
+import ApiStore from '../ApiStore'
 import './Contributor.css'
 
 class Contributor extends Component {
@@ -31,7 +31,7 @@ class Contributor extends Component {
     }
 
     valToggle = () => {
-        let targetUrl = api + '/api/users/validate/toggle/' + window.user
+        let targetUrl = ApiStore + '/api/users/validate/toggle/' + window.user
         fetch(targetUrl, {
 
             method: 'POST',

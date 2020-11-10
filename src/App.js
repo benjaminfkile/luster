@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
+import KeyStore from "./KeyStore"
 import PostAddress from './Post/Post'
 import Browse from './Browse/Browse'
 import Profile from './Profile/Profile'
 import Map from './Map/Map'
 import Nav from './Nav/Nav'
-import api from './api'
+import ApiStore from './ApiStore'
 import Location from './Location'
 import LightStore from './LightStore'
 import RadarAnimation from './Browse/RadarAnimation'
 import Snow from './Snow/Snow'
 import './App.css';
 import Geocode from "react-geocode";
-Geocode.setApiKey("AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM");
+Geocode.setApiKey(KeyStore.googleKey);
 Geocode.setLanguage("en");
 
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
       geoLng: -95.7129,
       lat: null,
       lng: null,
+      searchRad: .5,
       accurateLocation: false,
       locationAccuracy: null
     }
@@ -43,8 +45,6 @@ class App extends Component {
 
   componentDidMount() {
     this.zoneInterval = setInterval(this.getZone, 500)
-    // window.user = "510295233cd1919aa43736c145e077a4"
-    // window.name = "Ben"
   }
 
   getZone = () => {
@@ -120,14 +120,11 @@ class App extends Component {
   }
 
   searchAddress = (input) => {
-    console.log('no input')
     if (input !== "") {
-      console.log("searching addresses")
       let temp = []
       this.setState({ results: null })
-      let targetUrl = "https://maps.googleapis.com/maps/api/place/queryautocomplete/json?location=" + this.state.geoLat + "," + this.state.geoLng + "&radius=" + this.state.radius + "&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM&input=" + input.split(' ').join('+')
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
-      fetch(proxyurl + targetUrl)
+      let targetUrl = ApiStore + '/api/places/' + input.split(' ').join('+')
+      fetch(targetUrl)
         .then(res => res.json())
         .then(res => {
           for (let i = 0; i < res.predictions.length; i++) {
@@ -142,7 +139,7 @@ class App extends Component {
   }
 
   getLights = (lat, lng, rad) => {
-    let targetUrl = api + '/api/lights/' + lat + ',' + lng + ',' + rad;
+    let targetUrl = ApiStore + '/api/lights/' + lat + ',' + lng + ',' + rad;
     fetch(targetUrl)
       .then(response => response.json())
       .then(data => {

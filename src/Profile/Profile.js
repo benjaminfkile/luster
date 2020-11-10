@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import api from '../api'
+import ApiStore from '../ApiStore'
 import Preview from "../Preview/Preview"
 import LazyLoad from 'react-lazyload';
 import Register from '../Register/Register'
@@ -56,7 +56,7 @@ class Profile extends Component {
 
     getContributions = () => {
         this.setState({ loading: true })
-        let targetUrl = api + '/api/lights/contributor/' + window.user
+        let targetUrl = ApiStore + '/api/lights/contributor/' + window.user
         fetch(targetUrl)
             .then(response => response.json())
             .then(data => {
@@ -87,7 +87,7 @@ class Profile extends Component {
             this.errorInterval = setInterval(this.listen4Error, 3000)
             return this.setState({ error: ' Password is required', loading: false });
         }
-        fetch(api + '/api/users/validate', {
+        fetch(ApiStore + '/api/users/validate', {
 
             method: 'POST',
             headers: {
@@ -119,7 +119,7 @@ class Profile extends Component {
     }
 
     setName = () => {
-        let targetUrl = api + '/api/users/' + this.state.email;
+        let targetUrl = ApiStore + '/api/users/' + this.state.email;
         fetch(targetUrl)
             .then(response => response.json())
             .then(data => {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import ApiStore from '../ApiStore'
+import KeyStore from '../KeyStore'
 import Location from '../Location'
-// import GeoData from '../GeoData'
 import Geocode from "react-geocode";
 import Upload from './Upload'
 import './Post.css'
-Geocode.setApiKey("AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM");
+Geocode.setApiKey(KeyStore.googleKey);
 Geocode.setLanguage("en");
-
 
 class Post extends Component {
 
@@ -48,14 +48,6 @@ class Post extends Component {
         }
     }
 
-    // getGeo = () => {
-
-    //     if (GeoData.length > 0 && GeoData[0].latitude) {
-    //         clearInterval(this.geoInterval)
-    //         this.setState({ geoLat: GeoData[0].latitude, geoLng: GeoData[0].longitude, radius: 50 })
-    //     }
-    // }
-
     handleChange = (event) => {
         const self = this;
 
@@ -77,14 +69,11 @@ class Post extends Component {
     }
 
     searchAddress = (input) => {
-        console.log('no input')
-        if(input !== ""){
-            console.log("searching addresses")
+        if (input !== "") {
             let temp = []
             this.setState({ results: null })
-            let targetUrl = "https://maps.googleapis.com/maps/api/place/queryautocomplete/json?location=" + this.state.geoLat + "," + this.state.geoLng + "&radius=" + this.state.radius + "&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM&input=" + input.split(' ').join('+')
-            const proxyurl = "https://cors-anywhere.herokuapp.com/";
-            fetch(proxyurl + targetUrl)
+            let targetUrl = ApiStore + '/api/places/' + input.split(' ').join('+')
+            fetch(targetUrl)
                 .then(res => res.json())
                 .then(res => {
                     for (let i = 0; i < res.predictions.length; i++) {
@@ -93,7 +82,7 @@ class Post extends Component {
                     this.setState({ results: temp, address: '', lat: null, lng: null })
                 })
                 .catch(() => console.log("Can’t access " + targetUrl + " response. Blocked by browser?"))
-        }else{
+        } else {
             this.setState({ results: [], address: '', lat: null, lng: null })
         }
     }
@@ -161,6 +150,7 @@ class Post extends Component {
                             <p>Clear</p>
                         </div>
                     </div>}
+                    {/*eslint-disable-next-line*/}
                     {(this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0) && <div className="Selection">
                         <p id="coords">Your Coordinates:</p>
                         <p id="coords1">{this.convertDMS(Location.lat, Location.lng)}</p>
@@ -171,6 +161,7 @@ class Post extends Component {
                             <p>Use</p>
                         </div>
                     </div>}
+                    {/*eslint-disable-next-line*/}
                     {(!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0) && <div className="Location_Error">
                         <h3>I cant draw an accurate bead on your location.</h3>
                         <br></br>

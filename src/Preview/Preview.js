@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import api from '../api'
-// import GeoData from '../GeoData'
+import ApiStore from '../ApiStore'
 import Contributor from '../Contributor/Contributor';
 import Spinner from '../Spinner/Spinner'
 import './Preview.css'
@@ -26,7 +25,7 @@ class Preview extends Component {
 
     upvote = (args) => {
         if (window.user) {
-            fetch(api + '/api/stats/upvote', {
+            fetch(ApiStore + '/api/stats/upvote', {
 
                 method: 'POST',
                 headers: {
@@ -50,7 +49,7 @@ class Preview extends Component {
         } else {
             user += "no-data@:" + Date.now()
         }
-        fetch(api + '/api/stats/trip', {
+        fetch(ApiStore + '/api/stats/trip', {
 
             method: 'POST',
             headers: {

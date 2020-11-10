@@ -1,7 +1,7 @@
 import React from "react";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
+import KeyStore from '../KeyStore'
 import Location from '../Location'
-// import GeoData from '../GeoData'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Radar from '../Radar'
@@ -31,7 +31,6 @@ class Map extends React.Component {
       markers: null,
       lightDex: -1,
       location: false,
-      // geoData: false,
       centered: true,
       dragged: true,
       nearest: false,
@@ -44,8 +43,7 @@ class Map extends React.Component {
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
     this.updateLocationInterval = setInterval(this.updateLocation, 1000)
-    this.dbInterval = setInterval(this.listen4DB, 100)
-    // this.geoInterval = setInterval(this.listen4GEO, 100)
+    this.dbInterval = setInterval(this.listen4DB, 500)
     this.setState({ lights: LightStore })
   }
 
@@ -76,7 +74,6 @@ class Map extends React.Component {
       this.setState({ location: false })
       this.locationTimeout++
       if (this.locationTimeout > 19) {
-        // console.log('location denied')
         clearInterval(this.listen4LocationInterval)
       }
     }
@@ -87,13 +84,6 @@ class Map extends React.Component {
       this.setState({ location: true })
     }
   }
-
-  // listen4GEO = () => {
-  //   if (GeoData[0] && this.mapMounted) {
-  //     this.setState({ geoData: true })
-  //     clearInterval(this.geoInterval)
-  //   }
-  // }
 
   findNearest = () => {
     this.setState({ nearest: true })
@@ -156,7 +146,6 @@ class Map extends React.Component {
     return (
       <div>
 
-        {/*LIKELINESS = 0*/}
         {/*center over nearest*/}
         {this.state.nearest && <GoogleMap
           zoom={15}
@@ -172,20 +161,7 @@ class Map extends React.Component {
           />
         </GoogleMap>}
 
-        {/*LIKELINESS = 1*/}
-        {/*Location refused but found GeoData*/}
-        {/* {!this.state.location && this.state.geoData && <GoogleMap
-          zoom={11}
-          defaultCenter={{ lat: GeoData[0].latitude, lng: GeoData[0].longitude }}
-          defaultOptions={this.defaultMapOptions}
-          onDrag={this.dragged}
-        >
-          <>
-          </>
-        </GoogleMap>} */}
-
-        {/*LIKELINESS = 2*/}
-        {/*has Location and map is centered*/}
+        {/*center over location*/}
         {this.state.location && this.state.centered && <GoogleMap
           zoom={11}
           center={{ lat: Location.lat, lng: Location.lng }}
@@ -200,7 +176,6 @@ class Map extends React.Component {
           </>
         </GoogleMap>}
 
-        {/*LIKELINESS = 3*/}
         {/*has Location and user drags map*/}
         {this.state.location && this.state.dragged && <GoogleMap
           zoom={11}
@@ -214,11 +189,9 @@ class Map extends React.Component {
               icon={locationMarker}
             />}
           </>
-        </GoogleMap>}
+        </GoogleMap>}  
 
-        {/*LIKELINESS = 4*/}
-        {/*no Location*/}
-        {/*center of USA*/}
+        {/*no Location, center of USA*/}
         {!this.state.location && <GoogleMap
           zoom={11}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
@@ -253,8 +226,7 @@ class Map extends React.Component {
 const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
-    // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-    googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAj6zqW55nq95JI6gGGj-BtkN_hfZhJScM"
+    googleMapURL={KeyStore.mapUrl}
     loadingElement={<div style={{ height: `100%` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
     mapElement={<div style={{ height: `100%` }} />}
