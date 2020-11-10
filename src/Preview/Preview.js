@@ -79,11 +79,6 @@ class Preview extends Component {
 
     render() {
 
-        if(this.props.lightDex !== -1){
-            console.log("lat: " + this.props.lights[this.props.lightDex].lat)
-            console.log("lng: " + this.props.lights[this.props.lightDex].lng)
-        }
-
         return (
             <div>
                 {this.props.lightDex !== -1 && !this.props.contributions && <div className="Preview_User">
