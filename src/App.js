@@ -34,7 +34,6 @@ class App extends Component {
       geoLng: -95.7129,
       lat: null,
       lng: null,
-      searchRad: .5,
       accurateLocation: false,
       locationAccuracy: null
     }
