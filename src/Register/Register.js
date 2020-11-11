@@ -195,8 +195,6 @@ class Register extends Component {
                         <img id="verify-img" src="./res/verify.png" alt="oops"></img>
                         <p>Verify Code</p>
                     </div>}
-                    {/* {this.state.codeSent && <button onClick={this.checkCode}>Submit</button>} */}
-
                     {this.state.codeSent && !this.state.invalidCode && <p>I sent you an email with a verification code, please enter the code to finish registering.</p>}
                 </form>}
                 <br></br>

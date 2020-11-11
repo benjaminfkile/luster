@@ -54,6 +54,7 @@ class Upload extends Component {
             }
         })
             .then(res => {
+                console.log(res)
                 this.setState({ response: res, finished: true, progress: null, image: null, selectedFile: null })
                 this.updateRows(this.state.response.data.data.display_url, this.state.response.data.data.delete_url)
             });
@@ -79,6 +80,7 @@ class Upload extends Component {
                     url: large,
                     id: uuid.v4(),
                     user: window.user,
+                    pass: window.pass,
                     del: del,
                     upvotes: '{}',
                     trips: '{}',

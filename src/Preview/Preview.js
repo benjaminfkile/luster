@@ -24,7 +24,7 @@ class Preview extends Component {
     }
 
     upvote = (args) => {
-        if (window.user) {
+        if (window.user && window.pass) {
             fetch(ApiStore + '/api/stats/upvote', {
 
                 method: 'POST',
@@ -34,9 +34,24 @@ class Preview extends Component {
                 },
                 body: JSON.stringify({
                     id: this.props.lights[args].id,
-                    userId: window.user
+                    userId: window.user,
+                    pass: window.pass
                 })
             })
+        }
+        this.toggleUpvote(args)
+    }
+
+    toggleUpvote = (args) => {
+        if (this.state.liked) {
+            if (this.props.lights[args].upvotes && this.props.lights[args].upvotes.length > 0) {
+                let i = this.props.lights[args].upvotes.indexOf(window.user);
+                if (i > -1) {
+                    this.props.lights[args].upvotes.splice(i, 1);
+                }
+                this.setState({ liked: false, likes: this.props.lights[args].upvotes.length})
+            }
+        } else {
             this.props.lights[args].upvotes.push(window.user)
             this.setState({ liked: true, likes: this.props.lights[args].upvotes.length })
         }
@@ -94,7 +109,7 @@ class Preview extends Component {
                                 {this.state.likes}
                             </p>
                         </div>
-                        {window.user && this.state.liked && <img id="like-img" src="./res/like-btn.png" alt="oops"></img>}
+                        {window.user && this.state.liked && <img id="like-img" src="./res/like-btn.png" alt="oops" onClick={() => this.upvote(this.props.lightDex)}></img>}
                         {window.user && !this.state.liked && <img id="like-img" src="./res/not-liked.png" alt="oops" onClick={() => this.upvote(this.props.lightDex)}></img>}
 
                     </div>}

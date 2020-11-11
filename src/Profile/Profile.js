@@ -77,6 +77,7 @@ class Profile extends Component {
 
         evt.preventDefault();
         this.setState({ loading: true })
+        window.pass = this.state.password
 
         if (!this.state.email) {
             this.errorInterval = setInterval(this.listen4Error, 3000)
@@ -102,7 +103,6 @@ class Profile extends Component {
             this.setState({ loading: false })
             if (res.status === 200) {
                 this.setState({ loggedIn: true })
-                //window.user = this.state.email
                 this.setName(this.state.email)
             }
             if (res.status === 202) {
@@ -130,6 +130,8 @@ class Profile extends Component {
 
     logOut = () => {
         window.user = null
+        window.name = null
+        this.contribs = []
         this.setState({ loggedIn: false, email: '', password: '' })
     }
 
