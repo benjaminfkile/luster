@@ -1,0 +1,56 @@
+/*Credit to : https://codepen.io/doncoco/pen/WvMgwz */
+
+#c {
+  position: absolute;
+  top: 60vh;
+  left: 45vw;
+}
+
+.s {
+  width: 10vw;
+  height: 10vw;
+  border-radius: 50%;
+  float: left;
+  background: rgb(12, 191, 232);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  transition: all 0.2s;
+  -webkit-animation: r5 1s 0s ease-out infinite;
+  -moz-animation: r5 1s 0s ease-out infinite;
+  animation: r5 1s 0s ease-out infinite;
+}
+
+@-webkit-keyframes r5 {
+  0% {
+    box-shadow: 0 0 8px 6px rgba(12, 191, 232, .5), 0 0 0px 0px transparent, 0 0 0px 0px rgba(12, 191, 232, .7);
+  }
+  10% {
+    transform:scale(1,1);
+    box-shadow: 0 0 8px 6px rgba(12, 191, 232, .5), 0 0 12px 10px transparent, 0 0 12px 14px rgba(12, 191, 232, .7);
+  }
+  100% {
+    box-shadow: 0 0 8px 6px rgba(26, 140, 255, 0), 0 0 0px 40px transparent, 0 0 0px 40px rgba(26, 140, 255, 0);
+  }
+}
+@-moz-keyframes r5 {
+  0% {
+    box-shadow: 0 0 8px 6px rgb(12, 191, 232), 0 0 0px 0px transparent, 0 0 0px 0px rgb(12, 191, 232);
+  }
+  10% {
+    box-shadow: 0 0 8px 6px rgb(12, 191, 232), 0 0 12px 10px transparent, 0 0 12px 14px rgb(12, 191, 232);
+  }
+  100% {
+    box-shadow: 0 0 8px 6px rgba(26, 140, 255, 0), 0 0 0px 40px transparent, 0 0 0px 40px rgba(26, 140, 255, 0);
+  }
+}
+@keyframes r5 {
+  0% {
+    box-shadow: 0 0 8px 6px rgb(12, 191, 232), 0 0 0px 0px transparent, 0 0 0px 0px rgb(12, 191, 232);
+  }
+  10% {
+    box-shadow: 0 0 8px 6px rgb(12, 191, 232), 0 0 12px 10px transparent, 0 0 12px 14px rgb(12, 191, 232);
+  }
+  100% {
+    box-shadow: 0 0 8px 6px rgba(26, 140, 255, 0), 0 0 0px 40px transparent, 0 0 0px 40px rgba(26, 140, 255, 0);
+  }
+}

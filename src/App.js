@@ -9,7 +9,7 @@ import Nav from './Nav/Nav'
 import ApiStore from './ApiStore'
 import Location from './Location'
 import LightStore from './LightStore'
-import RadarAnimation from './Browse/RadarAnimation'
+import Pulse from './Pulse/Pulse'
 import Snow from './Snow/Snow'
 import './App.css';
 import Geocode from "react-geocode";
@@ -177,7 +177,7 @@ class App extends Component {
         {!this.state.hasLocation && <div className="Location_Denied">
           <h2>Welcome to LightMaps!</h2>
           <input type="text" value={this.state.input} placeholder={this.state.placeholder} onClick={this.clearPlaceholder} onChange={this.handleChange} />
-          {this.state.results && this.state.results.length === 0 && <h3>I dont have your location which is fine, you can search for locations instead.</h3>}
+          {this.state.results && this.state.results.length === 0 && <h3>You havent allowed me your location which is fine, you can search for a location instead.</h3>}
           {this.state.results && <div className="Address_Container">
             {this.state.results.map((result, i) =>
               <p className="Address_Suggestion" key={i} onClick={() => this.convertAddressToCoords(result)}>{result}</p>
@@ -197,7 +197,7 @@ class App extends Component {
               <p>Clear</p>
             </div>
           </div>}
-          {this.state.results && this.state.results.length === 0 && <RadarAnimation />}
+          {this.state.results && this.state.results.length === 0 && <Pulse />}
           <Snow />
         </div>}
       </div>

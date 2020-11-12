@@ -31,7 +31,7 @@
     cursor: pointer;
     font-family: 'Red Rose', cursive;
 }
-@media (min-height: 149px) {
+/* @media (min-height: 149px) {
     .Map_Controls{
         top: 73vh;
     }
@@ -90,7 +90,7 @@
     .Map_Controls{
         top: 93vh;
     }
-}
+} */
 
 
 
