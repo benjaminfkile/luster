@@ -50,7 +50,7 @@
     width: 50px;
 }
 #register-btn p{
-    margin-top: -3vh;
+    margin-top: -5vh;
 }
 #register-btn img{
     width: 100px;
@@ -61,6 +61,9 @@
 #error-btn{
     background-color: rgb(0, 0, 0);
     color: rgb(255, 0, 0);
+}
+#forgot-btn{
+    margin-top: 3vh;
 }
 .Contribs_Container{
     position: absolute;

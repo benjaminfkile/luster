@@ -189,7 +189,7 @@ class Map extends React.Component {
               icon={locationMarker}
             />}
           </>
-        </GoogleMap>}  
+        </GoogleMap>}
 
         {/*no Location, center of USA*/}
         {!this.state.location && <GoogleMap
@@ -201,12 +201,15 @@ class Map extends React.Component {
           </>
         </GoogleMap>}
 
-        {!this.state.nearest && <div className="Nearest" onClick={this.findNearest}>
-          <p>Nearest</p>
-        </div>}
-        {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
-          <p>Recenter</p>
-        </div>}
+        <div className="Map_Controls">
+          {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
+            <p>Recenter</p>
+          </div>}
+          {!this.state.nearest && <div className="Nearest" onClick={this.findNearest}>
+            <p>Nearest</p>
+          </div>}
+        </div>
+
         <div className="Markers">
           {this.state.markers}
         </div>

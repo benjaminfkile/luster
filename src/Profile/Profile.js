@@ -3,9 +3,9 @@ import ApiStore from '../ApiStore'
 import Preview from "../Preview/Preview"
 import LazyLoad from 'react-lazyload';
 import Register from '../Register/Register'
+import Reset from '../Reset/Reset'
 import Spinner from '../Spinner/Spinner'
 import './Profile.css'
-
 
 class Profile extends Component {
 
@@ -18,6 +18,7 @@ class Profile extends Component {
             password: '',
             error: '',
             register: false,
+            reset: '',
             loading: false,
             loggedIn: false,
             hasContribs: true,
@@ -156,6 +157,14 @@ class Profile extends Component {
         }
     }
 
+    resetPass = (args) => {
+        if (args === 1) {
+            this.setState({ reset: false })
+        } else {
+            this.setState({ reset: true })
+        }
+    }
+
     togglePreview = (args) => {
         if (this.state.showFeed) {
             this.setState({ showFeed: false })
@@ -230,7 +239,7 @@ class Profile extends Component {
                         lights={this.contribs}
                     />
                 </div>}
-                {!this.state.register && !this.state.loggedIn && !this.state.loading && !this.state.loading && <form className="Login_Form" id="login-form" onSubmit={this.handleSubmit}>
+                {!this.state.register && !this.state.reset && !this.state.loggedIn && !this.state.loading && !this.state.loading && <form className="Login_Form" id="login-form" onSubmit={this.handleSubmit}>
                     <h1>
                         Log In
                     </h1>
@@ -251,10 +260,17 @@ class Profile extends Component {
                         <img id="register-img" src="./res/register.png" alt="oops"></img>
                         <p>Register</p>
                     </div>
+                    <div id="forgot-btn" onClick={this.resetPass}>
+                        <p>Forgot Password?</p>
+                    </div>
                 </form>}
                 {this.state.register &&
                     <Register
                         register={this.register}
+                    />}
+                {this.state.reset &&
+                    <Reset
+                        reset={this.resetPass}
                     />}
                 <br></br>
                 {this.state.error &&

@@ -1,7 +1,13 @@
-.Recenter{
+.Map_Controls{
     position: absolute;
     top: 85vh;
-    left: 1vw;
+    width: 100vw;
+    display: flex;
+
+}
+
+.Recenter{
+    margin-left: 1vw;
     z-index: 1000;
     border: 2px solid rgb(60, 60, 60);
     border-radius: 5px;
@@ -14,9 +20,8 @@
     font-family: 'Red Rose', cursive;
 }
 .Nearest{
-    position: absolute;
-    top: 85vh;
-    left: 72vw;
+    margin-left: auto;
+    margin-right: 1vw;
     z-index: 1000;
     border: 2px solid rgb(60, 60, 60);
     border-radius: 5px;
