@@ -36,7 +36,7 @@ class Nav extends Component {
                     <div className="Map_Route" tabIndex="1">
                         <li onClick={this.toggleBurger}>
                             <Link to='/'>
-                                Map |
+                                Map | 
                             </Link>
                         </li>
 
@@ -44,14 +44,14 @@ class Nav extends Component {
                     <div className="Browse_Route" tabIndex="2">
                         <li onClick={this.toggleBurger}>
                             <Link to='/browse'>
-                                Browse |
+                                Browse | 
                             </Link>
                         </li>
                     </div>
                     <div className="Post_Route" tabIndex="3">
                         <li onClick={this.toggleBurger}>
                             <Link to='/post'>
-                                Post |
+                                Post | 
                             </Link>
                         </li>
                     </div>
