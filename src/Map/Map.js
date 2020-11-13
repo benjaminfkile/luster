@@ -1,5 +1,6 @@
 import React from "react";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
+import Search from '../Search/Search'
 import KeyStore from '../KeyStore'
 import Location from '../Location'
 import LightStore from "../LightStore";
@@ -7,6 +8,8 @@ import Preview from "../Preview/Preview"
 import Radar from '../Radar'
 import Snow from '../Snow/Snow'
 import { mapStyles } from './NightMode'
+import { Link } from 'react-router-dom'
+
 import '../Map/Map.css'
 
 class Map extends React.Component {
@@ -144,8 +147,15 @@ class Map extends React.Component {
       new window.google.maps.Size(50, 50))
 
     return (
-      <div>
-
+      <div className="Map">
+        <div className="Search_Route">
+          <li>
+            <Link to='/search'>
+              <img id="search-pin" src='./res/pin.png' alt='hacky'></img>
+            </Link>
+          </li>
+        </div>
+        {LightStore.length === 0 && this.mapMounted && <Search />}
         {/*center over nearest*/}
         {this.state.nearest && <GoogleMap
           zoom={15}

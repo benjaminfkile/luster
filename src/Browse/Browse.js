@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import Search from '../Search/Search'
 import Preview from "../Preview/Preview"
-import Snow from '../Snow/Snow'
 import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
 import Spinner from '../Spinner/Spinner'
 import Radar from '../Radar'
+import { Link } from 'react-router-dom'
 import '../Browse/Browse.css'
 
 class Browse extends Component {
@@ -20,7 +21,8 @@ class Browse extends Component {
             showSlider: true,
             maxDistance: 20,
             sliderMax: 200,
-            searchDistance: 0
+            searchDistance: 0,
+            nag: false
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
     }
@@ -34,6 +36,7 @@ class Browse extends Component {
     listen4DB = () => {
         if (LightStore.length > 0) {
             clearInterval(this.dbInterval)
+            //??
             this.setState({ db: true })
             this.lights = LightStore
         }
@@ -47,7 +50,7 @@ class Browse extends Component {
     }
 
     listen4SliderDrag = () => {
-        if(this.state.maxDistance !== this.distance){
+        if (this.state.maxDistance !== this.distance) {
             this.filterByDistance(this.distance)
         }
     }
@@ -87,6 +90,14 @@ class Browse extends Component {
         this.setState({ lightDex: args })
     }
 
+    toggleNag = () => {
+        if (this.state.nag) {
+            this.setState({ nag: false })
+        } else {
+            this.setState({ nag: true })
+        }
+    }
+
     handleSliderDrag(evt) {
         this.distance = evt.target.value
         this.setState({ showFeed: false })
@@ -96,37 +107,47 @@ class Browse extends Component {
 
         return (
             <div className="Browse">
-                {this.lights.length === 0 && <Spinner />}
-                <p id="range-info"> Found {this.lights.length} within {this.state.maxDistance} miles.</p>
-                {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
-                    <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
-                </div>}
-                {this.state.showFeed && <div className="Img_Container">
-                    {this.lights.map((img, i) =>
-                        <LazyLoad
-                            key={i}
-                            height={0}>
-                            <div className="Item">
-                                <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                <div id="browse-stats">
-                                    <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                    <p>
-                                        {img.upvotes.length}
-                                    </p>
-                                    <p id="distance">
-                                        {img.distance} mi
+                <div className="Search_Route">
+                    <li>
+                        <Link to='/search'>
+                            <img id="search-pin" src='./res/pin.png' alt='hacky'></img>
+                        </Link>
+                    </li>
+                </div>
+                {this.lights.length === 0 && <Search />}
+                {this.lights.length > 0 && <div className="Has_Location">
+                    {this.lights.length === 0 && <Spinner />}
+                    <p id="range-info"> Found {this.lights.length} within {this.state.maxDistance} miles.</p>
+                    {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
+                        <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
+                    </div>}
+                    {this.state.showFeed && <div className="Img_Container">
+                        {this.lights.map((img, i) =>
+                            <LazyLoad
+                                key={i}
+                                height={0}>
+                                <div className="Item">
+                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                    <div id="browse-stats">
+                                        <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                        <p>
+                                            {img.upvotes.length}
                                         </p>
+                                        <p id="distance">
+                                            {img.distance} mi
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        </LazyLoad>)}
+                            </LazyLoad>)}
+                    </div>}
+                    <Preview
+                        togglePreview={this.togglePreview}
+                        lights={this.lights}
+                        lightDex={this.state.lightDex}
+                        contributions={false}
+                    />
                 </div>}
-                <Preview
-                    togglePreview={this.togglePreview}
-                    lights={this.lights}
-                    lightDex={this.state.lightDex}
-                    contributions={false}
-                />
-                <Snow />
+                {/* <Snow /> */}
             </div>
         );
     }

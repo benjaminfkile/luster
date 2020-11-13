@@ -11,8 +11,9 @@ function inApp() {
 }
 
 function getLocation() {
-    if (!app && navigator.geolocation) {
+    if (!app && navigator.geolocation && !window.haltGeo) {
         navigator.geolocation.getCurrentPosition(setLocation)
+        console.log("location updated")
     }
 }
 

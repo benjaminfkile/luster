@@ -9,7 +9,7 @@ class Pulse extends Component {
         return (
             <div className="Pulse">
                 <div id='c'>
-                    <div class='s'>
+                    <div className='s'>
                     </div>
                 </div>
             </div>
