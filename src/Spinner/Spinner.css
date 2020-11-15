@@ -10,7 +10,7 @@
   height: 10vw;
   -webkit-animation: spin .4s linear infinite;
   animation: spin .4s linear infinite;
-  z-index: 10005;
+  z-index: 1005;
 }
 
 @-webkit-keyframes spin {

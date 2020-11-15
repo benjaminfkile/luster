@@ -3,8 +3,8 @@ import ApiStore from '../ApiStore'
 import KeyStore from "../KeyStore"
 import Location from '../Location'
 import LightStore from '../LightStore'
-import Pulse from '../Pulse/Pulse'
 import Geocode from "react-geocode";
+import Snow from '../Snow/Snow'
 import "./Search.css"
 Geocode.setApiKey(KeyStore.googleKey);
 Geocode.setLanguage("en");
@@ -12,7 +12,7 @@ Geocode.setLanguage("en");
 class Search extends Component {
 
   searchRadius = 3
-  path = window.location.pathname
+  mounted = false
 
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ class Search extends Component {
       hasLocation: false,
       address: '',
       input: '',
-      placeholder: "Search",
+      placeholder: "",
       results: [],
       typing: false,
       typingTimeout: 0,
@@ -28,8 +28,6 @@ class Search extends Component {
       geoLng: -95.7129,
       lat: null,
       lng: null,
-      accurateLocation: false,
-      locationAccuracy: null
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,15 +35,16 @@ class Search extends Component {
   }
 
   componentDidMount() {
+    this.mounted = true
     this.zoneInterval = setInterval(this.getZone, 500)
   }
 
-  getZone = () => {
+  componentWillUnmount() {
+    this.mounted = false
+  }
 
-    if (this.path === '/search') {
-      this.setState({ hasLocation: false })
-      window.haltGeo = true
-    } else {
+  getZone = () => {
+    if (!this.props.toggled && this.mounted) {
       if (!Location.lat) {
         this.setState({ hasLocation: false })
       } else {
@@ -53,8 +52,11 @@ class Search extends Component {
         clearInterval(this.zoneInterval)
         this.setState({ hasLocation: true })
         this.getLights(Location.lat, Location.lng, this.searchRadius)
-
       }
+    } else {
+      clearInterval(this.zoneInterval)
+      this.getLights(Location.lat, Location.lng, this.searchRadius)
+      window.haltLocation = true
     }
   }
 
@@ -143,10 +145,11 @@ class Search extends Component {
     fetch(targetUrl)
       .then(response => response.json())
       .then(data => {
-        if (data && data.length === 0) {
+        if (data && data.length < 1) {
           this.searchRadius += 3
-          if (this.searchRadius > 99) {
-            alert('nothing found near you')
+          if (this.searchRadius > 33) {
+            this.setState({ hasLocation: false })
+            this.searchRadius = 3
           } else {
             this.getLights(lat, lng, this.searchRadius)
           }
@@ -154,47 +157,45 @@ class Search extends Component {
           LightStore.length = 0
           for (let i = 0; i < data.length; i++) {
             if (data[i].on === 't') {
+              if (i > 300) { break; }
               LightStore.push(data[i])
             }
           }
         }
-      })
-      .catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
-    if (this.path === "/search") {
-      window.history.back()
-    }
+      }).catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
+    console.log('Search Radius' + this.searchRadius)
   }
 
   render() {
     return (
       <div>
-        {!this.state.hasLocation && <div className="Location_Denied">
-          {/* <h2>Welcome to LightMaps!</h2> */}
-          <input type="text" value={this.state.input} placeholder={this.state.placeholder} onClick={this.clearPlaceholder} onChange={this.handleChange} />
-          {this.state.results && this.state.results.length === 0 && <h3>You havent allowed LightMaps your location which is fine, you can search for a location instead.</h3>}
-          {this.state.results && <div className="Address_Container">
+        {!this.state.hasLocation && <div className="Search">
+          <h2>Search</h2>
+          <input id="search-input" type="text" value={this.state.input} placeholder={this.state.placeholder} onClick={this.clearPlaceholder} onChange={this.handleChange} />
+          {this.state.results && this.state.results.length === 0 && !this.props.toggled && <h3>You havent allowed LightMaps your location which is fine, you can search for a location instead.</h3>}
+          {this.state.results && this.state.results.length === 0 && this.props.toggled && <h3>Search for places.</h3>}
+          {this.state.results && <div className="Suggestion_Container">
             {this.state.results.map((result, i) =>
-              <p className="Address_Suggestion" key={i} onClick={() => this.convertAddressToCoords(result)}>{result}</p>
+              <p className="Suggestion" key={i} onClick={() => this.convertAddressToCoords(result)}>{result}</p>
             )}
           </div>}
           {this.state.lat && this.state.address !== '' && <div className="Selection">
-            <p id="address">Your Location:</p>
-            <p id="address1">{this.state.address}</p>
-            <p id="coords">Location Coordinates:</p>
-            <p id="coords1">{this.convertDMS(this.state.lat, this.state.lng)}</p>
-            <div className="Yes_Option" onClick={this.useAddress}>
+            <p id="suggestion">Location:</p>
+            <p id="suggestion1">{this.state.address}</p>
+            <p id="coords2">Location Coordinates:</p>
+            <p id="coords3">{this.convertDMS(this.state.lat, this.state.lng)}</p>
+            <div className="Yes_Option1" onClick={this.useAddress}>
               <img id="use-img" src="./res/yes.png" alt="oops" />
               <p>Use</p>
             </div>
-            <div className="No_Option" onClick={this.discardAddress}>
+            <div className="No_Option1" onClick={this.discardAddress}>
               <img id="use-img" src="./res/no.png" alt="oops" />
               <p>Clear</p>
             </div>
           </div>}
-          {this.state.results && this.state.results.length === 0 && <Pulse />}
         </div>}
+        {/* <Snow /> */}
       </div>
-
     )
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
+import LightStore from './LightStore'
 import PostAddress from './Post/Post'
 import Browse from './Browse/Browse'
 import Profile from './Profile/Profile'
@@ -15,13 +16,13 @@ class App extends Component {
     return (
       <div className="Wrapper">
         <div className="App">
-        <Nav />
+          <Nav />
           <Switch>
             <Route exact path='/' component={Map} />
             <Route path='/post' component={PostAddress} />
             <Route path='/browse' component={Browse} />
             <Route path='/profile' component={Profile} />
-            <Route path='/search' component={Search} autoClear={false}/>
+            <Route path='/search' component={Search} />
             <Route component={Map} />
           </Switch>
         </div>

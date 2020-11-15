@@ -1,14 +1,13 @@
 import React from "react";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
-import Search from '../Search/Search'
 import KeyStore from '../KeyStore'
 import Location from '../Location'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Radar from '../Radar'
 import Snow from '../Snow/Snow'
+import Search from '../Search/Search'
 import { mapStyles } from './NightMode'
-import { Link } from 'react-router-dom'
 
 import '../Map/Map.css'
 
@@ -37,7 +36,9 @@ class Map extends React.Component {
       centered: true,
       dragged: true,
       nearest: false,
-      inApp: true
+      inApp: true,
+      target: null,
+      search: false
     }
   }
 
@@ -47,6 +48,8 @@ class Map extends React.Component {
     this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
     this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 500)
+    this.radarInterval = setInterval(this.listen4Radar, 500)
+    this.queryInterval = setInterval(this.listenForQuery, 500)
     this.setState({ lights: LightStore })
   }
 
@@ -82,9 +85,23 @@ class Map extends React.Component {
     }
   }
 
+  listen4Radar = () => {
+    if (Radar.targets.length > 0 && this.mapMounted) {
+        this.setState({target: Radar.targets[0][0]})
+        clearInterval(this.radarInterval)
+    }
+}
+
   updateLocation = () => {
     if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
       this.setState({ location: true })
+    }
+  }
+
+  listenForQuery = () => {
+    if (this.state.target && this.state.target !== Radar.targets[0][0] && this.mapMounted) {
+      this.setState({ target: Radar.targets[0][0] })
+      this.buildMarkers()
     }
   }
 
@@ -98,18 +115,24 @@ class Map extends React.Component {
     this.setState({ centered: true })
     this.setState({ dragged: false })
     this.setState({ nearest: false })
-
   }
 
   dragged = () => {
     this.setState({ centered: false })
     this.setState({ dragged: true })
     this.setState({ nearest: false })
-
   }
 
   togglePreview = (args) => {
     this.setState({ lightDex: args })
+  }
+
+  toggleSearch = () => {
+    if (this.state.search) {
+      this.setState({ search: false })
+    } else {
+      this.setState({ search: true })
+    }
   }
 
   buildMarkers = () => {
@@ -139,6 +162,7 @@ class Map extends React.Component {
 
   render = () => {
 
+
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
       null,
@@ -148,16 +172,10 @@ class Map extends React.Component {
 
     return (
       <div className="Map">
-        <div className="Search_Route">
-          <li>
-            <Link to='/search'>
-              <img id="search-pin" src='./res/pin.png' alt='hacky'></img>
-            </Link>
-          </li>
-        </div>
-        {LightStore.length === 0 && this.mapMounted && <Search />}
+        {LightStore.length === 0 && <Search />}
+        {this.state.search && <Search toggled={true} />}
         {/*center over nearest*/}
-        {this.state.nearest && <GoogleMap
+        {this.state.nearest && Radar.targets[0][1].lat && <GoogleMap
           zoom={15}
           center={{ lat: Number(Radar.targets[0][1].lat), lng: Number(Radar.targets[0][1].lng) }}
           defaultOptions={this.defaultMapOptions}
@@ -220,16 +238,19 @@ class Map extends React.Component {
           </div>}
         </div>
 
+        <div className="Search_Toggle">
+          <img src="./res/pin.png" alt="oops" onClick={this.toggleSearch}></img>
+        </div>
         <div className="Markers">
           {this.state.markers}
         </div>
 
-        <Preview
+        {!this.state.search && <Preview
           togglePreview={this.togglePreview}
           lightDex={this.state.lightDex}
           contributions={false}
           lights={LightStore}
-        />
+        />}
         <Snow />
       </div>
     );

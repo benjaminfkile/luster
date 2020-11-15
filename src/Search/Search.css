@@ -1,12 +1,18 @@
-.Location_Denied{
+.Search{
     position: absolute;
-    top: 10vh;
-    z-index: 1010;
+    top: 15vh;
+    left: 4vw;
+    width: 90vw;
+    z-index: 1099;
+    border-style: solid;
+    border-radius: 5px;
+    text-align: center;
+    background-color: black;
 }
-.Location_Denied input[type=text]{
-    width: 86vw;
+.Search input[type=text]{
+    width: 88vw;
     margin-top: 2vh;
-    margin-left: 5vw;
+    margin-left: .5vw;
     padding-bottom: 15px;
     padding-top: 15px;
     /* padding-left: 4vw; */
@@ -18,35 +24,99 @@
     border-radius: 5px;
     text-align: center;
   }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: rgb(168,168,168);
+    -webkit-box-shadow: 0 0 0px 1000px rgb(0, 0, 0) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
   
-  .Location_Denied h3{
+  .Search h3{
     text-align: center;
     margin-top: 5vh;
     margin-left: 5vw;
     margin-right: 5vw;
+    margin-bottom: 50px;
     color: rgb(168,168,168);
+    font-size: 15px;
 
   }
   
-  .Location_Denied h2{
+  .Search h2{
     text-align: center;
     margin-top: 5vh;
     margin-bottom: 3vh;
     margin-left: 5vw;
     margin-right: 5vw;
     color: rgb(12, 191, 232);
+    font-size: 20px;
   }
   
-  .Address_Container p{
+  .Suggestion_Container p{
     color: rgb(168,168,168);
   }
+  .Suggestion{
+    width: 90vw;
+    border-bottom: solid;
+    border-color: rgb(36, 47, 62);
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
-  .Search_Route{
-    position: absolute;
-    z-index: 1199;
-    top: -5px;
-    left: -10px;
+  #suggestion, #suggestion1, #coords2, #coords3{
+    text-align: center;
+    width: 90vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    color: white;
 }
-#search-pin{
-    width: 60px;
+#suggestion1, #coords3{
+    color: rgb(12,191,232);
 }
+.Yes_Option{
+    margin-bottom: 2vh;
+}
+.Yes_Option1{
+    display: flex;
+    width: 22vw;
+    margin-left: 34vw;
+    margin-bottom: 10px;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border-width: 1px;
+
+}
+.No_Option1{
+    display: flex;
+    width: 25vw;
+    margin-left: 32.5vw;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border-width: 1px;
+
+}
+.Yes_Option1 p, .No_Option1 p{
+    padding-top: 5px;
+    color: rgb(255, 255, 255);
+}
+.Yes_Option1 img, .No_Option1 img{
+    width: 30px;
+}
+.Yes_Option1{
+    margin-top: 5vh;
+}
+
