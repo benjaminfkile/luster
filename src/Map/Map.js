@@ -10,6 +10,7 @@ import Search from '../Search/Search'
 import { mapStyles } from './NightMode'
 
 import '../Map/Map.css'
+import { timeHours } from "d3";
 
 class Map extends React.Component {
 
@@ -105,7 +106,7 @@ class Map extends React.Component {
 
   listenForQuery = () => {
     if (this.state.target && this.state.target !== Radar.targets[0][0] && this.mapMounted) {
-      this.setState({ target: Radar.targets[0][0], centered: true })
+      this.setState({ target: Radar.targets[0][0] })
       this.buildMarkers()
     }
   }
@@ -167,8 +168,9 @@ class Map extends React.Component {
 
   render = () => {
 
-    console.log('Map rendered')
-
+    if (this.state.lights && this.state.lights.length > 0) {
+      console.log(this.state.lights.length)
+    }
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',

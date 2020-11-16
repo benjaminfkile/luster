@@ -158,7 +158,7 @@ class Search extends Component {
           LightStore.length = 0
           for (let i = 0; i < data.length; i++) {
             if (data[i].on === 't') {
-              if (i > 300) { break; }
+              // if (i > 300) { break; }
               LightStore.push(data[i])
             }
           }
