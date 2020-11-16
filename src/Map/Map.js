@@ -47,7 +47,7 @@ class Map extends React.Component {
     this.inApp()
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 500)
-    // this.updateLocationInterval = setInterval(this.updateLocation, 1000)
+    this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 500)
     this.radarInterval = setInterval(this.listen4Radar, 500)
     this.queryInterval = setInterval(this.listenForQuery, 500)
