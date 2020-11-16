@@ -122,6 +122,9 @@ class Browse extends Component {
 
     render() {
 
+        console.log('Browse rendered')
+
+
         return (
             <div className="Browse">
                 {this.state.loading && <Spinner />}

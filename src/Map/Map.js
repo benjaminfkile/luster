@@ -22,7 +22,8 @@ class Map extends React.Component {
     mapTypeControl: false,
     streetViewControl: false,
     gestureHandling: 'greedy',
-    // minZoom: 8,
+    zoom: 11,
+    minZoom: 4,
     maxZoom: 15
   };
 
@@ -45,7 +46,7 @@ class Map extends React.Component {
   componentDidMount() {
     this.inApp()
     this.mapMounted = true;
-    this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
+    this.listen4LocationInterval = setInterval(this.listenForLocation, 500)
     this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 500)
     this.radarInterval = setInterval(this.listen4Radar, 500)
@@ -73,6 +74,7 @@ class Map extends React.Component {
   }
 
   listenForLocation = () => {
+    console.log('listenign for location')
     if (Location.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
       clearInterval(this.listen4LocationInterval)
@@ -85,22 +87,25 @@ class Map extends React.Component {
     }
   }
 
-  listen4Radar = () => {
-    if (Radar.targets.length > 0 && this.mapMounted) {
-        this.setState({target: Radar.targets[0][0]})
-        clearInterval(this.radarInterval)
-    }
-}
-
   updateLocation = () => {
     if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
-      this.setState({ location: true })
+      this.setState({ location: true})
+    }
+    if(!this.state.dragged){
+      this.setState({centered: true})
+    }
+  }
+
+  listen4Radar = () => {
+    if (Radar.targets.length > 0 && this.mapMounted) {
+      this.setState({ target: Radar.targets[0][0] })
+      clearInterval(this.radarInterval)
     }
   }
 
   listenForQuery = () => {
     if (this.state.target && this.state.target !== Radar.targets[0][0] && this.mapMounted) {
-      this.setState({ target: Radar.targets[0][0] })
+      this.setState({ target: Radar.targets[0][0], dragged: false })
       this.buildMarkers()
     }
   }
@@ -137,6 +142,8 @@ class Map extends React.Component {
 
   buildMarkers = () => {
 
+    console.log('build markers')
+
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       let markerImg = new window.google.maps.MarkerImage(
@@ -162,6 +169,8 @@ class Map extends React.Component {
 
   render = () => {
 
+    console.log('Map rendered')
+
 
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
@@ -176,7 +185,6 @@ class Map extends React.Component {
         {this.state.search && <Search toggled={true} />}
         {/*center over nearest*/}
         {this.state.nearest && Radar.targets[0][1].lat && <GoogleMap
-          zoom={15}
           center={{ lat: Number(Radar.targets[0][1].lat), lng: Number(Radar.targets[0][1].lng) }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -191,7 +199,6 @@ class Map extends React.Component {
 
         {/*center over location*/}
         {this.state.location && this.state.centered && <GoogleMap
-          zoom={11}
           center={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -206,7 +213,6 @@ class Map extends React.Component {
 
         {/*has Location and user drags map*/}
         {this.state.location && this.state.dragged && <GoogleMap
-          zoom={11}
           defaultCenter={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -221,7 +227,6 @@ class Map extends React.Component {
 
         {/*no Location, center of USA*/}
         {!this.state.location && <GoogleMap
-          zoom={11}
           defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
           defaultOptions={this.defaultMapOptions}
         >
@@ -261,8 +266,8 @@ const MapComponent = withScriptjs(withGoogleMap(Map));
 export default () => (
   <MapComponent
     googleMapURL={KeyStore.mapUrl}
-    loadingElement={<div style={{ height: `100%` }} />}
+    loadingElement={<div style={{ height: `100vh` }} />}
     containerElement={<div style={{ height: `100vh`, width: "100vw" }} />}
-    mapElement={<div style={{ height: `100%` }} />}
+    mapElement={<div style={{ height: `100vh` }} />}
   />
 );
