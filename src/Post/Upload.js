@@ -85,7 +85,8 @@ class Upload extends Component {
                     upvotes: '{}',
                     trips: '{}',
                     uploaded: Date.now(),
-                    on: 't'
+                    on: 't',
+                    icon: (Math.floor(Math.random() * 15) + 1)
                 })
             })
         }

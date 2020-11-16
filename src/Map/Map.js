@@ -47,7 +47,7 @@ class Map extends React.Component {
     this.inApp()
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 500)
-    this.updateLocationInterval = setInterval(this.updateLocation, 1000)
+    // this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 500)
     this.radarInterval = setInterval(this.listen4Radar, 500)
     this.queryInterval = setInterval(this.listenForQuery, 500)
@@ -89,10 +89,10 @@ class Map extends React.Component {
 
   updateLocation = () => {
     if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
-      this.setState({ location: true})
+      this.setState({ location: true })
     }
-    if(!this.state.dragged){
-      this.setState({centered: true})
+    if (!this.state.dragged) {
+      this.setState({ centered: true })
     }
   }
 
@@ -142,12 +142,10 @@ class Map extends React.Component {
 
   buildMarkers = () => {
 
-    console.log('build markers')
-
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       let markerImg = new window.google.maps.MarkerImage(
-        './res/' + Math.floor((Math.random() * (23 - 1) + 1)) + '.png',
+        './res/' + this.state.lights[i].icon + '.png',
         null,
         null,
         null,
