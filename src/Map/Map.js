@@ -48,7 +48,7 @@ class Map extends React.Component {
     this.inApp()
     this.mapMounted = true;
     this.listen4LocationInterval = setInterval(this.listenForLocation, 500)
-    // this.updateLocationInterval = setInterval(this.updateLocation, 1000)
+    this.updateLocationInterval = setInterval(this.updateLocation, 1000)
     this.dbInterval = setInterval(this.listen4DB, 500)
     this.radarInterval = setInterval(this.listen4Radar, 500)
     this.queryInterval = setInterval(this.listenForQuery, 500)
@@ -88,14 +88,14 @@ class Map extends React.Component {
     }
   }
 
-  // updateLocation = () => {
-  //   if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
-  //     this.setState({ location: true })
-  //   }
-  //   if (!this.state.dragged) {
-  //     this.setState({ centered: true })
-  //   }
-  // }
+  updateLocation = () => {
+    if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
+      this.setState({ location: true })
+    }
+    if (!this.state.dragged) {
+      this.setState({ centered: true })
+    }
+  }
 
   listen4Radar = () => {
     if (Radar.targets.length > 0 && this.mapMounted) {
