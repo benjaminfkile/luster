@@ -105,7 +105,7 @@ class Map extends React.Component {
 
   listenForQuery = () => {
     if (this.state.target && this.state.target !== Radar.targets[0][0] && this.mapMounted) {
-      this.setState({ target: Radar.targets[0][0]})
+      this.setState({ target: Radar.targets[0][0], centered: true })
       this.buildMarkers()
     }
   }
