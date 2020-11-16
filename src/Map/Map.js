@@ -88,12 +88,12 @@ class Map extends React.Component {
   }
 
   updateLocation = () => {
-    if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
-      this.setState({ location: true })
-    }
-    if (!this.state.dragged) {
-      this.setState({ centered: true })
-    }
+    // if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
+    //   this.setState({ location: true })
+    // }
+    // if (!this.state.dragged) {
+    //   this.setState({ centered: true })
+    // }
   }
 
   listen4Radar = () => {
