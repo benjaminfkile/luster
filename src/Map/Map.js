@@ -72,7 +72,6 @@ class Map extends React.Component {
   }
 
   listenForLocation = () => {
-    console.log('listenign for location')
     if (Location.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
       clearInterval(this.listen4LocationInterval)
@@ -100,6 +99,7 @@ class Map extends React.Component {
   listen4Radar = () => {
     if (Radar.targets.length > 0 && this.mapMounted) {
       this.setState({ target: Radar.targets[0][0] })
+      //clear interval????
     }
   }
 
@@ -121,6 +121,10 @@ class Map extends React.Component {
     this.setState({ nearest: false })
   }
 
+  zoomChanged = () => {
+    this.dragged()
+  }
+
   togglePreview = (args) => {
     this.setState({ lightDex: args })
   }
@@ -138,7 +142,7 @@ class Map extends React.Component {
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       let markerImg = new window.google.maps.MarkerImage(
-        './res/' + this.state.lights[i].icon + '.png',
+        './res/' + Math.floor((Math.random() * (15 - 1) + 1)) + '.png',
         null,
         null,
         null,
@@ -176,6 +180,7 @@ class Map extends React.Component {
           center={{ lat: Number(Radar.targets[0][1].lat), lng: Number(Radar.targets[0][1].lng) }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
+          onZoomChanged={this.zoomChanged}
         >
           <>
           </>
@@ -190,6 +195,7 @@ class Map extends React.Component {
           center={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
+          onZoomChanged={this.zoomChanged}
         >
           <>
             {this.state.location && <Marker
@@ -204,6 +210,8 @@ class Map extends React.Component {
           defaultCenter={{ lat: Location.lat, lng: Location.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
+          onZoomChanged={this.zoomChanged}
+
         >
           <>
             {!this.state.nearest && <Marker

@@ -31,10 +31,10 @@ class Browse extends Component {
 
     componentDidMount() {
         this.browseMounted = true
-        this.dbInterval = setInterval(this.listen4DB, 500)
-        this.radarInterval = setInterval(this.listen4Radar, 500)
+        this.dbInterval = setInterval(this.listen4DB, 1000)
+        this.radarInterval = setInterval(this.listen4Radar, 1000)
         this.distanceInterval = setInterval(this.listen4SliderDrag, 500)
-        this.queryInterval = setInterval(this.listenForQuery, 500)
+        this.updateInterval = setInterval(this.update, 1000)
     }
 
     componentWillUnmount() {
@@ -62,16 +62,21 @@ class Browse extends Component {
         }
     }
 
-    listenForQuery = () => {
-        if (this.state.target && this.state.target !== Radar.targets[0][0] && this.browseMounted) {
-            this.setState({ target: Radar.targets[0][0], search: false })
-            this.filterByDistance(20)
+    update = () => {
+        if (LightStore.update.length > 0) {
+            for (let i = 0; i < LightStore.update.length; i++) {
+                if (LightStore.update[i] === 1) {
+                    this.lights = LightStore.lights
+                    this.setState({ target: Radar.targets[0][0], search: false })
+                    this.filterByDistance(20)
+                }
+            }
         }
     }
 
     filterByDistance = (miles) => {
         clearInterval(this.searchIntevral)
-        this.setState({loading: true})
+        this.setState({ loading: true })
         if (Radar.targets.length > 0) {
             this.lights = []
             for (let i = 0; i < Radar.targets.length; i++) {
@@ -121,10 +126,7 @@ class Browse extends Component {
     }
 
     render() {
-
-        console.log('Browse rendered')
-
-
+        // console.log('Browse rendered')
         return (
             <div className="Browse">
                 {this.state.loading && <Spinner />}

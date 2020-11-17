@@ -163,7 +163,7 @@ class Search extends Component {
           }
         }
       }).catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
-    console.log('Search Radius ' + this.searchRadius)
+    // console.log('Search Radius ' + this.searchRadius)
   }
 
   render() {

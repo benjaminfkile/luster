@@ -30,8 +30,8 @@ function checkDiff() {
         }
     }
     LightStore.update.unshift(0)
-    if (LightStore.update.length > 10) {
-        LightStore.update.length = 10
+    if (LightStore.update.length > 2) {
+        LightStore.update.length = 2
     }
 }
 
