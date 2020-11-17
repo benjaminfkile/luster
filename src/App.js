@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
-import LightStore from './LightStore'
 import PostAddress from './Post/Post'
 import Browse from './Browse/Browse'
 import Profile from './Profile/Profile'

@@ -4,7 +4,6 @@ import KeyStore from "../KeyStore"
 import Location from '../Location'
 import LightStore from '../LightStore'
 import Geocode from "react-geocode";
-import Snow from '../Snow/Snow'
 import "./Search.css"
 Geocode.setApiKey(KeyStore.googleKey);
 Geocode.setLanguage("en");
@@ -48,7 +47,7 @@ class Search extends Component {
       if (!Location.lat) {
         this.setState({ hasLocation: false })
       } else {
-        LightStore.length = 0
+        LightStore.lights.length = 0
         clearInterval(this.zoneInterval)
         this.setState({ hasLocation: true })
         this.getLights(Location.lat, Location.lng, this.searchRadius)
@@ -155,11 +154,11 @@ class Search extends Component {
             this.getLights(lat, lng, this.searchRadius)
           }
         } else {
-          LightStore.length = 0
+          LightStore.lights.length = 0
           for (let i = 0; i < data.length; i++) {
             if (data[i].on === 't') {
               // if (i > 300) { break; }
-              LightStore.push(data[i])
+              LightStore.lights.push(data[i])
             }
           }
         }

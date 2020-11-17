@@ -1,4 +1,4 @@
-import Lighstore from './LightStore'
+import LightStore from './LightStore'
 import Location from './Location'
 // import GeoData from './GeoData'
 
@@ -10,7 +10,7 @@ let Radar = {
 let dbInterval = setInterval(listen4DB, 1000)
 
 function listen4DB() {
-    if (Lighstore.length > 0 && Location.lat) {
+    if (LightStore.lights.length > 0 && Location.lat) {
         clearInterval(dbInterval)
         setInterval(updateCoords, 1000)
         polulateRadar()
@@ -40,9 +40,9 @@ function polulateRadar() {
     Radar.targets.length = 0
 
     if (Location.lat) {
-        for (let i = 0; i < Lighstore.length; i++) {
-            if (Lighstore.length > 0) {
-                Radar.targets.push([distance(Location.lat, Location.lng, Lighstore[i].lat, Lighstore[i].lng, "N"), Lighstore[i]])
+        for (let i = 0; i < LightStore.lights.length; i++) {
+            if (LightStore.lights.length > 0) {
+                Radar.targets.push([distance(Location.lat, Location.lng, LightStore.lights[i].lat, LightStore.lights[i].lng, "N"), LightStore.lights[i]])
             }
         }
     } 

@@ -42,9 +42,9 @@ class Browse extends Component {
     }
 
     listen4DB = () => {
-        if (LightStore.length > 0 && this.browseMounted) {
+        if (LightStore.lights.length > 0 && this.browseMounted) {
             clearInterval(this.dbInterval)
-            this.lights = LightStore
+            this.lights = LightStore.lights
         }
     }
 
@@ -128,7 +128,7 @@ class Browse extends Component {
         return (
             <div className="Browse">
                 {this.state.loading && <Spinner />}
-                {LightStore.length === 0 && <Search />}
+                {LightStore.lights.length === 0 && <Search />}
                 {this.state.search && <Search toggled={true} />}
                 {this.lights.length > 0 && !this.state.search && <div className="Has_Location">
                     <p id="range-info"> Found {this.lights.length} within {this.state.maxDistance} miles.</p>

@@ -5,12 +5,10 @@ import Location from '../Location'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Radar from '../Radar'
-import Snow from '../Snow/Snow'
+// import Snow from '../Snow/Snow'
 import Search from '../Search/Search'
 import { mapStyles } from './NightMode'
-
 import '../Map/Map.css'
-import { timeHours } from "d3";
 
 class Map extends React.Component {
 
@@ -47,12 +45,11 @@ class Map extends React.Component {
   componentDidMount() {
     this.inApp()
     this.mapMounted = true;
-    this.listen4LocationInterval = setInterval(this.listenForLocation, 500)
-    this.updateLocationInterval = setInterval(this.updateLocation, 1000)
-    this.dbInterval = setInterval(this.listen4DB, 500)
-    this.radarInterval = setInterval(this.listen4Radar, 500)
-    this.queryInterval = setInterval(this.listenForQuery, 500)
-    this.setState({ lights: LightStore })
+    this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
+    this.updateInterval = setInterval(this.update, 1000)
+    this.dbInterval = setInterval(this.listen4DB, 1000)
+    this.radarInterval = setInterval(this.listen4Radar, 1000)
+    this.setState({ lights: LightStore.lights })
   }
 
   inApp = () => {
@@ -67,8 +64,8 @@ class Map extends React.Component {
   }
 
   listen4DB = () => {
-    if (LightStore.length > 0 && this.mapMounted) {
-      this.setState({ lights: LightStore })
+    if (LightStore.lights.length > 0 && this.mapMounted) {
+      this.setState({ lights: LightStore.lights })
       this.buildMarkers()
       clearInterval(this.dbInterval)
     }
@@ -88,27 +85,21 @@ class Map extends React.Component {
     }
   }
 
-  updateLocation = () => {
-    if (!this.state.recenter && !this.state.inApp && Location.lat && this.mapMounted) {
-      this.setState({ location: true })
-    }
-    if (!this.state.dragged) {
-      this.setState({ centered: true })
+  update = () => {
+    if (LightStore.update.length > 0) {
+      for (let i = 0; i < LightStore.update.length; i++) {
+        if (LightStore.update[i] === 1) {
+          this.setState({ lights: LightStore.lights })
+          this.recenter()
+          this.buildMarkers()
+        }
+      }
     }
   }
 
   listen4Radar = () => {
     if (Radar.targets.length > 0 && this.mapMounted) {
       this.setState({ target: Radar.targets[0][0] })
-      clearInterval(this.radarInterval)
-    }
-  }
-
-  listenForQuery = () => {
-    if (this.state.target && this.state.target !== Radar.targets[0][0] && this.mapMounted) {
-      this.setState({ target: Radar.targets[0][0], lights: LightStore })
-      // this.dragged()
-      this.buildMarkers()
     }
   }
 
@@ -169,10 +160,6 @@ class Map extends React.Component {
 
   render = () => {
 
-    if (this.state.lights && this.state.lights.length > 0) {
-      console.log(this.state.lights.length)
-    }
-
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
       null,
@@ -182,7 +169,7 @@ class Map extends React.Component {
 
     return (
       <div className="Map">
-        {LightStore.length === 0 && <Search />}
+        {!this.state.search && LightStore.lights.length === 0 && <Search />}
         {this.state.search && <Search toggled={true} />}
         {/*center over nearest*/}
         {this.state.nearest && Radar.targets[0][1].lat && <GoogleMap
@@ -251,13 +238,13 @@ class Map extends React.Component {
           {this.state.markers}
         </div>
 
-        {!this.state.search && <Preview
+        <Preview
           togglePreview={this.togglePreview}
           lightDex={this.state.lightDex}
           contributions={false}
-          lights={LightStore}
-        />}
-        <Snow />
+          lights={LightStore.lights}
+        />
+        {/* <Snow /> */}
       </div>
     );
   };
