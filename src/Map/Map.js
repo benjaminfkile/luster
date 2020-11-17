@@ -61,6 +61,7 @@ class Map extends React.Component {
 
   componentWillUnmount() {
     this.mapMounted = false;
+    clearInterval(this.updateInterval)
   }
 
   listen4DB = () => {
@@ -131,9 +132,9 @@ class Map extends React.Component {
 
   toggleSearch = () => {
     if (this.state.search) {
-      this.setState({ search: false })
+      this.setState({ search: false, lightDex: -1 })
     } else {
-      this.setState({ search: true })
+      this.setState({ search: true, lightDex: -1 })
     }
   }
 
