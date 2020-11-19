@@ -94,6 +94,10 @@ class Preview extends Component {
 
     render() {
 
+        if(this.props.lightDex !== -1){
+            console.log(this.props.lights[this.props.lightDex].id)
+        }
+
         return (
             <div>
                 {this.props.lightDex !== -1 && !this.props.contributions && <div className="Preview_User">

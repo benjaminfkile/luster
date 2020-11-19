@@ -66,7 +66,7 @@ class Browse extends Component {
     }
 
     update = () => {
-        if (LightStore.update.length > 0) {
+        if (LightStore.update.length > 0 && this.browseMounted) {
             for (let i = 0; i < LightStore.update.length; i++) {
                 if (LightStore.update[i] === 1) {
                     this.lights = LightStore.lights
