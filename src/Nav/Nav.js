@@ -51,7 +51,7 @@ class Nav extends Component {
                     </div>
                     {!window.user && <div className="Profile_Route" tabIndex="4">
                         <Link to='/profile'>
-                            <img id="nav-img" src="./res/nav-login-icon.png" alt="oops" onClick={this.toggleBurger}></img>
+                            <img id="nav-img" src="./res/logout.png" alt="oops" onClick={this.toggleBurger}></img>
                         </Link>
                     </div>}
                     {window.user && <div className="Profile_Route" tabIndex="4">
