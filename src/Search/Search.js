@@ -147,7 +147,7 @@ class Search extends Component {
       .then(data => {
         if (data && data.length < 1) {
           this.searchRadius += 3
-          if (this.searchRadius > 33) {
+          if (this.searchRadius > 99) {
             this.setState({ hasLocation: false })
             this.searchRadius = 3
           } else {
