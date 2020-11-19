@@ -27,6 +27,13 @@
     border-radius: 5px;
     text-align: center;
 }
+#no-img{
+    width: 80vw;
+    /* height: 40vh; */
+    margin-left: 0vw;
+    margin-top: 3vh;
+  
+  }
 .Location_Error p{
     color: rgb(255, 255, 255);
     padding-right: 2vw;

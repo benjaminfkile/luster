@@ -101,7 +101,7 @@ class Upload extends Component {
                         <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
                 Choose File
                 </label>
-                    {!this.state.image && <img src="./res/2.png" id="noImg" alt='A tree'></img>}
+                    {!this.state.image && <img src="./res/2.png" id="img-placeholder" alt='A tree'></img>}
                     {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
                     <img id="arrow-img" src="./res/upload.png" alt="oops" />
                     {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}

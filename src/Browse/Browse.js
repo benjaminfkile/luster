@@ -11,6 +11,8 @@ class Browse extends Component {
 
     lights = []
     distance = 20
+    scrollDex = -1
+
     browseMounted = false
 
     constructor() {
@@ -35,6 +37,7 @@ class Browse extends Component {
         this.radarInterval = setInterval(this.listen4Radar, 1000)
         this.distanceInterval = setInterval(this.listen4SliderDrag, 500)
         this.updateInterval = setInterval(this.update, 1000)
+        this.scrollInterval = setInterval(this.scroll, 500)
     }
 
     componentWillUnmount() {
@@ -72,9 +75,14 @@ class Browse extends Component {
                 }
             }
         }
-        // if(!this.state.search && this.state.lightDex !== -1){
-        //     this.setState({showFeed: true})
-        // }
+    }
+
+    scroll = () => {
+        if (this.state.showFeed && this.scrollDex !== -1) {
+            let item = document.getElementById(this.scrollDex)
+            item.scrollIntoView(true)
+            this.scrollDex = -1
+        }
     }
 
     filterByDistance = (miles) => {
@@ -108,6 +116,7 @@ class Browse extends Component {
 
     togglePreview = (args) => {
         if (this.state.showFeed) {
+            this.scrollDex = args
             this.setState({ showFeed: false })
         } else {
             this.setState({ showFeed: true })
@@ -122,6 +131,7 @@ class Browse extends Component {
             this.setState({ search: true })
             if (this.state.lightDex !== -1) {
                 this.togglePreview(-1)
+                this.scrollDex = -1
             }
         }
     }
@@ -132,8 +142,6 @@ class Browse extends Component {
     }
 
     render() {
-        console.log('Browse rendered')
-        console.log(this.state.showFeed)
         return (
             <div className="Browse">
                 {this.state.loading && <Spinner />}
@@ -149,7 +157,7 @@ class Browse extends Component {
                             <LazyLoad
                                 key={i}
                                 height={0}>
-                                <div className="Item">
+                                <div className="Item" id={i}>
                                     <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                     <div id="browse-stats">
                                         <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>

@@ -181,7 +181,7 @@ class Post extends Component {
                     <h3>
                         Log in or Register to post photos!
                 </h3>
-                    <img src="./res/2.png" id="noImg" alt='A tree'></img>
+                    <img src="./res/2.png" id="no-img" alt='A tree'></img>
 
                 </div>}
             </div>

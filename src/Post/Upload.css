@@ -32,7 +32,6 @@ input[type="file"] {
     height: 30vh;
     margin-left: 4vw;
     margin-top: 20px;
-
     z-index: 1000;
     border-style: solid;
     border-radius: 5px;
@@ -49,7 +48,6 @@ input[type="file"] {
 #UploadBtn{
     z-index: 1000;
     width: 20vw;
-
     text-align: center;
     margin-top: 20px;
     margin-left: 35vw;
@@ -87,10 +85,10 @@ input[type="file"] {
 
 }
 
-#noImg{
+#img-placeholder{
   width: 80vw;
   /* height: 40vh; */
-  margin-left: 5vw;
+  margin-left: 10vw;
   margin-top: 3vh;
 
 }
@@ -124,53 +122,7 @@ input[type="file"] {
   margin-bottom: 10vh;
 }
 
-@media screen and (orientation:landscape) {
 
-
-  .Upload_Container{
-    justify-content: left;
-    height: 100vh;
-}
-
-  .custom-file-upload {
-      top: 3vh;
-      left: 3vw;
-
-  }
-  #noImg{
-    width: 60vw;
-    height: 60vh;
-
-  }
-
-
-  #UploadImg {
-    width: 60vw;
-    height: 60vh;
-    z-index: 1000;
-    margin-left: 3vw;
-    border-style: solid;
-    border-radius: 5px;
-  }
-
-  #UploadBtn{
-    top: 85vh;
-    left: 3vw;
-  }
-
-  #success {
-    position: absolute;
-    top: 4vh;
-    left: 48vw;
-}
-
-  #arrow {
-  top: 0vh;
-  left: 23vw;
-
-  }
-
-}
 
 
   
