@@ -34,40 +34,30 @@ class Nav extends Component {
 
                 {this.state.hamburger && <div className="Routes">
                     <div className="Map_Route" tabIndex="1">
-                        <li onClick={this.toggleBurger}>
-                            <Link to='/'>
-                                Map |
-                            </Link>
-                        </li>
+                        <Link to='/'>
+                            <img id="nav-img" src="./res/nav-map-icon.png" alt="oops" onClick={this.toggleBurger}></img>
+                        </Link>
 
                     </div>
                     <div className="Browse_Route" tabIndex="2">
-                        <li onClick={this.toggleBurger}>
-                            <Link to='/browse'>
-                                Browse |
-                            </Link>
-                        </li>
+                        <Link to='/browse'>
+                            <img id="nav-img" src="./res/nav-browse-icon.png" alt="oops" onClick={this.toggleBurger}></img>
+                        </Link>
                     </div>
                     <div className="Post_Route" tabIndex="3">
-                        <li onClick={this.toggleBurger}>
-                            <Link to='/post'>
-                                Post |
-                            </Link>
-                        </li>
+                        <Link to='/post'>
+                            <img id="nav-img" src="./res/nav-post-icon.png" alt="oops" onClick={this.toggleBurger}></img>
+                        </Link>
                     </div>
                     {!window.user && <div className="Profile_Route" tabIndex="4">
-                        <li onClick={this.toggleBurger}>
-                            <Link to='/profile'>
-                                Login
-                            </Link>
-                        </li>
+                        <Link to='/profile'>
+                            <img id="nav-img" src="./res/nav-login-icon.png" alt="oops" onClick={this.toggleBurger}></img>
+                        </Link>
                     </div>}
                     {window.user && <div className="Profile_Route" tabIndex="4">
-                        <li onClick={this.toggleBurger}>
-                            <Link to='/profile'>
-                                Profile
-                            </Link>
-                        </li>
+                        <Link to='/profile'>
+                            <img id="nav-img" src="./res/nav-profile-icon.png" alt="oops" onClick={this.toggleBurger}></img>
+                        </Link>
                     </div>}
                 </div>}
             </div>

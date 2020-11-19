@@ -72,6 +72,9 @@ class Browse extends Component {
                 }
             }
         }
+        // if(!this.state.search && this.state.lightDex !== -1){
+        //     this.setState({showFeed: true})
+        // }
     }
 
     filterByDistance = (miles) => {
@@ -117,6 +120,9 @@ class Browse extends Component {
             this.setState({ search: false })
         } else {
             this.setState({ search: true })
+            if (this.state.lightDex !== -1) {
+                this.togglePreview(-1)
+            }
         }
     }
 
@@ -126,7 +132,8 @@ class Browse extends Component {
     }
 
     render() {
-        // console.log('Browse rendered')
+        console.log('Browse rendered')
+        console.log(this.state.showFeed)
         return (
             <div className="Browse">
                 {this.state.loading && <Spinner />}
@@ -164,7 +171,7 @@ class Browse extends Component {
                     />}
                 </div>}
                 <div className="Search_Toggle">
-                    <img src="./res/pin.png" alt="oops" onClick={this.toggleSearch}></img>
+                    <img src="./res/search.png" alt="oops" onClick={this.toggleSearch}></img>
                 </div>
             </div>
         );

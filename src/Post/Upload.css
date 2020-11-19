@@ -89,8 +89,8 @@ input[type="file"] {
 
 #noImg{
   width: 80vw;
-  height: 40vh;
-  margin-left: 10vw;
+  /* height: 40vh; */
+  margin-left: 5vw;
   margin-top: 3vh;
 
 }
@@ -112,7 +112,10 @@ input[type="file"] {
 }
 
 .Unvalidated{
-  margin-top: 15vh;
+  position: absolute;
+  left: 0vw;
+  width: 100vw;
+  top: 15vh;
   text-align: center;
   color:  rgb(255, 255, 255);
 

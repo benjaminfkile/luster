@@ -1,5 +1,6 @@
 .Post{
-    margin-top: 10vh;
+    position: absolute;
+    top: 10vh;
     width: 100vw;
     color: rgb(0, 0, 0);
 }

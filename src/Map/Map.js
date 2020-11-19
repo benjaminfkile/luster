@@ -11,7 +11,7 @@ import { mapStyles } from './NightMode'
 import '../Map/Map.css'
 
 class Map extends React.Component {
-
+  
   locationTimeout = 0
   mapMounted = false;
   defaultMapOptions = {
@@ -25,6 +25,7 @@ class Map extends React.Component {
     minZoom: 4,
     maxZoom: 15
   };
+
 
   constructor() {
     super();
@@ -123,7 +124,7 @@ class Map extends React.Component {
   }
 
   zoomChanged = () => {
-    this.dragged()
+    // this.dragged()
   }
 
   togglePreview = (args) => {
@@ -241,7 +242,7 @@ class Map extends React.Component {
         </div>
 
         <div className="Search_Toggle">
-          <img src="./res/pin.png" alt="oops" onClick={this.toggleSearch}></img>
+          <img src="./res/search.png" alt="oops" onClick={this.toggleSearch}></img>
         </div>
         <div className="Markers">
           {this.state.markers}

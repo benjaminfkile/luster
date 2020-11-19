@@ -35,6 +35,7 @@
     position: absolute;
     top: 0vh;
     left: 0vw;
+    margin-left: auto;
 }
 .Search_Toggle img{
     width: 60px;
