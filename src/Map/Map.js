@@ -5,7 +5,7 @@ import Location from '../Location'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Radar from '../Radar'
-// import Snow from '../Snow/Snow'
+import Snow from '../Snow/Snow'
 import Search from '../Search/Search'
 import { mapStyles } from './NightMode'
 import '../Map/Map.css'
@@ -144,7 +144,7 @@ class Map extends React.Component {
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       let markerImg = new window.google.maps.MarkerImage(
-        './res/' + Math.floor((Math.random() * (15 - 1) + 1)) + '.png',
+        './res/' + this.state.lights[i].pin + '.png',
         null,
         null,
         null,

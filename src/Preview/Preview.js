@@ -118,7 +118,7 @@ class Preview extends Component {
 
                     </div>}
                     <div className="Exit" onClick={this.unloadImg.bind(this)}>
-                        <img id="exit-img" src="./res/exit-btn.png" alt="oops"></img>
+                        <img id="exit-img" src="./res/close-menu.png" alt="oops"></img>
                     </div>
                 </div>}
                 {this.props.lightDex !== -1 && this.props.contributions && <div className="Preview_Manager">
@@ -140,7 +140,7 @@ class Preview extends Component {
                         />
                     </div>}
                     <div className="Exit" onClick={this.unloadImg.bind(this)}>
-                        <img id="exit-img" src="./res/exit-btn.png" alt="oops"></img>
+                        <img id="exit-img" src="./res/close-menu.png" alt="oops"></img>
                     </div>
                 </div>}
             </div>
