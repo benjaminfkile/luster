@@ -75,13 +75,14 @@
 	margin-bottom: 5px;
 	margin-left: 2vw;
 	background-color: black;
-
 }
 
 .Item img {
 	width: 96vw;
 	height: 35vh;
 	z-index: 10000;
+	-webkit-animation: slide-in-right .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-right .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 a {
@@ -92,8 +93,6 @@ a {
 	display: flex;
 	font-size: 15px;
 	color: rgb(255, 255, 255);
-	-webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 #browse-upvotes-img {
