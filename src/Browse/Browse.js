@@ -149,7 +149,7 @@ class Browse extends Component {
                 {LightStore.lights.length === 0 && <Search />}
                 {this.state.search && <Search toggled={true} />}
                 {this.lights.length > 0 && !this.state.search && <div className="Has_Location">
-                    <p id="range-info"> Found {this.lights.length} within {this.state.maxDistance} miles.</p>
+                    <p id="range-info"> Found {this.lights.length} within ~ {this.state.maxDistance} miles.</p>
                     {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
                         <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                     </div>}
@@ -166,7 +166,7 @@ class Browse extends Component {
                                             {img.upvotes.length}
                                         </p>
                                         <p id="distance">
-                                            {img.distance} mi
+                                            ~ {img.distance} mi
                                         </p>
                                     </div>
                                 </div>

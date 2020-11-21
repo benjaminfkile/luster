@@ -78,7 +78,7 @@
 .Contrib_Item{
     display: flex;
     width: 94vw;
-    height: 15vh;
+    height: 25vh;
     text-align: left;
     margin-bottom: 5px;
     background-color: rgb(0, 0, 0);
@@ -86,7 +86,7 @@
     border-color: rgb(0, 0, 0);
 }
 .Contrib_Item img{
-    width: 40vw;
+    width: 60vw;
 }
 #contrib-stats{
     margin-top: 5px;

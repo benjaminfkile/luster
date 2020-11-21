@@ -218,20 +218,16 @@ class Profile extends Component {
                                             <img id="contrib-stats-off" src="./res/off.png" alt="oops"></img>
                                             <p>Off</p>
                                         </div>}
+                                        <div className="Upload_Date">
+                                            <br></br>
+                                            <p>
+                                                {img.uploaded}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </LazyLoad>)}
                     </div>}
-                    {!this.state.hasContribs && !this.state.loading && <div className="Welcome">
-                        <h2>Welcome to LightMaps!!!</h2>
-                        <br></br>
-                        <h3>You can now upvote other peoples contributions</h3>
-                        <br></br>
-                        <p>LightMaps is free and always will be, this year I am raising money for suicide awareness.  You can donate following the link below if you would like to</p>
-                        <br></br>
-                        <p>You havent posted any photos yet, if you choose to post anything you will be able to manage your post here.</p>
-                    </div>}
-
                     <Preview
                         togglePreview={this.togglePreview}
                         lightDex={this.state.lightDex}

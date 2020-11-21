@@ -49,7 +49,7 @@ class Preview extends Component {
                 if (i > -1) {
                     this.props.lights[args].upvotes.splice(i, 1);
                 }
-                this.setState({ liked: false, likes: this.props.lights[args].upvotes.length})
+                this.setState({ liked: false, likes: this.props.lights[args].upvotes.length })
             }
         } else {
             this.props.lights[args].upvotes.push(window.user)
@@ -64,6 +64,7 @@ class Preview extends Component {
         } else {
             user += "no-data@:" + Date.now()
         }
+        this.props.lights[this.props.lightDex].trips.push('trip')
         fetch(ApiStore + '/api/stats/trip', {
 
             method: 'POST',
@@ -94,8 +95,8 @@ class Preview extends Component {
 
     render() {
 
-        if(this.props.lightDex !== -1){
-            console.log(this.props.lights[this.props.lightDex].id)
+        if (this.props.lightDex !== -1) {
+            console.log(this.props.lights[this.props.lightDex])
         }
 
         return (
@@ -118,7 +119,24 @@ class Preview extends Component {
 
                     </div>}
                     <div className="Exit" onClick={this.unloadImg.bind(this)}>
-                        <img id="exit-img" src="./res/close-menu.png" alt="oops"></img>
+                        <img id="exit-img" src="./res/close-preview.png" alt="oops"></img>
+                        <div id="preview-footer">
+                            <p>
+                                {
+                                    'Uploaded: '
+                                    + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleDateString("en-US")
+                                    + ' at '
+                                    + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleTimeString("en-US")
+                                }
+                            </p>
+                            <br></br>
+                            <p>
+                                {
+                                    'Trips: '
+                                    + this.props.lights[this.props.lightDex].trips.length
+                                }
+                            </p>
+                        </div>
                     </div>
                 </div>}
                 {this.props.lightDex !== -1 && this.props.contributions && <div className="Preview_Manager">
@@ -140,7 +158,7 @@ class Preview extends Component {
                         />
                     </div>}
                     <div className="Exit" onClick={this.unloadImg.bind(this)}>
-                        <img id="exit-img" src="./res/close-menu.png" alt="oops"></img>
+                        <img id="exit-img-manager" src="./res/close-preview.png" alt="oops"></img>
                     </div>
                 </div>}
             </div>

@@ -5,7 +5,6 @@ import Location from '../Location'
 import LightStore from "../LightStore";
 import Preview from "../Preview/Preview"
 import Radar from '../Radar'
-import Snow from '../Snow/Snow'
 import Search from '../Search/Search'
 import { mapStyles } from './NightMode'
 import '../Map/Map.css'

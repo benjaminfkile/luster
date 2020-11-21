@@ -7,21 +7,21 @@ export const mapStyles = [
       elementType: 'labels.text.fill',
       stylers: [{color: '#d59563'}]
     },
-    {
-      featureType: 'poi',
-      elementType: 'labels.text.fill',
-      stylers: [{color: '#d59563'}]
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'geometry',
-      stylers: [{color: '#263c3f'}]
-    },
-    {
-      featureType: 'poi.park',
-      elementType: 'labels.text.fill',
-      stylers: [{color: '#6b9a76'}]
-    },
+    // {
+    //   featureType: 'poi',
+    //   elementType: 'labels.text.fill',
+    //   stylers: [{color: '#d59563'}]
+    // },
+    // {
+    //   featureType: 'poi.park',
+    //   elementType: 'geometry',
+    //   stylers: [{color: '#263c3f'}]
+    // },
+    // {
+    //   featureType: 'poi.park',
+    //   elementType: 'labels.text.fill',
+    //   stylers: [{color: '#6b9a76'}]
+    // },
     {
       featureType: 'road',
       elementType: 'geometry',
@@ -52,16 +52,16 @@ export const mapStyles = [
       elementType: 'labels.text.fill',
       stylers: [{color: '#f3d19c'}]
     },
-    {
-      featureType: 'transit',
-      elementType: 'geometry',
-      stylers: [{color: '#2f3948'}]
-    },
-    {
-      featureType: 'transit.station',
-      elementType: 'labels.text.fill',
-      stylers: [{color: '#d59563'}]
-    },
+    // {
+    //   featureType: 'transit',
+    //   elementType: 'geometry',
+    //   stylers: [{color: '#2f3948'}]
+    // },
+    // {
+    //   featureType: 'transit.station',
+    //   elementType: 'labels.text.fill',
+    //   stylers: [{color: '#d59563'}]
+    // },
     {
       featureType: 'water',
       elementType: 'geometry',
