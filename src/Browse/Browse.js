@@ -5,7 +5,7 @@ import LightStore from '../LightStore'
 import Spinner from '../Spinner/Spinner'
 import Radar from '../Radar'
 import Search from '../Search/Search'
-import Snow from '../Snow/Snow'
+// import Snow from '../Snow/Snow'
 import '../Browse/Browse.css'
 
 class Browse extends Component {
@@ -182,7 +182,7 @@ class Browse extends Component {
                 <div className="Search_Toggle">
                     <img src="./res/search.png" alt="oops" onClick={this.toggleSearch}></img>
                 </div>
-                <Snow/>
+                {/* <Snow/> */}
             </div>
         );
     }
