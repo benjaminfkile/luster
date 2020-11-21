@@ -116,28 +116,16 @@ class Preview extends Component {
                         </div>
                         {window.user && this.state.liked && <img id="like-img" src="./res/like-btn.png" alt="oops" onClick={() => this.upvote(this.props.lightDex)}></img>}
                         {window.user && !this.state.liked && <img id="like-img" src="./res/not-liked.png" alt="oops" onClick={() => this.upvote(this.props.lightDex)}></img>}
-
                     </div>}
-                    <div className="Exit" onClick={this.unloadImg.bind(this)}>
-                        <img id="exit-img" src="./res/close-preview.png" alt="oops"></img>
-                        <div id="preview-footer">
-                            <p>
-                                {
-                                    'Uploaded: '
-                                    + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleDateString("en-US")
-                                    + ' at '
-                                    + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleTimeString("en-US")
-                                }
-                            </p>
-                            <br></br>
-                            <p>
-                                {
-                                    'Trips: '
-                                    + this.props.lights[this.props.lightDex].trips.length
-                                }
-                            </p>
-                        </div>
+                    <div id="preview-footer">
+                        <p>
+                            {'Uploaded: ' + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleDateString("en-US") + ' at ' + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleTimeString("en-US")}
+                        </p>
+                        <p>
+                            {'Trips: ' + this.props.lights[this.props.lightDex].trips.length}
+                        </p>
                     </div>
+                        <img id="exit-img" src="./res/close-preview.png" alt="oops" onClick={this.unloadImg.bind(this)}></img>
                 </div>}
                 {this.props.lightDex !== -1 && this.props.contributions && <div className="Preview_Manager">
                     <img src={this.props.lights[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>
@@ -157,7 +145,7 @@ class Preview extends Component {
                             unloadImg={this.unloadImg}
                         />
                     </div>}
-                    <div className="Exit" onClick={this.unloadImg.bind(this)}>
+                    <div className="Exit_Manager" onClick={this.unloadImg.bind(this)}>
                         <img id="exit-img-manager" src="./res/close-preview.png" alt="oops"></img>
                     </div>
                 </div>}
