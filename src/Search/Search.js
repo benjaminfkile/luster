@@ -150,6 +150,7 @@ class Search extends Component {
           if (this.searchRadius > 99) {
             this.setState({ hasLocation: false })
             this.searchRadius = 3
+            console.log('nothing found')
           } else {
             this.getLights(lat, lng, this.searchRadius)
           }

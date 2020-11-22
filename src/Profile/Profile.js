@@ -10,6 +10,7 @@ import './Profile.css'
 class Profile extends Component {
 
     contribs = []
+    currUser = ''
 
     constructor() {
         super();
@@ -37,7 +38,7 @@ class Profile extends Component {
             this.setState({ loggedIn: true })
         }
         this.contribs = []
-        this.interval = setInterval(this.listen4User, 1000)
+        this.userInterval = setInterval(this.listen4User, 1000)
     }
 
     componentWillUnmount() {
@@ -47,7 +48,7 @@ class Profile extends Component {
     listen4User = () => {
         if (window.user) {
             this.getContributions()
-            clearInterval(this.interval)
+            clearInterval(this.userInterval)
         }
     }
 
@@ -131,6 +132,8 @@ class Profile extends Component {
                 window.user = data.id
                 window.name = data.name
             })
+
+            console.log(window.name)
     }
 
     logOut = () => {
@@ -298,3 +301,7 @@ class Profile extends Component {
 }
 
 export default Profile
+
+/*
+fix name not changing when differrent user logs in during same session
+*/
