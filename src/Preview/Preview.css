@@ -1,5 +1,5 @@
 .Preview_User {
-	position: absolute;
+	position: fixed;
 	z-index: 1002;
 	width: 96vw;
 	height: 50vh;
@@ -12,7 +12,7 @@
 
 }
 .Preview_Manager{
-	position: absolute;
+	position: fixed;
 	z-index: 1002;
 	width: 96vw;
 	height: 50vh;
