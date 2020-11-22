@@ -65,6 +65,10 @@
 #forgot-btn{
     margin-top: 3vh;
 }
+.No_Contribs p{
+    padding-left: 15px;
+    padding-right: 15px;
+}
 .Contribs_Container{
     position: absolute;
     overflow-y: auto;

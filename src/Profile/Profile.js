@@ -21,7 +21,7 @@ class Profile extends Component {
             reset: '',
             loading: false,
             loggedIn: false,
-            hasContribs: true,
+            hasContribs: false,
             showFeed: true,
             lightDex: -1,
         };
@@ -57,6 +57,7 @@ class Profile extends Component {
 
     getContributions = () => {
         this.setState({ loading: true })
+        this.contribs.length = 0
         let targetUrl = ApiStore + '/api/lights/contributor/' + window.user
         fetch(targetUrl)
             .then(response => response.json())
@@ -67,6 +68,9 @@ class Profile extends Component {
                     var time = new Date(parseInt(data[0].uploaded)).toLocaleTimeString("en-US")
                     let timestamp = date + " at " + time
                     this.contribs[i].uploaded = timestamp
+                }
+                if (data.length > 0) {
+                    this.setState({ hasContribs: true })
                 }
             }).then(() =>
                 this.setState({ loading: false })
@@ -155,6 +159,7 @@ class Profile extends Component {
         } else {
             this.setState({ register: true })
         }
+
     }
 
     resetPass = (args) => {
@@ -182,7 +187,7 @@ class Profile extends Component {
                     {this.state.loading && <Spinner />}
                 </div>
                 {this.state.loggedIn && !this.state.loading && <div className="Profile">
-                    <h1>Hi {window.name}</h1>
+                    <h1>Hi {window.name.charAt(0).toUpperCase() + window.name.slice(1)}</h1>
                     <div id="logout-btn" onClick={this.logOut}>
                         <img id="logout-img" src="./res/logout.png" alt="oops"></img>
                         <p>Logout</p>
@@ -227,6 +232,19 @@ class Profile extends Component {
                                     </div>
                                 </div>
                             </LazyLoad>)}
+                    </div>}
+                    {!this.state.hasContribs && <div className="No_Contribs">
+                        <h3>
+                            Welcome to Lightmaps
+                            </h3>
+                        <br></br>
+                        <p>
+                            You will see your contributions in place of this message if you decide to post any christmas displays.
+                            </p>
+                        <br></br>
+                        <p>
+                            You can upvote other displays now as well
+                            </p>
                     </div>}
                     <Preview
                         togglePreview={this.togglePreview}

@@ -118,14 +118,21 @@ class Preview extends Component {
                         {window.user && !this.state.liked && <img id="like-img" src="./res/not-liked.png" alt="oops" onClick={() => this.upvote(this.props.lightDex)}></img>}
                     </div>}
                     <div id="preview-footer">
-                        <p>
-                            {'Uploaded: ' + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleDateString("en-US") + ' at ' + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleTimeString("en-US")}
-                        </p>
-                        <p>
-                            {'Trips: ' + this.props.lights[this.props.lightDex].trips.length}
-                        </p>
+                        <div className="Uploaded_Wrapper">
+                            <img id="upload-icon" src="./res/uploaded.png" alt="oops"></img>
+                            <p>
+                                {new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleDateString("en-US") + ' at ' + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleTimeString("en-US")}
+                            </p>
+                        </div>
+                        <div className="Trips_Wrapper">
+                            <img id="trips-icon" src="./res/trips.png" alt="oops"></img>
+                            <p>
+                                {'Trips: ' + this.props.lights[this.props.lightDex].trips.length}
+                            </p>
+                        </div>
+
                     </div>
-                        <img id="exit-img" src="./res/close-preview.png" alt="oops" onClick={this.unloadImg.bind(this)}></img>
+                    <img id="exit-img" src="./res/close-preview.png" alt="oops" onClick={this.unloadImg.bind(this)}></img>
                 </div>}
                 {this.props.lightDex !== -1 && this.props.contributions && <div className="Preview_Manager">
                     <img src={this.props.lights[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>
