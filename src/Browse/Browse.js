@@ -21,12 +21,10 @@ class Browse extends Component {
         this.state = {
             lightDex: -1,
             showFeed: true,
-            showSlider: true,
             maxDistance: 20,
             sliderMax: 200,
             searchDistance: 0,
             search: false,
-            target: null,
             loading: true
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
@@ -71,7 +69,7 @@ class Browse extends Component {
             for (let i = 0; i < LightStore.update.length; i++) {
                 if (LightStore.update[i] === 1) {
                     this.lights = LightStore.lights
-                    this.setState({ target: Radar.targets[0][0], search: false })
+                    this.setState({ target: Radar.targets[0][0], maxDistance: 20, search: false })
                     this.filterByDistance(20)
                 }
             }
@@ -87,7 +85,6 @@ class Browse extends Component {
     }
 
     filterByDistance = (miles) => {
-        clearInterval(this.searchIntevral)
         this.setState({ loading: true })
         if (Radar.targets.length > 0) {
             this.lights = []
@@ -100,7 +97,7 @@ class Browse extends Component {
             this.setState({ maxDistance: miles })
         }
         if (this.lights.length === 0) {
-            this.searchIntevral = setInterval(this.findClosest, 500)
+            this.findClosest()
         } else {
             this.setState({ showFeed: true, loading: false })
         }
@@ -150,7 +147,7 @@ class Browse extends Component {
                 {this.state.search && <Search toggled={true} />}
                 {this.lights.length > 0 && !this.state.search && <div className="Has_Location">
                     <p id="range-info"> Found {this.lights.length} within ~ {this.state.maxDistance} miles.</p>
-                    {this.state.showSlider && this.state.lightDex === -1 && <div className="Slider">
+                    {this.state.lightDex === -1 && <div className="Slider">
                         <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                     </div>}
                     {this.state.showFeed && <div className="Img_Container">

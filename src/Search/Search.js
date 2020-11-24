@@ -94,7 +94,7 @@ class Search extends Component {
     Location.lng = this.state.lng
     Location.accuracy = 0
     this.getLights(this.state.lat, this.state.lng, this.searchRadius)
-    // this.props.update()
+    // LightStore.update.unshift(1)
   }
 
   discardAddress = () => {
@@ -146,14 +146,14 @@ class Search extends Component {
       .then(response => response.json())
       .then(data => {
         if (data && data.length < 1) {
-          this.searchRadius += 3
-          if (this.searchRadius > 99) {
-            this.setState({ hasLocation: false })
-            this.searchRadius = 3
-            console.log('nothing found')
-          } else {
-            this.getLights(lat, lng, this.searchRadius)
-          }
+          this.searchRadius += 5
+          // if (this.searchRadius > 100) {
+          //   this.setState({ hasLocation: false })
+          //   this.searchRadius = 3
+          //   console.log('nothing found')
+          //} else {
+          this.getLights(lat, lng, this.searchRadius)
+          //}
         } else {
           LightStore.lights.length = 0
           for (let i = 0; i < data.length; i++) {
@@ -164,17 +164,17 @@ class Search extends Component {
           }
         }
       }).catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
-    // console.log('Search Radius ' + this.searchRadius)
   }
 
   render() {
     return (
       <div>
         {!this.state.hasLocation && <div className="Search">
-          <h2>Search</h2>
+          {this.state.results && this.state.results.length === 0 && !this.props.toggled && <h2>Mannually Set Search Point</h2>}
+          {this.state.results && this.state.results.length === 0 && this.props.toggled && <h2>Search</h2>}
           <input id="search-input" type="text" value={this.state.input} placeholder={this.state.placeholder} onClick={this.clearPlaceholder} onChange={this.handleChange} />
-          {this.state.results && this.state.results.length === 0 && !this.props.toggled && <h3>You havent allowed LightMaps your location which is fine, you can search for a location instead.</h3>}
-          {this.state.results && this.state.results.length === 0 && this.props.toggled && <h3>Search for places.</h3>}
+          {this.state.results && this.state.results.length === 0 && !this.props.toggled && <h3>You havent allowed Lightmaps your location which is fine, you can set your search point manually.</h3>}
+          {this.state.results && this.state.results.length === 0 && this.props.toggled && <h3>Explore other places.</h3>}
           {this.state.results && <div className="Suggestion_Container">
             {this.state.results.map((result, i) =>
               <p className="Suggestion" key={i} onClick={() => this.convertAddressToCoords(result)}>{result}</p>
