@@ -244,7 +244,7 @@ class Map extends React.Component {
           <img src="./res/search.png" alt="oops" onClick={this.toggleSearch}></img>
         </div>
         <div className="Markers">
-          {this.state.markers}
+          {(!this.state.search && this.state.lightDex === -1) && this.state.markers}
         </div>
 
         <Preview
