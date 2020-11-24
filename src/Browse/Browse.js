@@ -176,10 +176,10 @@ class Browse extends Component {
                         contributions={false}
                     />}
                 </div>}
-                <div className="Search_Toggle">
+                {/* <div className="Search_Toggle">
                     <img src="./res/search.png" alt="oops" onClick={this.toggleSearch}></img>
-                </div>
-                {/* <Snow/> */}
+                </div> */}
+                {/* <Snow/>*/}
             </div>
         );
     }

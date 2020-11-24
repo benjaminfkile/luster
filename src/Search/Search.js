@@ -106,6 +106,7 @@ class Search extends Component {
   }
 
   handleChange = (event) => {
+
     const self = this;
 
     if (self.state.typingTimeout) {
@@ -142,6 +143,7 @@ class Search extends Component {
 
   getLights = (lat, lng, rad) => {
     let targetUrl = ApiStore + '/api/lights/' + lat + ',' + lng + ',' + rad;
+    console.log(targetUrl)
     fetch(targetUrl)
       .then(response => response.json())
       .then(data => {
