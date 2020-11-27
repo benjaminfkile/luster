@@ -96,7 +96,6 @@ class Map extends React.Component {
 
   update = () => {
     if (LightStore.update.length > 0) {
-      if (LightStore.bounds === 'in') {
         for (let i = 0; i < LightStore.update.length; i++) {
           if (LightStore.update[i] === 1) {
             this.setState({ lights: LightStore.lights, lightDex: -1, search: false })
@@ -105,9 +104,6 @@ class Map extends React.Component {
           }
         }
       }
-    } else {
-      this.setState({ outOfBounds: true })
-    }
   }
 
   listen4Radar = () => {
