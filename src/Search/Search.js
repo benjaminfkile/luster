@@ -10,7 +10,7 @@ Geocode.setLanguage("en");
 
 class Search extends Component {
 
-  searchRadius = 3
+  searchRadius = 1
   mounted = false
 
   constructor(props) {
@@ -148,7 +148,7 @@ class Search extends Component {
       .then(response => response.json())
       .then(data => {
         if (data && data.length < 1) {
-          this.searchRadius += 5
+          this.searchRadius += 1
           // if (this.searchRadius > 100) {
           //   this.setState({ hasLocation: false })
           //   this.searchRadius = 3
