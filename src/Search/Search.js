@@ -44,17 +44,17 @@ class Search extends Component {
 
   getZone = () => {
     if (!this.props.toggled && this.mounted) {
-      if (!Location.lat) {
+      if (!Location.coords.lat) {
         this.setState({ hasLocation: false })
       } else {
         LightStore.lights.length = 0
         clearInterval(this.zoneInterval)
         this.setState({ hasLocation: true })
-        this.getLights(Location.lat, Location.lng, this.searchRadius)
+        this.getLights(Location.coords.lat, Location.coords.lng, this.searchRadius)
       }
     } else {
       clearInterval(this.zoneInterval)
-      this.getLights(Location.lat, Location.lng, this.searchRadius)
+      this.getLights(Location.coords.lat, Location.coords.lng, this.searchRadius)
       window.haltLocation = true
     }
   }
@@ -90,8 +90,8 @@ class Search extends Component {
 
   useAddress = () => {
     this.setState({ hasLocation: true })
-    Location.lat = this.state.lat
-    Location.lng = this.state.lng
+    Location.coords.lat = this.state.lat
+    Location.coords.lng = this.state.lng
     Location.accuracy = 0
     this.getLights(this.state.lat, this.state.lng, this.searchRadius)
     // LightStore.update.unshift(1)

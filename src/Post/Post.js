@@ -38,11 +38,11 @@ class Post extends Component {
     }
 
     checkLocationAccuracy = () => {
-        if (Location.lat) {
+        if (Location.coords.lat) {
             if (Location.accuracy > 50) {
                 this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy.toFixed(2) })
             } else {
-                this.setState({ accurateLocation: true, lat: Location.lat, lng: Location.lng, locationAccuracy: Location.accuracy.toFixed(2) })
+                this.setState({ accurateLocation: true, lat: Location.coords.lat, lng: Location.coords.lng, locationAccuracy: Location.accuracy.toFixed(2) })
             }
             clearInterval(this.accuracyInterval)
         }
@@ -153,7 +153,7 @@ class Post extends Component {
                     {/*eslint-disable-next-line*/}
                     {(this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0) && <div className="Selection">
                         <p id="coords">Your Coordinates:</p>
-                        <p id="coords1">{this.convertDMS(Location.lat, Location.lng)}</p>
+                        <p id="coords1">{this.convertDMS(Location.coords.lat, Location.coords.lng)}</p>
                         <p id="accuracy"> Coordinate Accuracy:</p>
                         <p id="accuracy1">{this.state.locationAccuracy} m</p>
                         <div className="Yes_Option" onClick={this.useAddress}>

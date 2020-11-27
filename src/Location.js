@@ -1,4 +1,18 @@
-let Location = []
+let Location = {
+    coords: {
+        lat: null,
+        lng: null
+    },
+    bounds: 'in'
+}
+
+const latLngBounds = {
+    north: 49.00139,
+    south: 44.358221,
+    east: -104.039138,
+    west: -116.050003,
+}
+
 let app = true
 
 function inApp() {
@@ -11,14 +25,25 @@ function inApp() {
 }
 
 function getLocation() {
+    if (Location.coords.lat &&
+        (Location.coords.lat <= latLngBounds.north
+            && Location.coords.lat >= latLngBounds.south
+            && Location.coords.lng <= latLngBounds.east
+            && Location.coords.lng >= latLngBounds.west)) {
+        Location.bounds = 'in'
+    }else{
+        Location.bounds = 'out'
+    }
     if (!app && !window.haltLocation && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setLocation)
     }
+
+    console.log('bounds: ' + Location.bounds)
 }
 
 function setLocation(position) {
-    Location.lat = position.coords.latitude
-    Location.lng = position.coords.longitude
+    Location.coords.lat = position.coords.latitude
+    Location.coords.lng = position.coords.longitude
     Location.accuracy = position.coords.accuracy
 }
 

@@ -10,7 +10,7 @@ import { mapStyles } from './NightMode'
 import '../Map/Map.css'
 
 class Map extends React.Component {
-  
+
   locationTimeout = 0
   mapMounted = false;
   defaultMapOptions = {
@@ -20,8 +20,16 @@ class Map extends React.Component {
     mapTypeControl: false,
     streetViewControl: false,
     gestureHandling: 'greedy',
+    restriction: {
+      latLngBounds: {
+        north: 49.00139,
+        south: 44.358221,
+        east: -104.039138,
+        west: -116.050003,
+      },
+    },
     zoom: 11,
-    minZoom: 4,
+    minZoom: 8,
     maxZoom: 15
   };
 
@@ -38,7 +46,8 @@ class Map extends React.Component {
       nearest: false,
       inApp: true,
       target: null,
-      search: false
+      search: false,
+      outOfBounds: false
     }
   }
 
@@ -73,7 +82,7 @@ class Map extends React.Component {
   }
 
   listenForLocation = () => {
-    if (Location.lat && !this.state.inApp && this.mapMounted) {
+    if (Location.coords.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
       clearInterval(this.listen4LocationInterval)
     } else {
@@ -87,13 +96,17 @@ class Map extends React.Component {
 
   update = () => {
     if (LightStore.update.length > 0) {
-      for (let i = 0; i < LightStore.update.length; i++) {
-        if (LightStore.update[i] === 1) {
-          this.setState({ lights: LightStore.lights, lightDex: -1, search: false})
-          this.recenter()
-          this.buildMarkers()
+      if (LightStore.bounds === 'in') {
+        for (let i = 0; i < LightStore.update.length; i++) {
+          if (LightStore.update[i] === 1) {
+            this.setState({ lights: LightStore.lights, lightDex: -1, search: false })
+            this.recenter()
+            this.buildMarkers()
+          }
         }
       }
+    } else {
+      this.setState({ outOfBounds: true })
     }
   }
 
@@ -105,25 +118,19 @@ class Map extends React.Component {
   }
 
   findNearest = () => {
-    this.setState({ nearest: true })
-    this.setState({ dragged: true })
-    this.setState({ centered: false })
+    this.setState({ nearest: true, dragged: true, centered: false })
   }
 
   recenter = () => {
-    this.setState({ centered: true })
-    this.setState({ dragged: false })
-    this.setState({ nearest: false })
+    this.setState({ centered: true, dragged: false, nearest: false })
   }
 
   dragged = () => {
-    this.setState({ centered: false })
-    this.setState({ dragged: true })
-    this.setState({ nearest: false })
+    this.setState({ centered: false, dragged: true, nearest: false })
   }
 
   zoomChanged = () => {
-    // this.dragged()
+    this.setState({ centered: false, dragged: true })
   }
 
   togglePreview = (args) => {
@@ -193,14 +200,14 @@ class Map extends React.Component {
 
         {/*center over location*/}
         {this.state.location && this.state.centered && <GoogleMap
-          center={{ lat: Location.lat, lng: Location.lng }}
+          center={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
           onZoomChanged={this.zoomChanged}
         >
           <>
             {this.state.location && <Marker
-              position={{ lat: Location.lat, lng: Location.lng }}
+              position={{ lat: Location.coords.lat, lng: Location.coords.lng }}
               icon={locationMarker}
             />}
           </>
@@ -208,7 +215,7 @@ class Map extends React.Component {
 
         {/*has Location and user drags map*/}
         {this.state.location && this.state.dragged && <GoogleMap
-          defaultCenter={{ lat: Location.lat, lng: Location.lng }}
+          defaultCenter={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
           onZoomChanged={this.zoomChanged}
@@ -216,7 +223,7 @@ class Map extends React.Component {
         >
           <>
             {!this.state.nearest && <Marker
-              position={{ lat: Location.lat + .00001, lng: Location.lng + .00001 }}
+              position={{ lat: Location.coords.lat, lng: Location.coords.lng }}
               icon={locationMarker}
             />}
           </>
@@ -224,7 +231,7 @@ class Map extends React.Component {
 
         {/*no Location, center of USA*/}
         {!this.state.location && <GoogleMap
-          defaultCenter={{ lat: 37.0902, lng: -95.7129 }}
+          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
           defaultOptions={this.defaultMapOptions}
         >
           <>

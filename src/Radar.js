@@ -10,7 +10,7 @@ let Radar = {
 let dbInterval = setInterval(listen4DB, 1000)
 
 function listen4DB() {
-    if (LightStore.lights.length > 0 && Location.lat) {
+    if (LightStore.lights.length > 0 && Location.coords.lat) {
         clearInterval(dbInterval)
         setInterval(updateCoords, 1000)
         polulateRadar()
@@ -19,16 +19,16 @@ function listen4DB() {
 
 function updateCoords() {
 
-    if (/*Location &&*/ Location.lat) {
-        Radar.locationHistory.unshift([Location.lat, Location.lng])
+    if (/*Location &&*/ Location.coords.lat) {
+        Radar.locationHistory.unshift([Location.coords.lat, Location.coords.lng])
     } 
     // else {
-    //     if (!Location.lat && GeoData[0].latitude) {
+    //     if (!Location.coords.lat && GeoData[0].latitude) {
     //         Radar.locationHistory.unshift([GeoData[0].latitude, GeoData[0].longitude])
     //     }
     // }
 
-    if (Location.lat /*|| GeoData[0].latitude*/) {
+    if (Location.coords.lat /*|| GeoData[0].latitude*/) {
         if (Radar.locationHistory.length > 1 && Radar.locationHistory[0][0] !== Radar.locationHistory[1][0] && Radar.locationHistory[0][1] !== Radar.locationHistory[1][1]) {
             polulateRadar()
         }
@@ -39,10 +39,10 @@ function polulateRadar() {
     //why doesnt Radar.targets = [] work?
     Radar.targets.length = 0
 
-    if (Location.lat) {
+    if (Location.coords.lat) {
         for (let i = 0; i < LightStore.lights.length; i++) {
             if (LightStore.lights.length > 0) {
-                Radar.targets.push([distance(Location.lat, Location.lng, LightStore.lights[i].lat, LightStore.lights[i].lng, "N"), LightStore.lights[i]])
+                Radar.targets.push([distance(Location.coords.lat, Location.coords.lng, LightStore.lights[i].lat, LightStore.lights[i].lng, "N"), LightStore.lights[i]])
             }
         }
     } 
