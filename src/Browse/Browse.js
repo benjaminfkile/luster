@@ -157,7 +157,8 @@ class Browse extends Component {
                             <LazyLoad
                                 key={i}
                                 height={0}>
-                                <div className="Item" id={i}>
+                                {i % 2 === 0 && <div className="Even_Item" id={i}>
+
                                     <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                     <div id="browse-stats">
                                         <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
@@ -168,7 +169,20 @@ class Browse extends Component {
                                             ~ {img.distance} mi
                                         </p>
                                     </div>
-                                </div>
+                                </div>}
+                                {i % 2 !== 0 && <div className="Odd_Item" id={i}>
+
+                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                    <div id="browse-stats">
+                                        <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                        <p>
+                                            {img.upvotes.length}
+                                        </p>
+                                        <p id="distance">
+                                            ~ {img.distance} mi
+                                        </p>
+                                    </div>
+                                </div>}
                             </LazyLoad>)}
                     </div>}
                     {!this.state.search && <Preview
