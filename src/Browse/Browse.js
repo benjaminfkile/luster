@@ -5,6 +5,7 @@ import LightStore from '../LightStore'
 import Spinner from '../Spinner/Spinner'
 import Radar from '../Radar'
 import Search from '../Search/Search'
+import Map from '../Map/Map'
 // import Snow from '../Snow/Snow'
 import '../Browse/Browse.css'
 
@@ -16,8 +17,8 @@ class Browse extends Component {
 
     browseMounted = false
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             lightDex: -1,
             showFeed: true,
@@ -142,6 +143,7 @@ class Browse extends Component {
     render() {
         return (
             <div className="Browse">
+                <Map />
                 {this.state.loading && <Spinner />}
                 {LightStore.lights.length === 0 && <Search />}
                 {this.state.search && <Search toggled={true} />}

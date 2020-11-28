@@ -143,7 +143,7 @@ class Search extends Component {
 
   getLights = (lat, lng, rad) => {
     let targetUrl = ApiStore + '/api/lights/' + lat + ',' + lng + ',' + rad;
-    console.log(targetUrl)
+    // console.log(targetUrl)
     fetch(targetUrl)
       .then(response => response.json())
       .then(data => {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { withGoogleMap, withScriptjs, GoogleMap, Marker } from "react-google-maps";
 import KeyStore from '../KeyStore'
 import Location from '../Location'
@@ -9,7 +9,7 @@ import Search from '../Search/Search'
 import { mapStyles } from './NightMode'
 import '../Map/Map.css'
 
-class Map extends React.Component {
+class Map extends Component {
 
   locationTimeout = 0
   mapMounted = false;
@@ -34,8 +34,8 @@ class Map extends React.Component {
   };
 
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       lights: null,
       markers: null,
@@ -53,12 +53,14 @@ class Map extends React.Component {
 
   componentDidMount() {
     this.inApp()
-    this.mapMounted = true;
-    this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
-    this.updateInterval = setInterval(this.update, 1000)
-    this.dbInterval = setInterval(this.listen4DB, 1000)
-    this.radarInterval = setInterval(this.listen4Radar, 1000)
-    this.setState({ lights: LightStore.lights })
+    if (window.location.pathname !== '/browse') {
+      this.mapMounted = true;
+      this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
+      this.updateInterval = setInterval(this.update, 1000)
+      this.dbInterval = setInterval(this.listen4DB, 1000)
+      this.radarInterval = setInterval(this.listen4Radar, 1000)
+      this.setState({ lights: LightStore.lights })
+    }
   }
 
   inApp = () => {
@@ -96,14 +98,14 @@ class Map extends React.Component {
 
   update = () => {
     if (LightStore.update.length > 0) {
-        for (let i = 0; i < LightStore.update.length; i++) {
-          if (LightStore.update[i] === 1) {
-            this.setState({ lights: LightStore.lights, lightDex: -1, search: false })
-            this.recenter()
-            this.buildMarkers()
-          }
+      for (let i = 0; i < LightStore.update.length; i++) {
+        if (LightStore.update[i] === 1) {
+          this.setState({ lights: LightStore.lights, lightDex: -1, search: false })
+          this.recenter()
+          this.buildMarkers()
         }
       }
+    }
   }
 
   listen4Radar = () => {
@@ -142,7 +144,6 @@ class Map extends React.Component {
   }
 
   buildMarkers = () => {
-
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
       let markerImg = new window.google.maps.MarkerImage(
@@ -162,7 +163,6 @@ class Map extends React.Component {
         />
       temp.push(marker)
     }
-
     this.setState({ markers: temp })
   }
 
@@ -177,7 +177,7 @@ class Map extends React.Component {
 
     return (
       <div className="Map">
-        {!this.state.search && LightStore.lights.length === 0 && <Search />}
+        {!this.state.search && LightStore.lights.length === 0 && window.location.pathname !== '/browse' && <Search />}
         {this.state.search && <Search toggled={true} />}
         {/*center over nearest*/}
         {this.state.nearest && Radar.targets[0][1].lat && <GoogleMap
@@ -195,7 +195,7 @@ class Map extends React.Component {
         </GoogleMap>}
 
         {/*center over location*/}
-        {this.state.location && this.state.centered && <GoogleMap
+        {this.state.location && this.state.centered && window.location.pathname !== '/browse' && <GoogleMap
           center={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -210,7 +210,7 @@ class Map extends React.Component {
         </GoogleMap>}
 
         {/*has Location and user drags map*/}
-        {this.state.location && this.state.dragged && <GoogleMap
+        {this.state.location && this.state.dragged && window.location.pathname !== '/browse' && <GoogleMap
           defaultCenter={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -225,8 +225,8 @@ class Map extends React.Component {
           </>
         </GoogleMap>}
 
-        {/*no Location, center of USA*/}
-        {!this.state.location && <GoogleMap
+        {/*no Location, center of Montana*/}
+        {!this.state.location && window.location.pathname !== '/browse' && <GoogleMap
           defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
           defaultOptions={this.defaultMapOptions}
         >
@@ -234,18 +234,34 @@ class Map extends React.Component {
           </>
         </GoogleMap>}
 
-        <div className="Map_Controls">
+        {!this.state.location && window.location.pathname === '/browse' && <GoogleMap
+          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
+          defaultOptions={this.defaultMapOptions}
+        >
+          <>
+          </>
+        </GoogleMap>}
+
+        {this.state.location && window.location.pathname === '/browse' && <GoogleMap
+          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
+          defaultOptions={this.defaultMapOptions}
+        >
+          <>
+          </>
+        </GoogleMap>}
+
+        {window.location.pathname !== '/browse' && <div className="Map_Controls">
           {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
             <p>Recenter</p>
           </div>}
           {!this.state.nearest && <div className="Nearest" onClick={this.findNearest}>
             <p>Nearest</p>
           </div>}
-        </div>
+        </div>}
 
-        <div className="Search_Toggle">
+        {window.location.pathname !== '/browse' && <div className="Search_Toggle">
           <img src="./res/search.png" alt="oops" onClick={this.toggleSearch}></img>
-        </div>
+        </div>}
         <div className="Markers">
           {(!this.state.search && this.state.lightDex === -1) && this.state.markers}
         </div>

@@ -38,7 +38,7 @@ function getLocation() {
         navigator.geolocation.getCurrentPosition(setLocation)
     }
 
-    console.log('bounds: ' + Location.bounds)
+    // console.log('bounds: ' + Location.bounds)
 }
 
 function setLocation(position) {

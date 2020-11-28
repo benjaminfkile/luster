@@ -5,15 +5,21 @@
 }
 
 #range-info {
+	position: absolute;
 	width: 100vw;
-	margin-top: 3vh;
+	top: 1vh;
 	text-align: center;
 	color: rgb(255, 255, 255);
+	z-index: 10000;
+
 }
 
 .Slider {
+	position: absolute;
+	top: 4vh;
 	margin-left: 5vw;
 	width: 100vw;
+	z-index: 10000;
 }
 
 #nested-slider {
@@ -63,23 +69,32 @@
 .Img_Container {
 	position: absolute;
 	overflow-y: auto;
-	top: 12vh;
-	width: 100vw;
-	height: 89vh;
+	top: 10vh;
+	left: 2vw;
+	width: 96vw;
+	height: 85vh;
 	z-index: 102;
+	border-style: solid;
+	background-color: black;
+	border-width: 1px;
+	border-color: rgb(126, 126, 126);
 	/* margin-top: 2vh; */
 }
 
 .Item {
-	width: 96vw;
+	width: 97vw;
 	margin-bottom: 5px;
-	margin-left: 2vw;
+	/* margin-left: 2vw; */
+	border-bottom: solid;
 	background-color: black;
+	border-width: 1px;
+	border-color: rgb(126, 126, 126);
 }
 
 .Item img {
-	width: 96vw;
+	width: 94vw;
 	height: 35vh;
+	margin-left: 1vw;
 	z-index: 10000;
 	-webkit-animation: slide-in-right .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 	animation: slide-in-right .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
