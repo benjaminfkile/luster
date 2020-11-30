@@ -103,32 +103,33 @@ class Preview extends Component {
                     {/* {!this.state.loaded && <img src="./res/splash.png" id="preview-img" alt='A tree'></img>} */}
                     {!this.state.loaded && <Spinner />}
                     {this.state.loaded && <div className="Preview_User_Interface">
-                        <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} onClick={() => this.trip(this.props.lightDex)} /> &nbsp;</a>
                         <div id="stats">
                             <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
                             <p>
-                                {this.state.likes}
+                                {'Upvotes: ' + this.state.likes}
                             </p>
                         </div>
                         {window.user && this.state.liked && <img id="like-img" src="./res/like-btn.png" alt="oops" onClick={() => this.upvote(this.props.lightDex)}></img>}
                         {window.user && !this.state.liked && <img id="like-img" src="./res/not-liked.png" alt="oops" onClick={() => this.upvote(this.props.lightDex)}></img>}
                     </div>}
                     <div id="preview-footer">
-                        <div className="Uploaded_Wrapper">
-                            <img id="upload-icon" src="./res/uploaded.png" alt="oops"></img>
-                            <p>
-                                {new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleDateString("en-US") + ' at ' + new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleTimeString("en-US")}
-                            </p>
-                        </div>
                         <div className="Trips_Wrapper">
                             <img id="trips-icon" src="./res/trips.png" alt="oops"></img>
                             <p>
                                 {'Trips: ' + this.props.lights[this.props.lightDex].trips.length}
                             </p>
                         </div>
-
+                        {/* <div className="Uploaded_Wrapper">
+                            <img id="upload-icon" src="./res/uploaded.png" alt="oops"></img>
+                            <p>
+                                {new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleDateString("en-US")}
+                            </p>
+                        </div> */}
                     </div>
-                    <img id="exit-img" src="./res/close-preview.png" alt="oops" onClick={this.unloadImg.bind(this)}></img>
+                    <div className="Preview_Controls">
+                        <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" id="nav-img" onClick={() => this.trip(this.props.lightDex)} /> &nbsp;</a>
+                        <img id="exit-img" src="./res/close-preview.png" alt="oops" onClick={this.unloadImg.bind(this)}></img>
+                    </div>
                 </div>}
                 {this.props.lightDex !== -1 && this.props.contributions && <div className="Preview_Manager">
                     <img src={this.props.lights[this.props.lightDex].url} onLoad={this.handleImageLoaded.bind(this)} alt='hacky' height={0} width={0}></img>

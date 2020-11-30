@@ -128,7 +128,8 @@ class Map extends Component {
   }
 
   zoomChanged = () => {
-    this.setState({ centered: false, dragged: true })
+    // this.setState({ centered: false, dragged: true })
+    // this.dragged()
   }
 
   togglePreview = (args) => {
@@ -250,7 +251,7 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
-        {window.location.pathname !== '/browse' && <div className="Map_Controls">
+        {window.location.pathname !== '/browse' && !this.state.search && <div className="Map_Controls">
           {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
             <p>Recenter</p>
           </div>}

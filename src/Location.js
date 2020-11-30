@@ -3,7 +3,8 @@ let Location = {
         lat: null,
         lng: null
     },
-    bounds: 'in'
+    bounds: 'in',
+    allowed: false,
 }
 
 const latLngBounds = {
@@ -25,26 +26,29 @@ function inApp() {
 }
 
 function getLocation() {
+
+
     if (Location.coords.lat &&
         (Location.coords.lat <= latLngBounds.north
             && Location.coords.lat >= latLngBounds.south
             && Location.coords.lng <= latLngBounds.east
             && Location.coords.lng >= latLngBounds.west)) {
         Location.bounds = 'in'
-    }else{
+    } else {
         Location.bounds = 'out'
     }
     if (!app && !window.haltLocation && navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(setLocation)
     }
-
-    // console.log('bounds: ' + Location.bounds)
 }
 
 function setLocation(position) {
-    Location.coords.lat = position.coords.latitude
-    Location.coords.lng = position.coords.longitude
-    Location.accuracy = position.coords.accuracy
+    if (!window.haltLocation) {
+        Location.coords.lat = position.coords.latitude
+        Location.coords.lng = position.coords.longitude
+        Location.accuracy = position.coords.accuracy
+    } 
+    // console.log(position.coords.latitude)
 }
 
 navigator.geolocation.getCurrentPosition(setLocation)
