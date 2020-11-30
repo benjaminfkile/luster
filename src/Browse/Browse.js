@@ -33,11 +33,11 @@ class Browse extends Component {
 
     componentDidMount() {
         this.browseMounted = true
-        this.dbInterval = setInterval(this.listen4DB, 1000)
-        this.radarInterval = setInterval(this.listen4Radar, 1000)
+        this.dbInterval = setInterval(this.listen4DB, 500)
+        this.radarInterval = setInterval(this.listen4Radar, 300)
         this.distanceInterval = setInterval(this.listen4SliderDrag, 500)
-        this.updateInterval = setInterval(this.update, 1000)
-        this.scrollInterval = setInterval(this.scroll, 500)
+        this.updateInterval = setInterval(this.update, 100)
+        this.scrollInterval = setInterval(this.scroll, 300)
     }
 
     componentWillUnmount() {

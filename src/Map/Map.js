@@ -55,10 +55,10 @@ class Map extends Component {
     this.inApp()
     if (window.location.pathname !== '/browse') {
       this.mapMounted = true;
-      this.listen4LocationInterval = setInterval(this.listenForLocation, 1000)
-      this.updateInterval = setInterval(this.update, 1000)
-      this.dbInterval = setInterval(this.listen4DB, 1000)
-      this.radarInterval = setInterval(this.listen4Radar, 1000)
+      this.listen4LocationInterval = setInterval(this.listenForLocation, 100)
+      this.updateInterval = setInterval(this.update, 100)
+      this.dbInterval = setInterval(this.listen4DB, 100)
+      this.radarInterval = setInterval(this.listen4Radar, 300)
       this.setState({ lights: LightStore.lights })
     }
   }

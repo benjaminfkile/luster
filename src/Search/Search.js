@@ -18,7 +18,6 @@ class Search extends Component {
       placeholder: 'search',
       results: [],
       hasInput: false,
-      city: ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.clearPlaceholder = this.clearPlaceholder.bind(this);
@@ -55,7 +54,9 @@ class Search extends Component {
     Location.coords.lat = lat
     Location.coords.lng = lng
     this.getLights(Location.coords.lat, Location.coords.lng, rad)
-    this.setState({ city: city })
+    if(LightStore.lights.length > 0){
+      LightStore.update.unshift(1)
+    }
   }
 
   getLocation = () => {
@@ -75,6 +76,7 @@ class Search extends Component {
           if (this.searchRadius > 9) {
             this.searchRadius = 1
             console.log('nothing found')
+            this.searchRadius = 1
           } else {
             this.getLights(lat, lng, this.searchRadius)
           }
@@ -85,6 +87,7 @@ class Search extends Component {
               LightStore.lights.push(data[i])
             }
           }
+          this.searchRadius = 1
         }
       }).catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
   }
