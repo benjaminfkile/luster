@@ -36,9 +36,17 @@ class Browse extends Component {
         this.browseMounted = true
         this.dbInterval = setInterval(this.listen4DB, 500)
         this.radarInterval = setInterval(this.listen4Radar, 300)
-        this.distanceInterval = setInterval(this.listen4SliderDrag, 500)
+        this.sliderInterval = setInterval(this.listen4SliderDrag, 100)
         this.updateInterval = setInterval(this.update, 100)
         this.scrollInterval = setInterval(this.scroll, 300)
+        this.orientInterval = setInterval(this.listen4Orient, 500)
+
+    }
+
+    listen4Orient = () => {
+        if (!document.getElementById('img-container')) {
+            this.update()
+        }
     }
 
     componentWillUnmount() {
@@ -61,6 +69,7 @@ class Browse extends Component {
     }
 
     listen4SliderDrag = () => {
+        this.setState({sliderDragged: false})
         if (this.state.maxDistance !== this.distance && this.browseMounted) {
             this.filterByDistance(this.distance)
         }
@@ -98,11 +107,10 @@ class Browse extends Component {
             }
             this.setState({ maxDistance: miles })
         }
-        //modify for big db
-        if (this.lights.length < 20) {
+        if (this.lights.length === 0) {
             this.findClosest()
         } else {
-            this.setState({ showFeed: true, loading: false, desktopImg: this.lights[0].url })
+            this.setState({ showFeed: true, loading: false })
         }
     }
 
@@ -144,7 +152,7 @@ class Browse extends Component {
 
     handleSliderDrag(evt) {
         this.distance = evt.target.value
-        this.setState({ showFeed: false, loading: true })
+        this.setState({ showFeed: false, loading: true, sliderDragged: true })
     }
 
     render() {
@@ -161,13 +169,12 @@ class Browse extends Component {
                         {this.state.lightDex === -1 && <div className="Slider">
                             <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                         </div>}
-                        {this.state.showFeed && <div className="Img_Container">
+                        {this.state.showFeed && <div className="Img_Container" id="img-container">
                             {this.lights.map((img, i) =>
                                 <LazyLoad
                                     key={i}
                                     height={0}>
                                     {i % 2 === 0 && <div className="Even_Item" id={i}>
-
                                         <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                         <div id="browse-stats">
                                             <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
@@ -180,7 +187,6 @@ class Browse extends Component {
                                         </div>
                                     </div>}
                                     {i % 2 !== 0 && <div className="Odd_Item" id={i}>
-
                                         <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                         <div id="browse-stats">
                                             <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
@@ -204,10 +210,10 @@ class Browse extends Component {
                 </div>
                 {/************************************************************************************************************************/}
                 <div className="Browse_Desktop">
-                {this.state.showFeed && this.state.lightDex === -1 && <p id="range-info-browse"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
-                        {this.state.lightDex === -1 && <div className="Slider_Browse">
-                            <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider-browse" onChange={this.handleSliderDrag}></input>
-                        </div>}
+                    {this.state.showFeed && this.state.lightDex === -1 && <p id="range-info-browse"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
+                    {this.state.lightDex === -1 && <div className="Slider_Browse">
+                        <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider-browse" onChange={this.handleSliderDrag}></input>
+                    </div>}
                     {this.state.lightDex === -1 && <div className="Carousel">
                         {this.state.showFeed && <div className="Img_Container_Browse">
                             {this.lights.map((img, i) =>
@@ -216,7 +222,7 @@ class Browse extends Component {
                                     height={0}>
                                     {i % 2 === 0 && <div className="Even_Item_Browse" id={i}>
 
-                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                         <div id="browse-stats">
                                             <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
                                             <p>
@@ -228,7 +234,7 @@ class Browse extends Component {
                                         </div>
                                     </div>}
                                     {i % 2 !== 0 && <div className="Odd_Item_Browse" id={i}>
-                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                         <div id="browse-stats">
                                             <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
                                             <p>
