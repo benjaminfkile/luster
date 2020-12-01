@@ -1,7 +1,7 @@
 let Location = {
     coords: {
-        lat: null,
-        lng: null
+        lat: 46.8721,
+        lng: -113.9940
     },
     bounds: 'in',
     allowed: false,
@@ -26,7 +26,6 @@ function inApp() {
 }
 
 function getLocation() {
-
 
     if (Location.coords.lat &&
         (Location.coords.lat <= latLngBounds.north

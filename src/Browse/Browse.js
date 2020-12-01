@@ -97,7 +97,8 @@ class Browse extends Component {
             }
             this.setState({ maxDistance: miles })
         }
-        if (this.lights.length === 0) {
+        //modify for big db
+        if (this.lights.length < 5) {
             this.findClosest()
         } else {
             this.setState({ showFeed: true, loading: false })

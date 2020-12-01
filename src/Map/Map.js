@@ -29,7 +29,7 @@ class Map extends Component {
       },
     },
     zoom: 11,
-    minZoom: 8,
+    minZoom: 6,
     maxZoom: 15
   };
 
@@ -87,7 +87,8 @@ class Map extends Component {
     if (Location.coords.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
       clearInterval(this.listen4LocationInterval)
-    } else {
+    }
+    else {
       this.setState({ location: false })
       this.locationTimeout++
       if (this.locationTimeout > 19) {
@@ -196,22 +197,21 @@ class Map extends Component {
         </GoogleMap>}
 
         {/*center over location*/}
-        {this.state.location && this.state.centered && window.location.pathname !== '/browse' && <GoogleMap
+        {this.state.centered && window.location.pathname !== '/browse' && <GoogleMap
           center={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
           onZoomChanged={this.zoomChanged}
         >
           <>
-            {this.state.location && <Marker
+            {<Marker
               position={{ lat: Location.coords.lat, lng: Location.coords.lng }}
               icon={locationMarker}
             />}
           </>
         </GoogleMap>}
 
-        {/*has Location and user drags map*/}
-        {this.state.location && this.state.dragged && window.location.pathname !== '/browse' && <GoogleMap
+        {this.state.dragged && window.location.pathname !== '/browse' && <GoogleMap
           defaultCenter={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -226,8 +226,7 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
-        {/*no Location, center of Montana*/}
-        {!this.state.location && window.location.pathname !== '/browse' && <GoogleMap
+        {/* {!this.state.location && window.location.pathname !== '/browse' && <GoogleMap
           defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
           defaultOptions={this.defaultMapOptions}
         >
@@ -241,10 +240,10 @@ class Map extends Component {
         >
           <>
           </>
-        </GoogleMap>}
+        </GoogleMap>} */}
 
-        {this.state.location && window.location.pathname === '/browse' && <GoogleMap
-          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
+        {window.location.pathname === '/browse' && <GoogleMap
+          defaultCenter={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
         >
           <>

@@ -49,14 +49,12 @@ class Search extends Component {
     this.setState({ results: this.searchResults })
   }
 
-  customLocation = (lat, lng, rad, city) => {
+  customLocation = (lat, lng, rad) => {
     window.haltLocation = true
     Location.coords.lat = lat
     Location.coords.lng = lng
     this.getLights(Location.coords.lat, Location.coords.lng, rad)
-    if(LightStore.lights.length > 0){
       LightStore.update.unshift(1)
-    }
   }
 
   getLocation = () => {
