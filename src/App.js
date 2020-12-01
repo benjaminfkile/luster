@@ -10,11 +10,7 @@ import './App.css';
 
 class App extends Component {
 
-
   render() {
-
-    window.user = 'asfasdff'
-
 
     return (
       <div className="Wrapper">
