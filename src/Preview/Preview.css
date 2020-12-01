@@ -54,6 +54,7 @@
 		margin-top: 10px;
 		margin-right: 10px;
 		margin-left: auto;
+		cursor: pointer;
 	}
 	
 	#preview-footer{
@@ -88,6 +89,7 @@
 	}
 	
 	#exit-img{
+		cursor: pointer;
 		-webkit-animation: slide-in-left .8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 		animation: slide-in-left .8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; 
 	}
@@ -105,27 +107,56 @@
 @media screen and (orientation:landscape) {
 	.Preview_User{
 		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100vw;
-		height: 100vh;
+		top: 5vh;
+		left: 5vw;
+		width: 90vw;
+		height: 90vh;
+		/* border: none; */
+		border-radius: 0%;
+		border-color: rgb(141, 141, 141);
 	}
 
-	#stats{
-		display: none;
-	}
 	.Preview_Controls{
 		position: fixed;
-		bottom: 0;
+		top: 82vh;
 		width: 100%;
 		border: none;
 	}
 
+	#stats{
+		position: fixed;
+		top: 2vh;
+		width: 100%;
+		border: none;
+	}
+
+	#preview-footer{
+		position: absolute;
+		top: 2vh;
+		width: 90vw;
+		border: none;
+	}
+
+	.Trips_Wrapper{
+		float: right;
+		margin-right: 1vw;
+	}
+
+	/* .Nav{
+		display: none;
+	} */
+
 	#preview-img {
-		width: 100vw;
-		height: 100vh;
-		background-color: rgb(0,0, 0);
-		border-radius: 2%;
+		width: 90vw;
+		height: 90vh;
+
+	}
+
+	#like-img{
+        position: absolute;
+		margin-right: 1vw;
+		right: 0;
+		top: 75vh;
 	}
  }
 

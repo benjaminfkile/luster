@@ -99,7 +99,7 @@ class Browse extends Component {
             this.setState({ maxDistance: miles })
         }
         //modify for big db
-        if (this.lights.length < 5) {
+        if (this.lights.length < 20) {
             this.findClosest()
         } else {
             this.setState({ showFeed: true, loading: false, desktopImg: this.lights[0].url })
@@ -148,6 +148,7 @@ class Browse extends Component {
     }
 
     render() {
+
         return (
             <div className="Browse">
                 <Map />
@@ -203,14 +204,11 @@ class Browse extends Component {
                 </div>
                 {/************************************************************************************************************************/}
                 <div className="Browse_Desktop">
-                {/* {this.state.loading && <Spinner />} */}
-                    {/* {LightStore.lights.length === 0 && <Search />}
-                    {this.state.search && <Search toggled={true} />} */}
-                    <div className="Carousel">
-                    {this.state.showFeed && <p id="range-info-browse"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
+                {this.state.showFeed && this.state.lightDex === -1 && <p id="range-info-browse"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
                         {this.state.lightDex === -1 && <div className="Slider_Browse">
                             <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider-browse" onChange={this.handleSliderDrag}></input>
                         </div>}
+                    {this.state.lightDex === -1 && <div className="Carousel">
                         {this.state.showFeed && <div className="Img_Container_Browse">
                             {this.lights.map((img, i) =>
                                 <LazyLoad
@@ -218,7 +216,7 @@ class Browse extends Component {
                                     height={0}>
                                     {i % 2 === 0 && <div className="Even_Item_Browse" id={i}>
 
-                                        <img src={img.url} alt="oops" onClick={() => this.loadDesktopImg(i)} />
+                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                         <div id="browse-stats">
                                             <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
                                             <p>
@@ -230,7 +228,7 @@ class Browse extends Component {
                                         </div>
                                     </div>}
                                     {i % 2 !== 0 && <div className="Odd_Item_Browse" id={i}>
-                                        <img src={img.url} alt="oops" onClick={() => this.loadDesktopImg(i)} />
+                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
                                         <div id="browse-stats">
                                             <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
                                             <p>
@@ -243,10 +241,16 @@ class Browse extends Component {
                                     </div>}
                                 </LazyLoad>)}
                         </div>}
-                        {this.state.desktopImg && <div className="Desktop_Img">
-                            <img src={this.state.desktopImg} alt="oops" />
-                        </div>}
-                    </div>
+                        {/* {this.state.desktopImg && <div className="Desktop_Img">
+                            <img src={this.state.desktopImg} alt="oops" onClick={() => this.togglePreview(0)} />
+                        </div>} */}
+                    </div>}
+                    {!this.state.search && <Preview
+                        togglePreview={this.togglePreview}
+                        lights={this.lights}
+                        lightDex={this.state.lightDex}
+                        contributions={false}
+                    />}
                 </div>
             </div>
         );

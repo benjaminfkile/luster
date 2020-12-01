@@ -250,7 +250,7 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
-        {window.location.pathname !== '/browse' && !this.state.search && <div className="Map_Controls">
+        {window.location.pathname !== '/browse' && !this.state.search && this.state.lightDex === -1 && <div className="Map_Controls">
           {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
             <p>Recenter</p>
           </div>}

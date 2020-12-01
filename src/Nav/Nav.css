@@ -2,14 +2,15 @@
 .Nav {
         position: relative;
 	top: 1vh;
-	z-index: 1003;
+	z-index: 10050;
 }
 
 .Menu img {
         position: absolute;
         margin-right: 7px;
         right: 0;
-	width: 40px;
+        width: 40px;
+        cursor: pointer;
 }
 
 .Routes {
@@ -25,6 +26,7 @@
 	border-color: rgb(39, 39, 39);
 	background-color: rgb(0, 0, 0);
         border-radius: 5px;
+        cursor: pointer;
         -webkit-animation: slide-in-right 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
         animation: slide-in-right 0.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
