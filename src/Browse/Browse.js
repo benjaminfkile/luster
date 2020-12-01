@@ -26,7 +26,8 @@ class Browse extends Component {
             sliderMax: 200,
             searchDistance: 0,
             search: false,
-            loading: true
+            loading: true,
+            desktopImg: null
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
     }
@@ -101,7 +102,7 @@ class Browse extends Component {
         if (this.lights.length < 5) {
             this.findClosest()
         } else {
-            this.setState({ showFeed: true, loading: false })
+            this.setState({ showFeed: true, loading: false, desktopImg: this.lights[0].url })
         }
     }
 
@@ -136,6 +137,11 @@ class Browse extends Component {
         }
     }
 
+    loadDesktopImg = (args) => {
+        this.setState({ desktopImg: this.lights[args].url })
+        console.log(args)
+    }
+
     handleSliderDrag(evt) {
         this.distance = evt.target.value
         this.setState({ showFeed: false, loading: true })
@@ -145,58 +151,103 @@ class Browse extends Component {
         return (
             <div className="Browse">
                 <Map />
-                {this.state.loading && <Spinner />}
-                {LightStore.lights.length === 0 && <Search />}
-                {this.state.search && <Search toggled={true} />}
-                {this.lights.length > 0 && !this.state.search && <div className="Has_Location">
-                    {this.state.showFeed && <p id="range-info"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
-                    {this.state.lightDex === -1 && <div className="Slider">
-                        <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
-                    </div>}
-                    {this.state.showFeed && <div className="Img_Container">
-                        {this.lights.map((img, i) =>
-                            <LazyLoad
-                                key={i}
-                                height={0}>
-                                {i % 2 === 0 && <div className="Even_Item" id={i}>
+                <div className="Browse_Mobile">
+                    {this.state.loading && <Spinner />}
+                    {LightStore.lights.length === 0 && <Search />}
+                    {this.state.search && <Search toggled={true} />}
+                    {this.lights.length > 0 && !this.state.search && <div className="Has_Location">
+                        {this.state.showFeed && <p id="range-info"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
+                        {this.state.lightDex === -1 && <div className="Slider">
+                            <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
+                        </div>}
+                        {this.state.showFeed && <div className="Img_Container">
+                            {this.lights.map((img, i) =>
+                                <LazyLoad
+                                    key={i}
+                                    height={0}>
+                                    {i % 2 === 0 && <div className="Even_Item" id={i}>
 
-                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                    <div id="browse-stats">
-                                        <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                        <p>
-                                            {img.upvotes.length}
+                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                        <div id="browse-stats">
+                                            <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                            <p>
+                                                {img.upvotes.length}
+                                            </p>
+                                            <p id="distance">
+                                                ~ {img.distance} mi
                                         </p>
-                                        <p id="distance">
-                                            ~ {img.distance} mi
-                                        </p>
-                                    </div>
-                                </div>}
-                                {i % 2 !== 0 && <div className="Odd_Item" id={i}>
+                                        </div>
+                                    </div>}
+                                    {i % 2 !== 0 && <div className="Odd_Item" id={i}>
 
-                                    <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                    <div id="browse-stats">
-                                        <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                        <p>
-                                            {img.upvotes.length}
+                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
+                                        <div id="browse-stats">
+                                            <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                            <p>
+                                                {img.upvotes.length}
+                                            </p>
+                                            <p id="distance">
+                                                ~ {img.distance} mi
                                         </p>
-                                        <p id="distance">
-                                            ~ {img.distance} mi
-                                        </p>
-                                    </div>
-                                </div>}
-                            </LazyLoad>)}
+                                        </div>
+                                    </div>}
+                                </LazyLoad>)}
+                        </div>}
+                        {!this.state.search && <Preview
+                            togglePreview={this.togglePreview}
+                            lights={this.lights}
+                            lightDex={this.state.lightDex}
+                            contributions={false}
+                        />}
                     </div>}
-                    {!this.state.search && <Preview
-                        togglePreview={this.togglePreview}
-                        lights={this.lights}
-                        lightDex={this.state.lightDex}
-                        contributions={false}
-                    />}
-                </div>}
-                {/* <div className="Search_Toggle">
-                    <img src="./res/search.png" alt="oops" onClick={this.toggleSearch}></img>
-                </div> */}
-                {/* <Snow/>*/}
+                </div>
+                {/************************************************************************************************************************/}
+                <div className="Browse_Desktop">
+                {/* {this.state.loading && <Spinner />} */}
+                    {/* {LightStore.lights.length === 0 && <Search />}
+                    {this.state.search && <Search toggled={true} />} */}
+                    <div className="Carousel">
+                    {this.state.showFeed && <p id="range-info-browse"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
+                        {this.state.lightDex === -1 && <div className="Slider_Browse">
+                            <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider-browse" onChange={this.handleSliderDrag}></input>
+                        </div>}
+                        {this.state.showFeed && <div className="Img_Container_Browse">
+                            {this.lights.map((img, i) =>
+                                <LazyLoad
+                                    key={i}
+                                    height={0}>
+                                    {i % 2 === 0 && <div className="Even_Item_Browse" id={i}>
+
+                                        <img src={img.url} alt="oops" onClick={() => this.loadDesktopImg(i)} />
+                                        <div id="browse-stats">
+                                            <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                            <p>
+                                                {img.upvotes.length}
+                                            </p>
+                                            <p id="distance">
+                                                ~ {img.distance} mi
+                                        </p>
+                                        </div>
+                                    </div>}
+                                    {i % 2 !== 0 && <div className="Odd_Item_Browse" id={i}>
+                                        <img src={img.url} alt="oops" onClick={() => this.loadDesktopImg(i)} />
+                                        <div id="browse-stats">
+                                            <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
+                                            <p>
+                                                {img.upvotes.length}
+                                            </p>
+                                            <p id="distance">
+                                                ~ {img.distance} mi
+                                        </p>
+                                        </div>
+                                    </div>}
+                                </LazyLoad>)}
+                        </div>}
+                        {this.state.desktopImg && <div className="Desktop_Img">
+                            <img src={this.state.desktopImg} alt="oops" />
+                        </div>}
+                    </div>
+                </div>
             </div>
         );
     }
