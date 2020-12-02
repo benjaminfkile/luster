@@ -6,13 +6,12 @@ import Spinner from '../Spinner/Spinner'
 import Radar from '../Radar'
 import Search from '../Search/Search'
 import Map from '../Map/Map'
-// import Snow from '../Snow/Snow'
 import '../Browse/Browse.css'
 
 class Browse extends Component {
 
     lights = []
-    distance = 20
+    distance = 100
     scrollDex = -1
 
     browseMounted = false
@@ -22,12 +21,13 @@ class Browse extends Component {
         this.state = {
             lightDex: -1,
             showFeed: true,
-            maxDistance: 20,
+            maxDistance: 100,
             sliderMax: 200,
             searchDistance: 0,
             search: false,
             loading: true,
-            desktopImg: null
+            desktopImg: null,
+            landscape: false
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
     }
@@ -35,18 +35,10 @@ class Browse extends Component {
     componentDidMount() {
         this.browseMounted = true
         this.dbInterval = setInterval(this.listen4DB, 500)
-        this.radarInterval = setInterval(this.listen4Radar, 300)
-        this.sliderInterval = setInterval(this.listen4SliderDrag, 100)
-        this.updateInterval = setInterval(this.update, 100)
-        this.scrollInterval = setInterval(this.scroll, 300)
-        this.orientInterval = setInterval(this.listen4Orient, 500)
-
-    }
-
-    listen4Orient = () => {
-        if (!document.getElementById('img-container')) {
-            this.update()
-        }
+        this.radarInterval = setInterval(this.listen4Radar, 500)
+        this.sliderInterval = setInterval(this.listen4SliderDrag, 300)
+        this.updateInterval = setInterval(this.update, 500)
+        this.scrollInterval = setInterval(this.scroll, 500)
     }
 
     componentWillUnmount() {
@@ -64,7 +56,7 @@ class Browse extends Component {
         if (Radar.targets.length > 0 && this.browseMounted) {
             this.setState({ target: Radar.targets[0][0] })
             clearInterval(this.radarInterval)
-            this.filterByDistance(20)
+            this.filterByDistance(100)
         }
     }
 
@@ -81,7 +73,7 @@ class Browse extends Component {
                 if (LightStore.update[i] === 1) {
                     this.lights = LightStore.lights
                     this.setState({ target: Radar.targets[0][0], maxDistance: 20, search: false })
-                    this.filterByDistance(20)
+                    this.filterByDistance(100)
                 }
             }
         }
@@ -145,22 +137,16 @@ class Browse extends Component {
         }
     }
 
-    loadDesktopImg = (args) => {
-        this.setState({ desktopImg: this.lights[args].url })
-        console.log(args)
-    }
-
     handleSliderDrag(evt) {
         this.distance = evt.target.value
         this.setState({ showFeed: false, loading: true, sliderDragged: true })
     }
 
     render() {
-
         return (
             <div className="Browse">
                 <Map />
-                <div className="Browse_Mobile">
+                {!this.state.landscape && <div className="Browse_Mobile">
                     {this.state.loading && <Spinner />}
                     {LightStore.lights.length === 0 && <Search />}
                     {this.state.search && <Search toggled={true} />}
@@ -207,57 +193,7 @@ class Browse extends Component {
                             contributions={false}
                         />}
                     </div>}
-                </div>
-                {/************************************************************************************************************************/}
-                <div className="Browse_Desktop">
-                    {this.state.showFeed && this.state.lightDex === -1 && <p id="range-info-browse"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
-                    {this.state.lightDex === -1 && <div className="Slider_Browse">
-                        <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider-browse" onChange={this.handleSliderDrag}></input>
-                    </div>}
-                    {this.state.lightDex === -1 && <div className="Carousel">
-                        {this.state.showFeed && <div className="Img_Container_Browse">
-                            {this.lights.map((img, i) =>
-                                <LazyLoad
-                                    key={i}
-                                    height={0}>
-                                    {i % 2 === 0 && <div className="Even_Item_Browse" id={i}>
-
-                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                        <div id="browse-stats">
-                                            <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                            <p>
-                                                {img.upvotes.length}
-                                            </p>
-                                            <p id="distance">
-                                                ~ {img.distance} mi
-                                        </p>
-                                        </div>
-                                    </div>}
-                                    {i % 2 !== 0 && <div className="Odd_Item_Browse" id={i}>
-                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                        <div id="browse-stats">
-                                            <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                            <p>
-                                                {img.upvotes.length}
-                                            </p>
-                                            <p id="distance">
-                                                ~ {img.distance} mi
-                                        </p>
-                                        </div>
-                                    </div>}
-                                </LazyLoad>)}
-                        </div>}
-                        {/* {this.state.desktopImg && <div className="Desktop_Img">
-                            <img src={this.state.desktopImg} alt="oops" onClick={() => this.togglePreview(0)} />
-                        </div>} */}
-                    </div>}
-                    {!this.state.search && <Preview
-                        togglePreview={this.togglePreview}
-                        lights={this.lights}
-                        lightDex={this.state.lightDex}
-                        contributions={false}
-                    />}
-                </div>
+                </div>}
             </div>
         );
     }

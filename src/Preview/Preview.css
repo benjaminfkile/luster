@@ -2,7 +2,7 @@
 		position: fixed;
 		z-index: 1002;
 		width: 96vw;
-		height: 63vh;
+		height: 55vh;
 		top: 13vh;
 		left: 2vw;
 		background-color: rgb(0,0, 0);
@@ -78,9 +78,12 @@
 	
 	.Preview_Controls{
 		display: flex;
-		border-top: solid;
+		position: absolute;
+		top: 58vh;
+		width: 96vw;
+		/* border-top: solid;
 		border-width: 1px;
-		border-color: rgb(131, 131, 131);
+		border-color: rgb(131, 131, 131); */
 	}
 	
 	.Preview_Controls img{
@@ -105,60 +108,19 @@
 
 
 @media screen and (orientation:landscape) {
-	.Preview_User{
-		position: absolute;
-		top: 5vh;
-		left: 5vw;
-		width: 90vw;
-		height: 90vh;
-		/* border: none; */
-		border-radius: 0%;
-		border-color: rgb(141, 141, 141);
+	.Preview_User, .Preview_Manager{
+		width: 55vw;
+		height: 55vh;
+		top: 22.5vh;
+		left: 22.5vw;
 	}
-
+	#preview-img{
+		width: 55vw;
+	}
 	.Preview_Controls{
-		position: fixed;
-		top: 82vh;
-		width: 100%;
-		border: none;
+		width: 55vw;
 	}
-
-	#stats{
-		position: fixed;
-		top: 2vh;
-		width: 100%;
-		border: none;
-	}
-
-	#preview-footer{
-		position: absolute;
-		top: 2vh;
-		width: 90vw;
-		border: none;
-	}
-
-	.Trips_Wrapper{
-		float: right;
-		margin-right: 1vw;
-	}
-
-	/* .Nav{
-		display: none;
-	} */
-
-	#preview-img {
-		width: 90vw;
-		height: 90vh;
-
-	}
-
-	#like-img{
-        position: absolute;
-		margin-right: 1vw;
-		right: 0;
-		top: 75vh;
-	}
- }
+}
 
 
 @-webkit-keyframes slide-in-bottom {

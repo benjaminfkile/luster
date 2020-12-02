@@ -123,12 +123,6 @@ class Preview extends Component {
                                 {'Trips: ' + this.props.lights[this.props.lightDex].trips.length}
                             </p>
                         </div>
-                        {/* <div className="Uploaded_Wrapper">
-                            <img id="upload-icon" src="./res/uploaded.png" alt="oops"></img>
-                            <p>
-                                {new Date(parseInt(this.props.lights[this.props.lightDex].uploaded)).toLocaleDateString("en-US")}
-                            </p>
-                        </div> */}
                     </div>
                     <div className="Preview_Controls">
                         <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" id="nav-img" onClick={() => this.trip(this.props.lightDex)} /> &nbsp;</a>
