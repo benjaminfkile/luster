@@ -138,10 +138,6 @@ class Profile extends Component {
 
     logOut = () => {
         window.location.reload()
-        // window.user = null
-        // window.name = null
-        // this.contribs = []
-        // this.setState({ loggedIn: false, email: '', password: '' })
     }
 
     handleUserChange(evt) {
