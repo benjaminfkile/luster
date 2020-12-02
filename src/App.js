@@ -12,8 +12,6 @@ class App extends Component {
 
   render() {
 
-    window.user = '12346'
-
     return (
       <div className="Wrapper">
         <div className="App">
