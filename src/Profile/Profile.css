@@ -125,3 +125,8 @@
     padding-left: 2vw;
     padding-right: 2vw;
 }
+@media screen and (orientation:landscape) {
+    .Spinner{
+        top: -10vh;
+    }
+}

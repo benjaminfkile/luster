@@ -159,7 +159,6 @@ class Profile extends Component {
         } else {
             this.setState({ register: true })
         }
-
     }
 
     resetPass = (args) => {

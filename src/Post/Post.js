@@ -41,9 +41,9 @@ class Post extends Component {
     checkLocationAccuracy = () => {
         if (Location.coords.lat) {
             if (Location.accuracy > 50) {
-                this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy.toFixed(2) })
+                this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy })
             } else {
-                this.setState({ accurateLocation: true, lat: Location.coords.lat, lng: Location.coords.lng, locationAccuracy: Location.accuracy.toFixed(2) })
+                this.setState({ accurateLocation: true, lat: Location.coords.lat, lng: Location.coords.lng, locationAccuracy: Location.accuracy })
             }
             clearInterval(this.accuracyInterval)
         }
@@ -179,7 +179,7 @@ class Post extends Component {
                     />
                 </div>}
                 {!window.user && <div className="Unvalidated">
-                    <Snow/>
+                    <Snow />
                     <h3>
                         Log in or Register to post photos!
                 </h3>

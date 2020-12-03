@@ -120,5 +120,18 @@
 .Yes_Option1{
     margin-top: 5vh;
 }
-
+@media screen and (orientation:landscape) {
+  .Search{
+      width: 40vw;
+      height: 60vh;
+      left: 30vw;
+  }
+  #search-input{
+    width: 36vw;
+  }
+  .Suggestion{
+    margin-left: 2vw;
+    width: 36vw;
+  }
+}
 
