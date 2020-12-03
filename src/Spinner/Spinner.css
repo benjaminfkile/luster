@@ -2,7 +2,7 @@
   position: absolute;
   top: 30vh;
   left: 44.5vw;
-  border: 1vw solid #646464;
+  border: 1vw solid #6b6b6b;
   border-radius: 50%;
   border-top: 1vh solid rgb(12,191,232);
   border-bottom: 1vh solid rgb(12, 191, 232);
@@ -11,6 +11,22 @@
   -webkit-animation: spin .4s linear infinite;
   animation: spin .4s linear infinite;
   z-index: 1005;
+}
+
+@media screen and (orientation:landscape) {
+
+  .Spinner{
+    top: 0vh;
+    left: 0vw;
+    border: 5px solid #797878; /* Light grey */
+    border-top: 5px solid rgb(12,191,232); /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    z-index: 1005;
+
+  }
+
 }
 
 @-webkit-keyframes spin {

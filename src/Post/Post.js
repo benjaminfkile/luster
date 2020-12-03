@@ -5,6 +5,7 @@ import Location from '../Location'
 import Geocode from "react-geocode";
 import Upload from './Upload'
 import './Post.css'
+import Snow from '../Snow/Snow';
 Geocode.setApiKey(KeyStore.googleKey);
 Geocode.setLanguage("en");
 
@@ -178,6 +179,7 @@ class Post extends Component {
                     />
                 </div>}
                 {!window.user && <div className="Unvalidated">
+                    <Snow/>
                     <h3>
                         Log in or Register to post photos!
                 </h3>

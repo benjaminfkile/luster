@@ -6,6 +6,7 @@ import Spinner from '../Spinner/Spinner'
 import Radar from '../Radar'
 import Search from '../Search/Search'
 import Map from '../Map/Map'
+import Snow from '../Snow/Snow'
 import '../Browse/Browse.css'
 
 class Browse extends Component {
@@ -27,7 +28,6 @@ class Browse extends Component {
             search: false,
             loading: true,
             desktopImg: null,
-            landscape: false
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
     }
@@ -61,7 +61,7 @@ class Browse extends Component {
     }
 
     listen4SliderDrag = () => {
-        this.setState({sliderDragged: false})
+        this.setState({ sliderDragged: false })
         if (this.state.maxDistance !== this.distance && this.browseMounted) {
             this.filterByDistance(this.distance)
         }
@@ -146,7 +146,7 @@ class Browse extends Component {
         return (
             <div className="Browse">
                 <Map />
-                {!this.state.landscape && <div className="Browse_Mobile">
+                <Snow/>
                     {this.state.loading && <Spinner />}
                     {LightStore.lights.length === 0 && <Search />}
                     {this.state.search && <Search toggled={true} />}
@@ -193,7 +193,6 @@ class Browse extends Component {
                             contributions={false}
                         />}
                     </div>}
-                </div>}
             </div>
         );
     }

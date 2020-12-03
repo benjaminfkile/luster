@@ -109,16 +109,20 @@
 
 @media screen and (orientation:landscape) {
 	.Preview_User, .Preview_Manager{
-		width: 55vw;
-		height: 55vh;
+		width: 35vw;
+		height: 58vh;
 		top: 22.5vh;
-		left: 22.5vw;
+		left: 32.5vw;
 	}
 	#preview-img{
-		width: 55vw;
+		width: 35vw;
 	}
 	.Preview_Controls{
-		width: 55vw;
+		border-top: solid;
+		border-width: 1px;
+		border-color: rgb(126, 126, 126);
+		top: 51vh;
+		width: 35vw;
 	}
 }
 
