@@ -43,6 +43,9 @@ class Browse extends Component {
 
     componentWillUnmount() {
         this.browseMounted = false
+        clearInterval(this.sliderInterval)
+        clearInterval(this.updateInterval)
+        clearInterval(this.scrollInterval)
     }
 
     listen4DB = () => {
