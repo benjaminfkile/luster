@@ -112,7 +112,7 @@
 @media screen and (orientation:landscape) {
 	.Preview_User, .Preview_Manager{
 		width: 35vw;
-		height: 58vh;
+		height: 60vh;
 		top: 22.5vh;
 		left: 32.5vw;
 	}
