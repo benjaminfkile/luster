@@ -47,6 +47,10 @@ class Register extends Component {
             return this.setState({ error: 'Email is required', loading: false });
         }
 
+        if(this.state.pass1.length < 5){
+            return this.setState({ error: 'Password is must be at least 5 characters long', loading: false });
+        }
+
         if (!this.state.pass1 && !this.state.pass2) {
             return this.setState({ error: 'Password is required', loading: false });
         }
@@ -187,7 +191,7 @@ class Register extends Component {
                         <input type="text" value={this.state.code} onChange={this.handleCodeChange} />
                         <br></br>
                     </div>}
-                    {!this.state.codeSent && <div id="register-btn" onClick={this.handleSubmit}>
+                    {!this.state.codeSent && !this.state.error && <div id="register-btn" onClick={this.handleSubmit}>
                         <img id="next-img" src="./res/next.png" alt="oops"></img>
                         <p>Submit</p>
                     </div>}
