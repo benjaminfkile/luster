@@ -129,17 +129,17 @@
     }
 
     .Post input[type=text]{
-        width: 40vw;
+        width: 70vw;
         margin-left: 30vw;
     }
 
     .Address_Container{
-        width: 40vw;
+        width: 70vw;
         margin-left: 30vw;
     }
 
     .Address_Suggestion{
-        width: 40vw;
+        width: 70vw;
         text-align: center;
     }
 
