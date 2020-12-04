@@ -88,6 +88,8 @@
 	
 	.Preview_Controls img{
 		margin-left: auto;
+		margin-top: 10px;
+		margin-bottom: 10px;
 		height: 60px;	
 	}
 	
