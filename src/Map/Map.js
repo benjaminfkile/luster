@@ -22,10 +22,10 @@ class Map extends Component {
     gestureHandling: 'greedy',
     restriction: {
       latLngBounds: {
-        north: 49.00139,
-        south: 44.358221,
-        east: -104.039138,
-        west: -116.050003,
+        north: 51,
+        south: 43,
+        east: -103,
+        west: -117,
       },
     },
     zoom: 11,
@@ -41,7 +41,7 @@ class Map extends Component {
       markers: null,
       lightDex: -1,
       location: false,
-      centered: true,
+      centered: false,
       dragged: true,
       nearest: false,
       inApp: true,

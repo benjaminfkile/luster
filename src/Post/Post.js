@@ -40,7 +40,7 @@ class Post extends Component {
 
     checkLocationAccuracy = () => {
         if (Location.coords.lat) {
-            if (Location.accuracy > 5000) {
+            if (Location.accuracy > 60) {
                 this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy })
             } else {
                 this.setState({ accurateLocation: true, lat: Location.coords.lat, lng: Location.coords.lng, locationAccuracy: Location.accuracy })

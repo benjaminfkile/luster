@@ -1,3 +1,10 @@
+.Register{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: -3vh;
+
+}
 #next-btn{
     width: 30vw;
     margin-left: 35vw;
@@ -12,7 +19,7 @@
 }
 #verify-btn{
     width: 30vw;
-    margin-top: -4vh;
+    margin-top: -2vh;
     margin-bottom: 2vh;
     margin-left: 35vw;
 }
@@ -20,7 +27,7 @@
     width: 100px;
 }
 #verify-btn p{
-    margin-top: -7vh;
+    margin-top: -3vh;
 }
 
 #back-btn{
@@ -31,7 +38,13 @@
 }
 #back-btn img{
     width: 100px;
+    cursor: pointer;
 }
 #back-btn p{
-    margin-top: -4vh;
+    margin-top: -2vh;
+}
+@media screen and (orientation:landscape) {
+    .Register{
+        top: 10vh;
+    }
 }
