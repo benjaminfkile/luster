@@ -66,8 +66,7 @@ class Profile extends Component {
                 for (let i = 0; i < data.length; i++) {
                     this.contribs.push(data[i])
                     let date = new Date(parseInt(data[0].uploaded)).toLocaleDateString("en-US")
-                    var time = new Date(parseInt(data[0].uploaded)).toLocaleTimeString("en-US")
-                    let timestamp = date + " at " + time
+                    let timestamp = date 
                     this.contribs[i].uploaded = timestamp
                 }
                 if (data.length > 0) {
@@ -187,11 +186,11 @@ class Profile extends Component {
                 </div>
                 {this.state.loggedIn && !this.state.loading && <div className="Profile">
                     <h1>Hi {window.name.charAt(0).toUpperCase() + window.name.slice(1)}</h1>
-                    <div id="logout-btn" onClick={this.logOut}>
+                    {this.state.showFeed && <div id="logout-btn" onClick={this.logOut}>
                         <img id="logout-img" src="./res/logout.png" alt="oops"></img>
                         <p>Logout</p>
-                    </div>
-                    {this.state.hasContribs && !this.state.loading && <h3>
+                    </div>}
+                    {this.state.hasContribs && !this.state.loading && this.state.showFeed && <h3>
                         Your Contributions ( {this.contribs.length} )
                     </h3>}
                     {this.state.hasContribs && this.state.showFeed && !this.state.loading && <div className="Contribs_Container">

@@ -1,6 +1,6 @@
 .Login{
     position: fixed;
-    color: silver;
+    color: rgb(134, 134, 134);
     font-family: 'Red Rose', cursive;
     text-align: center;
     margin-top: 10vh;
@@ -13,7 +13,7 @@
 .Login h1{
     margin-top: -8vh;
     margin-bottom: 1vh;
-    color: rgb(12,191,232);
+    color: rgb(134, 134, 134);
 }
 .Login_Form h1{
     margin-top: -8vh;
@@ -30,9 +30,11 @@
 }
 #logout-btn img{
     width: 50px;
+    cursor: pointer;
 }
 #logout-btn p{
     margin-top: -2vh;
+    cursor: pointer;
 }
 #login-btn{
     width: 30vw;
@@ -42,18 +44,21 @@
 }
 #login-btn img{
     width: 100px;
+    cursor: pointer;
 }
 #login-btn p{
     margin-top: -3vh;
 }
 #register-btn img{
     width: 50px;
+    cursor: pointer;
 }
 #register-btn p{
     margin-top: -5vh;
 }
 #register-btn img{
     width: 100px;
+    cursor: pointer;
 }
 #register-btn p{
     margin-top: -3vh;
@@ -61,9 +66,11 @@
 #error-btn{
     background-color: rgb(0, 0, 0);
     color: rgb(255, 0, 0);
+    cursor: pointer;
 }
 #forgot-btn{
     margin-top: 3vh;
+    cursor: pointer;
 }
 .No_Contribs p{
     padding-left: 15px;
@@ -128,5 +135,73 @@
 @media screen and (orientation:landscape) {
     .Spinner{
         top: -10vh;
+    }
+    .Contribs_Container {
+		display: grid;
+		grid-template-columns: auto auto auto auto;
+		top: 12.5vh;
+		left: 5vw;
+		width: 90vw;
+		height: 75vh;
+		padding-left: 8px;
+		padding-top: 8px;
+		background-color: rgb(0, 0, 0);
+		z-index: 10000;
+		border-style: solid;
+		border-width: 1px;
+		border-color: rgb(126, 126, 126);
+	}
+	.Contribs_Container::-webkit-scrollbar {
+		display: none;
+	}
+	.Contribs_Container {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+	.Contrib_Item {
+        display: block;
+		width: 22vw;
+		cursor: pointer;
+		height: 27vh;
+        margin: 0px;
+        border-style: solid;
+		border-width: 1px;
+		border-color: rgb(126, 126, 126);
+		border-radius: 2px;
+    }
+    .Contrib_Item img{
+        height: 22vh;
+        width: 22vw;
+    }
+	#contrib-stats p{
+		font-size: 20px;
+	}
+	#contrib-stats {
+        display: flex;
+        width: 22vw;
+    }
+    #contrib-stats p{
+        margin-right: 5px;
+    }
+    #contrib-stats-upvote{
+        width: 30px;
+        height: 30px;
+    }
+    #exit-img-manager{
+        width: 60px;
+        margin-top: 5vh;
+        margin-left: 14vw;
+        cursor: pointer;
+    }
+    .Upload_Date{
+        margin-left: auto;
+        margin-right: 30px;
+    }
+    .Manager{
+        margin-right: .5vw;
+        cursor: pointer;
+    }
+    .Upload_Date p{
+        margin-top: -20px;
     }
 }
