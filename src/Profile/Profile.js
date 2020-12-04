@@ -233,7 +233,7 @@ class Profile extends Component {
                     </div>}
                     {!this.state.hasContribs && <div className="No_Contribs">
                         <h3>
-                            Welcome to Lightmaps
+                            Welcome to 406Lights
                             </h3>
                         <br></br>
                         <p>

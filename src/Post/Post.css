@@ -14,7 +14,7 @@
     padding-left: 0vw;
 }
 .Post input[type=text]{
-    width: 86vw;
+    width: 90vw;
     margin-left: 5vw;
     padding-bottom: 15px;
     padding-top: 15px;
@@ -69,6 +69,7 @@
     color: rgb(255, 255, 255);
     padding-top: 10px;
     padding-bottom: 10px;
+    cursor: pointer;
 }
 #address, #address1, #coords, #coords1, #accuracy, #accuracy1{
     text-align: center;
@@ -83,6 +84,7 @@
 }
 .Yes_Option{
     margin-bottom: 2vh;
+    cursor: pointer;
 }
 .Yes_Option{
     display: flex;
@@ -96,6 +98,7 @@
 }
 .No_Option{
     display: flex;
+    cursor: pointer;
     width: 25vw;
     margin-left: 37.5vw;
     border-style: solid;
@@ -115,4 +118,41 @@
     margin-top: 5vh;
 }
 @media screen and (orientation:landscape) {
+
+    .Post{
+        top: 20vh;
+    }
+
+    .Post h1{
+        margin-bottom: 4vh;
+    }
+
+    .Post input[type=text]{
+        width: 40vw;
+        margin-left: 30vw;
+    }
+
+    .Address_Container{
+        width: 40vw;
+        margin-left: 30vw;
+    }
+
+    .Address_Suggestion{
+        width: 40vw;
+        text-align: center;
+    }
+
+    .Yes_Option, .No_Option{
+        margin-left: 47vw;
+        width: 6vw;
+    }
+    .Yes_Option p{
+        margin-left: 15px;
+    }
+    .No_Option p{
+        margin-left: 10px;
+    }
+    .Yes_Option p, .No_Option, p{
+        text-align: center;
+    }
 }

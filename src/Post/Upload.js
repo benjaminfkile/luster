@@ -31,7 +31,7 @@ class Upload extends Component {
 
     checkDimensions = () => {
 
-        let img = document.getElementById("UploadImg");
+        let img = document.getElementById("upload-img");
         let width = img.naturalWidth;
         let height = img.naturalHeight;
 
@@ -102,8 +102,7 @@ class Upload extends Component {
                 Choose File
                 </label>
                     {!this.state.image && <img src="./res/2.png" id="img-placeholder" alt='A tree'></img>}
-                    {this.state.image && <img id="UploadImg" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
-                    <img id="arrow-img" src="./res/upload.png" alt="oops" />
+                    {this.state.image && <img id="upload-img" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
                     {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
                     {this.state.image && !this.state.warning && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
                     {this.state.warning && <p id="warning">Error!!! The photo seems to be in portrait, Luster is intended for landscape photos only.</p>}

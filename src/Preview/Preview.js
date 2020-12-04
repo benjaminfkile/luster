@@ -96,7 +96,7 @@ class Preview extends Component {
     render() {
 
         // if(this.props.lightDex !== -1){
-        //     console.log(this.props.lights[this.props.lightDex].url)
+        //     console.log(this.props.lights[this.props.lightDex].id)
         // }
 
         return (

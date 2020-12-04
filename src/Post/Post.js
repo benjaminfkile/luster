@@ -40,7 +40,7 @@ class Post extends Component {
 
     checkLocationAccuracy = () => {
         if (Location.coords.lat) {
-            if (Location.accuracy > 50) {
+            if (Location.accuracy > 5000) {
                 this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy })
             } else {
                 this.setState({ accurateLocation: true, lat: Location.coords.lat, lng: Location.coords.lng, locationAccuracy: Location.accuracy })
@@ -166,7 +166,7 @@ class Post extends Component {
                     {(!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0) && <div className="Location_Error">
                         <h3>I cant draw an accurate bead on your location.</h3>
                         <br></br>
-                        <p>This could be caused by a weak signal from a satelite or you have denied LightMaps access to your location</p>
+                        <p>This could be caused by a weak signal from a satelite or you have denied 406Lights access to your location</p>
                         <br></br>
                         <p>You will have to manually enter your address instead</p>
 
