@@ -40,10 +40,10 @@ class Post extends Component {
 
     checkLocationAccuracy = () => {
         if (Location.coords.lat) {
-            if (Location.accuracy > 150) {
+            if (Location.accuracy > 100) {
                 this.setState({ accurateLocation: false, locationAccuracy: Location.accuracy })
             } else {
-                this.setState({ accurateLocation: true, lat: Location.coords.lat, lng: Location.coords.lng, locationAccuracy: Location.accuracy })
+                this.setState({ accurateLocation: true, lat: Location.coords.lat, lng: Location.coords.lng, locationAccuracy: (Location.accuracy * 3.28084).toFixed(2) })
             }
             clearInterval(this.accuracyInterval)
         }
@@ -156,7 +156,7 @@ class Post extends Component {
                         <p id="coords">Your Coordinates:</p>
                         <p id="coords1">{this.convertDMS(Location.coords.lat, Location.coords.lng)}</p>
                         <p id="accuracy"> Coordinate Accuracy:</p>
-                        <p id="accuracy1">{this.state.locationAccuracy} m</p>
+                        <p id="accuracy1">{this.state.locationAccuracy} ft</p>
                         <div className="Yes_Option" onClick={this.useAddress}>
                             <img id="use-img" src="./res/yes.png" alt="oops" />
                             <p>Use</p>
