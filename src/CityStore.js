@@ -31,8 +31,8 @@ let CityStore = [
     },
     {
         city: 'Missoula',
-        lat: 46.92,
-        lng: -114.08
+        lat: 46.8721,
+        lng: -113.9940
     },
 ]
 export default CityStore
