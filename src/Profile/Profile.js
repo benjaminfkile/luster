@@ -224,7 +224,7 @@ class Profile extends Component {
                                         <div className="Upload_Date">
                                             <br></br>
                                             <p>
-                                                {img.uploaded}
+                                                {/* {img.uploaded} */}
                                             </p>
                                         </div>
                                     </div>
