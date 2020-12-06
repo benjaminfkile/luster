@@ -118,7 +118,7 @@
 .Yes_Option{
     margin-top: 5vh;
 }
-@media screen and (orientation:landscape) {
+/* @media screen and (orientation:landscape) {
 
     .Post{
         top: 20vh;
@@ -156,4 +156,4 @@
     .Yes_Option p, .No_Option, p{
         text-align: center;
     }
-}
+} */

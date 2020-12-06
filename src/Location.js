@@ -1,7 +1,11 @@
 let Location = {
+    // coords: {
+    //     lat: 46.8721,
+    //     lng: -113.9940
+    // },
     coords: {
-        lat: 46.8721,
-        lng: -113.9940
+        lat: null,
+        lng: null
     },
     bounds: 'in',
     allowed: false,

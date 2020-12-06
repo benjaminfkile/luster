@@ -4,6 +4,7 @@ import LazyLoad from 'react-lazyload';
 import LightStore from '../LightStore'
 import Spinner from '../Spinner/Spinner'
 import Radar from '../Radar'
+import Location from '../Location'
 import Search from '../Search/Search'
 import Map from '../Map/Map'
 import Snow from '../Snow/Snow'
@@ -71,12 +72,16 @@ class Browse extends Component {
     }
 
     update = () => {
-        if (LightStore.update.length > 0 && this.browseMounted) {
-            for (let i = 0; i < LightStore.update.length; i++) {
-                if (LightStore.update[i] === 1) {
-                    this.lights = LightStore.lights
-                    this.setState({ target: Radar.targets[0][0], maxDistance: 20, search: false })
-                    this.filterByDistance(100)
+        if(!Location.coords.lat){
+            window.location.href = '/map'; //relative to domain
+        }else{
+            if (LightStore.update.length > 0 && this.browseMounted) {
+                for (let i = 0; i < LightStore.update.length; i++) {
+                    if (LightStore.update[i] === 1) {
+                        this.lights = LightStore.lights
+                        this.setState({ target: Radar.targets[0][0], maxDistance: 20, search: false })
+                        this.filterByDistance(100)
+                    }
                 }
             }
         }
@@ -102,7 +107,7 @@ class Browse extends Component {
             }
             this.setState({ maxDistance: miles })
         }
-        if (this.lights.length === 0) {
+        if (this.lights.length < 12) {
             this.findClosest()
         } else {
             this.setState({ showFeed: true, loading: false })

@@ -65,9 +65,11 @@ class Profile extends Component {
             .then(data => {
                 for (let i = 0; i < data.length; i++) {
                     this.contribs.push(data[i])
-                    let date = new Date(parseInt(data[0].uploaded)).toLocaleDateString("en-US")
-                    let timestamp = date 
-                    this.contribs[i].uploaded = timestamp
+                    let date = new Date(Number(data[i].uploaded))
+                    let month = date.toLocaleString("en-US", { month: "numeric" }) // December
+                    let day = date.toLocaleString("en-US", { day: "numeric" }) // 9
+                    this.contribs[i].uploaded = month + '/' + day
+
                 }
                 if (data.length > 0) {
                     this.setState({ hasContribs: true })
@@ -132,7 +134,7 @@ class Profile extends Component {
                 window.name = data.name
             })
 
-            console.log(window.name)
+        console.log(window.name)
     }
 
     logOut = () => {
@@ -224,7 +226,7 @@ class Profile extends Component {
                                         <div className="Upload_Date">
                                             <br></br>
                                             <p>
-                                                {/* {img.uploaded} */}
+                                                {img.uploaded}
                                             </p>
                                         </div>
                                     </div>

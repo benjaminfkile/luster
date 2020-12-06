@@ -16,7 +16,7 @@ class Search extends Component {
     this.state = {
       input: '',
       placeholder: 'search',
-      results: [],
+      cities: CityStore,
       hasInput: false,
     }
     this.handleChange = this.handleChange.bind(this);
@@ -34,19 +34,6 @@ class Search extends Component {
 
   clearPlaceholder = () => {
     this.setState({ placeholder: '' })
-  }
-
-  filter = (input) => {
-    this.searchResults = []
-    this.setState({ results: this.searchResults })
-    if (input && input.length > 0) {
-      for (let i = 0; i < CityStore.length; i++) {
-        if (input.substring(0, input.length).toUpperCase() === CityStore[i].city.substring(0, input.length).toUpperCase()) {
-          this.searchResults.push(CityStore[i])
-        }
-      }
-    }
-    this.setState({ results: this.searchResults })
   }
 
   customLocation = (lat, lng, rad) => {
@@ -93,11 +80,10 @@ class Search extends Component {
   render() {
     return (
       <div className="Search">
-        <h2>Search</h2>
-        <input id="search-input" type="text" autoComplete="off" value={this.state.input} placeholder={this.state.placeholder} onClick={this.clearPlaceholder} onChange={this.handleChange} />
-        {this.state.results.length > 0 && <div className="Suggestion_Container">
-          {this.state.results.map((result, i) =>
-              <p className="Suggestion" key={i} onClick={() => this.customLocation(this.state.results[i].lat, this.state.results[i].lng, 1, result.city)}>{result.city}</p>
+        <h2>Choose City</h2>
+        {this.state.cities.length > 0 && <div className="Suggestion_Container">
+          {this.state.cities.map((city, i) =>
+              <p className="Suggestion" key={i} onClick={() => this.customLocation(this.state.cities[i].lat, this.state.cities[i].lng, 1, city.city)}>{city.city}</p>
           )}
         </div>}
       </div>

@@ -11,6 +11,9 @@
  
 
 }
+.Search_Toggle{
+  cursor: pointer;
+}
 .Search input[type=text]{
     width: 88vw;
     margin-top: 2vh;
@@ -66,13 +69,14 @@
   }
   .Suggestion{
     width: 90vw;
-    border-bottom: solid;
+    border-top: solid;
     border-color: rgb(36, 47, 62);
     background-color: rgb(0, 0, 0);
     border-radius: 5px;
     color: rgb(255, 255, 255);
     padding-top: 10px;
     padding-bottom: 10px;
+    cursor: pointer;
 }
 
   #suggestion, #suggestion1, #coords2, #coords3{
@@ -97,7 +101,6 @@
     border-color: rgb(255, 255, 255);
     border-radius: 5px;
     border-width: 1px;
-
 }
 .No_Option1{
     display: flex;
@@ -108,7 +111,6 @@
     border-color: rgb(255, 255, 255);
     border-radius: 5px;
     border-width: 1px;
-
 }
 .Yes_Option1 p, .No_Option1 p{
     padding-top: 5px;
@@ -123,7 +125,7 @@
 @media screen and (orientation:landscape) {
   .Search{
       width: 40vw;
-      height: 60vh;
+      height: 50vh;
       left: 30vw;
   }
   #search-input{

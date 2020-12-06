@@ -125,7 +125,7 @@ class Preview extends Component {
                         </div>
                     </div>
                     <div className="Preview_Controls">
-                        <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" id="nav-img" onClick={() => this.trip(this.props.lightDex)} /> &nbsp;</a>
+                        <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" id="nav-img-preview" onClick={() => this.trip(this.props.lightDex)} /> &nbsp;</a>
                         <img id="exit-img" src="./res/close-preview.png" alt="oops" onClick={this.unloadImg.bind(this)}></img>
                     </div>
                 </div>}
@@ -135,7 +135,7 @@ class Preview extends Component {
                     {/* {!this.state.loaded && <img src="./res/splash.png" id="preview-img" alt='A tree'></img>} */}
                     {!this.state.loaded && <Spinner />}
                     {this.state.loaded && <div className="Preview_Manager_Interface">
-                        <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" height={50} width={50} /> &nbsp;</a>
+                        <a href={'https://www.google.com/maps/search/?api=1&query=' + this.props.lights[this.props.lightDex].lat + ',' + this.props.lights[this.props.lightDex].lng} target="_blank" rel="noopener noreferrer"><img src="./res/navi-btn.png" alt="Directions" id="nav-img-preview" /> &nbsp;</a>
                         <div id="stats">
                             <img id="upvotes-img" src="./res/upvotes.png" alt="oops"></img>
                             <p>

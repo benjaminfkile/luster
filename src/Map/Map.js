@@ -169,7 +169,7 @@ class Map extends Component {
   }
 
   render = () => {
-
+    
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
       null,
@@ -182,7 +182,7 @@ class Map extends Component {
         {!this.state.search && LightStore.lights.length === 0 && window.location.pathname !== '/browse' && <Search />}
         {this.state.search && <Search toggled={true} />}
         {/*center over nearest*/}
-        {this.state.nearest && Radar.targets[0][1].lat && <GoogleMap
+        {this.state.nearest && Radar.targets[0][1].lat && Location.coords.lat && <GoogleMap
           center={{ lat: Number(Radar.targets[0][1].lat), lng: Number(Radar.targets[0][1].lng) }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -197,7 +197,7 @@ class Map extends Component {
         </GoogleMap>}
 
         {/*center over location*/}
-        {this.state.centered && window.location.pathname !== '/browse' && <GoogleMap
+        {this.state.centered && window.location.pathname !== '/browse' && Location.coords.lat && <GoogleMap
           center={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -211,7 +211,7 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
-        {this.state.dragged && window.location.pathname !== '/browse' && <GoogleMap
+        {this.state.dragged && window.location.pathname !== '/browse' && Location.coords.lat && <GoogleMap
           defaultCenter={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
@@ -226,23 +226,16 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
-        {/* {!this.state.location && window.location.pathname !== '/browse' && <GoogleMap
+        {!Location.coords.lat && <GoogleMap
           defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
           defaultOptions={this.defaultMapOptions}
+
         >
           <>
           </>
         </GoogleMap>}
 
-        {!this.state.location && window.location.pathname === '/browse' && <GoogleMap
-          defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
-          defaultOptions={this.defaultMapOptions}
-        >
-          <>
-          </>
-        </GoogleMap>} */}
-
-        {window.location.pathname === '/browse' && <GoogleMap
+        {window.location.pathname === '/browse' && Location.coords.lat && <GoogleMap
           defaultCenter={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
         >
@@ -250,7 +243,7 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
-        {window.location.pathname !== '/browse' && !this.state.search && this.state.lightDex === -1 && <div className="Map_Controls">
+        {window.location.pathname !== '/browse' && !this.state.search && this.state.lightDex === -1 && Location.coords.lat && <div className="Map_Controls">
           {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
             <p>Recenter</p>
           </div>}
