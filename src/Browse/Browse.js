@@ -176,7 +176,7 @@ class Browse extends Component {
                                                 {img.upvotes.length}
                                             </p>
                                             <p id="distance">
-                                                ~ {img.distance} mi
+                                                {img.distance} NM
                                         </p>
                                         </div>
                                     </div>}
@@ -188,7 +188,7 @@ class Browse extends Component {
                                                 {img.upvotes.length}
                                             </p>
                                             <p id="distance">
-                                                ~ {img.distance} mi
+                                                {img.distance} NM
                                         </p>
                                         </div>
                                     </div>}
