@@ -1,5 +1,15 @@
 let CityStore = [
     {
+        city: 'Missoula',
+        lat: 46.8721,
+        lng: -113.9940
+    },
+    {
+        city: 'Kalispell',
+        lat: 48.1920,
+        lng: -114.3168
+    },
+    {
         city: 'Billings',
         lat: 45.7833,
         lng: -108.5007
@@ -23,16 +33,6 @@ let CityStore = [
         city: 'Helena',
         lat: 46.5891,
         lng: -112.0391
-    },
-    {
-        city: 'Kalispell',
-        lat: 48.1920,
-        lng: -114.3168
-    },
-    {
-        city: 'Missoula',
-        lat: 46.8721,
-        lng: -113.9940
     },
 ]
 export default CityStore
