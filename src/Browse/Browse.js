@@ -159,7 +159,7 @@ class Browse extends Component {
                     {LightStore.lights.length === 0 && <Search />}
                     {this.state.search && <Search toggled={true} />}
                     {this.lights.length > 0 && !this.state.search && <div className="Has_Location">
-                        {this.state.showFeed && <p id="range-info"> Range: {this.state.maxDistance} mi | Results: {this.lights.length}</p>}
+                        {this.state.showFeed && <p id="range-info"> Range: {this.state.maxDistance} NM | Results: {this.lights.length}</p>}
                         {this.state.lightDex === -1 && <div className="Slider">
                             <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                         </div>}
