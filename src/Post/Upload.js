@@ -89,7 +89,7 @@ class Upload extends Component {
                 })
             })
         }
-    } 
+    }
 
     render() {
 
@@ -101,7 +101,8 @@ class Upload extends Component {
                         <input id="ChooseFile" type="file" onChange={this.imgSelectedHandler} />
                 Choose File
                 </label>
-                    {!this.state.image && <img src="./res/2.png" id="img-placeholder" alt='A tree'></img>}
+                    {!this.state.image && <h3>FLASH OFF | NO FACES</h3>}
+                    {!this.state.image && <img src="./res/upload-placeholder.png" id="img-placeholder" alt='A tree'></img>}
                     {this.state.image && <img id="upload-img" src={this.state.image} alt="oops" onLoad={this.checkDimensions} />}
                     {this.state.progress > 0 && <p id="progress">{this.state.progress} %</p>}
                     {this.state.image && !this.state.warning && <p id="UploadBtn" onClick={this.imgUploadHandler}>Post</p>}
