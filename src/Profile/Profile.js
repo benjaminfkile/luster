@@ -133,8 +133,6 @@ class Profile extends Component {
                 window.user = data.id
                 window.name = data.name
             })
-
-        console.log(window.name)
     }
 
     logOut = () => {

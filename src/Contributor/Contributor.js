@@ -65,8 +65,6 @@ class Contributor extends Component {
 
     render() {
 
-        console.log(this.props)
-
         return (
             <div className="Manager">
                 {this.state.on && <div className="On" onClick={this.toggleSwitch}>
