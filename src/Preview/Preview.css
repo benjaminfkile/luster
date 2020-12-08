@@ -45,7 +45,7 @@
 }
 
 .Preview_Manager_Interface img{
-height: 40px;
+height: 30px;
 }
 
 #stats {
@@ -360,6 +360,19 @@ height: 40px;
 		left: 2.5vw;
 		width: 95vw;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 2.5vw;
+		width: 95vw;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 31vh;
+		left: 95vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	.Preview_Controls {
 		width: 95vw;
 	}
@@ -379,6 +392,19 @@ height: 40px;
 	.Preview_Controls {
 		width: 90vw;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 5vw;
+		width: 90vw;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 31vh;
+		left: 90vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 90vw;
 	}
@@ -395,6 +421,19 @@ height: 40px;
 	.Preview_Controls {
 		width: 90vw;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 5vw;
+		width: 90vw;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 31vh;
+		left: 90vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 90vw;
 	}
@@ -411,6 +450,19 @@ height: 40px;
 	.Preview_Controls {
 		width: 80vw;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 10vw;
+		width: 80vw;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 31vh;
+		left: 80vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 80vw;
 	}
@@ -430,6 +482,20 @@ height: 40px;
 		width: 70vw;
 		top: 47vh;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 15vw;
+		width: 70vw;
+		height: 45vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 43vh;
+		left: 70vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 70vw;
 		height: 35vh;
@@ -450,6 +516,20 @@ height: 40px;
 		width: 60vw;
 		top: 52vh;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 20vw;
+		width: 60vw;
+		height: 48vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 45vh;
+		left: 60vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 60vw;
 		height: 40vh;
@@ -470,6 +550,20 @@ height: 40px;
 		width: 70vw;
 		top: 52vh;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 15vw;
+		width: 70vw;
+		height: 48vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 45vh;
+		left: 75vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 70vw;
 		height: 40vh;
@@ -490,6 +584,20 @@ height: 40px;
 		width: 80vw;
 		top: 52vh;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 10vw;
+		width: 80vw;
+		height: 48vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 45vh;
+		left: 85vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 80vw;
 		height: 40vh;
@@ -510,6 +618,20 @@ height: 40px;
 		width: 80vw;
 		top: 58vh;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 10vw;
+		width: 80vw;
+		height: 55vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 53vh;
+		left: 85vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 80vw;
 		height: 45vh;
@@ -530,6 +652,20 @@ height: 40px;
 		width: 75vw;
 		top: 58vh;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 12.5vw;
+		width: 75vw;
+		height: 55vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 53vh;
+		left: 80vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 75vw;
 		height: 45vh;
@@ -546,6 +682,24 @@ height: 40px;
 		width: 70vw;
 		height: 65vh;
 	}
+	#exit-img-manager{
+		top: 55vh;
+		left: 50vw;
+	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 15vw;
+		width: 70vw;
+		height: 53vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 51vh;
+		left: 75vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	.Preview_Controls {
 		width: 70vw;
 		top: 58vh;
@@ -570,6 +724,20 @@ height: 40px;
 		width: 65vw;
 		top: 58vh;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 17.5vw;
+		width: 65vw;
+		height: 55vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 53vh;
+		left: 70vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 65vw;
 		height: 45vh;
@@ -590,6 +758,20 @@ height: 40px;
 		width: 60vw;
 		top: 58vh;
 	}
+	.Preview_Manager{
+		top: 15vh;
+		left: 20vw;
+		width: 60vw;
+		height: 55vh;
+	}
+
+	#exit-img-manager{
+		position: absolute;
+		top: 53vh;
+		left: 65vw;
+        width: 60px;
+        cursor: pointer;
+    }
 	#preview-img {
 		width: 60vw;
 		height: 45vh;

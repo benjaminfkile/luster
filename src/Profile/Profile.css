@@ -191,20 +191,20 @@
         width: 30px;
         height: 30px;
     }
-    #exit-img-manager{
+    /* #exit-img-manager{
         width: 60px;
         margin-top: 5vh;
         margin-left: 14vw;
         cursor: pointer;
-    }
+    } */
     .Upload_Date{
         margin-left: auto;
         margin-right: 15px;
     }
-    .Manager{
+    /* .Manager{
         margin-right: .5vw;
         cursor: pointer;
-    }
+    } */
     .Upload_Date p{
         margin-top: -20px;
     }
