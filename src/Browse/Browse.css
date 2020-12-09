@@ -246,6 +246,43 @@ a {
 	}
 }
 
+@media screen and (orientation:landscape) and (max-height: 799px) {
+	.Slider{
+		display: none;
+	}
+	#range-info{
+		display: none;
+	}
+	#browse-stats p{
+		font-size: 13px;
+		margin-top: -1px;
+	}
+	.Img_Container {
+		top: 0vh;
+		left: 0vw;
+		width: 100vw;
+		height: 100vh;
+		padding-top: 2px;
+		padding-left: 2px;
+	}
+	.Even_Item, .Odd_Item{
+		width: 24vw;
+	}
+	.Odd_Item img,
+	.Even_Item img {
+		width: 24vw;
+		cursor: pointer;
+		height: 22vh;
+		margin: 0px;
+	}
+	/* .Nav{
+		display: none;
+	} */
+	#browse-upvotes-img{
+		margin-top: -3px;
+	}
+}
+
 @-webkit-keyframes slide-in-right {
 	0% {
 		-webkit-transform: translateX(1000px);
