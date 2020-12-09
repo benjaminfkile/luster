@@ -209,3 +209,26 @@
         margin-top: -20px;
     }
 }
+
+@media screen and (orientation:landscape) and (max-height: 799px) {
+	.Contribs_Container {
+		top: -10vh;
+		left: 0vw;
+		width: 100vw;
+		height: 100vh;
+		padding-top: 2px;
+        padding-left: 2px;
+    }
+    .Contrib_Item{
+        width: 24vw;
+        height: 24vh;
+        margin-bottom: 2px;
+    }
+    .Contrib_Item img{
+        height: 24vh;
+        width: 24vw;
+    }
+    #contrib-stats{
+        display: none;
+    }
+}
