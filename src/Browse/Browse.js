@@ -151,6 +151,7 @@ class Browse extends Component {
     }
 
     render() {
+
         return (
             <div className="Browse">
                 <Map />

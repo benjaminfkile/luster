@@ -121,25 +121,6 @@ height: 30px;
 	animation: slide-in-left .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
-/* @media screen and (orientation:landscape) {
-	.Preview_User, .Preview_Manager{
-		width: 35vw;
-		height: 60vh;
-		top: 20vh;
-		left: 32.5vw;
-	}
-	#preview-img{
-		width: 35vw;
-	}
-	.Preview_Controls{
-		border-top: solid;
-		border-width: 1px;
-		border-color: rgb(126, 126, 126);
-		top: 51vh;
-		width: 35vw;
-	}
-} */
-
 @media only screen and (min-height: 400px) {
 	.Preview_User {
 		height: 72vh;
@@ -442,321 +423,22 @@ height: 30px;
 	}
 }
 
-@media only screen and (min-width: 650px) {
+/*********************************************************Desktop/Tablet************************************************************/
+
+@media only screen and (min-width: 650px) and (min-height: 800px) {
 	.Preview_User {
-		left: 10vw;
-		width: 80vw;
+		top: 10vh;
+		left: 0; 
+		right: 0; 
+		margin-left: auto; 
+		margin-right: auto; 
+		width: 640px;
+		height: 650px;
 	}
 	.Preview_Controls {
-		width: 80vw;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 10vw;
-		width: 80vw;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 31vh;
-		left: 80vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	#preview-img {
-		width: 80vw;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 750px) {
-	.Preview_User {
-		top: 25vh;
-		height: 54vh;
-		left: 15vw;
-		width: 70vw;
-	}
-	.Preview_Controls {
-		width: 70vw;
-		top: 47vh;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 15vw;
-		width: 70vw;
-		height: 45vh;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 43vh;
-		left: 70vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	#preview-img {
-		width: 70vw;
-		height: 35vh;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 850px) {
-	.Preview_User {
-		top: 20vh;
-		left: 20vw;
-		width: 60vw;
-		height: 60vh;
-	}
-	.Preview_Controls {
-		width: 60vw;
-		top: 52vh;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 20vw;
-		width: 60vw;
-		height: 48vh;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 45vh;
-		left: 60vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	#preview-img {
-		width: 60vw;
-		height: 40vh;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 950px) {
-	.Preview_User {
-		top: 20.5vh;
-		left: 15vw;
-		width: 70vw;
-		height: 59vh;
-	}
-	.Preview_Controls {
-		width: 70vw;
-		top: 52vh;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 15vw;
-		width: 70vw;
-		height: 48vh;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 45vh;
-		left: 75vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	#preview-img {
-		width: 70vw;
-		height: 40vh;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 1050px) {
-	.Preview_User {
-		top: 20vh;
-		left: 10vw;
-		width: 80vw;
-		height: 60vh;
-	}
-	.Preview_Controls {
-		width: 80vw;
-		top: 52vh;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 10vw;
-		width: 80vw;
-		height: 48vh;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 45vh;
-		left: 85vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	#preview-img {
-		width: 80vw;
-		height: 40vh;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 1150px) {
-	.Preview_User {
-		top: 15vh;
-		left: 10vw;
-		width: 80vw;
-		height: 65vh;
-	}
-	.Preview_Controls {
-		width: 80vw;
-		top: 58vh;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 10vw;
-		width: 80vw;
-		height: 55vh;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 53vh;
-		left: 85vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	#preview-img {
-		width: 80vw;
-		height: 45vh;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 1250px) {
-	.Preview_User {
-		top: 15vh;
-		left: 12.5vw;
-		width: 75vw;
-		height: 65vh;
-	}
-	.Preview_Controls {
-		width: 75vw;
-		top: 58vh;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 12.5vw;
-		width: 75vw;
-		height: 55vh;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 53vh;
-		left: 80vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	#preview-img {
-		width: 75vw;
-		height: 45vh;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 1350px) {
-	.Preview_User {
-		top: 15vh;
-		left: 15vw;
-		width: 70vw;
-		height: 65vh;
-	}
-	#exit-img-manager{
+		position: initial;
+		width: 640px;
 		top: 55vh;
-		left: 50vw;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 15vw;
-		width: 70vw;
-		height: 53vh;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 51vh;
-		left: 75vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	.Preview_Controls {
-		width: 70vw;
-		top: 58vh;
-	}
-	#preview-img {
-		width: 70vw;
-		height: 45vh;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 1450px) {
-	.Preview_User {
-		top: 15vh;
-		left: 17.5vw;
-		width: 65vw;
-		height: 65vh;
-	}
-	.Preview_Controls {
-		width: 65vw;
-		top: 58vh;
-	}
-	.Preview_Manager{
-		top: 15vh;
-		left: 17.5vw;
-		width: 65vw;
-		height: 55vh;
-	}
-
-	#exit-img-manager{
-		position: absolute;
-		top: 53vh;
-		left: 70vw;
-        width: 60px;
-        cursor: pointer;
-    }
-	#preview-img {
-		width: 65vw;
-		height: 45vh;
-	}
-	#like-img {
-		height: 25px;
-	}
-}
-
-@media only screen and (min-width: 1550px) {
-	.Preview_User {
-		top: 15vh;
-		left: 20vw;
-		width: 60vw;
-		height: 65vh;
-	}
-	.Preview_Controls {
-		width: 60vw;
-		top: 58vh;
 	}
 	.Preview_Manager{
 		top: 15vh;
@@ -773,11 +455,51 @@ height: 30px;
         cursor: pointer;
     }
 	#preview-img {
-		width: 60vw;
-		height: 45vh;
+		width: 640px;
+		height: 480px;
 	}
 	#like-img {
 		height: 25px;
+	}
+}
+
+@media screen and (orientation:landscape) and (max-height: 799px) {
+	.Preview_User{
+		position: absolute;
+		top: 10vh;
+		left: 10vw;
+		width: 80vw;
+		height: 80vh;
+	}
+	.Preview_Controls{
+		width: 80vw;
+		top: 0vh;
+		border: none;
+	}
+	.Preview_User_Interface{
+		position: absolute;
+		width: 100vw;
+		top: 70vh;
+	}
+	#preview-footer{
+		position: absolute;
+		width: 100vw;
+		top: 60vh;
+	}
+	#stats{
+		width: 40vw;
+	}
+	#preview-img{
+		width: 80vw;
+		height: 80vh;
+	}
+	#like-img{
+		position: absolute;
+		top: -1vh;
+		left: 75.5vw;
+	}
+	.Trips_Wrapper{
+		display: none;
 	}
 }
 
