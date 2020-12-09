@@ -465,7 +465,7 @@ height: 30px;
 
 @media screen and (orientation:landscape) and (max-height: 799px) {
 	.Preview_User{
-		position: absolute;
+		position: fixed;
 		top: 10vh;
 		left: 10vw;
 		width: 80vw;
