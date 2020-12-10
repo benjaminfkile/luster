@@ -222,7 +222,7 @@ class Profile extends Component {
                                             <p>Off</p>
                                         </div>}
                                         <div className="Upload_Date">
-                                            <br></br>
+                                            <img id="contrib-stats-uploaded" src="./res/uploaded.png" alt="oops"></img>
                                             <p>
                                                 {img.uploaded}
                                             </p>

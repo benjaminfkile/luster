@@ -450,14 +450,18 @@ height: 30px;
 		height: 560px;
 	}
 
+	.Preview_Manager_Interface{
+		width: 570px;
+	}
+
 	.Manager{
 		margin-right: 1vh;
 	}
-
 	#exit-img-manager{
 		position: absolute;
-		top: 455px;
-		left: 25vw;
+		margin: 0px;
+		top: 485px;
+		left: 580px;
         width: 60px;
         cursor: pointer;
     }
@@ -485,11 +489,25 @@ height: 30px;
 		width: 80vw;
 		height: 80vh;
 	}
-	.Preview_Manager_Interface{
-		display: none;
+	.Manager{
+		margin-top: -5px;
 	}
 	.Exit_Manager{
-		display: none;
+		display: block;
+		top: 0vh;
+	}
+	.Preview_Manager_Interface{
+		position: absolute;
+		width: 0vw;
+		top: 0vh;
+	}
+	#exit-img-manager{
+		margin-top: -32vh;
+		margin-left: -16vw;
+		/* position: initial; */
+		/* position: relative;
+		top: -2vh;
+		left: 86vw; */
 	}
 	.Preview_Controls{
 		width: 80vw;

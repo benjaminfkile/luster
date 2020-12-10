@@ -5,7 +5,7 @@
     text-align: center;
     margin-top: 10vh;
     width: 100vw;
-    height: 20vh;
+    height: 100vh;
 }
 .Login label, input{
     font-size: 20px;
@@ -100,11 +100,14 @@
     border-color: rgb(0, 0, 0);
 }
 .Contrib_Item img{
-    width: 60vw;
+    width: 70vw;
 }
 #contrib-stats{
+    margin-top: 7px;
+    margin-left: 2.5px;
+}
+#contrib-stats p{
     margin-top: 5px;
-    margin-left: 10px;
 }
 #upvote-section{
     display: flex;
@@ -116,26 +119,36 @@
     display: flex;
 }
 #contrib-stats-upvote{
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 #contrib-stats-trips{
     width: 30px;
     height: 30px;
 }
-#contrib-stats-on{
-    width: 25px;
-    height: 25px;
-}
 #contrib-stats-off{
     width: 25px;
     height: 25px;
+    margin-left: 5px;
+}
+#contrib-stats-on {
+    width: 25px;
+    height: 25px;
+    margin-left: 2.5px;
+}
+.Upload_Date{
+    display: flex;
+}
+#contrib-stats-uploaded{
+    width: 30px;
+    height: 30px;
 }
 
 .Welcome{
     padding-left: 2vw;
     padding-right: 2vw;
 }
+
 @media screen and (orientation:landscape) {
     .Spinner{
         top: -10vh;
@@ -143,7 +156,7 @@
     .Contribs_Container {
 		display: grid;
 		grid-template-columns: auto auto auto auto;
-		top: 8vh;
+		top: 2vh;
 		left: 5vw;
 		width: 90vw;
 		height: 75vh;
@@ -191,22 +204,15 @@
         width: 30px;
         height: 30px;
     }
-    /* #exit-img-manager{
-        width: 60px;
-        margin-top: 5vh;
-        margin-left: 14vw;
-        cursor: pointer;
-    } */
     .Upload_Date{
         margin-left: auto;
         margin-right: 15px;
     }
-    /* .Manager{
-        margin-right: .5vw;
-        cursor: pointer;
-    } */
     .Upload_Date p{
         margin-top: -20px;
+    }
+    .Login h3{
+        margin-top: 15px;
     }
 }
 
