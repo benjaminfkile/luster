@@ -26,9 +26,7 @@ class Browse extends Component {
             maxDistance: 100,
             sliderMax: 200,
             searchDistance: 0,
-            search: false,
             loading: true,
-            desktopImg: null,
         }
         this.handleSliderDrag = this.handleSliderDrag.bind(this);
     }
@@ -42,6 +40,7 @@ class Browse extends Component {
         this.scrollInterval = setInterval(this.scroll, 500)
     }
 
+    //clear remaning intervals when unmounting
     componentWillUnmount() {
         this.browseMounted = false
         clearInterval(this.sliderInterval)
@@ -49,13 +48,14 @@ class Browse extends Component {
         clearInterval(this.scrollInterval)
     }
 
+    //waits for a respose from the API
     listen4DB = () => {
         if (LightStore.lights.length > 0 && this.browseMounted) {
             clearInterval(this.dbInterval)
             this.lights = LightStore.lights
         }
     }
-
+    //waits untill Radar.js has ran everything through the halversine function
     listen4Radar = () => {
         if (Radar.targets.length > 0 && this.browseMounted) {
             this.setState({ target: Radar.targets[0][0] })
@@ -63,7 +63,7 @@ class Browse extends Component {
             this.filterByDistance(100)
         }
     }
-
+    //listens for when the user drags the slider and calls filterByDistance()
     listen4SliderDrag = () => {
         this.setState({ sliderDragged: false })
         if (this.state.maxDistance !== this.distance && this.browseMounted) {
@@ -72,9 +72,10 @@ class Browse extends Component {
     }
 
     update = () => {
-        if(!Location.coords.lat){
-            window.location.href = '/map'; //relative to domain
-        }else{
+        if (!Location.coords.lat) { //if the user denies there location and lands on the page in the Browse route somehow redirect them to the map route so they can manually choose a location
+            window.location.href = '/map';
+        } else {
+            //if the update Array in LightStore.js has a 1 in it, then the user changed there location so empty this.lights, reset Radar targets and call filterByDistance() again
             if (LightStore.update.length > 0 && this.browseMounted) {
                 for (let i = 0; i < LightStore.update.length; i++) {
                     if (LightStore.update[i] === 1) {
@@ -86,7 +87,7 @@ class Browse extends Component {
             }
         }
     }
-
+    //scroll to the last image the user clicked
     scroll = () => {
         if (this.state.showFeed && this.scrollDex !== -1) {
             let item = document.getElementById(this.scrollDex)
@@ -94,7 +95,7 @@ class Browse extends Component {
             this.scrollDex = -1
         }
     }
-
+    //filters the lights by distance based on the slider value
     filterByDistance = (miles) => {
         this.setState({ loading: true })
         if (Radar.targets.length > 0) {
@@ -108,12 +109,13 @@ class Browse extends Component {
             this.setState({ maxDistance: miles })
         }
         if (this.lights.length < 12) {
+            //if no lights are found call findClosest()
             this.findClosest()
         } else {
             this.setState({ showFeed: true, loading: false })
         }
     }
-
+    //increases the maxDistance if no lights are found
     findClosest = () => {
         this.setState({ searchDistance: this.state.searchDistance + 20, sliderMax: this.state.sliderMax + 20, loading: true })
         this.filterByDistance(this.state.searchDistance)
@@ -122,7 +124,7 @@ class Browse extends Component {
             this.setState({ searchDistance: 0, loading: false })
         }
     }
-
+    //when lightDex is -1 (in Preview.js), the preview will show, when its not -1 the preview wont show and the state will be changed to show the feed
     togglePreview = (args) => {
         if (this.state.showFeed) {
             this.scrollDex = args
@@ -132,19 +134,7 @@ class Browse extends Component {
         }
         this.setState({ lightDex: args })
     }
-
-    toggleSearch = () => {
-        if (this.state.search) {
-            this.setState({ search: false })
-        } else {
-            this.setState({ search: true })
-            if (this.state.lightDex !== -1) {
-                this.togglePreview(-1)
-                this.scrollDex = -1
-            }
-        }
-    }
-
+    //sets this.distance to the value from the onChange event
     handleSliderDrag(evt) {
         this.distance = evt.target.value
         this.setState({ showFeed: false, loading: true, sliderDragged: true })
@@ -154,54 +144,56 @@ class Browse extends Component {
 
         return (
             <div className="Browse">
+                {/*The Map and Snow components just for looks in Browse*/}
                 <Map />
-                <Snow/>
-                    {this.state.loading && <Spinner />}
-                    {LightStore.lights.length === 0 && <Search />}
-                    {this.state.search && <Search toggled={true} />}
-                    {this.lights.length > 0 && !this.state.search && <div className="Has_Location">
-                        {this.state.showFeed && <p id="range-info"> Range: {this.state.maxDistance} NM | Results: {this.lights.length}</p>}
-                        {this.state.lightDex === -1 && <div className="Slider">
-                            <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
-                        </div>}
-                        {this.state.showFeed && <div className="Img_Container" id="img-container">
-                            {this.lights.map((img, i) =>
-                                <LazyLoad
-                                    key={i}
-                                    height={0}>
-                                    {i % 2 === 0 && <div className="Even_Item" id={i}>
-                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                        <div id="browse-stats">
-                                            <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                            <p>
-                                                {img.upvotes.length}
-                                            </p>
-                                            <p id="distance">
-                                                {img.distance} nm
-                                        </p>
-                                        </div>
-                                    </div>}
-                                    {i % 2 !== 0 && <div className="Odd_Item" id={i}>
-                                        <img src={img.url} alt="oops" onClick={() => this.togglePreview(i)} />
-                                        <div id="browse-stats">
-                                            <img id="browse-upvotes-img" src="./res/upvotes.png" alt="oops"></img>
-                                            <p>
-                                                {img.upvotes.length}
-                                            </p>
-                                            <p id="distance">
-                                                {img.distance} nm
-                                        </p>
-                                        </div>
-                                    </div>}
-                                </LazyLoad>)}
-                        </div>}
-                        {!this.state.search && <Preview
-                            togglePreview={this.togglePreview}
-                            lights={this.lights}
-                            lightDex={this.state.lightDex}
-                            contributions={false}
-                        />}
+                <Snow />
+                {this.state.loading && <Spinner />}
+                {/*Search is never used in browse but (for now) needs to mounted if the user doesnt allow there location(check the update() method)*/}
+                {LightStore.lights.length === 0 && <Search />}
+                {this.lights.length > 0 && <div className="Has_Location">
+                    {this.state.showFeed && <p id="range-info"> Range: {this.state.maxDistance} NM | Results: {this.lights.length}</p>}
+                    {this.state.lightDex === -1 && <div className="Slider">
+                        <input type="range" min="2" max={this.state.sliderMax} value={this.state.maxDistance} id="nested-slider" onChange={this.handleSliderDrag}></input>
                     </div>}
+                    {this.state.showFeed && <div className="Img_Container" id="img-container">
+                        {this.lights.map((img, i) =>
+                            <LazyLoad
+                                key={i}
+                                height={0}>
+                                {/*creating even or odd className for animations, Evens will slide in right, odds slide in left*/}
+                                {i % 2 === 0 && <div className="Even_Item" id={i}>
+                                    <img src={img.url} alt={img.id} onClick={() => this.togglePreview(i)} />
+                                    <div id="browse-stats">
+                                        <img id="browse-upvotes-img" src="./res/upvotes.png" alt="upvote"></img>
+                                        <p>
+                                            {img.upvotes.length}
+                                        </p>
+                                        <p id="distance">
+                                            {img.distance} nm
+                                        </p>
+                                    </div>
+                                </div>}
+                                {i % 2 !== 0 && <div className="Odd_Item" id={i}>
+                                    <img src={img.url} alt={img.id} onClick={() => this.togglePreview(i)} />
+                                    <div id="browse-stats">
+                                        <img id="browse-upvotes-img" src="./res/upvotes.png" alt="upvote"></img>
+                                        <p>
+                                            {img.upvotes.length}
+                                        </p>
+                                        <p id="distance">
+                                            {img.distance} nm
+                                        </p>
+                                    </div>
+                                </div>}
+                            </LazyLoad>)}
+                    </div>}
+                    <Preview
+                        togglePreview={this.togglePreview /*callback from Preview to show the feed again*/}
+                        lights={this.lights/*pass the lights  to Preview so it can load the image*/}
+                        lightDex={this.state.lightDex/*pass the lightDex to Preview*/}
+                        contributions={false/*Preview needs to know weather the user is trying to preview the lights in the Profile component, or in the Browse component*/}
+                    />
+                </div>}
             </div>
         );
     }

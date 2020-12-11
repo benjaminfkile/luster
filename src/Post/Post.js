@@ -5,7 +5,6 @@ import Location from '../Location'
 import Geocode from "react-geocode";
 import Upload from './Upload'
 import './Post.css'
-// import Snow from '../Snow/Snow';
 Geocode.setApiKey(KeyStore.googleKey);
 Geocode.setLanguage("en");
 
@@ -34,10 +33,9 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        // this.geoInterval = setInterval(this.getGeo, 100)
         this.accuracyInterval = setInterval(this.checkLocationAccuracy, 100)
     }
-
+    //checks the accurace of the user location, if not acccurate enough the have to enter there address instead
     checkLocationAccuracy = () => {
         if (Location.coords.lat) {
             if (Location.accuracy > 100) {
@@ -48,7 +46,7 @@ class Post extends Component {
             clearInterval(this.accuracyInterval)
         }
     }
-
+    //sets the state to the user input
     handleChange = (event) => {
         const self = this;
 
@@ -64,11 +62,11 @@ class Post extends Component {
             }, 1000)
         });
     }
-
+    //clears the placeholder in the input
     clearPlaceholder = () => {
         this.setState({ placeholder: "" })
     }
-
+    //call the api to get search suggestions
     searchAddress = (input) => {
         if (input !== "") {
             let temp = []
@@ -82,12 +80,12 @@ class Post extends Component {
                     }
                     this.setState({ results: temp, address: '', lat: null, lng: null })
                 })
-                .catch(() => console.log("Can’t access " + targetUrl + " response. Blocked by browser?"))
+                .catch(() => alert("Can’t access " + targetUrl + " response. Blocked by browser?"))//very unlikely
         } else {
             this.setState({ results: [], address: '', lat: null, lng: null })
         }
     }
-
+    //use react-geocode with google to convert address to coords
     convertAddressToCoords = (address) => {
         Geocode.fromAddress(address).then(
             response => {
@@ -99,7 +97,7 @@ class Post extends Component {
             }
         );
     }
-
+    //conver to coords to DMS
     toDegreesMinutesAndSeconds = (coordinate) => {
         let absolute = Math.abs(coordinate);
         let degrees = Math.floor(absolute);
@@ -116,11 +114,11 @@ class Post extends Component {
         let longitudeCardinal = lng >= 0 ? 'E' : 'W';
         return latitude + ' ' + latitudeCardinal + '\n' + longitude + ' ' + longitudeCardinal;
     }
-
+    //set hasLocation to the user address
     useAddress = () => {
         this.setState({ hasLocation: true })
     }
-
+    //discard and search for a different address
     discardAddress = () => {
         this.setState({ address: '', input: '', results: [], lat: null, lng: null })
     }
@@ -179,13 +177,10 @@ class Post extends Component {
                     />
                 </div>}
                 {!window.user && <div className="Unvalidated">
-                    {/* <Snow /> */}
                     <h3>
                         Log in or Register to post photos!
                 </h3>
-                    {/* <img src="./res/2.png" id="no-img" alt='A tree'></img> */}
                     <img src="./res/warning.png" id="no-img" alt='A tree'></img>
-
                 </div>}
             </div>
         )

@@ -1,3 +1,4 @@
+//a collection of cities in Montana with there coordinates
 let CityStore = [
     {
         city: 'Missoula',

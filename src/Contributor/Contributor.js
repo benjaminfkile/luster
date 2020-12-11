@@ -48,7 +48,6 @@ class Contributor extends Component {
             })
         }).then(res => {
             if (res.status === 200) {
-                console.log('valid')
                 if (this.props.contribution.on === 'f') {
                     this.props.contribution.on = 't'
                 } else {
@@ -56,11 +55,7 @@ class Contributor extends Component {
                 }
 
             }
-            if (res.status === 403) {
-                console.log('invalid')
-            }
         })
-        // return this.setState({ error: '' });
     }
 
     render() {

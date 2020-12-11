@@ -1,14 +1,14 @@
 import LightStore from './LightStore'
 import Location from './Location'
-// import GeoData from './GeoData'
 
 let Radar = {
     targets: [],
     locationHistory: []
 }
 
-let dbInterval = setInterval(listen4DB, 1000)
+let dbInterval = setInterval(listen4DB, 500)
 
+//wait for light data
 function listen4DB() {
     if (LightStore.lights.length > 0 && Location.coords.lat) {
         clearInterval(dbInterval)
@@ -16,27 +16,20 @@ function listen4DB() {
         polulateRadar()
     }
 }
-
+//add the new coordinates
 function updateCoords() {
-
-    if (/*Location &&*/ Location.coords.lat) {
+    if (Location.coords.lat) {
         Radar.locationHistory.unshift([Location.coords.lat, Location.coords.lng])
     } 
-    // else {
-    //     if (!Location.coords.lat && GeoData[0].latitude) {
-    //         Radar.locationHistory.unshift([GeoData[0].latitude, GeoData[0].longitude])
-    //     }
-    // }
 
-    if (Location.coords.lat /*|| GeoData[0].latitude*/) {
+    if (Location.coords.lat) {
         if (Radar.locationHistory.length > 1 && Radar.locationHistory[0][0] !== Radar.locationHistory[1][0] && Radar.locationHistory[0][1] !== Radar.locationHistory[1][1]) {
             polulateRadar()
         }
     }
 }
-
+//push the data to the targets array with the updated distances
 function polulateRadar() {
-    //why doesnt Radar.targets = [] work?
     Radar.targets.length = 0
 
     if (Location.coords.lat) {
@@ -46,18 +39,9 @@ function polulateRadar() {
             }
         }
     } 
-    // else {
-    //     if (GeoData && GeoData[0].latitude) {
-    //         for (let i = 0; i < Lighstore.length; i++) {
-    //             if (Lighstore.length > 0) {
-    //                 Radar.targets.push([distance(GeoData[0].latitude, GeoData[0].longitude, Lighstore[i].lat, Lighstore[i].lng, "N"), Lighstore[i]])
-    //             }
-    //         }
-    //     }
-    // }
     Radar.targets = Radar.targets.sort((a, b) => a[0] - b[0])
 }
-
+//calculate the nautical mile distances
 function distance(lat1, lon1, lat2, lon2, unit) {
     let radlat1 = Math.PI * lat1 / 180
     let radlat2 = Math.PI * lat2 / 180

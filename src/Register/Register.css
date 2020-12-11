@@ -1,50 +1,57 @@
-.Register{
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-    top: 0vh;
-
-}
-#next-btn{
-    width: 30vw;
-    margin-left: 35vw;
-    margin-bottom: 3vh;
-
-}
-#next-btn img{
-    width: 30px;
-}
-#next-btn p{
-    margin-top: -3vh;
-}
-#verify-btn{
-    width: 30vw;
-    margin-top: -2vh;
-    margin-bottom: 2vh;
-    margin-left: 35vw;
-}
-#verify-btn img{
-    width: 100px;
-}
-#verify-btn p{
-    margin-top: -3vh;
+.Register {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	top: 0vh;
 }
 
-#back-btn{
-    width: 30vw;
-    margin-top: -4vh;
-    margin-bottom: 2vh;
-    margin-left: 35vw;
+#next-btn {
+	width: 30vw;
+	margin-left: 35vw;
+	margin-bottom: 3vh;
 }
-#back-btn img{
-    width: 100px;
-    cursor: pointer;
+
+#next-btn img {
+	width: 30px;
 }
-#back-btn p{
-    margin-top: -2vh;
+
+#next-btn p {
+	margin-top: -3vh;
 }
+
+#verify-btn {
+	width: 30vw;
+	margin-top: -2vh;
+	margin-bottom: 2vh;
+	margin-left: 35vw;
+}
+
+#verify-btn img {
+	width: 100px;
+}
+
+#verify-btn p {
+	margin-top: -3vh;
+}
+
+#back-btn {
+	width: 30vw;
+	margin-top: -4vh;
+	margin-bottom: 2vh;
+	margin-left: 35vw;
+}
+
+#back-btn img {
+	width: 100px;
+	cursor: pointer;
+}
+
+#back-btn p {
+	margin-top: -2vh;
+}
+
 @media screen and (orientation:landscape) {
-    .Register{
-        top: 10vh;
-    }
+	.Register {
+		top: 10vh;
+	}
 }

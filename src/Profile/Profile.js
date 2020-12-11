@@ -32,7 +32,7 @@ class Profile extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.dismissError = this.dismissError.bind(this);
     }
-
+    //check if logged in or not
     componentDidMount() {
         if (window.user) {
             this.setState({ loggedIn: true })
@@ -40,22 +40,23 @@ class Profile extends Component {
         this.contribs = []
         this.userInterval = setInterval(this.listen4User, 1000)
     }
-
+    //clear the contribs Array
     componentWillUnmount() {
         this.contribs = []
+        clearInterval(this.userInterval)
     }
-
+    //if window.user, get user contributions
     listen4User = () => {
         if (window.user) {
             this.getContributions()
             clearInterval(this.userInterval)
         }
     }
-
+    //when user clicks dismiss, worng password, already registered etc
     dismissError() {
         this.setState({ error: '' });
     }
-
+    //query the API to return the users contributions
     getContributions = () => {
         this.setState({ loading: true })
         this.contribs.length = 0
@@ -66,8 +67,8 @@ class Profile extends Component {
                 for (let i = 0; i < data.length; i++) {
                     this.contribs.push(data[i])
                     let date = new Date(Number(data[i].uploaded))
-                    let month = date.toLocaleString("en-US", { month: "numeric" }) // December
-                    let day = date.toLocaleString("en-US", { day: "numeric" }) // 9
+                    let month = date.toLocaleString("en-US", { month: "numeric" }) // Month
+                    let day = date.toLocaleString("en-US", { day: "numeric" }) // Day
                     this.contribs[i].uploaded = month + '/' + day
 
                 }
@@ -77,11 +78,10 @@ class Profile extends Component {
             }).then(() =>
                 this.setState({ loading: false })
             )
-            .catch(error => alert('Sorry the service is down \n:(\nPlease try asadfsdfsdafsadfsadfasdfgain later'));
+            .catch(error => alert('Sorry the service is down \n:(\nPlease try again later'));
     }
-
+    //log them in
     handleSubmit(evt) {
-
         evt.preventDefault();
         this.setState({ loading: true })
         window.pass = this.state.password
@@ -124,7 +124,7 @@ class Profile extends Component {
         })
         return this.setState({ error: '' });
     }
-
+    //set the window.name variable for the user
     setName = () => {
         let targetUrl = ApiStore + '/api/users/' + this.state.email;
         fetch(targetUrl)
@@ -134,7 +134,7 @@ class Profile extends Component {
                 window.name = data.name
             })
     }
-
+    //clear the window variables on logout
     logOut = () => {
         window.location.reload()
     }
@@ -150,16 +150,15 @@ class Profile extends Component {
             password: evt.target.value,
         });
     }
-
+    //show or dont show the register component
     register = (args) => {
-
         if (args === 1) {
             this.setState({ register: false })
         } else {
             this.setState({ register: true })
         }
     }
-
+    //show or dont show the reset pass div
     resetPass = (args) => {
         if (args === 1) {
             this.setState({ reset: false })
@@ -167,7 +166,7 @@ class Profile extends Component {
             this.setState({ reset: true })
         }
     }
-
+    //toggle a preview of the image by it lightDex
     togglePreview = (args) => {
         if (this.state.showFeed) {
             this.setState({ showFeed: false })
@@ -296,7 +295,3 @@ class Profile extends Component {
 }
 
 export default Profile
-
-/*
-fix name not changing when differrent user logs in during same session
-*/

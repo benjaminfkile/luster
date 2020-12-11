@@ -17,9 +17,8 @@ class Upload extends Component {
             finished: false,
         }
     }
-
+    //store the image locally
     imgSelectedHandler = (event) => {
-
         this.setState({
             selectedFile: event.target.files[0]
         })
@@ -28,9 +27,8 @@ class Upload extends Component {
             this.setState({ image: URL.createObjectURL(img), finished: false });
         }
     }
-
+    //make sure the image is landscape
     checkDimensions = () => {
-
         let img = document.getElementById("upload-img");
         let width = img.naturalWidth;
         let height = img.naturalHeight;
@@ -41,13 +39,12 @@ class Upload extends Component {
             this.setState({ warning: false })
         }
     }
-
+    //upload the image to imgbb.com with a 60 second expiration expiration time
+    //if the API approves the image a copy will be made and the API will make a copy of the image and repost to imgbb.com with no expiration time
     imgUploadHandler = () => {
-
         const fd = new FormData()
         fd.append('image', this.state.selectedFile)
         axios.post("https://api.imgbb.com/1/upload?expiration=60&key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
-            // axios.post("https://api.imgbb.com/1/upload?key=eeadc880da3384d7927fb106962183a2&name=" + uuid.v4() + "&image=", fd, {
             onUploadProgress: ProgressEvent => {
                 this.setState({ progress: Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) })
             }
@@ -57,11 +54,9 @@ class Upload extends Component {
                 this.updateRows(this.state.response.data.data.display_url, this.state.response.data.data.delete_url)
             });
     }
-
+    //post the row data to the API
     updateRows = async (large, del) => {
-
         if (this.state.response && this.props.lat) {
-
             let lat = this.props.lat
             let lng = this.props.lng
 
@@ -84,8 +79,8 @@ class Upload extends Component {
                     trips: '{}',
                     uploaded: Date.now(),
                     on: 't',
-                    dummy: 'f',
-                    pin: (Math.floor(Math.random() * (15 - 1 + 1)) + 1) + ''
+                    dummy: 'f',//image will be a dummy image(for deciphering test images vs actuals)
+                    pin: (Math.floor(Math.random() * (15 - 1 + 1)) + 1) + ''//pick a marker for the image
                 })
             })
         }

@@ -9,7 +9,7 @@ class Nav extends Component {
             hamburger: false
         }
     }
-
+    //toggle the menu
     toggleBurger = () => {
         if (this.state.hamburger === false) {
             this.setState({ hamburger: true })
@@ -30,8 +30,7 @@ class Nav extends Component {
                         <img src="./res/close-menu.png" alt="*" onClick={this.toggleBurger}></img>
                     </div>}
                 </div>
-
-
+                {/*Set up links for react-router*/}
                 {this.state.hamburger && <div className="Routes">
                     <div className="Map_Route" tabIndex="1">
                         <Link to='/'>

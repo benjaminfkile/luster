@@ -1,3 +1,6 @@
+//handle the updating of the array of lights
+//if update[] Array recieves a 1 from a component
+
 let LightStore = {
     lights: [],
     update: []

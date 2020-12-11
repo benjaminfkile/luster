@@ -4,6 +4,7 @@
     width: 100vw;
     border: none;
 }
+
 .Recenter{
     margin-left: 1vw;
     margin-bottom: 4vh;
@@ -21,6 +22,7 @@
     cursor: pointer;
     font-family: 'Red Rose', cursive;
 }
+
 .Nearest{
     margin-right: 1vw;
     margin-bottom: 4vh;
@@ -38,12 +40,14 @@
     cursor: pointer;
     font-family: 'Red Rose', cursive;
 }
+
 .Search_Toggle{
     position: absolute;
     top: 0vh;
     left: 0vw;
     margin-left: auto;
 }
+
 .Search_Toggle img{
     width: 60px;
 }

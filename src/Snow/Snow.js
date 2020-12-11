@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import '../Snow/Snow.css'
 
 class Snow extends Component {
-
+    
+    //make it snow
     render() {
 
         return (

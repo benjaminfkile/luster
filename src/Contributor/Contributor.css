@@ -1,33 +1,42 @@
-.Manager{
-    display: flex;
-    margin-left: auto;
-    margin-right: 3vw;
-    text-align: center;
-}
-.Manager p{
-    margin-left: 5px;
-}
-#on{
-    color: rgb(255, 255, 255);
-}
-#off{
-    color: rgb(255, 255, 255);
-}
-.Off img, .On img{
-    height: 30px;
-}
-.Off, .On, .Delete{
-    display: flex;
-    margin-top: 2vh;
-}
-.Off p, .On p{
-    margin-top: 1vh;
-}
-.On, .Off{
-    display: flex;
-    margin-right: auto;
-    margin-left: 1vw;
+.Manager {
+	display: flex;
+	margin-left: auto;
+	margin-right: 3vw;
+	text-align: center;
 }
 
+.Manager p {
+	margin-left: 5px;
+}
 
+#on {
+	color: rgb(255, 255, 255);
+}
 
+#off {
+	color: rgb(255, 255, 255);
+}
+
+.Off img,
+.On img {
+	height: 30px;
+}
+
+.Off,
+.On,
+.Delete {
+	display: flex;
+	margin-top: 2vh;
+}
+
+.Off p,
+.On p {
+	margin-top: 1vh;
+}
+
+.On,
+.Off {
+	display: flex;
+	margin-right: auto;
+	margin-left: 1vw;
+}

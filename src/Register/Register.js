@@ -82,7 +82,6 @@ class Register extends Component {
                 this.setState({ loading: false })
                 if (res.status === 200) {
                     this.setState({ emailTaken: false, codeSent: true })
-                    // console.log("code sent")
                 }
                 if (res.status === 202) {
                     this.setState({ emailTaken: true, codeSent: false, error: 'Email already registered' })
@@ -97,7 +96,6 @@ class Register extends Component {
     }
 
     checkCode = (evt) => {
-
         evt.preventDefault();
         this.setState({ loading: true })
 
@@ -215,7 +213,6 @@ class Register extends Component {
             </div>
         );
     }
-
 }
 
 export default Register

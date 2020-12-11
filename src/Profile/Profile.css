@@ -1,159 +1,192 @@
-.Login{
-    position: fixed;
-    color: rgb(134, 134, 134);
-    font-family: 'Red Rose', cursive;
-    text-align: center;
-    margin-top: 10vh;
-    width: 100vw;
-    height: 100vh;
+.Login {
+	position: fixed;
+	color: rgb(134, 134, 134);
+	font-family: 'Red Rose', cursive;
+	text-align: center;
+	margin-top: 10vh;
+	width: 100vw;
+	height: 100vh;
 }
-.Login label, input{
-    font-size: 20px;
-}
-.Login h1{
-    margin-top: -8vh;
-    margin-bottom: 1vh;
-    color: rgb(134, 134, 134);
-}
-.Login_Form h1{
-    margin-top: -8vh;
-    margin-bottom: 8vh;
-    color: rgb(12,191,232);
-}
-.Login h3{
-    margin-top: 5vh;
-}
-#logout-btn{
-    position: absolute;
-    margin-left: 1vw;
-    top: -10vh;
-}
-#logout-btn img{
-    width: 50px;
-    cursor: pointer;
-}
-#logout-btn p{
-    margin-top: -2vh;
-    cursor: pointer;
-}
-#login-btn{
-    width: 30vw;
-    margin-left: 35vw;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-}
-#login-btn img{
-    width: 100px;
-    cursor: pointer;
-}
-#login-btn p{
-    margin-top: -3vh;
-}
-#register-btn img{
-    width: 50px;
-    cursor: pointer;
-}
-#register-btn p{
-    margin-top: -5vh;
-}
-#register-btn img{
-    width: 100px;
-    cursor: pointer;
-}
-#register-btn p{
-    margin-top: -3vh;
-}
-#error-btn{
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 0, 0);
-    cursor: pointer;
-}
-#forgot-btn{
-    margin-top: 3vh;
-    cursor: pointer;
-}
-.No_Contribs{
-    margin-top: 10vh;
-}
-.No_Contribs p{
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.Contribs_Container{
-    position: absolute;
-    overflow-y: auto;
-    top: 10vh;
-    left: 2vw;
-    height: 75vh;
-    width: 96vw;
-    background-color: rgb(36, 47, 62);
 
+.Login label,
+input {
+	font-size: 20px;
 }
-.Contrib_Item{
-    display: flex;
-    width: 94vw;
-    height: 25vh;
-    text-align: left;
-    margin-bottom: 5px;
-    background-color: rgb(0, 0, 0);
-    border-style: solid;
-    border-color: rgb(0, 0, 0);
+
+.Login h1 {
+	margin-top: -8vh;
+	margin-bottom: 1vh;
+	color: rgb(134, 134, 134);
 }
-.Contrib_Item img{
-    width: 70vw;
+
+.Login_Form h1 {
+	margin-top: -8vh;
+	margin-bottom: 8vh;
+	color: rgb(12, 191, 232);
 }
-#contrib-stats{
-    margin-top: 7px;
-    margin-left: 2.5px;
+
+.Login h3 {
+	margin-top: 5vh;
 }
-#contrib-stats p{
-    margin-top: 5px;
+
+#logout-btn {
+	position: absolute;
+	margin-left: 1vw;
+	top: -10vh;
 }
-#upvote-section{
-    display: flex;
+
+#logout-btn img {
+	width: 50px;
+	cursor: pointer;
 }
-#trip-section{
-    display: flex;
+
+#logout-btn p {
+	margin-top: -2vh;
+	cursor: pointer;
 }
-#on-section, #off-section{
-    display: flex;
+
+#login-btn {
+	width: 30vw;
+	margin-left: 35vw;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
 }
-#contrib-stats-upvote{
-    width: 30px;
-    height: 30px;
+
+#login-btn img {
+	width: 100px;
+	cursor: pointer;
 }
-#contrib-stats-trips{
-    width: 30px;
-    height: 30px;
+
+#login-btn p {
+	margin-top: -3vh;
 }
-#contrib-stats-off{
-    width: 25px;
-    height: 25px;
-    margin-left: 5px;
+
+#register-btn img {
+	width: 50px;
+	cursor: pointer;
 }
+
+#register-btn p {
+	margin-top: -5vh;
+}
+
+#register-btn img {
+	width: 100px;
+	cursor: pointer;
+}
+
+#register-btn p {
+	margin-top: -3vh;
+}
+
+#error-btn {
+	background-color: rgb(0, 0, 0);
+	color: rgb(255, 0, 0);
+	cursor: pointer;
+}
+
+#forgot-btn {
+	margin-top: 3vh;
+	cursor: pointer;
+}
+
+.No_Contribs {
+	margin-top: 10vh;
+}
+
+.No_Contribs p {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.Contribs_Container {
+	position: absolute;
+	overflow-y: auto;
+	top: 10vh;
+	left: 2vw;
+	height: 75vh;
+	width: 96vw;
+	background-color: rgb(36, 47, 62);
+}
+
+.Contrib_Item {
+	display: flex;
+	width: 94vw;
+	height: 25vh;
+	text-align: left;
+	margin-bottom: 5px;
+	background-color: rgb(0, 0, 0);
+	border-style: solid;
+	border-color: rgb(0, 0, 0);
+}
+
+.Contrib_Item img {
+	width: 70vw;
+}
+
+#contrib-stats {
+	margin-top: 7px;
+	margin-left: 2.5px;
+}
+
+#contrib-stats p {
+	margin-top: 5px;
+}
+
+#upvote-section {
+	display: flex;
+}
+
+#trip-section {
+	display: flex;
+}
+
+#on-section,
+#off-section {
+	display: flex;
+}
+
+#contrib-stats-upvote {
+	width: 30px;
+	height: 30px;
+}
+
+#contrib-stats-trips {
+	width: 30px;
+	height: 30px;
+}
+
+#contrib-stats-off {
+	width: 25px;
+	height: 25px;
+	margin-left: 5px;
+}
+
 #contrib-stats-on {
-    width: 25px;
-    height: 25px;
-    margin-left: 2.5px;
-}
-.Upload_Date{
-    display: flex;
-}
-#contrib-stats-uploaded{
-    width: 30px;
-    height: 30px;
+	width: 25px;
+	height: 25px;
+	margin-left: 2.5px;
 }
 
-.Welcome{
-    padding-left: 2vw;
-    padding-right: 2vw;
+.Upload_Date {
+	display: flex;
+}
+
+#contrib-stats-uploaded {
+	width: 30px;
+	height: 30px;
+}
+
+.Welcome {
+	padding-left: 2vw;
+	padding-right: 2vw;
 }
 
 @media screen and (orientation:landscape) {
-    .Spinner{
-        top: -10vh;
-    }
-    .Contribs_Container {
+	.Spinner {
+		top: -10vh;
+	}
+	.Contribs_Container {
 		display: grid;
 		grid-template-columns: auto auto auto auto;
 		top: 2vh;
@@ -176,44 +209,44 @@
 		scrollbar-width: none;
 	}
 	.Contrib_Item {
-        display: block;
+		display: block;
 		width: 22vw;
 		cursor: pointer;
 		height: 27vh;
-        margin: 0px;
-        border-style: solid;
+		margin: 0px;
+		border-style: solid;
 		border-width: 1px;
 		border-color: rgb(126, 126, 126);
 		border-radius: 2px;
-    }
-    .Contrib_Item img{
-        height: 22vh;
-        width: 22vw;
-    }
-	#contrib-stats p{
+	}
+	.Contrib_Item img {
+		height: 22vh;
+		width: 22vw;
+	}
+	#contrib-stats p {
 		font-size: 20px;
 	}
 	#contrib-stats {
-        display: flex;
-        width: 22vw;
-    }
-    #contrib-stats p{
-        margin-right: 5px;
-    }
-    #contrib-stats-upvote{
-        width: 30px;
-        height: 30px;
-    }
-    .Upload_Date{
-        margin-left: auto;
-        margin-right: 15px;
-    }
-    .Upload_Date p{
-        margin-top: -20px;
-    }
-    .Login h3{
-        margin-top: 15px;
-    }
+		display: flex;
+		width: 22vw;
+	}
+	#contrib-stats p {
+		margin-right: 5px;
+	}
+	#contrib-stats-upvote {
+		width: 30px;
+		height: 30px;
+	}
+	.Upload_Date {
+		margin-left: auto;
+		margin-right: 15px;
+	}
+	.Upload_Date p {
+		margin-top: -20px;
+	}
+	.Login h3 {
+		margin-top: 15px;
+	}
 }
 
 @media screen and (orientation:landscape) and (max-height: 799px) {
@@ -223,18 +256,18 @@
 		width: 100vw;
 		height: 100vh;
 		padding-top: 2px;
-        padding-left: 2px;
-    }
-    .Contrib_Item{
-        width: 24vw;
-        height: 24vh;
-        margin-bottom: 2px;
-    }
-    .Contrib_Item img{
-        height: 24vh;
-        width: 24vw;
-    }
-    #contrib-stats{
-        display: none;
-    }
+		padding-left: 2px;
+	}
+	.Contrib_Item {
+		width: 24vw;
+		height: 24vh;
+		margin-bottom: 2px;
+	}
+	.Contrib_Item img {
+		height: 24vh;
+		width: 24vw;
+	}
+	#contrib-stats {
+		display: none;
+	}
 }

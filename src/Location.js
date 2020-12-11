@@ -1,8 +1,5 @@
+//handles the updating of the user location
 let Location = {
-    // coords: {
-    //     lat: 46.8721,
-    //     lng: -113.9940
-    // },
     coords: {
         lat: null,
         lng: null
@@ -19,7 +16,7 @@ const latLngBounds = {
 }
 
 let app = true
-
+//check if Facebook or Instagram
 function inApp() {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
     if ((ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
@@ -40,7 +37,7 @@ function getLocation() {
     } else {
         Location.bounds = 'out'
     }
-    if (!app && !window.haltLocation && navigator.geolocation) {
+    if (!app && !window.haltLocation && navigator.geolocation) {//dont set location if window.HaltLocation
         navigator.geolocation.getCurrentPosition(setLocation)
     }
 }
@@ -51,7 +48,6 @@ function setLocation(position) {
         Location.coords.lng = position.coords.longitude
         Location.accuracy = position.coords.accuracy
     } 
-    // console.log(position.coords.latitude)
 }
 
 navigator.geolocation.getCurrentPosition(setLocation)

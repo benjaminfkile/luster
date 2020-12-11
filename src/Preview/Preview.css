@@ -44,8 +44,8 @@
 	color: rgb(255, 255, 255);
 }
 
-.Preview_Manager_Interface img{
-height: 30px;
+.Preview_Manager_Interface img {
+	height: 30px;
 }
 
 #stats {
@@ -218,8 +218,8 @@ height: 30px;
 	#exit-img {
 		height: 45px;
 	}
-	#exit-img-manager{
-		top: 5vh;	
+	#exit-img-manager {
+		top: 5vh;
 	}
 	#like-img {
 		height: 25px;
@@ -227,8 +227,8 @@ height: 30px;
 	#preview-img {
 		height: 35vh;
 	}
-	#exit-img-manager{
-		top: 50vh;	
+	#exit-img-manager {
+		top: 50vh;
 	}
 }
 
@@ -257,8 +257,8 @@ height: 30px;
 	#preview-img {
 		height: 33vh;
 	}
-	#exit-img-manager{
-		top: 42vh;	
+	#exit-img-manager {
+		top: 42vh;
 	}
 }
 
@@ -286,7 +286,8 @@ height: 30px;
 	}
 	#preview-img {
 		height: 25vh;
-	} #exit-img-manager{
+	}
+	#exit-img-manager {
 		top: 32vh;
 	}
 }
@@ -341,19 +342,21 @@ height: 30px;
 		left: 2.5vw;
 		width: 95vw;
 	}
-	.Preview_Manager{
+	.Preview_Manager {
 		top: 15vh;
 		left: 2.5vw;
 		width: 95vw;
 	}
-
-	#exit-img-manager{
+	.Preview_Manager_Interface {
+		width: 0vw;
+	}
+	#exit-img-manager {
 		position: absolute;
 		top: 31vh;
-		left: 95vw;
-        width: 60px;
-        cursor: pointer;
-    }
+		left: 93vw;
+		width: 60px;
+		cursor: pointer;
+	}
 	.Preview_Controls {
 		width: 95vw;
 	}
@@ -373,19 +376,18 @@ height: 30px;
 	.Preview_Controls {
 		width: 90vw;
 	}
-	.Preview_Manager{
+	.Preview_Manager {
 		top: 15vh;
 		left: 5vw;
 		width: 90vw;
 	}
-
-	#exit-img-manager{
+	#exit-img-manager {
 		position: absolute;
 		top: 31vh;
 		left: 90vw;
-        width: 60px;
-        cursor: pointer;
-    }
+		width: 60px;
+		cursor: pointer;
+	}
 	#preview-img {
 		width: 90vw;
 	}
@@ -402,19 +404,18 @@ height: 30px;
 	.Preview_Controls {
 		width: 90vw;
 	}
-	.Preview_Manager{
+	.Preview_Manager {
 		top: 15vh;
 		left: 5vw;
 		width: 90vw;
 	}
-
-	#exit-img-manager{
+	#exit-img-manager {
 		position: absolute;
 		top: 31vh;
 		left: 90vw;
-        width: 60px;
-        cursor: pointer;
-    }
+		width: 60px;
+		cursor: pointer;
+	}
 	#preview-img {
 		width: 90vw;
 	}
@@ -423,15 +424,16 @@ height: 30px;
 	}
 }
 
+
 /*********************************************************Desktop/Tablet************************************************************/
 
 @media only screen and (min-width: 650px) and (min-height: 800px) {
 	.Preview_User {
 		top: 10vh;
-		left: 0; 
-		right: 0; 
-		margin-left: auto; 
-		margin-right: auto; 
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
 		width: 640px;
 		height: 650px;
 	}
@@ -440,31 +442,29 @@ height: 30px;
 		width: 640px;
 		top: 55vh;
 	}
-	.Preview_Manager{
+	.Preview_Manager {
 		top: 15vh;
-		left: 0; 
-		right: 0; 
-		margin-left: auto; 
-		margin-right: auto; 
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
 		width: 640px;
 		height: 560px;
 	}
-
-	.Preview_Manager_Interface{
+	.Preview_Manager_Interface {
 		width: 570px;
 	}
-
-	.Manager{
+	.Manager {
 		margin-right: 1vh;
 	}
-	#exit-img-manager{
+	#exit-img-manager {
 		position: absolute;
 		margin: 0px;
 		top: 485px;
 		left: 580px;
-        width: 60px;
-        cursor: pointer;
-    }
+		width: 60px;
+		cursor: pointer;
+	}
 	#preview-img {
 		width: 640px;
 		height: 480px;
@@ -475,72 +475,67 @@ height: 30px;
 }
 
 @media screen and (orientation:landscape) and (max-height: 799px) {
-	.Preview_User{
+	.Preview_User {
 		position: fixed;
 		top: 10vh;
 		left: 10vw;
 		width: 80vw;
 		height: 80vh;
 	}
-	.Preview_Manager{
+	.Preview_Manager {
 		position: fixed;
 		top: 10vh;
 		left: 10vw;
 		width: 80vw;
 		height: 80vh;
 	}
-	.Manager{
+	.Manager {
 		margin-top: -5px;
 	}
-	.Exit_Manager{
+	.Exit_Manager {
 		display: block;
 		top: 0vh;
 	}
-	.Preview_Manager_Interface{
+	.Preview_Manager_Interface {
 		position: absolute;
 		width: 0vw;
 		top: 0vh;
 	}
-	#exit-img-manager{
+	#exit-img-manager {
 		margin-top: -32vh;
 		margin-left: -16vw;
-		/* position: initial; */
-		/* position: relative;
-		top: -2vh;
-		left: 86vw; */
 	}
-	.Preview_Controls{
+	.Preview_Controls {
 		width: 80vw;
 		top: 0vh;
 		border: none;
 	}
-	.Preview_User_Interface{
+	.Preview_User_Interface {
 		position: absolute;
 		width: 100vw;
 		top: 70vh;
 	}
-	#preview-footer{
+	#preview-footer {
 		position: absolute;
 		width: 100vw;
 		top: 60vh;
 	}
-	#stats{
+	#stats {
 		width: 40vw;
 	}
-	#preview-img{
+	#preview-img {
 		width: 80vw;
 		height: 80vh;
 	}
-	#like-img{
+	#like-img {
 		position: absolute;
 		top: -1vh;
 		left: 75.5vw;
 	}
-	.Trips_Wrapper{
+	.Trips_Wrapper {
 		display: none;
 	}
 }
-
 
 @-webkit-keyframes slide-in-bottom {
 	0% {

@@ -52,8 +52,8 @@ class Map extends Component {
   }
 
   componentDidMount() {
-    this.inApp()
-    if (window.location.pathname !== '/browse') {
+    this.inApp()//check to make sure the user didnt open on Facebook or Instagram, if true dont keep updating the location or FB/IG browser will ask for it every second
+    if (window.location.pathname !== '/browse') { //I render different maps based on window.location.pathname, the map in the browsee component in basically just a background image so need to set intervals a wast memory/CPU
       this.mapMounted = true;
       this.listen4LocationInterval = setInterval(this.listenForLocation, 100)
       this.updateInterval = setInterval(this.update, 100)
@@ -62,19 +62,19 @@ class Map extends Component {
       this.setState({ lights: LightStore.lights })
     }
   }
-
+  //checks to see if the user opened the site in Facebook or Instagram
   inApp = () => {
     var ua = navigator.userAgent || navigator.vendor || window.opera;
     if (!(ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf('Instagram') > -1)) {
       this.setState({ inApp: false })
     }
   }
-
+  //clear all intervals on unmount
   componentWillUnmount() {
     this.mapMounted = false;
     clearInterval(this.updateInterval)
   }
-
+  //listen for when the LightStore is populated
   listen4DB = () => {
     if (LightStore.lights.length > 0 && this.mapMounted) {
       this.setState({ lights: LightStore.lights })
@@ -82,7 +82,7 @@ class Map extends Component {
       clearInterval(this.dbInterval)
     }
   }
-
+  //listen for the location to center the map over
   listenForLocation = () => {
     if (Location.coords.lat && !this.state.inApp && this.mapMounted) {
       this.setState({ location: true })
@@ -96,7 +96,8 @@ class Map extends Component {
       }
     }
   }
-
+  //if the update Array in the LightStore has a 1 in it the user changed there location 
+  //so rebuild markers for the new location, close search if it open and set the lightDex to -1
   update = () => {
     if (LightStore.update.length > 0) {
       for (let i = 0; i < LightStore.update.length; i++) {
@@ -108,11 +109,10 @@ class Map extends Component {
       }
     }
   }
-
+  //update the the state of target so the user can center the map over the nearest marker
   listen4Radar = () => {
     if (Radar.targets.length > 0 && this.mapMounted) {
       this.setState({ target: Radar.targets[0][0] })
-      //clear interval????
     }
   }
 
@@ -127,16 +127,11 @@ class Map extends Component {
   dragged = () => {
     this.setState({ centered: false, dragged: true, nearest: false })
   }
-
-  zoomChanged = () => {
-    // this.setState({ centered: false, dragged: true })
-    // this.dragged()
-  }
-
+  //toggle the preview based on the lightDex
   togglePreview = (args) => {
     this.setState({ lightDex: args })
   }
-
+  //opens or closes the search component
   toggleSearch = () => {
     if (this.state.search) {
       this.setState({ search: false, lightDex: -1 })
@@ -144,7 +139,7 @@ class Map extends Component {
       this.setState({ search: true, lightDex: -1 })
     }
   }
-
+  //creates the map markers
   buildMarkers = () => {
     let temp = []
     for (let i = 0; i < this.state.lights.length; i++) {
@@ -169,7 +164,7 @@ class Map extends Component {
   }
 
   render = () => {
-    
+
     let locationMarker = new window.google.maps.MarkerImage(
       './res/location-marker.png',
       null,
@@ -181,12 +176,12 @@ class Map extends Component {
       <div className="Map">
         {!this.state.search && LightStore.lights.length === 0 && window.location.pathname !== '/browse' && <Search />}
         {this.state.search && <Search toggled={true} />}
+        
         {/*center over nearest*/}
         {this.state.nearest && Radar.targets[0][1].lat && Location.coords.lat && <GoogleMap
           center={{ lat: Number(Radar.targets[0][1].lat), lng: Number(Radar.targets[0][1].lng) }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
-          onZoomChanged={this.zoomChanged}
         >
           <>
           </>
@@ -201,7 +196,6 @@ class Map extends Component {
           center={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
-          onZoomChanged={this.zoomChanged}
         >
           <>
             {<Marker
@@ -211,12 +205,11 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
+        {/*user drags map*/}
         {this.state.dragged && window.location.pathname !== '/browse' && Location.coords.lat && <GoogleMap
           defaultCenter={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
           onDrag={this.dragged}
-          onZoomChanged={this.zoomChanged}
-
         >
           <>
             {!this.state.nearest && <Marker
@@ -226,15 +219,16 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
+        {/*no location yet, center over Missoula*/}
         {!Location.coords.lat && <GoogleMap
           defaultCenter={{ lat: 46.8721, lng: -113.9940 }}
           defaultOptions={this.defaultMapOptions}
-
         >
           <>
           </>
         </GoogleMap>}
 
+        {/*window.location.pathname === browse, render a map centered over user location that doesnt do anything for a background picture*/}
         {window.location.pathname === '/browse' && Location.coords.lat && <GoogleMap
           defaultCenter={{ lat: Location.coords.lat, lng: Location.coords.lng }}
           defaultOptions={this.defaultMapOptions}
@@ -243,6 +237,7 @@ class Map extends Component {
           </>
         </GoogleMap>}
 
+        {/*dont render buttons for recenter or nearest if window.location.pathname === browse*/}
         {window.location.pathname !== '/browse' && !this.state.search && this.state.lightDex === -1 && Location.coords.lat && <div className="Map_Controls">
           {!this.state.centered && this.state.location && <div className="Recenter" onClick={this.recenter}>
             <p>Recenter</p>
@@ -252,6 +247,7 @@ class Map extends Component {
           </div>}
         </div>}
 
+        {/*dont render markers the window.location.pathname === browse*/}
         {window.location.pathname !== '/browse' && <div className="Search_Toggle">
           <img src="./res/search.png" alt="oops" onClick={this.toggleSearch}></img>
         </div>}

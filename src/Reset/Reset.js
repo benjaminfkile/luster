@@ -80,8 +80,6 @@ class Reset extends Component {
             return this.setState({ error: '5 digit code required', loading: false });
         }
 
-
-
         fetch(ApiStore + '/api/users/resetPass/update', {
 
             method: 'POST',
