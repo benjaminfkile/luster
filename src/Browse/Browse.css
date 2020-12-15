@@ -98,13 +98,13 @@
 }
 
 .Even_Item img {
-	-webkit-animation: slide-in-right .8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: slide-in-right .8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-in-right .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-right .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .Odd_Item img {
-	-webkit-animation: slide-in-left .8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: slide-in-left .8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-in-left .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-left .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 a {

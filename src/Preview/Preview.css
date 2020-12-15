@@ -12,8 +12,8 @@
 	border-color: rgb(126, 126, 126);
 	border-radius: 1%;
 	font-size: 15px;
-	-webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-bottom 0.3s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .Preview_Manager {
@@ -71,8 +71,8 @@
 #preview-footer {
 	color: rgb(255, 255, 255);
 	z-index: 1002;
-	-webkit-animation: slide-in-right 1.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: slide-in-right 1.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-in-right .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-right .5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .Uploaded_Wrapper,
@@ -108,8 +108,8 @@
 
 #exit-img {
 	cursor: pointer;
-	-webkit-animation: slide-in-left .8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: slide-in-left .8s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-in-left 1.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-left 1.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 #exit-img-manager {
