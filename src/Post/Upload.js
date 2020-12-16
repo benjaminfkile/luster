@@ -40,7 +40,7 @@ class Upload extends Component {
         }
     }
     //upload the image to imgbb.com with a 60 second expiration expiration time
-    //if the API approves the image a copy will be made and the API will make a copy of the image and repost to imgbb.com with no expiration time
+    //if the API approves the image the API will make a copy of the image and repost to imgbb.com with no expiration time
     imgUploadHandler = () => {
         const fd = new FormData()
         fd.append('image', this.state.selectedFile)
@@ -51,11 +51,11 @@ class Upload extends Component {
         })
             .then(res => {
                 this.setState({ response: res, finished: true, progress: null, image: null, selectedFile: null })
-                this.updateRows(this.state.response.data.data.display_url, this.state.response.data.data.delete_url)
+                this.insertRow(this.state.response.data.data.display_url, this.state.response.data.data.delete_url)
             });
     }
     //post the row data to the API
-    updateRows = async (large, del) => {
+    insertRow = async (large, del) => {
         if (this.state.response && this.props.lat) {
             let lat = this.props.lat
             let lng = this.props.lng

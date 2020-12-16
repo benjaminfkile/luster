@@ -8,7 +8,6 @@ class Contributor extends Component {
         this.state = {
             on: true,
             off: false,
-            del: true
         }
     }
 
