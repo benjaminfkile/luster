@@ -108,8 +108,8 @@
 
 #exit-img {
 	cursor: pointer;
-	-webkit-animation: slide-in-left 1.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	animation: slide-in-left 1.0s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-in-left .7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	animation: slide-in-left .7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 #exit-img-manager {
