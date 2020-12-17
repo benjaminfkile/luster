@@ -123,7 +123,7 @@
 
 @media only screen and (min-height: 400px) {
 	.Preview_User {
-		height: 72vh;
+		height: 71vh;
 	}
 	.Preview_Manager {
 		height: 72vh;
@@ -177,13 +177,13 @@
 
 @media only screen and (min-height: 500px) {
 	.Preview_User {
-		height: 69vh;
+		height: 65vh;
 	}
 	.Preview_Manager {
 		height: 50vh;
 	}
 	.Preview_Controls {
-		top: 59vh;
+		top: 56vh;
 	}
 	.Preview_Controls img {
 		margin-top: .3vh;
