@@ -3,7 +3,7 @@ import ApiStore from '../ApiStore'
 import KeyStore from '../KeyStore'
 import Location from '../Location'
 import Geocode from "react-geocode";
-import Upload from './Upload'
+// import Upload from './Upload'
 import './Post.css'
 Geocode.setApiKey(KeyStore.googleKey);
 Geocode.setLanguage("en");
@@ -35,7 +35,7 @@ class Post extends Component {
     componentDidMount() {
         this.accuracyInterval = setInterval(this.checkLocationAccuracy, 100)
     }
-    //checks the accurace of the user location, if not acccurate enough the have to enter there address instead
+    //checks the accurace of the user location, if not acccurate enough they have to enter there address instead
     checkLocationAccuracy = () => {
         if (Location.coords.lat) {
             if (Location.accuracy > 100) {
@@ -127,7 +127,7 @@ class Post extends Component {
 
         return (
             <div>
-                {window.user && !this.state.hasLocation && <div className="Post">
+                {/* {window.user && !this.state.hasLocation && <div className="Post">
                     <h1>Post</h1>
                     <input type="text" value={this.state.input} placeholder={this.state.placeholder} onClick={this.clearPlaceholder} onChange={this.handleChange} />
                     {this.state.results && <div className="Address_Container">
@@ -149,7 +149,6 @@ class Post extends Component {
                             <p>Clear</p>
                         </div>
                     </div>}
-                    {/*eslint-disable-next-line*/}
                     {(this.state.accurateLocation && !this.state.results) || (this.state.accurateLocation && this.state.results.length === 0) && <div className="Selection">
                         <p id="coords">Your Coordinates:</p>
                         <p id="coords1">{this.convertDMS(Location.coords.lat, Location.coords.lng)}</p>
@@ -160,7 +159,6 @@ class Post extends Component {
                             <p>Use</p>
                         </div>
                     </div>}
-                    {/*eslint-disable-next-line*/}
                     {(!this.state.accurateLocation && !this.state.results) || (!this.state.accurateLocation && this.state.results.length === 0) && <div className="Location_Error">
                         <h3>I cant draw an accurate bead on your location.</h3>
                         <br></br>
@@ -181,7 +179,13 @@ class Post extends Component {
                         Log in or Register to post photos!
                 </h3>
                     <img src="./res/warning.png" id="no-img" alt='A tree'></img>
-                </div>}
+                </div>} */}
+                <div className="Unvalidated">
+                    <h3>
+                        Uploads disabled until 12/1/2021
+                </h3>
+                    <img src="./res/warning.png" id="no-img" alt='A tree'></img>
+                </div>
             </div>
         )
     }
