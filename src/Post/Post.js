@@ -3,7 +3,7 @@ import ApiStore from '../ApiStore'
 import KeyStore from '../KeyStore'
 import Location from '../Location'
 import Geocode from "react-geocode";
-// import Upload from './Upload'
+import Upload from './Upload'
 import './Post.css'
 Geocode.setApiKey(KeyStore.googleKey);
 Geocode.setLanguage("en");
@@ -127,7 +127,7 @@ class Post extends Component {
 
         return (
             <div>
-                {/* {window.user && !this.state.hasLocation && <div className="Post">
+                {window.user && !this.state.hasLocation && <div className="Post">
                     <h1>Post</h1>
                     <input type="text" value={this.state.input} placeholder={this.state.placeholder} onClick={this.clearPlaceholder} onChange={this.handleChange} />
                     {this.state.results && <div className="Address_Container">
@@ -179,13 +179,13 @@ class Post extends Component {
                         Log in or Register to post photos!
                 </h3>
                     <img src="./res/warning.png" id="no-img" alt='A tree'></img>
-                </div>} */}
-                <div className="Unvalidated">
+                </div>}
+                {/* <div className="Unvalidated">
                     <h3>
                         Uploads disabled until 12/1/2021
                 </h3>
                     <img src="./res/warning.png" id="no-img" alt='A tree'></img>
-                </div>
+                </div> */}
             </div>
         )
     }
